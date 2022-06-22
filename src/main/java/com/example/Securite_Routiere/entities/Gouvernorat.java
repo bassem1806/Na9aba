@@ -20,6 +20,6 @@ public class Gouvernorat {
     private long gvrCode;
     @NotBlank(message = "Cause Accident est obligatoire ")
    private String gvrDsgar;
-    private int p;
+ 
 
 }
