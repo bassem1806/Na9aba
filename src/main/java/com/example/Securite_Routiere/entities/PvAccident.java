@@ -4,8 +4,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Entity
 public class PvAccident {
@@ -19,24 +18,18 @@ public class PvAccident {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private CauseAccident causeAccident;
 
-    /**** Many To Many  participant accident ****/
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade={
-            CascadeType.PERSIST,
-            CascadeType.MERGE})
-
-    @JoinTable(name = "Pvaccidpart",
-    joinColumns = {@JoinColumn (name = "participanid") },
-    inverseJoinColumns = { @JoinColumn(name = "numpv") })
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<Part> part =new HashSet<>();
-
-
     /**** Many To One delegation ****/
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "delegid", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Delegation delegation;
+
+
+    /**** Many To One part****/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "prtCode", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Part part;
 
 
     /**** Many To One Signaux de circulation ****/
