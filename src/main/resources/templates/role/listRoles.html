@@ -58,7 +58,7 @@
             <div class="card-body">
                 <div th:switch="${roles}" class="container my-5">
                     <p class="my-5">
-                        <a th:href="@{'/role/add/'}" class="btn btn-primary">
+                        <a th:href="@{'/role/add'}" class="btn btn-primary">
                             <i class="fas fa-user-plus ml-2"> Add Role</i></a>
                     </p>
                     <div class="col-md-10">
@@ -76,7 +76,7 @@
                                 <tbody>
                                 <tr th:each="role : ${roles}">
                                     <td th:text="${role.id}"></td>
-                                    <td th:text="${role.role}"></td>
+                                    <td th:text="${role.name}"></td>
                                 </tr>
                                 </tbody>
                             </table>

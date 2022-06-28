@@ -35,18 +35,21 @@ public class RoleController {
     }
 
     @GetMapping("add")
-    public String showAddRoleForm() {
+    public String showAddRoleForm(Model model) {
 
         //m.addAttribute("Role",new Role("Admin"));
+       Role role = new Role();
+        model.addAttribute("role", role);
+
         return "role/addRole";
     }
 
     @PostMapping("add")
-    public String addRole(@RequestParam("role") String role) {
+    public String addRole(@RequestParam("name") String roleName) {
 
-        System.out.println(role);
-        Role r = new Role(role);
-        Role rSaved = roleRepository.save(r);
+        System.out.println(roleName);
+        Role r = new Role(roleName);
+      Role rSaved = roleRepository.save(r);
         System.out.println("role = "+ rSaved);
         return "redirect:list";
     }
