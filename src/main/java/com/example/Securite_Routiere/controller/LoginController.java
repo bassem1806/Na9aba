@@ -27,7 +27,7 @@ public class LoginController {
     }
 
     @RequestMapping(value={"/home1"}, method = RequestMethod.GET)
-    public ModelAndView accueil(){
+    public ModelAndView home1(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("home1");
         return modelAndView;

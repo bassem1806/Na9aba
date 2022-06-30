@@ -19,24 +19,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <title>
     إدارة الخدمات الفنية
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+ <!-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>-->
+  <script src="/assets/js/fontawesome.js" crossorigin="anonymous"></script>
+  <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+  <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 </head>
 
-<body class="">
+<body>
 <div class="container position-sticky z-index-sticky top-0">
   <div class="row">
     <div class="col-12">
@@ -45,11 +46,11 @@
         <div class="container-fluid">
 
 
-          <div class="col-lg-8 mb-4 mx-auto text-left">
+          <div class="col-lg-8 mb-4 mx-auto text-center">
 
             <ul class="navbar-nav d-lg-block d-none">
 
-              <h3 class="font-weight-bolder text-info text-gradient" >تطبيقة السلامة المرورية </h3>
+              <h3  class="font-weight-bolder text-info text-gradient" >تطبيقة السلامة المرورية </h3>
 
             </ul>
           </div>
@@ -68,11 +69,12 @@
             <div class="card card-plain mt-8">
 
               <div class="card-body">
+             <!--
                 <form th:action="@{/registration}" method="get">
                   <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-                </form>
+                </form>-->
                 <div class="card-header pb-0 text-left bg-transparent">
-                  <h3 class="font-weight-bolder text-info text-gradient">مرحبا بك</h3>
+                  <h3 class="font-weight-bolder text-info text-center">مرحبا بك</h3>
 
                 </div>
 
@@ -114,7 +116,8 @@
           </div>
           <div class="col-md-6">
             <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-              <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/curved-images/curved6.jpg')"></div>
+
+              <div  class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"  align="right" style="background-image:url('/assets/img/log-ct1.gif')"></div>
             </div>
           </div>
         </div>
@@ -161,12 +164,12 @@
 <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
 <!--   Core JS Files   -->
 <!--   Core JS Files   -->
-<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap.min.js"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-<script src="../assets/js/plugins/fullcalendar.min.js"></script>
-<script src="../assets/js/plugins/chartjs.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="/assets/js/plugins/fullcalendar.min.js"></script>
+<script src="/assets/js/plugins/chartjs.min.js"></script>
 <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -337,7 +340,7 @@
       },
     });
   </script>
-<script src="../assets/js/plugins/choices.min.js"></script>
+<script src="/assets/js/plugins/choices.min.js"></script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class Home1Controller {
-	@RequestMapping(value = "/home1")
+    @RequestMapping(value = "/home1")
     public ModelAndView home1() {
 
         LocalDateTime now = LocalDateTime.now();
@@ -21,7 +21,11 @@ public class Home1Controller {
         Map params = new HashMap<String, Object>();
         params.put("date_time", date_time);
 
-        return new ModelAndView("home1", params);
-    }
+   return new ModelAndView("home1", params);
 
+    }
 }
+
+
+
+
