@@ -24,4 +24,20 @@ public class Part {
     @Column(name = "participannom")
     private String prtDsgar;
 
+
+    public long getPrtCode() {
+        return prtCode;
+    }
+
+    public void setPrtCode(long prtCode) {
+        this.prtCode = prtCode;
+    }
+
+    public String getPrtDsgar() {
+        return prtDsgar;
+    }
+
+    public void setPrtDsgar(String prtDsgar) {
+        this.prtDsgar = prtDsgar;
+    }
 }
