@@ -1,13 +1,17 @@
 package com.example.Securite_Routiere.controller;
 
+import com.example.Securite_Routiere.entities.CauseAccident;
 import com.example.Securite_Routiere.entities.PvAccident;
 import com.example.Securite_Routiere.repositories.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -65,6 +69,24 @@ private final PvAccidentRepository pvAccidentRepository;
         return "pvaccident/addPvAccident";
 
     }
+
+    @PostMapping("addSave")
+
+    public String addPvAccident(@Valid PvAccident pvAccident, BindingResult result,
+
+                                @RequestParam(name = "causeAccidentcascode", required = true) Long a,
+                                @RequestParam(name = "delegationdlgCode", required = true) Long b,
+                                @RequestParam(name = "partprtCode", required = true) Long c,
+                                @RequestParam(name = "signauxCirculationsigCode", required = true) Long d,
+                                @RequestParam(name = "situationRoutesitCode", required = true) Long e,
+                                @RequestParam(name = "tempstmpCode", required = true) Long f,
+                                @RequestParam(name = "typerouterteCode", required = true) Long j,
+                                @RequestParam(name = "uniteuntCode", required = true) Long h,)
+    {
+        CauseAccident causeAccident=causeAccidentRepository.findById(a).orElseThrow(()
+
+    }
+
 
 
 
