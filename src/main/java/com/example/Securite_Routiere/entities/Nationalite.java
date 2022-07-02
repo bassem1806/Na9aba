@@ -9,18 +9,39 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 @ToString
 public class Nationalite {
 @Id
-@GeneratedValue(strategy = GenerationType.AUTO)
-@Column(name = "Nationaliteid")
-private long natCode;
+
+private long id;
 
 
     @NotBlank(message = "Nationalité est obligatoire")
-    @Column(name = "Nationalite")
-    private String natDsgar;
+    @Column(name = "nationalite_name")
+    private String name;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getLibelle() {
+        return name;
+    }
+
+    public void setLibelle(String libelle) {
+        this.name = libelle;
+    }
+
+    public Nationalite(long id, String libelle) {
+        this.id = id;
+        this.name = libelle;
+    }
+
+    public Nationalite() {
+    }
 }

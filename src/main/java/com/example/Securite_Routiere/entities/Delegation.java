@@ -12,26 +12,56 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 @ToString
 public class Delegation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "delegid")
-    private long dlgCode;
+
+    private long id;
 
     @NotBlank(message = "Delegation nom est oblogatoire ")
-    @Column(name = "delegation")
-    private String dlgDsgar;
+    @Column(name = "delegation_name")
+    private String name;
 
 
     /**** Many To One ****/
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "gvrCode", nullable = false)
+    @JoinColumn(name = "gouvernorat_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Gouvernorat gouvernorat;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Gouvernorat getGouvernorat() {
+        return gouvernorat;
+    }
+
+    public void setGouvernorat(Gouvernorat gouvernorat) {
+        this.gouvernorat = gouvernorat;
+    }
+
+    public Delegation(long id, String name) {
+        this.id = id;
+        this.name = name;
+
+    }
+
+    public Delegation() {
+    }
 }

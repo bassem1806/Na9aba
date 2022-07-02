@@ -10,20 +10,38 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 @ToString
 
 public class Temps {
 
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tempsid")
-    private long tmpCode;
+
+    private long id;
 
     @NotBlank(message = "Temps lors de l'accident ")
-    @Column(name = "temps")
-    private String tmpDsgar;
+    @Column(name = "temps_name")
+    private String name;
 
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Temps(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Temps() {
+    }
 }

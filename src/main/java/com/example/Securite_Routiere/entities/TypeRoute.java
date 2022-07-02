@@ -9,20 +9,40 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 @ToString
 
 public class TypeRoute {
 @Id
 @GeneratedValue(strategy= GenerationType.AUTO)
-@Column(name = "typerouteid")
-    private long rteCode;
+
+    private long id;
 
     @NotBlank(message = "Type route est obligatoire ")
-    @Column(name = "typeroute")
-    private String rteDsgar;
+    @Column(name = "typeroute_name")
+    private String name;
 
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public TypeRoute(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public TypeRoute() {
+    }
 }

@@ -9,17 +9,37 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class Gouvernorat {
 @Id
  @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private long gvrCode;
+    private long id;
     @NotBlank(message = "Cause Accident est obligatoire ")
-   private String gvrDsgar;
- 
+    @Column(name = "gouvernorat_name")
+   private String name;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Gouvernorat(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Gouvernorat() {
+    }
 }

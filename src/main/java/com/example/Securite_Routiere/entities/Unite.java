@@ -9,18 +9,40 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 @ToString
 public class Unite {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "Uniteid")
-    private long untCode;
+
+    private long id;
+
+
     @NotBlank(message = "le nom de l'unité est obligatoir ")
-    @Column(name = "unitenom")
-    private String untDsgar;
+    @Column(name = "unite_name")
+    private String name;
 
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Unite(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Unite() {
+    }
 }

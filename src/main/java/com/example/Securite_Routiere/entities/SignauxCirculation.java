@@ -9,19 +9,40 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 @ToString
 public class SignauxCirculation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Signecirculationid")
-    private long sigCode;
+
+    private long id;
 
     @NotBlank(message = "Cause Accident est obligatoire ")
-    @Column(name = "SigneCirculation")
-    private String sigDsgar;
+    @Column(name = "SigneCirculation_name")
+    private String name;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public SignauxCirculation(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public SignauxCirculation() {
+    }
 }

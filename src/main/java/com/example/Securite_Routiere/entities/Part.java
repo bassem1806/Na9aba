@@ -10,34 +10,39 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 @ToString
 public class Part {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "participanid")
-    private long prtCode;
+
+    private long ig;
 
     @NotBlank(message = "Participant obligatoir ")
-    @Column(name = "participannom")
-    private String prtDsgar;
+    @Column(name = "part_name")
+    private String name;
 
-
-    public long getPrtCode() {
-        return prtCode;
+    public long getIg() {
+        return ig;
     }
 
-    public void setPrtCode(long prtCode) {
-        this.prtCode = prtCode;
+    public void setIg(long ig) {
+        this.ig = ig;
     }
 
-    public String getPrtDsgar() {
-        return prtDsgar;
+    public String getLibelle() {
+        return name;
     }
 
-    public void setPrtDsgar(String prtDsgar) {
-        this.prtDsgar = prtDsgar;
+    public void setLibelle(String libelle) {
+        this.name = libelle;
+    }
+
+    public Part(long ig, String libelle) {
+        this.ig = ig;
+        this.name = libelle;
+    }
+
+    public Part() {
     }
 }

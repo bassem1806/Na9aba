@@ -12,19 +12,39 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class CauseAccident {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-    @Column(name = "CauseAccID")
-    private long cacCode;
+
     @NotBlank(message = "Cause Accident est obligatoire ")
-    @Column(name = "CauseAccNom")
-    private String cacDsgar;
+    @Column(name = "casuseaccident_name")
+    private String name;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CauseAccident(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public CauseAccident() {
+    }
 }

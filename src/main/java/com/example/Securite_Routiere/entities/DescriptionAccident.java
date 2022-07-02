@@ -12,25 +12,55 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
 public class DescriptionAccident {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="descrpaccdid")
-    private long dacCode;
+
+    private long id;
 @NotBlank(message = "la description est oblogatoir ")
-@Column(name="descrpaccd")
-    private String dacDsgar;
+@Column(name="descriptionaccident_name")
+    private String name;
 
     /**** Many To One ****/
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cacCode", nullable = false)
+    @JoinColumn(name = "causeAccident_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private CauseAccident causeAccident;
 
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getLibelle() {
+        return name;
+    }
+
+    public void setLibelle(String libelle) {
+        this.name = libelle;
+    }
+
+    public CauseAccident getCauseAccident() {
+        return causeAccident;
+    }
+
+    public void setCauseAccident(CauseAccident causeAccident) {
+        this.causeAccident = causeAccident;
+    }
+
+    public DescriptionAccident() {
+    }
+
+    public DescriptionAccident(long id, String libelle) {
+        this.id = id;
+        this.name = libelle;
+
+
+
+    }
 }
