@@ -21,6 +21,9 @@ public class PvAccident {
     @Column(name = "numimatric")
     private long numimatric;
 
+    @Column(name = "numbarquia")
+    private long numbarquia;
+
     public long getNumimatric() {
         return numimatric;
     }
@@ -50,8 +53,7 @@ public class PvAccident {
     @Column(name = "dateimatric")
     private Date dateimatric;
 
-    @Column(name = "numbarquia")
-    private long numbarquia;
+
 
 
     /**** Many To One cause accident ****/
