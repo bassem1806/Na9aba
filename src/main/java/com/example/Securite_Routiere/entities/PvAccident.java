@@ -24,6 +24,28 @@ public class PvAccident {
     @Column(name = "numbarquia")
     private long numbarquia;
 
+    @Column(name = "addreaccid")
+    private String addreaccid;
+
+    public String getAddreaccid() {
+        return addreaccid;
+    }
+
+    public void setAddreaccid(String addreaccid) {
+        this.addreaccid = addreaccid;
+    }
+
+    public String getPointKmaccid() {
+        return pointKmaccid;
+    }
+
+    public void setPointKmaccid(String pointKmaccid) {
+        this.pointKmaccid = pointKmaccid;
+    }
+
+    @Column(name = "pointKmaccid")
+    private String pointKmaccid;
+
     public long getNumimatric() {
         return numimatric;
     }
@@ -62,6 +84,20 @@ public class PvAccident {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private CauseAccident causeAccident;
 
+    public Gouvernorat getGouvernorat() {
+        return gouvernorat;
+    }
+
+    public void setGouvernorat(Gouvernorat gouvernorat) {
+        this.gouvernorat = gouvernorat;
+    }
+
+    /**** Many To One gouvernorat ****/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "gouvenorat_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Gouvernorat gouvernorat;
+
     /**** Many To One delegation ****/
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "delegation_id", nullable = false)
@@ -99,6 +135,7 @@ public class PvAccident {
     @JoinColumn(name = "typeroute_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private TypeRoute typeRoute;
+
 
     /**** Many To One unite ****/
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -187,15 +224,14 @@ public class PvAccident {
         this.unite = unite;
     }
 
-    public PvAccident(long id, Date dateaccid, long numimatric, Date dateimatric, long numbarquia) {
+
+    public PvAccident() {
         this.id = id;
         this.dateaccid = dateaccid;
         this.numimatric = numimatric;
-        this.dateimatric = dateimatric;
         this.numbarquia = numbarquia;
+        this.addreaccid = addreaccid;
+        this.pointKmaccid = pointKmaccid;
+        this.dateimatric = dateimatric;
     }
-
-    public PvAccident() {
-    }
-
 }

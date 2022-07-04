@@ -16,18 +16,18 @@ public class Part {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private long ig;
+    private long id;
 
     @NotBlank(message = "Participant obligatoir ")
     @Column(name = "part_name")
     private String name;
 
     public long getIg() {
-        return ig;
+        return id;
     }
 
     public void setIg(long ig) {
-        this.ig = ig;
+        this.id = id;
     }
 
     public String getLibelle() {
@@ -39,7 +39,7 @@ public class Part {
     }
 
     public Part(long ig, String libelle) {
-        this.ig = ig;
+        this.id= id;
         this.name = libelle;
     }
 

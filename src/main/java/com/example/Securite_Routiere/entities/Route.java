@@ -1,25 +1,15 @@
 package com.example.Securite_Routiere.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+public class Route {
 
-@ToString
-
-public class TypeRoute {
-@Id
-@GeneratedValue(strategy= GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-    @NotBlank(message = "Type route est obligatoire ")
-    @Column(name = "typeroute_name")
-    private String name;
 
     public long getId() {
         return id;
@@ -37,11 +27,15 @@ public class TypeRoute {
         this.name = name;
     }
 
-    public TypeRoute(long id, String name) {
+    @NotBlank(message = " route est obligatoire ")
+    @Column(name = "route_name")
+    private String name;
+
+    public Route(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public TypeRoute() {
+    public Route() {
     }
 }

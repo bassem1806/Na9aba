@@ -28,7 +28,10 @@ public class PvAccidentController {
     private final TypeRouteRepository typeRouteRepository;
     private final UniteRepository uniteRepository;
 
-    public PvAccidentController(PvAccidentRepository pvAccidentRepository, CauseAccidentRepository causeAccidentRepository, DelegationRepository delegationRepository, PartRepository partRepository, SignauxCirculationRepository signauxCirculationRepository, SituationRouteRepository situationRouteRepository, TempsRepository tempsRepository, TypeRouteRepository typeRouteRepository, UniteRepository uniteRepository) {
+    private final GouvernoratRepository gouvernoratRepository;
+
+
+    public PvAccidentController(PvAccidentRepository pvAccidentRepository, CauseAccidentRepository causeAccidentRepository, DelegationRepository delegationRepository, PartRepository partRepository, SignauxCirculationRepository signauxCirculationRepository, SituationRouteRepository situationRouteRepository, TempsRepository tempsRepository, TypeRouteRepository typeRouteRepository, UniteRepository uniteRepository, GouvernoratRepository gouvernoratRepository) {
         this.pvAccidentRepository = pvAccidentRepository;
         this.causeAccidentRepository = causeAccidentRepository;
         this.delegationRepository = delegationRepository;
@@ -38,8 +41,8 @@ public class PvAccidentController {
         this.tempsRepository = tempsRepository;
         this.typeRouteRepository = typeRouteRepository;
         this.uniteRepository = uniteRepository;
+        this.gouvernoratRepository = gouvernoratRepository;
     }
-
 
     @GetMapping("list")
     //@ResponseBody
@@ -67,6 +70,7 @@ public class PvAccidentController {
         model.addAttribute("temps",tempsRepository.findAll());
         model.addAttribute("typeRoute",typeRouteRepository.findAll());
         model.addAttribute("unite",uniteRepository.findAll());
+        model.addAttribute("gouvernorat",gouvernoratRepository.findAll());
         model.addAttribute("pvAccident", new PvAccident());
         return "pvaccident/addPvAccident";
 
@@ -85,7 +89,8 @@ public class PvAccidentController {
                                 @RequestParam(name = "situationRouteId", required = true) Long e,
                                 @RequestParam(name = "tempsId", required = true) Long f,
                                 @RequestParam(name = "typerouteId", required = true) Long j,
-                                @RequestParam(name = "uniteId", required = true) Long h)
+                                @RequestParam(name = "uniteId", required = true) Long h,
+                                @RequestParam(name = "gouvernoratId", required = true) Long k)
     {
 
         CauseAccident causeAccident= causeAccidentRepository.findById(a).orElseThrow(()-> new IllegalArgumentException
@@ -120,6 +125,10 @@ public class PvAccidentController {
         Unite unite= uniteRepository.findById(h).orElseThrow(()-> new IllegalArgumentException
                 ("Invalid Unite Id:" +h));
         pvAccident.setUnite(unite);
+
+        Gouvernorat gouvernorat= gouvernoratRepository.findById(k).orElseThrow(()-> new IllegalArgumentException
+                ("Invalid Gouvernorat Id:" +k));
+        pvAccident.setGouvernorat(gouvernorat);
 
         pvAccidentRepository.save(pvAccident);
 
