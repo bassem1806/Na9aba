@@ -22,25 +22,25 @@ public class Part {
     @Column(name = "part_name")
     private String name;
 
-    public long getIg() {
+    public long getId() {
         return id;
     }
 
-    public void setIg(long ig) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getLibelle() {
+    public String getName() {
         return name;
     }
 
-    public void setLibelle(String libelle) {
-        this.name = libelle;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Part(long ig, String libelle) {
-        this.id= id;
-        this.name = libelle;
+    public Part(long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Part() {

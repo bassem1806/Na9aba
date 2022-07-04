@@ -136,15 +136,16 @@
                                             <option  th:each="tmp: ${temps}" th:value="${tmp.id}" th:text="${tmp.name}" />
                                         </select>
                                     </div>
-
-
-
-
-                                    <div class="card-body">
+                                      <div class="card-body">
                                         <h5 class="text"> أسباب الحادث</h5>
                                     </div>
 
-
+                                    <div class="col-sm-4">
+                                        <label for="part" class="col-form-label" >  الوسائل المتسببة في الحادث</label>
+                                        <select name="partId" class="form-control" >
+                                            <option  th:each="prt: ${part}" th:value="${prt.id}" th:text="${prt.name}" />
+                                        </select>
+                                    </div>
 
                                     <div class="col-md-12">
                                         <input type="submit" class="btn btn-primary" value="إضافة محضر معاية حادث"/>
