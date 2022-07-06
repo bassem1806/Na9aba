@@ -18,7 +18,7 @@ public class PvAccident1 {
     private String dateaccid;
 
     @Column(name = "numimatric")
-    private long numimatric;
+    private String numimatric;
 
     @Column(name = "numbarquia")
     private long numbarquia;
@@ -36,6 +36,14 @@ public class PvAccident1 {
 
 
 
+
+    /**** Many To One delegation ****/
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "delegation_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Delegation delegation;
+
     public long getId() {
         return id;
     }
@@ -52,11 +60,11 @@ public class PvAccident1 {
         this.dateaccid = dateaccid;
     }
 
-    public long getNumimatric() {
+    public String getNumimatric() {
         return numimatric;
     }
 
-    public void setNumimatric(long numimatric) {
+    public void setNumimatric(String numimatric) {
         this.numimatric = numimatric;
     }
 
@@ -84,7 +92,17 @@ public class PvAccident1 {
         this.unite = unite;
     }
 
-    public PvAccident1(long id, String dateaccid, long numimatric, long numbarquia, String addreaccid) {
+
+    public Delegation getDelegation() {
+        return delegation;
+    }
+
+    public void setDelegation(Delegation delegation) {
+        this.delegation = delegation;
+    }
+
+
+    public PvAccident1(long id, String dateaccid, String numimatric, long numbarquia, String addreaccid) {
         this.id = id;
         this.dateaccid = dateaccid;
         this.numimatric = numimatric;

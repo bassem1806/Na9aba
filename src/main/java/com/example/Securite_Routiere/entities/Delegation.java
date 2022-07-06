@@ -26,11 +26,26 @@ public class Delegation {
     private String name;
 
 
-    /**** Many To One ****/
+    public PvAccident1 getPvAccident1() {
+        return pvAccident1;
+    }
+
+    public void setPvAccident1(PvAccident1 pvAccident1) {
+        this.pvAccident1 = pvAccident1;
+    }
+
+    /**** Many To One  pv accident****/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "PvAccident1_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private  PvAccident1 pvAccident1;
+
+
+    /**** Many To One  gov****/
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "gouvernorat_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Gouvernorat gouvernorat;
+    private  Gouvernorat gouvernorat;
 
     public long getId() {
         return id;
@@ -48,13 +63,6 @@ public class Delegation {
         this.name = name;
     }
 
-    public Gouvernorat getGouvernorat() {
-        return gouvernorat;
-    }
-
-    public void setGouvernorat(Gouvernorat gouvernorat) {
-        this.gouvernorat = gouvernorat;
-    }
 
     public Delegation(long id, String name) {
         this.id = id;

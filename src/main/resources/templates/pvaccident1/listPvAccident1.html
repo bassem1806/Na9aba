@@ -60,6 +60,7 @@
                 <tr>
                   <th>id</th>
                   <th> unite</th>
+                  <th> gouvernorat</th>
 
                 </tr>
                 </thead>
@@ -67,6 +68,7 @@
                 <tr th:each="pvAccident1 : ${pvAccidents1}">
                   <td th:text="${pvAccident1.id}"></td>
                   <td th:text="${pvAccident1.unite.name}"></td>
+                  <td th:text="${pvAccident1.gouvernorat.name}"></td>
 
                 </tr>
                 </tbody>

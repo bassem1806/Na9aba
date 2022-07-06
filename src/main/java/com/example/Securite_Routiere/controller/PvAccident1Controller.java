@@ -1,8 +1,10 @@
 package com.example.Securite_Routiere.controller;
 
 import com.example.Securite_Routiere.entities.*;
+import com.example.Securite_Routiere.repositories.DelegationRepository;
+import com.example.Securite_Routiere.repositories.GouvernoratRepository;
 import com.example.Securite_Routiere.repositories.PvAccident1Repository;
-import com.example.Securite_Routiere.repositories.PvAccidentRepository;
+
 import com.example.Securite_Routiere.repositories.UniteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +24,16 @@ public class PvAccident1Controller {
 
         private final PvAccident1Repository pvAccident1Repository;
         private final UniteRepository uniteRepository;
+    private final GouvernoratRepository gouvernoratRepository;
+
+    private final DelegationRepository delegationRepository;
 
 @Autowired
-        public PvAccident1Controller(PvAccident1Repository pvAccident1Repository, UniteRepository uniteRepository) {
+        public PvAccident1Controller(PvAccident1Repository pvAccident1Repository, UniteRepository uniteRepository,GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository) {
             this.pvAccident1Repository = pvAccident1Repository;
             this.uniteRepository = uniteRepository;
+             this.gouvernoratRepository = gouvernoratRepository;
+    this.delegationRepository = delegationRepository;
         }
 
 
@@ -50,8 +57,10 @@ public class PvAccident1Controller {
 
 
         model.addAttribute("unite",uniteRepository.findAll());
+        model.addAttribute("gouvernorat", gouvernoratRepository.findAll() );
 
         model.addAttribute("pvAccident", new PvAccident());
+        model.addAttribute("delegation",delegationRepository.findAll());
         return "pvaccident1/addPvAccident1";
 
     }
@@ -61,8 +70,9 @@ public class PvAccident1Controller {
     public String addPvAccident1(@Valid PvAccident1 pvAccident1, BindingResult result,
 
 
-                                @RequestParam(name = "uniteId", required = true) Long h)
-
+                                @RequestParam(name = "uniteId", required = true) Long h,
+                                 @RequestParam(name = "gouvernoratId", required = true) Long k,
+                                  @RequestParam(name = "delegationdId", required = false) Long b)
     {
 
 
@@ -71,6 +81,11 @@ public class PvAccident1Controller {
                 ("Invalid Unite Id:" +h));
         pvAccident1.setUnite(unite);
 
+
+
+        Delegation delegation= delegationRepository.findById(b).orElseThrow(()-> new IllegalArgumentException
+                ("Invalid Delegation Id:" +b));
+        pvAccident1.setDelegation(delegation);
 
 /*
         System.out.println("pv accident :" +pvAccident1.getCauseAccident());
