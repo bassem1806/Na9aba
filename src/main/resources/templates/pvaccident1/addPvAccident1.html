@@ -25,16 +25,16 @@
     <!-- load delegation from gouvernorat-->
 
 
-    <!--  <script type="text/javascript">
+     <script type="text/javascript">
 
   $(document).ready(function(){
 
       $('#listGouvernorat').on('change', function(){
-          var gouvernorat_id = $(this).val();
+          var gouvernoratId = $(this).val();
 
           $.ajax({
               type: 'GET',
-              url: '/delegation/loadDlegationByGouvernorat/' + gouvernorat_id,
+              url: '/delegation/loadDlegationByGouvernorat/' + gouvernoratIid,
               success: function(result) {
                   var result = JSON.parse(result);
                   var s = '';
@@ -46,7 +46,7 @@
           });
       });
           });
-  </script>-->
+  </script>
 
     <!-- End load delegation from gouvernorat-->
 </head>
@@ -115,7 +115,7 @@
 
                                 <div class="col-sm-6">
                                     <label for="gouvernorat" class="col-form-label" >الولاية</label>
-                                    <select name="gouvernoratId" class="form-control">
+                                    <select name="gouvernorat_id" class="form-control">
                                         <option  th:each="gv: ${gouvernorat}" th:value="${gv.id}" th:text="${gv.name}" id="gouvernorat"/>
                                     </select>
                                 </div>

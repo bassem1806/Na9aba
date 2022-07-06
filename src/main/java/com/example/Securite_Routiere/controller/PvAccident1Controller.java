@@ -10,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Id;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -81,7 +79,9 @@ public class PvAccident1Controller {
                 ("Invalid Unite Id:" +h));
         pvAccident1.setUnite(unite);
 
-
+        Gouvernorat gouvernorat= gouvernoratRepository.findById(k).orElseThrow(()-> new IllegalArgumentException
+                ("Invalid Gouvernorat Id:" +k));
+        pvAccident1.setGouvernorat(gouvernorat);
 
         Delegation delegation= delegationRepository.findById(b).orElseThrow(()-> new IllegalArgumentException
                 ("Invalid Delegation Id:" +b));
@@ -97,8 +97,34 @@ public class PvAccident1Controller {
 
     }
 
+    @ResponseBody
+    @RequestMapping(value = "loadDelegationByGouvernorat/{id}", method = RequestMethod.GET)
+    public String loadStatesByCountry(@PathVariable("id") long id) {
+
+        System.out.println("init loadStatesByCountry");
+        System.out.println("l id de la Gouvernorat est ="+id);
+
+        //	System.out.println("la taille de la liste est egale ="+directionRepository.findByDirectiong(directiongRepository.findById(id).get()));
+
+        List <Delegation> delegationsByGv =delegationRepository.findByGouvernorat(gouvernoratRepository.findById(id).get());
+        System.out.println("la taille de la liste est egale ="+delegationsByGv.size());
+
+        Gson gson = new Gson();
+        //  GsonBuilder gsonBuilder = new GsonBuilder();
+        //    Gson gson = gsonBuilder.registerTypeAdapter(Direction.class, new MessageAdapter()).create();
+        return gson.toJson(delegationRepository.findByGouvernorat(gouvernoratRepository.findById(id).get()));
 
     }
+
+
+    private class Gson {
+
+        public String toJson(List<Delegation> byGouvernorat) {
+
+            return "redirect:list1";
+        }
+    }
+}
 
 
 

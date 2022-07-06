@@ -17,17 +17,27 @@ public class Gouvernorat {
 @Id
  @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private long id;
+    public long gouvernoratId;
     @NotBlank(message = "Cause Accident est obligatoire ")
     @Column(name = "gouvernorat_name")
    private String name;
 
 
-    /**** one To many part****/
-    @OneToMany
-    @JoinColumn(name = "gouvernorat_id", nullable = false)
+    /**** one To many delegation****/
+  /*  @OneToMany
+    @JoinColumn(name = "delegationId",referencedColumnName="delegationId" ,nullable = false )
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Delegation> delegation =new ArrayList<>();
+    private List<Delegation> delegations;*/
+
+   /* public long getGouvernoratId() {
+        return gouvernoratId;
+    }
+
+    public void setGouvernoratId(long gouvernoratId) {
+        this.gouvernoratId = gouvernoratId;
+    }
+
+    */
 
     public String getName() {
         return name;
@@ -37,16 +47,8 @@ public class Gouvernorat {
         this.name = name;
     }
 
-    public long getId() {
-        return id;
-    }
+    public Gouvernorat(String name) {
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Gouvernorat(long id, String name) {
-        this.id = id;
         this.name = name;
     }
 
