@@ -3,23 +3,23 @@
 <html lang="ar" dir="rtl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-<link rel="icon" type="image/png" href="../assets/img/favicon.png">
-<title>
-  إدارة الخدمات الفنية
-</title>
-<!--     Fonts and icons     -->
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-<!-- Nucleo Icons -->
-<link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-<link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-<!-- Font Awesome Icons -->
-<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-<link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-<!-- CSS Files -->
-<link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>
+    إدارة الخدمات الفنية
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 </head>
 
 <!-- menu a droite  -->
@@ -45,13 +45,13 @@
   <div class="container my-2">
     <div class="card">
       <div class="card-body">
-        <div th:switch="${roles}" class="container my-5">
+        <div th:switch="${pvAccidents1}" class="container my-5">
           <p class="my-5">
-            <a th:href="@{'/PvAccident/add'}" class="btn btn-primary">
+            <a th:href="@{'/PvAccidentnew/add1'}" class="btn btn-primary">
               <i class="fas fa-user-plus ml-2"> إضافة محضر جديد</i></a>
           </p>
           <div class="col-md-10">
-            <h2 th:case="null">ليس هنالك محاضر</h2>
+            <h2 th:case="null">ليس هنالك محاضرجديدة</h2>
             <div th:case="*">
 
               <h2>عدد المحاضر الجملي= <span th:text="${nbr}">10</span></h2>
@@ -59,14 +59,14 @@
                 <thead>
                 <tr>
                   <th>id</th>
-                  <th> cause</th>
+                  <th> unite</th>
 
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="PvAccident : ${pvAccidents}">
-                  <td th:text="${pvAccident.id}"></td>
-                  <td th:text="${pvAccident.causeAccident}"></td>
+                <tr th:each="pvAccident1 : ${pvAccidents1}">
+                  <td th:text="${pvAccident1.id}"></td>
+                  <td th:text="${pvAccident1.unite.name}"></td>
 
                 </tr>
                 </tbody>
@@ -315,6 +315,6 @@
       <script async defer src="https://buttons.github.io/buttons.js"></script>
       <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
       <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
-  </body>
+</body>
 
 </html>

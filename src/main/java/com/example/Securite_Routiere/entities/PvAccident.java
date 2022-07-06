@@ -3,9 +3,8 @@ package com.example.Securite_Routiere.entities;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.validation.constraints.NotNull;
+
 import javax.persistence.*;
-import java.util.Date;
 
 
 @Entity
@@ -15,8 +14,8 @@ public class PvAccident {
     private long id;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @NotNull
-    private Date dateaccid;
+
+    private String dateaccid;
 
     @Column(name = "numimatric")
     private long numimatric;
@@ -26,6 +25,8 @@ public class PvAccident {
 
     @Column(name = "addreaccid")
     private String addreaccid;
+
+
 
     public String getAddreaccid() {
         return addreaccid;
@@ -54,11 +55,11 @@ public class PvAccident {
         this.numimatric = numimatric;
     }
 
-    public Date getDateimatric() {
+    public String getDateimatric() {
         return dateimatric;
     }
 
-    public void setDateimatric(Date dateimatric) {
+    public void setDateimatric(String dateimatric) {
         this.dateimatric = dateimatric;
     }
 
@@ -71,9 +72,9 @@ public class PvAccident {
     }
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @NotNull
+
     @Column(name = "dateimatric")
-    private Date dateimatric;
+    private String dateimatric;
 
 
 
@@ -92,13 +93,25 @@ public class PvAccident {
         this.gouvernorat = gouvernorat;
     }
 
-    /**** Many To One gouvernorat ****/
+
+  /**** Many To One gouvernorat ****/
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "gouvenorat_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Gouvernorat gouvernorat;
 
+
+    public Delegation getDelegation() {
+        return delegation;
+    }
+
+    public void setDelegation(Delegation delegation) {
+        this.delegation = delegation;
+    }
+
     /**** Many To One delegation ****/
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "delegation_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -152,11 +165,11 @@ public class PvAccident {
         this.id = id;
     }
 
-    public Date getDateaccid() {
+    public String getDateaccid() {
         return dateaccid;
     }
 
-    public void setDateaccid(Date dateaccid) {
+    public void setDateaccid(String dateaccid) {
         this.dateaccid = dateaccid;
     }
 
@@ -168,13 +181,7 @@ public class PvAccident {
         this.causeAccident = causeAccident;
     }
 
-    public Delegation getDelegation() {
-        return delegation;
-    }
 
-    public void setDelegation(Delegation delegation) {
-        this.delegation = delegation;
-    }
 
     public Part getPart() {
         return part;
@@ -234,4 +241,8 @@ public class PvAccident {
         this.pointKmaccid = pointKmaccid;
         this.dateimatric = dateimatric;
     }
+
+
+
+
 }

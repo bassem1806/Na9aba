@@ -3,6 +3,7 @@ package com.example.Securite_Routiere.controller;
 
 import com.example.Securite_Routiere.entities.*;
 import com.example.Securite_Routiere.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/PvAccident/")
@@ -30,10 +32,10 @@ public class PvAccidentController {
 
     private final GouvernoratRepository gouvernoratRepository;
 
-
+@Autowired
     public PvAccidentController(PvAccidentRepository pvAccidentRepository, CauseAccidentRepository causeAccidentRepository, DelegationRepository delegationRepository, PartRepository partRepository, SignauxCirculationRepository signauxCirculationRepository, SituationRouteRepository situationRouteRepository, TempsRepository tempsRepository, TypeRouteRepository typeRouteRepository, UniteRepository uniteRepository, GouvernoratRepository gouvernoratRepository) {
         this.pvAccidentRepository = pvAccidentRepository;
-        this.causeAccidentRepository = causeAccidentRepository;
+      this.causeAccidentRepository = causeAccidentRepository;
         this.delegationRepository = delegationRepository;
         this.partRepository = partRepository;
         this.signauxCirculationRepository = signauxCirculationRepository;
@@ -83,12 +85,12 @@ public class PvAccidentController {
     public String addPvAccident(@Valid PvAccident pvAccident, BindingResult result,
 
                                 @RequestParam(name = "causeAccidentId", required = true) Long a,
-                                @RequestParam(name = "delegationdId", required = true) Long b,
+                              @RequestParam(name = "delegationdId", required = false) Long b,
                                 @RequestParam(name = "partId", required = true) Long c,
                                 @RequestParam(name = "signauxCirculationId", required = true) Long d,
                                 @RequestParam(name = "situationRouteId", required = true) Long e,
                                 @RequestParam(name = "tempsId", required = true) Long f,
-                                @RequestParam(name = "typerouteId", required = true) Long j,
+                                @RequestParam(name = "typerouteId", required = false) Long j,
                                 @RequestParam(name = "uniteId", required = true) Long h,
                                 @RequestParam(name = "gouvernoratId", required = true) Long k)
     {
@@ -99,7 +101,7 @@ public class PvAccidentController {
 
         Delegation delegation= delegationRepository.findById(b).orElseThrow(()-> new IllegalArgumentException
                 ("Invalid Delegation Id:" +b));
-        pvAccident.setDelegation(delegation);
+        pvAccident.setDelegation((delegation));
 
         Part part= partRepository.findById(c).orElseThrow(()-> new IllegalArgumentException
                 ("Invalid Part Id:" +c));
@@ -130,7 +132,10 @@ public class PvAccidentController {
                 ("Invalid Gouvernorat Id:" +k));
         pvAccident.setGouvernorat(gouvernorat);
 
-        pvAccidentRepository.save(pvAccident);
+        System.out.println("pv accident :" +pvAccident.getCauseAccident());
+        System.out.println("pv accident :" +pvAccident.getAddreaccid());
+
+        /*pvAccidentRepository.save(pvAccident);*/
 
         return "redirect:list";
 
