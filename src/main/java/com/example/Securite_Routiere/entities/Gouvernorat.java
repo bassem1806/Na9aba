@@ -17,7 +17,7 @@ public class Gouvernorat {
 @Id
  @GeneratedValue(strategy = GenerationType.AUTO)
 
-    public long gouvernoratId;
+    public long id;
     @NotBlank(message = "Cause Accident est obligatoire ")
     @Column(name = "gouvernorat_name")
    private String name;
@@ -47,8 +47,16 @@ public class Gouvernorat {
         this.name = name;
     }
 
-    public Gouvernorat(String name) {
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Gouvernorat(long id, String name) {
+        this.id =id;
         this.name = name;
     }
 

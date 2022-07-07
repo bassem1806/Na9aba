@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface DelegationRepository extends JpaRepository<Delegation ,Long> {
 
-    List<Delegation> findByGouvernorat(Gouvernorat gouvernorat);
+    /* List<Delegation> findByGouvernorat(Gouvernorat gouvernorat);*/
 }

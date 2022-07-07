@@ -40,7 +40,7 @@ public class PvAccident1 {
     /**** Many To One delegation ****/
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "delegationId", nullable = false)
+    @JoinColumn(name = "delegation_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Delegation delegation;
 
@@ -55,7 +55,7 @@ public class PvAccident1 {
     /**** Many To One gov ****/
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "gouvernoratId", nullable = false)
+    @JoinColumn(name = "gouvernorat_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Gouvernorat gouvernorat;
 

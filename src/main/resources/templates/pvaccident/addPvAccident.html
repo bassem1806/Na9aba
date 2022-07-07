@@ -20,35 +20,6 @@
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
-
-
-    <!-- load delegation from gouvernorat-->
-
-
-  <!--  <script type="text/javascript">
-
-$(document).ready(function(){
-
-	$('#listGouvernorat').on('change', function(){
-		var gouvernorat_id = $(this).val();
-
-		$.ajax({
-			type: 'GET',
-			url: '/delegation/loadDlegationByGouvernorat/' + gouvernorat_id,
-			success: function(result) {
-				var result = JSON.parse(result);
-				var s = '';
-				for(var i = 0; i < result.length; i++) {
-					s += '<option value="' + result[i].id + '">' + result[i].libele + '</option>';
-				}
-				$('#listDelegation').html(s);
-			}
-		});
-	});
-		});
-</script>-->
-
-    <!-- End load delegation from gouvernorat-->
 </head>
 
 <body class="g-sidenav-show rtl bg-gray-100">
@@ -57,7 +28,7 @@ $(document).ready(function(){
     <div th:replace="fragments/menu :: menu" />
 
 </aside>
-<!--<div th:replace="fragments/header :: header" />-->
+<div th:replace="fragments/header :: header" />
 <main >
     <!-- Navbar -->
 
@@ -76,17 +47,17 @@ $(document).ready(function(){
                                 <div class="card-header pb-0 text-left bg-transparent">
                                     <h3 class="font-weight-bolder text-info text-center"> محضر معاينة حادث مرور</h3>
 
+                            </div>
+
+
+
+                            <div class="row g-3">
+                                <div class="col-sm-7">
+                                    <label for="unite" class="col-form-label" >الوحدة</label>
+                                    <select name="uniteId" class="form-control">
+                                        <option  th:each="un: ${unite}" th:value="${un.id}" th:text="${un.name}" />
+                                    </select>
                                 </div>
-
-
-
-                                <div class="row g-3">
-                                    <div class="col-sm-7">
-                                        <label for="unite" class="col-form-label" >الوحدة</label>
-                                        <select name="uniteId" class="form-control">
-                                            <option  th:each="un: ${unite}" th:value="${un.id}" th:text="${un.name}" id="unite" />
-                                        </select>
-                                    </div>
 
                                     <div class="col-sm">
                                         <label for="dateimatric" class="col-form-label">تاريخ التسجيل </label>
@@ -116,21 +87,21 @@ $(document).ready(function(){
                                     <div class="col-sm-6">
                                         <label for="gouvernorat" class="col-form-label" >الولاية</label>
                                         <select name="gouvernoratId" class="form-control">
-                                            <option  th:each="gov: ${gouvernorat}" th:value="${gov.id}" th:text="${gov.name}" id="gouvernorat"/>
+                                            <option  th:each="gov: ${gouvernorat}" th:value="${gov.id}" th:text="${gov.name}" />
                                         </select>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <label for="delegation" class="col-form-label" >المعتمدية</label>
                                         <select name="delegationId" class="form-control">
-                                            <option  th:each="dlg: ${delegation}" th:value="${dlg.id}" th:text="${dlg.name}" id="delegation"/>
+                                            <option  th:each="dlg: ${delegation}" th:value="${dlg.id}" th:text="${dlg.name}" />
                                         </select>
                                     </div>
 
                                     <div class="col-sm-4">
                                         <label for="typeRoute" class="col-form-label" >الطريق</label>
                                         <select name="typeRouteId" class="form-control">
-                                            <option  th:each="tr: ${typeRoute}" th:value="${tr.id}" th:text="${tr.name}"  id="typeRoute"/>
+                                            <option  th:each="tr: ${typeRoute}" th:value="${tr.id}" th:text="${tr.name}" />
                                         </select>
                                     </div>
 
@@ -146,23 +117,23 @@ $(document).ready(function(){
                                         <input type="text" th:field="*{pointKmaccid}" class="form-control" id="pointKmaccid" placeholder="النقطة الكيلومترية"/> <span th:if="${#fields.hasErrors('pointKmaccid')}" th:errors="*{pointKmaccid}" class="text-danger"></span>
                                     </div>
 
-                                  <div class="col-sm-4">
+                                    <div class="col-sm-4">
                                         <label for="signauxCirculation" class="col-form-label" >إشارات المرور</label>
                                         <select name="signauxCirculationId" class="form-control">
-                                            <option  th:each="Sig: ${signauxCirculation}" th:value="${Sig.id}" th:text="${Sig.name}" id="signauxCirculation"/>
+                                            <option  th:each="Sig: ${signauxCirculation}" th:value="${Sig.id}" th:text="${Sig.name}" />
                                         </select>
                                     </div>
 
                                     <div class="col-sm-4">
                                         <label for="situationRoute" class="col-form-label" > حالة الطريق</label>
                                         <select name="situationRouteId" class="form-control">
-                                            <option  th:each="Sitr: ${situationRoute}" th:value="${Sitr.id}" th:text="${Sitr.name}" id="situationRoute" />
+                                            <option  th:each="Sitr: ${situationRoute}" th:value="${Sitr.id}" th:text="${Sitr.name}" />
                                         </select>
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="temps" class="col-form-label" >  حالة الطقس</label>
                                         <select name="tempsId" class="form-control">
-                                            <option  th:each="tmp: ${temps}" th:value="${tmp.id}" th:text="${tmp.name}"  id="temps"/>
+                                            <option  th:each="tmp: ${temps}" th:value="${tmp.id}" th:text="${tmp.name}" />
                                         </select>
                                     </div>
                                       <div class="card-body">
@@ -170,16 +141,9 @@ $(document).ready(function(){
                                     </div>
 
                                     <div class="col-sm-4">
-                                        <label for="causeAccident" class="col-form-label"  >  أسباب الحادث</label>
-                                        <select name="causeAccidentId" class="form-control" multiple >
-                                            <option  th:each="caccid: ${causeAccident}" th:value="${caccid.id}" th:text="${caccid.name}" id="causeAccident" />
-                                        </select>
-                                    </div>
-
-                                    <div class="col-sm-4">
-                                        <label for="part" class="col-form-label"  >  الوسائل المتسببة في الحادث</label>
-                                        <select name="partId" class="form-control" multiple  >
-                                            <option  th:each="pt: ${part}" th:value="${pt.id}" th:text="${pt.name}"  id="part" />
+                                        <label for="part" class="col-form-label" >  الوسائل المتسببة في الحادث</label>
+                                        <select name="partId" class="form-control" multiple >
+                                            <option  th:each="pt: ${part}" th:value="${pt.id}" th:text="${pt.name}" />
                                         </select>
                                     </div>
 
@@ -197,7 +161,7 @@ $(document).ready(function(){
                                     <div class="form-group col-md-8"></div>
 
                                 </div>
-                          </form>
+                         </form>
                     </div>
                 </div>
             </div>

@@ -19,30 +19,34 @@ public class Delegation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private long delegationId;
+    private long id;
 
     @NotBlank(message = "Delegation nom est oblogatoire ")
     @Column(name = "delegation_name")
     private String name;
 
 
+    public Gouvernorat getGouvernorat() {
+        return gouvernorat;
+    }
 
-
-
+    public void setGouvernorat(Gouvernorat gouvernorat) {
+        this.gouvernorat = gouvernorat;
+    }
 
     /**** Many To One  gov****/
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "gouvernoratId", referencedColumnName="gouvernoratId" ,nullable = false)
+    @JoinColumn(name = "gouvernorat_id" ,nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private  Gouvernorat gouvernorat;
 
 
-    public long getDelegation_id() {
-        return delegationId;
+    public long getDelegationId() {
+        return id;
     }
 
-    public void setDelegation_id(long delegation_id) {
-        this.delegationId = delegation_id;
+    public void setDelegationId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -53,11 +57,17 @@ public class Delegation {
         this.name = name;
     }
 
+    public long getId() {
+        return id;
+    }
 
-    public Delegation( String name) {
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    public Delegation(long id, String name) {
+        this.id = id;
         this.name = name;
-
     }
 
     public Delegation() {

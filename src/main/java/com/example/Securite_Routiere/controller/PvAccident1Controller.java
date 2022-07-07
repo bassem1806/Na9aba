@@ -48,8 +48,8 @@ public class PvAccident1Controller {
         return "pvaccident1/listPvAccident1";
 
     }
-
     @GetMapping("add1")
+
 
     public String showAddPvAccident1Form(PvAccident1 pvAccident1, Model model) {
 
@@ -86,17 +86,15 @@ public class PvAccident1Controller {
         Delegation delegation= delegationRepository.findById(b).orElseThrow(()-> new IllegalArgumentException
                 ("Invalid Delegation Id:" +b));
         pvAccident1.setDelegation(delegation);
-
-/*
-        System.out.println("pv accident :" +pvAccident1.getCauseAccident());
-        System.out.println("pv accident :" +pvAcciden1t.getAddreaccid());*/
+        System.out.println("gov id :" +gouvernorat.getId());
+        System.out.println("delegation id :" +delegation.getDelegationId());
 
         pvAccident1Repository.save(pvAccident1);
 
         return "redirect:list1";
 
     }
-
+/*
     @ResponseBody
     @RequestMapping(value = "loadDelegationByGouvernorat/{id}", method = RequestMethod.GET)
     public String loadStatesByCountry(@PathVariable("id") long id) {
@@ -121,10 +119,10 @@ public class PvAccident1Controller {
 
         public String toJson(List<Delegation> byGouvernorat) {
 
-            return "redirect:list1";
-        }
+
+        }*/
     }
-}
+
 
 
 
