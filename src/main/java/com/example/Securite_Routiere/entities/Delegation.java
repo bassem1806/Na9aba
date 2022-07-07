@@ -1,10 +1,6 @@
 package com.example.Securite_Routiere.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,19 +8,22 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-
-@ToString
 public class Delegation {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name= "delegation_id")
+    private long delegationId;
 
-    private long id;
-
-    @NotBlank(message = "Delegation nom est oblogatoire ")
-    @Column(name = "delegation_name")
+    @NotBlank(message="Delegation nom est obligatoire")
+    @Column(name= "delegation_name")
     private String name;
 
+
+    /**** Many To One  gov****/
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "gouvernorat_id" )
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private  Gouvernorat gouvernorat;
 
     public Gouvernorat getGouvernorat() {
         return gouvernorat;
@@ -34,19 +33,13 @@ public class Delegation {
         this.gouvernorat = gouvernorat;
     }
 
-    /**** Many To One  gov****/
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "gouvernorat_id" ,nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private  Gouvernorat gouvernorat;
-
 
     public long getDelegationId() {
-        return id;
+        return delegationId;
     }
 
-    public void setDelegationId(long id) {
-        this.id = id;
+    public void setDelegationId(long delegationId) {
+        this.delegationId = delegationId;
     }
 
     public String getName() {
@@ -57,16 +50,8 @@ public class Delegation {
         this.name = name;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Delegation(long id, String name) {
-        this.id = id;
+    public Delegation(long delegationId, String name) {
+        this.delegationId = delegationId;
         this.name = name;
     }
 

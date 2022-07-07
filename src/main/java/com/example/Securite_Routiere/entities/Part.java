@@ -16,18 +16,18 @@ public class Part {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private long id;
+    private long partId;
 
     @NotBlank(message = "Participant obligatoir ")
     @Column(name = "part_name")
     private String name;
 
     public long getId() {
-        return id;
+        return partId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.partId = partId;
     }
 
     public String getName() {
@@ -38,8 +38,8 @@ public class Part {
         this.name = name;
     }
 
-    public Part(long id, String name) {
-        this.id = id;
+    public Part(long partId, String name) {
+        this.partId = partId;
         this.name = name;
     }
 

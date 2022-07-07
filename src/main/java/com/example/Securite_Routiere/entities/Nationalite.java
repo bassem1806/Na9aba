@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 public class Nationalite {
 @Id
 
-private long id;
+private long nationaliteId;
 
 
     @NotBlank(message = "Nationalité est obligatoire")
@@ -22,11 +22,11 @@ private long id;
     private String name;
 
     public long getId() {
-        return id;
+        return nationaliteId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.nationaliteId = id;
     }
 
     public String getLibelle() {
@@ -37,8 +37,8 @@ private long id;
         this.name = libelle;
     }
 
-    public Nationalite(long id, String libelle) {
-        this.id = id;
+    public Nationalite(long nationaliteId, String libelle) {
+        this.nationaliteId = nationaliteId;
         this.name = libelle;
     }
 

@@ -18,7 +18,7 @@ public class DescriptionAccident {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private long id;
+    private long descpaccidId;
 @NotBlank(message = "la description est oblogatoir ")
 @Column(name="descriptionaccident_name")
     private String name;
@@ -30,11 +30,11 @@ public class DescriptionAccident {
     private CauseAccident causeAccident;
 
     public long getId() {
-        return id;
+        return descpaccidId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.descpaccidId = id;
     }
 
     public String getLibelle() {
@@ -56,8 +56,8 @@ public class DescriptionAccident {
     public DescriptionAccident() {
     }
 
-    public DescriptionAccident(long id, String libelle) {
-        this.id = id;
+    public DescriptionAccident(long descpaccidId, String libelle) {
+        this.descpaccidId = descpaccidId;
         this.name = libelle;
 
 

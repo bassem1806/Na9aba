@@ -6,13 +6,14 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class PvAccident1 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long pvaccidId;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String dateaccid;
@@ -25,6 +26,21 @@ public class PvAccident1 {
 
     @Column(name = "addreaccid")
     private String addreaccid;
+
+    public String getDateimatric() {
+        return dateimatric;
+    }
+
+    public void setDateimatric(String dateimatric) {
+        this.dateimatric = dateimatric;
+    }
+
+    @Column(name = "dateimatric")
+    private String dateimatric;
+
+
+    @Column(name = "pointKmaccid")
+    private String pointKmaccid;
 
 
     /**** Many To One unite ****/
@@ -44,27 +60,17 @@ public class PvAccident1 {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Delegation delegation;
 
-    public Gouvernorat getGouvernorat() {
-        return gouvernorat;
-    }
 
-    public void setGouvernorat(Gouvernorat gouvernorat) {
-        this.gouvernorat = gouvernorat;
-    }
 
-    /**** Many To One gov ****/
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "gouvernorat_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Gouvernorat gouvernorat;
+
 
     public long getId() {
-        return id;
+        return pvaccidId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long pvaccidId) {
+        this.pvaccidId = pvaccidId;
     }
 
     public String getDateaccid() {
@@ -117,14 +123,26 @@ public class PvAccident1 {
     }
 
 
-    public PvAccident1(long id, String dateaccid, String numimatric, long numbarquia, String addreaccid) {
-        this.id = id;
+    public String getPointKmaccid() {
+        return pointKmaccid;
+    }
+
+    public void setPointKmaccid(String pointKmaccid) {
+        this.pointKmaccid = pointKmaccid;
+    }
+
+    public PvAccident1(long pvaccidId, String dateaccid, String numimatric, long numbarquia, String addreaccid, String dateimatric, String pointKmaccid) {
+        this.pvaccidId = pvaccidId;
         this.dateaccid = dateaccid;
         this.numimatric = numimatric;
         this.numbarquia = numbarquia;
         this.addreaccid = addreaccid;
+        this.dateimatric = dateimatric;
+        this.pointKmaccid = pointKmaccid;
     }
 
     public PvAccident1() {
     }
+
+
 }

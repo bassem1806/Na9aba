@@ -18,7 +18,7 @@ public class Temps {
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private long id;
+    private long tempsId;
 
     @NotBlank(message = "Temps lors de l'accident ")
     @Column(name = "temps_name")
@@ -26,19 +26,19 @@ public class Temps {
 
 
     public long getId() {
-        return id;
+        return tempsId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.tempsId = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public Temps(long id, String name) {
-        this.id = id;
+    public Temps(long tempsId, String name) {
+        this.tempsId = tempsId;
         this.name = name;
     }
 

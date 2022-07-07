@@ -15,18 +15,18 @@ import javax.validation.constraints.NotBlank;
 public class TypeRoute {
 @Id
 @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private long typerouteId;
 
     @NotBlank(message = "Type route est obligatoire ")
     @Column(name = "typeroute_name")
     private String name;
 
     public long getId() {
-        return id;
+        return typerouteId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long typerouteId) {
+        this.typerouteId = typerouteId;
     }
 
     public String getName() {
@@ -37,8 +37,8 @@ public class TypeRoute {
         this.name = name;
     }
 
-    public TypeRoute(long id, String name) {
-        this.id = id;
+    public TypeRoute(long typerouteId, String name) {
+        this.typerouteId = typerouteId;
         this.name = name;
     }
 

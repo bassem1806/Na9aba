@@ -16,18 +16,18 @@ public class SignauxCirculation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private long id;
+    private long sigauxId;
 
     @NotBlank(message = "Cause Accident est obligatoire ")
     @Column(name = "SigneCirculation_name")
     private String name;
 
     public long getId() {
-        return id;
+        return sigauxId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.sigauxId = sigauxId;
     }
 
     public String getName() {
@@ -38,8 +38,8 @@ public class SignauxCirculation {
         this.name = name;
     }
 
-    public SignauxCirculation(long id, String name) {
-        this.id = id;
+    public SignauxCirculation(long sigauxId, String name) {
+        this.sigauxId = sigauxId;
         this.name = name;
     }
 

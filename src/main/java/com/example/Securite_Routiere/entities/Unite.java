@@ -15,7 +15,7 @@ public class Unite {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 
-    private long id;
+    private long uniteId;
 
 
     @NotBlank(message = "le nom de l'unité est obligatoir ")
@@ -23,11 +23,11 @@ public class Unite {
     private String name;
 
     public long getId() {
-        return id;
+        return uniteId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.uniteId = uniteId;
     }
 
     public String getName() {
@@ -38,8 +38,8 @@ public class Unite {
         this.name = name;
     }
 
-    public Unite(long id, String name) {
-        this.id = id;
+    public Unite(long uniteId, String name) {
+        this.uniteId = uniteId;
         this.name = name;
     }
 

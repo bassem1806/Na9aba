@@ -17,7 +17,7 @@ public class CauseAccident {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long causeaccId;
 
 
     @NotBlank(message = "Cause Accident est obligatoire ")
@@ -25,11 +25,11 @@ public class CauseAccident {
     private String name;
 
     public long getId() {
-        return id;
+        return causeaccId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.causeaccId = causeaccId;
     }
 
     public String getName() {
@@ -40,8 +40,8 @@ public class CauseAccident {
         this.name = name;
     }
 
-    public CauseAccident(long id, String name) {
-        this.id = id;
+    public CauseAccident(long causeaccId, String name) {
+        this.causeaccId = causeaccId;
         this.name = name;
     }
 

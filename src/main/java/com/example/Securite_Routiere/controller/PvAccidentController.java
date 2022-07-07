@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/PvAccident/")
@@ -65,7 +64,7 @@ public class PvAccidentController {
     public String showAddPvAccidentForm(PvAccident pvAccident, Model model) {
 
         model.addAttribute("causeAccident",causeAccidentRepository.findAll());
-        model.addAttribute("delegation",delegationRepository.findAll());
+        model.addAttribute("templates/delegation",delegationRepository.findAll());
         model.addAttribute("part",partRepository.findAll());
         model.addAttribute("signauxCirculation",signauxCirculationRepository.findAll());
         model.addAttribute("situationRoute",situationRouteRepository.findAll());
