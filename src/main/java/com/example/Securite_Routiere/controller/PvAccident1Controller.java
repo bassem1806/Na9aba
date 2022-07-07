@@ -55,7 +55,7 @@ public class PvAccident1Controller {
 
         model.addAttribute("unite",uniteRepository.findAll());
         model.addAttribute("gouvernorat", gouvernoratRepository.findAll() );
-               model.addAttribute("templates/delegation",delegationRepository.findAll());
+               model.addAttribute("delegation",delegationRepository.findAll());
         model.addAttribute("pvAccident1", new PvAccident1());
         return "pvaccident1/addPvAccident1";
 
@@ -68,28 +68,29 @@ public class PvAccident1Controller {
 
                                 @RequestParam(name = "uniteId", required = true) Long h,
                               @RequestParam(name = "gouvernoratId", required = true) Long k,
-                                  @RequestParam(name = "delegationdId",required = true) Long b)
-
-
-
-
+                                  @RequestParam(name = "gouvernoratId1",required = true) Long b
+    )
 
     {
+        List<Delegation>delegationByGov = delegationRepository.findByGouvernorat(gouvernoratRepository.findById(11L));
 
+        System.out.println("size listes  :" +delegationByGov.size());
 
 
         Unite unite= uniteRepository.findById(h).orElseThrow(()-> new IllegalArgumentException
                 ("Invalid Unite Id:" +h));
         pvAccident1.setUnite(unite);
-
-
+        System.out.println("id unite :"+ h);
+        System.out.println("id gouvernoratId :"+k);
+        System.out.println("id gouvernoratId :"+b);
 
         Delegation delegation= delegationRepository.findById(b).orElseThrow(()-> new IllegalArgumentException
-       ("Invalid Delegation Id:" +b));
+                ("Invalid Unite Id:" +b));
+                System.out.println("delegation  :" +delegation.getName());
         pvAccident1.setDelegation(delegation);
+     pvAccident1Repository.save(pvAccident1);
 
 
-pvAccident1Repository.save(pvAccident1);
 
         return "redirect:list1";
 
