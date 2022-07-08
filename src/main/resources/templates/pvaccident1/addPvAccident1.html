@@ -135,6 +135,13 @@
                                     </select>
                                 </div>
 
+                                <div class="col-sm-4">
+                                    <label for="situationRoute" class="col-form-label" > حالة الطريق</label>
+                                    <select name="situationRouteId" class="form-control">
+                                        <option  th:each=" st :${situationRoute}" th:value="${st.Id}" th:text="${st.name}" id="situationRoute"/>
+                                    </select>
+                                </div>
+
 
                                <div class="card-body">
                                     <h5 class="text"> أسباب الحادث</h5>

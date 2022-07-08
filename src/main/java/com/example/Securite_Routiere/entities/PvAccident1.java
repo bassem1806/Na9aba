@@ -82,6 +82,12 @@ public class PvAccident1 {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private TypeRoute typeRoute;
 
+    /**** Many To One Situation de la route ****/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "situationroute_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private SituationRoute situationRoute;
+
 
 
 
@@ -160,6 +166,14 @@ public class PvAccident1 {
 
     public void setTypeRoute(TypeRoute typeRoute) {
         this.typeRoute = typeRoute;
+    }
+
+    public SituationRoute getSituationRoute() {
+        return situationRoute;
+    }
+
+    public void setSituationRoute(SituationRoute situationRoute) {
+        this.situationRoute = situationRoute;
     }
 
     public PvAccident1(long pvaccidId, String dateaccid, String numimatric, long numbarquia, String addreaccid, String dateimatric, String pointKmaccid) {

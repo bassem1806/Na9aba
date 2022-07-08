@@ -17,7 +17,7 @@ public class SituationRoute {
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private long sitrouteId;
+    private long situationrouteId;
 
     @NotBlank(message = "Situation de la route ")
     @Column(name = "sitroute_name")
@@ -25,11 +25,11 @@ public class SituationRoute {
 
 
     public long getId() {
-        return sitrouteId;
+        return situationrouteId;
     }
 
     public void setId(long id) {
-        this.sitrouteId = sitrouteId;
+        this.situationrouteId = situationrouteId;
     }
 
     public String getName() {
@@ -41,7 +41,7 @@ public class SituationRoute {
     }
 
     public SituationRoute(long sitrouteId, String name) {
-        this.sitrouteId = sitrouteId;
+        this.situationrouteId = sitrouteId;
         this.name = name;
     }
 
