@@ -1,14 +1,11 @@
 package com.example.Securite_Routiere.controller;
 
 import com.example.Securite_Routiere.entities.*;
-import com.example.Securite_Routiere.repositories.DelegationRepository;
-import com.example.Securite_Routiere.repositories.GouvernoratRepository;
-import com.example.Securite_Routiere.repositories.PvAccident1Repository;
-
-import com.example.Securite_Routiere.repositories.UniteRepository;
+import com.example.Securite_Routiere.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,13 +22,21 @@ public class PvAccident1Controller {
 
     private final DelegationRepository delegationRepository;
 
-@Autowired
-        public PvAccident1Controller(PvAccident1Repository pvAccident1Repository, UniteRepository uniteRepository,GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository) {
-            this.pvAccident1Repository = pvAccident1Repository;
-            this.uniteRepository = uniteRepository;
-             this.gouvernoratRepository = gouvernoratRepository;
-    this.delegationRepository = delegationRepository;
-        }
+    private  final SignauxCirculationRepository signauxCirculationRepository;
+
+
+    @Autowired
+    public PvAccident1Controller(PvAccident1Repository pvAccident1Repository, UniteRepository uniteRepository, GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository, SignauxCirculationRepository signauxCirculationRepository) {
+        this.pvAccident1Repository = pvAccident1Repository;
+        this.uniteRepository = uniteRepository;
+        this.gouvernoratRepository = gouvernoratRepository;
+        this.delegationRepository = delegationRepository;
+        this.signauxCirculationRepository = signauxCirculationRepository;
+
+    }
+
+
+
 
 
     @GetMapping("list1")
@@ -56,7 +61,8 @@ public class PvAccident1Controller {
         model.addAttribute("unite",uniteRepository.findAll());
         model.addAttribute("gouvernorat", gouvernoratRepository.findAll() );
                model.addAttribute("delegation",delegationRepository.findAll());
-        model.addAttribute("pvAccident1", new PvAccident1());
+               model.addAttribute("signauxCirculation",signauxCirculationRepository.findAll());
+               model.addAttribute("pvAccident1", new PvAccident1());
         return "pvaccident1/addPvAccident1";
 
     }
@@ -68,8 +74,9 @@ public class PvAccident1Controller {
 
                                 @RequestParam(name = "uniteId", required = true) Long h,
                               @RequestParam(name = "gouvernoratId", required = true) Long k,
-                                  @RequestParam(name = "gouvernoratId1",required = true) Long b
-    )
+                                  @RequestParam(name = "gouvernoratId1",required = true) Long b,
+                                 @RequestParam(name="signauxCirculationId",required = true)Long s)
+
 
     {
         List<Delegation>delegationByGov = delegationRepository.findByGouvernorat(gouvernoratRepository.findById(11L));
@@ -80,14 +87,21 @@ public class PvAccident1Controller {
         Unite unite= uniteRepository.findById(h).orElseThrow(()-> new IllegalArgumentException
                 ("Invalid Unite Id:" +h));
         pvAccident1.setUnite(unite);
-        System.out.println("id unite :"+ h);
-        System.out.println("id gouvernoratId :"+k);
-        System.out.println("id gouvernoratId :"+b);
+       // System.out.println("id unite :"+ h);
+        //System.out.println("id gouvernoratId :"+k);
+      //  System.out.println("id gouvernoratId :"+b);
 
         Delegation delegation= delegationRepository.findById(b).orElseThrow(()-> new IllegalArgumentException
                 ("Invalid Unite Id:" +b));
-                System.out.println("delegation  :" +delegation.getName());
+             //   System.out.println("delegation  :" +delegation.getName());
+
         pvAccident1.setDelegation(delegation);
+
+        SignauxCirculation signauxCirculation= signauxCirculationRepository.findById(s).orElseThrow(()-> new IllegalArgumentException
+                ("Invalid Signaux Circulation Id:" +s));
+              pvAccident1.setSignauxCirculation(signauxCirculation);
+
+
      pvAccident1Repository.save(pvAccident1);
 
 

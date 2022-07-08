@@ -61,6 +61,29 @@ public class PvAccident1 {
     private Delegation delegation;
 
 
+    public SignauxCirculation getSignauxCirculation() {
+        return signauxCirculation;
+    }
+
+    public void setSignauxCirculation(SignauxCirculation signauxCirculation) {
+        this.signauxCirculation = signauxCirculation;
+    }
+
+    /**** Many To One Signaux de circulation ****/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "signe_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private SignauxCirculation signauxCirculation;
+
+
+    /**** Many To One type de route ****/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "typeroute_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private TypeRoute typeRoute;
+
+
+
 
 
 
@@ -130,6 +153,8 @@ public class PvAccident1 {
     public void setPointKmaccid(String pointKmaccid) {
         this.pointKmaccid = pointKmaccid;
     }
+
+
 
     public PvAccident1(long pvaccidId, String dateaccid, String numimatric, long numbarquia, String addreaccid, String dateimatric, String pointKmaccid) {
         this.pvaccidId = pvaccidId;
