@@ -24,14 +24,17 @@ public class PvAccident1Controller {
 
     private  final SignauxCirculationRepository signauxCirculationRepository;
 
+    private final TypeRouteRepository typeRouteRepository;
+
 
     @Autowired
-    public PvAccident1Controller(PvAccident1Repository pvAccident1Repository, UniteRepository uniteRepository, GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository, SignauxCirculationRepository signauxCirculationRepository) {
+    public PvAccident1Controller(PvAccident1Repository pvAccident1Repository, UniteRepository uniteRepository, GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository, SignauxCirculationRepository signauxCirculationRepository, TypeRouteRepository typeRouteRepository) {
         this.pvAccident1Repository = pvAccident1Repository;
         this.uniteRepository = uniteRepository;
         this.gouvernoratRepository = gouvernoratRepository;
         this.delegationRepository = delegationRepository;
         this.signauxCirculationRepository = signauxCirculationRepository;
+        this.typeRouteRepository = typeRouteRepository;
 
     }
 
@@ -62,6 +65,7 @@ public class PvAccident1Controller {
         model.addAttribute("gouvernorat", gouvernoratRepository.findAll() );
                model.addAttribute("delegation",delegationRepository.findAll());
                model.addAttribute("signauxCirculation",signauxCirculationRepository.findAll());
+        model.addAttribute("typeRoute",typeRouteRepository.findAll());
                model.addAttribute("pvAccident1", new PvAccident1());
         return "pvaccident1/addPvAccident1";
 
@@ -75,7 +79,8 @@ public class PvAccident1Controller {
                                 @RequestParam(name = "uniteId", required = true) Long h,
                               @RequestParam(name = "gouvernoratId", required = true) Long k,
                                   @RequestParam(name = "gouvernoratId1",required = true) Long b,
-                                 @RequestParam(name="signauxCirculationId",required = true)Long s)
+                                 @RequestParam(name="signauxCirculationId",required = true)Long s,
+                                 @RequestParam(name="typeRouteId",required = true)Long t)
 
 
     {
@@ -102,7 +107,13 @@ public class PvAccident1Controller {
               pvAccident1.setSignauxCirculation(signauxCirculation);
 
 
-     pvAccident1Repository.save(pvAccident1);
+        TypeRoute typeRoute= typeRouteRepository.findById(t).orElseThrow(()-> new IllegalArgumentException
+                ("Invalid  type route Id:" +t));
+        pvAccident1.setTypeRoute(typeRoute);
+
+
+
+        pvAccident1Repository.save(pvAccident1);
 
 
 

@@ -154,7 +154,13 @@ public class PvAccident1 {
         this.pointKmaccid = pointKmaccid;
     }
 
+    public TypeRoute getTypeRoute() {
+        return typeRoute;
+    }
 
+    public void setTypeRoute(TypeRoute typeRoute) {
+        this.typeRoute = typeRoute;
+    }
 
     public PvAccident1(long pvaccidId, String dateaccid, String numimatric, long numbarquia, String addreaccid, String dateimatric, String pointKmaccid) {
         this.pvaccidId = pvaccidId;

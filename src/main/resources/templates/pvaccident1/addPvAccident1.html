@@ -121,7 +121,19 @@
                                 </div>
 
 
+                                <div class="col-sm-4">
+                                    <label for="signauxCirculation" class="col-form-label" >إشارات المرور</label>
+                                    <select name="signauxCirculationId" class="form-control">
+                                        <option  th:each=" sg :${signauxCirculation}" th:value="${sg.signeId}" th:text="${sg.name}" id="signauxCirculation"/>
+                                    </select>
+                                </div>
 
+                                <div class="col-sm-4">
+                                    <label for="typeRoute" class="col-form-label" > نوع الطريق</label>
+                                    <select name="typeRouteId" class="form-control">
+                                        <option  th:each=" tr :${typeRoute}" th:value="${tr.Id}" th:text="${tr.name}" id="typeRoute"/>
+                                    </select>
+                                </div>
 
 
                                <div class="card-body">
@@ -130,12 +142,7 @@
 
 
 
-                                <div class="col-sm-4">
-                                    <label for="signauxCirculation" class="col-form-label" >إشارات المرور</label>
-                                    <select name="signauxCirculationId" class="form-control">
-                                        <option  th:each=" sg :${signauxCirculation}" th:value="${sg.signeId}" th:text="${sg.name}" id="signauxCirculation"/>
-                                    </select>
-                                </div>
+
 
 
                                 <div class="col-md-12">
