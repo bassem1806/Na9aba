@@ -89,12 +89,23 @@ public class PvAccident1 {
     private SituationRoute situationRoute;
 
 
+    /**** Many To One temps ****/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "temps_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Temps temps;
+
+    /**** Many To One cause accident ****/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "causeaccident_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private CauseAccident causeAccident;
 
 
 
 
 
-    public long getId() {
+   public long getId() {
         return pvaccidId;
     }
 
@@ -174,6 +185,22 @@ public class PvAccident1 {
 
     public void setSituationRoute(SituationRoute situationRoute) {
         this.situationRoute = situationRoute;
+    }
+
+    public Temps getTemps() {
+        return temps;
+    }
+
+    public void setTemps(Temps temps) {
+        this.temps = temps;
+    }
+
+    public CauseAccident getCauseAccident() {
+        return causeAccident;
+    }
+
+    public void setCauseAccident(CauseAccident causeAccident) {
+        this.causeAccident = causeAccident;
     }
 
     public PvAccident1(long pvaccidId, String dateaccid, String numimatric, long numbarquia, String addreaccid, String dateimatric, String pointKmaccid) {

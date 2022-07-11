@@ -70,13 +70,13 @@
 
                     <br/>
 
-                    <input type="text" id="email" name="email"  th:placeholder="Email"
-                           class="form-control" /> <br/>
+                      <input type="text" id="login" name="login"  th:placeholder="Login"
+                             class="form-control" />  <br/>
                     <input type="password"  th:placeholder="Password"
                            id="password" name="password" class="form-control" /> <br />
 
                     <div align="center" th:if="${param.error}">
-                      <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+                      <p style="font-size: 20; color: #FF1C19;">login or Password invalid, please verify</p>
                     </div>
                     <button class="btn bg-gradient-info w-100 mt-4 mb-0" name="Submit" value="Login" type="Submit" th:text="Login"></button>
                   </form>

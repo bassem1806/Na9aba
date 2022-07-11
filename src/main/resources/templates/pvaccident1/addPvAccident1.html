@@ -141,15 +141,25 @@
                                         <option  th:each=" st :${situationRoute}" th:value="${st.Id}" th:text="${st.name}" id="situationRoute"/>
                                     </select>
                                 </div>
+                                <div class="col-sm-4">
+                                    <label for="temps" class="col-form-label" >  الطقس</label>
+                                    <select name="tempsId" class="form-control">
+                                        <option  th:each=" t :${temps}" th:value="${t.Id}" th:text="${t.name}" id="temps"/>
+                                    </select>
+                                </div>
 
 
                                <div class="card-body">
                                     <h5 class="text"> أسباب الحادث</h5>
                                 </div>
-
-
-
-
+<!---
+                                <div class="col-sm-4">
+                                    <label for="causeAccident" class="col-form-label" >  أسباب الحادث</label>
+                                    <select name="causeAccidentId" class="form-control">
+                                        <option  th:each=" cs :${causeaccident}" th:value="${cs.Id}" th:text="${cs.name}" id="causeAccident"/>
+                                    </select>
+                                </div>
+-->
 
 
                                 <div class="col-md-12">

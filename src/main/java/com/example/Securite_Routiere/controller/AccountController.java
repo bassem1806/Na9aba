@@ -53,7 +53,7 @@ public class AccountController {
 
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid User Id:" + id));
 
-        Role userRole = roleRepository.findByName(newRole);
+        Role userRole = roleRepository.findByRole(newRole);
 
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 

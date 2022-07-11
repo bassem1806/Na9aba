@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8" />
@@ -80,13 +80,21 @@
                      placeholder="اللقب" class="form-control" />
             </div>
           </div>
+
           <div class="form-group">
+            <div class="col-sm-9">
+              <input type="text" th:field="*{login}" placeholder="Login"
+                     class="form-control" /> <label
+                    th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
+                    class="validation-message"></label>
+            </div>
+       <!--   <div class="form-group">
             <div class="col-sm-9">
               <input type="text" th:field="*{email}" placeholder="البريد الإلكتروني"
                      class="form-control" /> <label
                     th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
                     class="validation-message"></label>
-            </div>
+            </div>-->
           </div>
           <div class="form-group">
             <div class="col-sm-9">

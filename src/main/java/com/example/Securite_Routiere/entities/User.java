@@ -19,10 +19,14 @@ public class User {
     private int id;
 
 
-    @Column(name = "email")
+    @Column(name = "login")
+    @NotEmpty(message = "*Please provide an login")
+    private String login;
+/*
+   @Column(name = "email")
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
-    private String email;
+    private String email;*/
 
     @Column(name = "password")
     @Length(min = 5, message = "*Your password must have at least 5 characters")
@@ -64,13 +68,7 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getPassword() {
         return password;
@@ -102,6 +100,14 @@ public class User {
 
     public void setActive(int active) {
         this.active = active;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
 

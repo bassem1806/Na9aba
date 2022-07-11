@@ -16,8 +16,8 @@ import java.util.List;
 @RequestMapping("/role")
 public class RoleController {
 
-   private final RoleRepository roleRepository;
-@Autowired
+    private final RoleRepository roleRepository;
+    @Autowired
     public RoleController(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
@@ -38,7 +38,7 @@ public class RoleController {
     public String showAddRoleForm(Model model) {
 
         //m.addAttribute("Role",new Role("Admin"));
-       Role role = new Role();
+        Role role = new Role();
         model.addAttribute("role", role);
 
         return "role/addRole";
@@ -49,7 +49,7 @@ public class RoleController {
 
         System.out.println(roleName);
         Role r = new Role(roleName);
-      Role rSaved = roleRepository.save(r);
+        Role rSaved = roleRepository.save(r);
         System.out.println("role = "+ rSaved);
         return "redirect:list";
     }

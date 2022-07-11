@@ -56,7 +56,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
                 .loginPage("/login").failureUrl("/login?error=true") // fixer la page login
 
                 .defaultSuccessUrl("/home1") // page d'accueil après login avec succès
-                .usernameParameter("email") // paramètres d'authentifications login et password
+                .usernameParameter("login") // paramètres d'authentifications login et password
                 .passwordParameter("password")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // route de deconnexion ici /logut
