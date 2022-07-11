@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.event.ListSelectionListener;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/PvAccidentnew/")
@@ -145,7 +147,12 @@ public class PvAccident1Controller {
         CauseAccident causeAccident= causeAccidentRepository.findById(c).orElseThrow(()-> new IllegalArgumentException
                 ("Invalid   cause accident  Id:" +c));
 
-        System.out.println("id cause aciid :"+c);
+
+
+
+       // Optional<CauseAccident> causeAccidents = causeAccidentRepository.findById(causeAccidentRepository.getReferenceById(causeAccident) );
+
+      //  System.out.println("id cause aciid :"+causeAccidents);
         pvAccident1.setCauseAccident(causeAccident);
 
         pvAccident1Repository.save(pvAccident1);
