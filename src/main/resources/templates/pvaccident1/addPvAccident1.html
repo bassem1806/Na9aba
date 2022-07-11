@@ -152,14 +152,15 @@
                                <div class="card-body">
                                     <h5 class="text"> أسباب الحادث</h5>
                                 </div>
-<!---
                                 <div class="col-sm-4">
-                                    <label for="causeAccident" class="col-form-label" >  أسباب الحادث</label>
+                                    <label for="causeAccident" class="col-form-label" >أسباب الحادث</label>
                                     <select name="causeAccidentId" class="form-control">
-                                        <option  th:each=" cs :${causeaccident}" th:value="${cs.Id}" th:text="${cs.name}" id="causeAccident"/>
+                                        <option  th:each=" s :${causeAccident}" th:value="${s.causeaccidentId}" th:text="${s.name}" id="causeAccident"/>
                                     </select>
                                 </div>
--->
+
+
+
 
 
                                 <div class="col-md-12">

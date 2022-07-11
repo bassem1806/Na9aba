@@ -80,6 +80,14 @@
                      placeholder="اللقب" class="form-control" />
             </div>
           </div>
+          <div class="form-group">
+          <div class="col-sm-9">
+            <label	th:if="${#fields.hasErrors('CNRPS')}" th:errors="*{CNRPS}"
+                      class="validation-message"></label>
+            <input type="text" th:field="*{CNRPS}"
+                   placeholder="الرقم الموحد" class="form-control" />
+          </div>
+      </div>
 
           <div class="form-group">
             <div class="col-sm-9">

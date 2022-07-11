@@ -80,6 +80,7 @@ public class PvAccident1Controller {
         model.addAttribute("typeRoute",typeRouteRepository.findAll());
         model.addAttribute("situationRoute",situationRouteRepository.findAll());
         model.addAttribute("temps",tempsRepository.findAll());
+        model.addAttribute("causeAccident",causeAccidentRepository.findAll());
                model.addAttribute("pvAccident1", new PvAccident1());
         return "pvaccident1/addPvAccident1";
 
@@ -97,8 +98,7 @@ public class PvAccident1Controller {
                                  @RequestParam(name="typeRouteId",required = true)Long t,
                                  @RequestParam(name="situationRouteId",required = true)Long z,
                                  @RequestParam(name="tempsId",required = true)Long r,
-                                 @RequestParam(name="causeAccidentId",required = true)Long c
-                                 )
+                                 @RequestParam(name="causeAccidentId",required = true)Long c)
 
 
     {
@@ -145,6 +145,7 @@ public class PvAccident1Controller {
         CauseAccident causeAccident= causeAccidentRepository.findById(c).orElseThrow(()-> new IllegalArgumentException
                 ("Invalid   cause accident  Id:" +c));
 
+        System.out.println("id cause aciid :"+c);
         pvAccident1.setCauseAccident(causeAccident);
 
         pvAccident1Repository.save(pvAccident1);

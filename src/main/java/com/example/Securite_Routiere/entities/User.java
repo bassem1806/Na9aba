@@ -41,6 +41,10 @@ public class User {
     @NotEmpty(message = "*Please provide your last name")
     private String lastName;
 
+    @Column(name = "CNRPS")
+    @NotEmpty(message = "*Please provide your CNRPS")
+    private String CNRPS;
+
     @Column(name = "active")
     private int active;
 
@@ -109,6 +113,15 @@ public class User {
     public void setLogin(String login) {
         this.login = login;
     }
+
+    public String getCNRPS() {
+        return CNRPS;
+    }
+
+    public void setCNRPS(String CNRPS) {
+        this.CNRPS = CNRPS;
+    }
+
 
 
 }

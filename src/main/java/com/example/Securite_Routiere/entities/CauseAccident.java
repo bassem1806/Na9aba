@@ -24,11 +24,19 @@ public class CauseAccident {
     @Column(name = "casuseaccident_name")
     private String name;
 
-    public long getId() {
+    public CauseAccident(long causeaccidentId, String name) {
+        this.causeaccidentId = causeaccidentId;
+        this.name = name;
+    }
+
+    public CauseAccident() {
+    }
+
+    public long getCauseaccidentId() {
         return causeaccidentId;
     }
 
-    public void setId(long id) {
+    public void setCauseaccidentId(long causeaccidentId) {
         this.causeaccidentId = causeaccidentId;
     }
 
@@ -38,13 +46,5 @@ public class CauseAccident {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public CauseAccident(long causeaccId, String name) {
-        this.causeaccidentId = causeaccId;
-        this.name = name;
-    }
-
-    public CauseAccident() {
     }
 }
