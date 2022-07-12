@@ -107,20 +107,32 @@ public class PvAccident1 {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Temps temps;
 
-    /**** Many To One cause accident ****/
+    /**** Many To many cause accident ****/
     /*
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "causeaccident_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private CauseAccident causeAccident;*/
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinTable(name = "pvaccident_causeaccident",
             joinColumns = @JoinColumn(name = "pvaccid_id"),
             inverseJoinColumns = @JoinColumn(name = "causeaccident_id"))
     private Set<CauseAccident> causeAccidents;
 
+    /**** Many To many part   ****/
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @JoinTable(name = "pvaccident_part",
+            joinColumns = @JoinColumn(name = "pvaccid_id"),
+            inverseJoinColumns = @JoinColumn(name = "part_id"))
+    private Set<Part> parts;
 
+    public Set<Part> getParts() {
+        return parts;
+    }
 
+    public void setParts(Set<Part> parts) {
+        this.parts = parts;
+    }
 
     public long getId() {
         return pvaccidId;

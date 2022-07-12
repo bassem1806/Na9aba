@@ -179,7 +179,13 @@ function myFunction() {
                                     <h5 class="text">  الوسائل المشاركة في الحادث</h5>
                                 </div>
 
+                                <div class="col-sm-6"     >
+                                    <label for="part" class="form-label select-label" > الوسائل المشاركة في الحادث</label><br>
+                                    <select name="part"  class="selectpicker" th:field="*{parts}" multiple >
+                                        <option  th:each=" p :${parts} " th:value="${p.Id}" th:text="${p.name}"  id="part"/>
 
+                                    </select>
+                                </div>
 
                                 <div class="col-md-12">
                                     <input type="submit" class="btn btn-primary" value="إضافة محضر معاية حادث 1"/>

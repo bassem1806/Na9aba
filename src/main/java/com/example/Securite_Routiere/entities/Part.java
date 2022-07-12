@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 
@@ -21,6 +22,24 @@ public class Part {
     @NotBlank(message = "Participant obligatoir ")
     @Column(name = "part_name")
     private String name;
+
+
+
+
+    /**** Many To many part   ****/
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @JoinTable(name = "pvaccident_part",
+            joinColumns = @JoinColumn(name = "part_id"),
+            inverseJoinColumns = @JoinColumn(name = "pvaccid_id"))
+    private Set<PvAccident1> pvAccident1s;
+
+    public Set<PvAccident1> getPvAccident1s() {
+        return pvAccident1s;
+    }
+
+    public void setPvAccident1s(Set<PvAccident1> pvAccident1s) {
+        this.pvAccident1s = pvAccident1s;
+    }
 
     public long getId() {
         return partId;

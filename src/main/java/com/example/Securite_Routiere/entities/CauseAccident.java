@@ -22,9 +22,9 @@ public class CauseAccident {
     private String name;
 
 
+    /**** Many To many pv accident1  ****/
 
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinTable(name = "pvaccident_causeaccident",
             joinColumns = @JoinColumn(name = "causeaccident_id"),
             inverseJoinColumns = @JoinColumn(name = "pvaccid_id"))

@@ -34,6 +34,7 @@ public class PvAccident1Controller {
     private final TempsRepository tempsRepository;
 
     private final CauseAccidentRepository causeAccidentRepository;
+    private final PartRepository partRepository;
 
 
 
@@ -41,7 +42,7 @@ public class PvAccident1Controller {
     public PvAccident1Controller(PvAccident1Repository pvAccident1Repository, UniteRepository uniteRepository, GouvernoratRepository gouvernoratRepository,
                                  DelegationRepository delegationRepository, SignauxCirculationRepository signauxCirculationRepository,
                                  TypeRouteRepository typeRouteRepository,SituationRouteRepository situationRouteRepository,TempsRepository tempsRepository,
-                                 CauseAccidentRepository causeAccidentRepository) {
+                                 CauseAccidentRepository causeAccidentRepository, PartRepository partRepository) {
         this.pvAccident1Repository = pvAccident1Repository;
         this.uniteRepository = uniteRepository;
         this.gouvernoratRepository = gouvernoratRepository;
@@ -51,6 +52,7 @@ public class PvAccident1Controller {
         this.situationRouteRepository =situationRouteRepository;
         this.tempsRepository=tempsRepository;
         this.causeAccidentRepository=causeAccidentRepository;
+        this.partRepository=partRepository;
 
     }
 
@@ -83,6 +85,7 @@ public class PvAccident1Controller {
         model.addAttribute("situationRoute",situationRouteRepository.findAll());
         model.addAttribute("temps",tempsRepository.findAll());
         model.addAttribute("causeAccidents",causeAccidentRepository.findAll());
+        model.addAttribute("parts",partRepository.findAll());
         model.addAttribute("pvAccident1", new PvAccident1());
         return "pvaccident1/addPvAccident1";
 
@@ -100,7 +103,8 @@ public class PvAccident1Controller {
                                  @RequestParam(name="typeRouteId",required = true)Long t,
                                  @RequestParam(name="situationRouteId",required = true)Long z,
                                  @RequestParam(name="tempsId",required = true)Long r,
-                                 @RequestParam ("causeAccidents") List <Long> causeAccident)
+                                 @RequestParam ("causeAccidents") List <Long> causeAccident,
+                                 @RequestParam ("parts") List <Long> part)
 
             //,required = true)Long c)
 
@@ -147,18 +151,6 @@ public class PvAccident1Controller {
 
         pvAccident1.setTemps(temps);
 
-
-     //   CauseAccident causeAccidents= causeAccidentRepository.findById(Long).orElseThrow(()-> new IllegalArgumentException
-          //      ("Invalid   cause accident  Id:" +c));
-
-//.out.println("id cause accid  :"+c);
-
-       // List<CauseAccident> causeaccidents = causeAccidentRepository.findAll();
-
-       // Optional<CauseAccident> causeAccidents = causeAccidentRepository.findById(causeAccidentRepository.getReferenceById(causeaccidents) );System.out.println("id cause aciid :"+causeAccidents);
-
-
-
         pvAccident1Repository.save(pvAccident1);
 
 
@@ -167,10 +159,26 @@ public class PvAccident1Controller {
 
     }
 
+    @GetMapping("delete/{id}")
+    public String deletePvAccident1(@PathVariable("id") long pvaccidId, Model model) {
 
+
+        PvAccident1 pvAccident1 = pvAccident1Repository.findById(pvaccidId)
+
+                .orElseThrow(()-> new IllegalArgumentException("Invalid pvAccident1 Id:" + pvaccidId));
+;
+        pvAccident1Repository.delete(pvAccident1);
+              model.addAttribute("pvAccidents1", pvAccident1Repository.findAll());
+
+
+     return  "redirect:../list1";
 
 
     }
+
+
+
+}
 
 
 

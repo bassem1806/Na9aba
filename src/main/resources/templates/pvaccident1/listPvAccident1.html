@@ -69,6 +69,8 @@
                   <td th:text="${pvAccident1.id}"></td>
                   <td th:text="${pvAccident1.unite.name}"></td>
                   <td th:text="${pvAccident1.delegation.gouvernorat.name}"></td>
+                <!--  <td><a th:href="@{/pvAccident1/edit/{id}(id=${pvAccident1.Id})}" class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td>-->
+                  <td><a th:href="@{/pvAccident1/delete/{id}(id=${pvAccident1.Id})}" class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
 
                 </tr>
                 </tbody>
