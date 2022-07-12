@@ -6,7 +6,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.List;
+
+import java.util.Set;
 
 @Entity
 public class PvAccident1 {
@@ -26,6 +27,7 @@ public class PvAccident1 {
 
     @Column(name = "addreaccid")
     private String addreaccid;
+
 
     public String getDateimatric() {
         return dateimatric;
@@ -96,16 +98,21 @@ public class PvAccident1 {
     private Temps temps;
 
     /**** Many To One cause accident ****/
+    /*
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "causeaccident_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private CauseAccident causeAccident;
+    private CauseAccident causeAccident;*/
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "pvaccident_causeaccident",
+            joinColumns = @JoinColumn(name = "pvaccid_id"),
+            inverseJoinColumns = @JoinColumn(name = "causeaccident_id"))
+    private Set<CauseAccident> causeAccidents;
 
 
 
 
-
-   public long getId() {
+    public long getId() {
         return pvaccidId;
     }
 
@@ -195,12 +202,12 @@ public class PvAccident1 {
         this.temps = temps;
     }
 
-    public CauseAccident getCauseAccident() {
-        return causeAccident;
+    public Set<CauseAccident> getCauseAccidents() {
+        return causeAccidents;
     }
 
-    public void setCauseAccident(CauseAccident causeAccident) {
-        this.causeAccident = causeAccident;
+    public void setCauseAccidents(Set<CauseAccident> causeAccidents) {
+        this.causeAccidents = causeAccidents;
     }
 
     public PvAccident1(long pvaccidId, String dateaccid, String numimatric, long numbarquia, String addreaccid, String dateimatric, String pointKmaccid) {

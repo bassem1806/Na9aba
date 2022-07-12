@@ -160,19 +160,24 @@ function myFunction() {
                                <div class="card-body">
                                     <h5 class="text"> أسباب الحادث</h5>
                                 </div>
-                                <div class="col-sm-8"     >
+                             <div class="col-sm-8"     >
                                     <label for="causeAccident" class="col-form-label" >أسباب الحادث</label><br>
-                                    <select name="causeAccidentId"  class="selectpicker"multiple data-live-search="true">
-                                        <option  th:each=" s :${causeAccident} " th:value="${s.causeaccidentId}" th:text="${s.name}"  id="causeAccident"/>
-
-
+                                    <select name="causeAccidentId"  class="selectpicker" th:field="*{causeAccidents}" multiple data-live-search="true">
+                                        <option  th:each=" s :${causeAccidents} " th:value="${s.causeaccidentId}" th:text="${s.name}"  id="causeAccident"/>
 
                                     </select>
                                 </div>
-
-
-
-
+                                <!--
+                                <div class="col-sm-8"     >
+                                    <label for="causeAccident" class="col-form-label" >أسباب الحادث</label><br>
+                                <select class="form-control" th:field="*{causeAccidents}" multiple="multiple">
+                                    <option th:each="s : ${causeAccidents}"
+                                            th:field="*{causeAccidents}"
+                                            th:value="${s.causeaccidentId}"
+                                            th:text="${s.name}">causeAccidents </option>
+                                </select>
+                                </div>
+-->
 
                                 <div class="col-md-12">
                                     <input type="submit" class="btn btn-primary" value="إضافة محضر معاية حادث 1"/>
@@ -188,7 +193,7 @@ function myFunction() {
                                 <div class="form-group col-md-8"></div>
 
                              </div>
-                            </form>
+                              </form>
                 </div>
             </div>
         </div>

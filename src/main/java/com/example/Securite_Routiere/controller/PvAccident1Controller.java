@@ -13,6 +13,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/PvAccidentnew/")
@@ -33,6 +34,7 @@ public class PvAccident1Controller {
     private final TempsRepository tempsRepository;
 
     private final CauseAccidentRepository causeAccidentRepository;
+
 
 
     @Autowired
@@ -65,25 +67,23 @@ public class PvAccident1Controller {
         if(lp.size()==0)
             lp = null;
         model.addAttribute("pvAccidents1", lp);
+        
 
         return "pvaccident1/listPvAccident1";
 
     }
     @GetMapping("add1")
-
-
     public String showAddPvAccident1Form(PvAccident1 pvAccident1, Model model) {
 
 
         model.addAttribute("unite",uniteRepository.findAll());
         model.addAttribute("gouvernorat", gouvernoratRepository.findAll() );
-               model.addAttribute("delegation",delegationRepository.findAll());
-               model.addAttribute("signauxCirculation",signauxCirculationRepository.findAll());
+        model.addAttribute("delegation",delegationRepository.findAll());model.addAttribute("signauxCirculation",signauxCirculationRepository.findAll());
         model.addAttribute("typeRoute",typeRouteRepository.findAll());
         model.addAttribute("situationRoute",situationRouteRepository.findAll());
         model.addAttribute("temps",tempsRepository.findAll());
-        model.addAttribute("causeAccident",causeAccidentRepository.findAll());
-               model.addAttribute("pvAccident1", new PvAccident1());
+        model.addAttribute("causeAccidents",causeAccidentRepository.findAll());
+        model.addAttribute("pvAccident1", new PvAccident1());
         return "pvaccident1/addPvAccident1";
 
     }
@@ -100,13 +100,17 @@ public class PvAccident1Controller {
                                  @RequestParam(name="typeRouteId",required = true)Long t,
                                  @RequestParam(name="situationRouteId",required = true)Long z,
                                  @RequestParam(name="tempsId",required = true)Long r,
-                                 @RequestParam(name="causeAccidentId",required = true)Long c)
+                                 @RequestParam ("causeAccidents") List <Long> causeAccident)
+
+            //,required = true)Long c)
 
 
     {
         List<Delegation>delegationByGov = delegationRepository.findByGouvernorat(gouvernoratRepository.findById(11L));
 
         System.out.println("size listes  :" +delegationByGov.size());
+
+         List<CauseAccident> parts;
 
 
         Unite unite= uniteRepository.findById(h).orElseThrow(()-> new IllegalArgumentException
@@ -144,16 +148,16 @@ public class PvAccident1Controller {
         pvAccident1.setTemps(temps);
 
 
-        CauseAccident causeAccident= causeAccidentRepository.findById(c).orElseThrow(()-> new IllegalArgumentException
-                ("Invalid   cause accident  Id:" +c));
+     //   CauseAccident causeAccidents= causeAccidentRepository.findById(Long).orElseThrow(()-> new IllegalArgumentException
+          //      ("Invalid   cause accident  Id:" +c));
+
+//.out.println("id cause accid  :"+c);
+
+       // List<CauseAccident> causeaccidents = causeAccidentRepository.findAll();
+
+       // Optional<CauseAccident> causeAccidents = causeAccidentRepository.findById(causeAccidentRepository.getReferenceById(causeaccidents) );System.out.println("id cause aciid :"+causeAccidents);
 
 
-
-
-       // Optional<CauseAccident> causeAccidents = causeAccidentRepository.findById(causeAccidentRepository.getReferenceById(causeAccident) );
-
-      //  System.out.println("id cause aciid :"+causeAccidents);
-        pvAccident1.setCauseAccident(causeAccident);
 
         pvAccident1Repository.save(pvAccident1);
 
