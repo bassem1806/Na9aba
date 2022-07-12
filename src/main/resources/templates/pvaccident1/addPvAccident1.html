@@ -160,24 +160,26 @@ function myFunction() {
                                <div class="card-body">
                                     <h5 class="text"> أسباب الحادث</h5>
                                 </div>
-                             <div class="col-sm-8"     >
-                                    <label for="causeAccident" class="col-form-label" >أسباب الحادث</label><br>
-                                    <select name="causeAccidentId"  class="selectpicker" th:field="*{causeAccidents}" multiple data-live-search="true">
+
+                             <div class="col-sm-6"     >
+                                    <label for="causeAccident" class="form-label select-label" >أسباب الحادث</label><br>
+                                    <select name="causeAccidentId"  class="selectpicker" th:field="*{causeAccidents}" multiple >
                                         <option  th:each=" s :${causeAccidents} " th:value="${s.causeaccidentId}" th:text="${s.name}"  id="causeAccident"/>
 
                                     </select>
                                 </div>
-                                <!--
-                                <div class="col-sm-8"     >
-                                    <label for="causeAccident" class="col-form-label" >أسباب الحادث</label><br>
-                                <select class="form-control" th:field="*{causeAccidents}" multiple="multiple">
-                                    <option th:each="s : ${causeAccidents}"
-                                            th:field="*{causeAccidents}"
-                                            th:value="${s.causeaccidentId}"
-                                            th:text="${s.name}">causeAccidents </option>
-                                </select>
+
+                                <div class="col-sm-6">
+
+                                    <label for="causePrincipale" class="col-form-label"> السبب الرئيسي للحادث </label>
+                                    <input type="text" th:field="*{causePrincipale}" class="form-control" id="causePrincipale" placeholder="السبب الرئيسي "/> <span th:if="${#fields.hasErrors('causePrincipale')}" th:errors="*{causePrincipale}" class="text-danger"></span>
                                 </div>
--->
+
+                                <div class="card-body">
+                                    <h5 class="text">  الوسائل المشاركة في الحادث</h5>
+                                </div>
+
+
 
                                 <div class="col-md-12">
                                     <input type="submit" class="btn btn-primary" value="إضافة محضر معاية حادث 1"/>

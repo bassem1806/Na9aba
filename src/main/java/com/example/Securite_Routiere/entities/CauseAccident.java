@@ -22,6 +22,8 @@ public class CauseAccident {
     private String name;
 
 
+
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "pvaccident_causeaccident",
             joinColumns = @JoinColumn(name = "causeaccident_id"),

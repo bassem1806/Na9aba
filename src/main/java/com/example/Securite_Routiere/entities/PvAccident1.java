@@ -28,6 +28,16 @@ public class PvAccident1 {
     @Column(name = "addreaccid")
     private String addreaccid;
 
+    @Column(name = "causePrincipale")
+    private String causePrincipale;
+
+    public String getCausePrincipale() {
+        return causePrincipale;
+    }
+
+    public void setCausePrincipale(String causePrincipale) {
+        this.causePrincipale = causePrincipale;
+    }
 
     public String getDateimatric() {
         return dateimatric;
@@ -210,7 +220,7 @@ public class PvAccident1 {
         this.causeAccidents = causeAccidents;
     }
 
-    public PvAccident1(long pvaccidId, String dateaccid, String numimatric, long numbarquia, String addreaccid, String dateimatric, String pointKmaccid) {
+    public PvAccident1(long pvaccidId, String dateaccid, String numimatric, long numbarquia, String addreaccid, String dateimatric, String pointKmaccid, String causePrincipale) {
         this.pvaccidId = pvaccidId;
         this.dateaccid = dateaccid;
         this.numimatric = numimatric;
@@ -218,6 +228,7 @@ public class PvAccident1 {
         this.addreaccid = addreaccid;
         this.dateimatric = dateimatric;
         this.pointKmaccid = pointKmaccid;
+        this.causePrincipale= causePrincipale;
     }
 
     public PvAccident1() {
