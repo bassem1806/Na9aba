@@ -171,7 +171,7 @@ public class PvAccident1Controller {
               model.addAttribute("pvAccidents1", pvAccident1Repository.findAll());
 
 
-     return  "redirect:../list1";
+     return  "redirect:list1";
 
 
     }
