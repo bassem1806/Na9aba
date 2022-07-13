@@ -65,7 +65,7 @@ function myFunction() {
                             <div class="row g-3">
                                 <div class="col-sm-7">
                                     <label for="unite" class="col-form-label" >الوحدة</label>
-                                    <select name="uniteId" class="form-control">
+                                    <select  name="uniteId" class="form-control">
                                         <option  th:each="un: ${unite}" th:value="${un.id}" th:text="${un.name}" id="unite" />
                                     </select>
                                 </div>

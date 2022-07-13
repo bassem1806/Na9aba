@@ -24,7 +24,7 @@ public class CauseAccident {
 
     /**** Many To many pv accident1  ****/
 
-    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinTable(name = "pvaccident_causeaccident",
             joinColumns = @JoinColumn(name = "causeaccident_id"),
             inverseJoinColumns = @JoinColumn(name = "pvaccid_id"))

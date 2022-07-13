@@ -45,7 +45,7 @@ public class RoleController {
     }
 
     @PostMapping("add")
-    public String addRole(@RequestParam("name") String roleName) {
+    public String addRole(@RequestParam("Role") String roleName) {
 
         System.out.println(roleName);
         Role r = new Role(roleName);
@@ -53,6 +53,8 @@ public class RoleController {
         System.out.println("role = "+ rSaved);
         return "redirect:list";
     }
+
+
 
 
 

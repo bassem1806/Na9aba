@@ -77,4 +77,8 @@ public class Gouvernorat {
     public void setDelegations(List<Delegation> delegations) {
         this.delegations = delegations;
     }
+
+
+
+
 }
