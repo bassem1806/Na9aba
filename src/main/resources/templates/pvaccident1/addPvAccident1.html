@@ -24,6 +24,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous"
           referrerpolicy="no-referrer" />
+<!--
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
   <script>
 function myFunction() {
        var select = document.getElementById('causeAccident');
@@ -48,7 +53,7 @@ function myFunction() {
 
 
 
-    <div class="container my-5" >
+    <div class="container my-12" >
 
         <div class="card">
             <div class="card-body">
@@ -64,31 +69,38 @@ function myFunction() {
 
                             <div class="row g-3">
                                 <div class="col-sm-7">
-                                    <label for="unite" class="col-form-label" >الوحدة</label>
-                                    <select  name="uniteId" class="form-control">
-                                        <option  th:each="un: ${unite}" th:value="${un.id}" th:text="${un.name}" id="unite" />
+                                    <label for="validationunite" class="col-form-label" >الوحدة</label>
+
+                                    <select  name="uniteId" class="form-select"  id="validationunite" required>
+                                        <option value="">--من فضل إختر الوحدة المباشرة--</option>
+                                        <option  th:each="un: ${unite}" th:value="${un.id}" th:text="${un.name}" />
                                     </select>
+                                    <div class="invalid-tooltip">
+                                        Please enter unite
+                                    </div>
                                 </div>
+
+
 
                                 <div class="col-sm">
                                     <label for="dateimatric" class="col-form-label">تاريخ التسجيل </label>
-                                    <input type="date" th:field="*{dateimatric}" class="form-control" id="dateimatric" placeholder="تاريخ التسجيل"/> <span th:if="${#fields.hasErrors('dateimatric')}" th:errors="*{dateimatric}" class="text-danger"></span>
+                                    <input type="date" th:field="*{dateimatric}" class="form-control" id="dateimatric" placeholder="تاريخ التسجيل" required/> <span th:if="${#fields.hasErrors('dateimatric')}" th:errors="*{dateimatric}" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-sm">
                                     <label for="numimatric" class="col-form-label"> رقم التسجيل </label>
-                                    <input type="text" th:field="*{numimatric}" class="form-control" placeholder="9990 تونس 230" id="numimatric" /> <span th:if="${#fields.hasErrors('numimatric')}" th:errors="*{numimatric}" class="text-danger"></span>
+                                    <input type="text" th:field="*{numimatric}" class="form-control" placeholder="9990 تونس 230" id="numimatric" required/> <span th:if="${#fields.hasErrors('numimatric')}" th:errors="*{numimatric}" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-6">
                                     <label for="numbarquia" class="col-form-label"> رقم البرقية </label>
-                                    <input type="text" th:field="*{numbarquia}" class="form-control" placeholder=" 9990 تونس 230" id="numbarquia" /> <span th:if="${#fields.hasErrors('numbarquia')}" th:errors="*{numbarquia}" class="text-danger"></span>
+                                    <input type="text" th:field="*{numbarquia}" class="form-control" placeholder=" 9990 تونس 230" id="numbarquia"  required/> <span th:if="${#fields.hasErrors('numbarquia')}" th:errors="*{numbarquia}" class="text-danger"></span>
                                 </div>
 
 
                                 <div class="col-6">
                                     <label for="dateaccid" class="col-form-label"> تاريخ الحادث </label>
-                                    <input type="date" th:field="*{dateaccid}" class="form-control" placeholder=" تاريخ الحادث  " id="dateaccid" /> <span th:if="${#fields.hasErrors('dateaccid')}" th:errors="*{dateaccid}" class="text-danger"></span>
+                                    <input type="date" th:field="*{dateaccid}" class="form-control" placeholder=" تاريخ الحادث  " id="dateaccid" required/> <span th:if="${#fields.hasErrors('dateaccid')}" th:errors="*{dateaccid}" class="text-danger"></span>
                                 </div>
 
                                 <div class="card-body">
@@ -97,17 +109,23 @@ function myFunction() {
 
                               <div class="col-sm-6">
                                     <label for="gouvernorat" class="col-form-label"  >الولاية</label>
-                                    <select name="gouvernoratId" class="form-control" >
+
+                                    <select name="gouvernoratId" class="form-control"  required>
+                                        <option value="">--من فضل إختر  الولاية--</option>
                                         <option  th:each="gv: ${gouvernorat}" th:value="${gv.gouvernoratId}" th:text="${gv.name}" id="gouvernorat"/>
                                     </select>
+
                                 </div>
 
 
                                 <div class="col-sm-6">
                                     <label for="gouvernorat1" class="col-form-label"  >المعتمدية</label>
-                                    <select name="gouvernoratId1" class="form-control" >
+
+                                    <select name="gouvernoratId1" class="form-control"  required>
+                                        <option value="">--من فضل إختر  المعتمدية--</option>
                                         <option  th:each="gv: ${delegation}" th:value="${gv.delegationId}" th:text="${gv.name}" id="gouvernorat1"/>
                                     </select>
+
                                 </div>
 
                        <!--       <div class="col-sm-6">
@@ -120,38 +138,45 @@ function myFunction() {
                                 <div class="col-sm-4">
 
                                     <label for="addreaccid" class="col-form-label"> العنوان </label>
-                                    <input type="text" th:field="*{addreaccid}" class="form-control" id="addreaccid" placeholder="العنوان "/> <span th:if="${#fields.hasErrors('addreaccid')}" th:errors="*{addreaccid}" class="text-danger"></span>
+                                    <input type="text" th:field="*{addreaccid}" class="form-control" id="addreaccid" placeholder="العنوان "required/> <span th:if="${#fields.hasErrors('addreaccid')}" th:errors="*{addreaccid}" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-sm-4">
                                     <label for="pointKmaccid" class="col-form-label"> النقطة الكيلومترية </label>
-                                    <input type="text" th:field="*{pointKmaccid}" class="form-control" id="pointKmaccid" placeholder="النقطة الكيلومترية"/> <span th:if="${#fields.hasErrors('pointKmaccid')}" th:errors="*{pointKmaccid}" class="text-danger"></span>
+                                    <input type="text" th:field="*{pointKmaccid}" class="form-control" id="pointKmaccid" placeholder="النقطة الكيلومترية" required/> <span th:if="${#fields.hasErrors('pointKmaccid')}" th:errors="*{pointKmaccid}" class="text-danger"></span>
                                 </div>
 
 
                                 <div class="col-sm-4">
                                     <label for="signauxCirculation" class="col-form-label" >إشارات المرور</label>
-                                    <select name="signauxCirculationId" class="form-control">
+
+                                    <select name="signauxCirculationId" class="form-control" required>
+                                        <option value="">--من فضل إختر  إشارة المرور--</option>
                                         <option  th:each=" sg :${signauxCirculation}" th:value="${sg.signeId}" th:text="${sg.name}" id="signauxCirculation"/>
                                     </select>
                                 </div>
 
                                 <div class="col-sm-4">
                                     <label for="typeRoute" class="col-form-label" > نوع الطريق</label>
-                                    <select name="typeRouteId" class="form-control">
+
+                                    <select name="typeRouteId" class="form-control" required>
+                                        <option value="">--من فضل إختر  نوع الطريق--</option>
                                         <option  th:each=" tr :${typeRoute}" th:value="${tr.Id}" th:text="${tr.name}" id="typeRoute"/>
                                     </select>
                                 </div>
 
                                 <div class="col-sm-4">
                                     <label for="situationRoute" class="col-form-label" > حالة الطريق</label>
-                                    <select name="situationRouteId" class="form-control">
+                                    <select name="situationRouteId" class="form-control" required>
+                                        <option value="">--من فضل إختر  حالة الطريق--</option>
                                         <option  th:each=" st :${situationRoute}" th:value="${st.Id}" th:text="${st.name}" id="situationRoute"/>
                                     </select>
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="temps" class="col-form-label" >  الطقس</label>
-                                    <select name="tempsId" class="form-control">
+
+                                    <select name="tempsId" class="form-control" required>
+                                        <option value="">--من فضل إختر  الطقس --</option>
                                         <option  th:each=" t :${temps}" th:value="${t.Id}" th:text="${t.name}" id="temps"/>
                                     </select>
                                 </div>
@@ -163,16 +188,18 @@ function myFunction() {
 
                              <div class="col-sm-6"     >
                                     <label for="causeAccident" class="form-label select-label" >أسباب الحادث</label><br>
-                                    <select name="causeAccidentId"  class="selectpicker" th:field="*{causeAccidents}" multiple >
+                                    <select name="causeAccidentId"  class="selectpicker" th:field="*{causeAccidents}" multiple required>
                                         <option  th:each=" s :${causeAccidents} " th:value="${s.causeaccidentId}" th:text="${s.name}"  id="causeAccident"/>
 
                                     </select>
                                 </div>
 
-                                <div class="col-sm-6">
+
+
+                              <div class="col-sm-6">
 
                                     <label for="causePrincipale" class="col-form-label"> السبب الرئيسي للحادث </label>
-                                    <input type="text" th:field="*{causePrincipale}" class="form-control" id="causePrincipale" placeholder="السبب الرئيسي "/> <span th:if="${#fields.hasErrors('causePrincipale')}" th:errors="*{causePrincipale}" class="text-danger"></span>
+                                    <input type="text" th:field="*{causePrincipale}" class="form-control" id="causePrincipale" placeholder="السبب الرئيسي "required/> <span th:if="${#fields.hasErrors('causePrincipale')}" th:errors="*{causePrincipale}" class="text-danger"></span>
                                 </div>
 
                                 <div class="card-body">
@@ -181,15 +208,57 @@ function myFunction() {
 
                                 <div class="col-sm-6"     >
                                     <label for="part" class="form-label select-label" > الوسائل المشاركة في الحادث</label><br>
-                                    <select name="part"  class="selectpicker" th:field="*{parts}" multiple >
+                                    <select name="part"  class="selectpicker" th:field="*{parts}" multiple  required>
                                         <option  th:each=" p :${parts} " th:value="${p.Id}" th:text="${p.name}"  id="part"/>
 
                                     </select>
                                 </div>
+                                <div class="card-body">
+                                    <h5 class="text">   الأطراف المتضررة في الحادث</h5>
+                                </div>
+                                                    <!--  Bootstrap table-->
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th scope="col">ID </th>
+                                                                <th scope="col">الإسم واللقب</th>
+                                                                <th scope="col">ب.ت.و</th>
+                                                                <th scope="col">الجنس</th>
+                                                                <th scope="col">العمر</th>
+                                                                <th scope="col">الحالة</th>
+                                                                <th scope="col">الملاحظات</th>
+                                                                <th scope="col">bouton</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                              <th scope="row"></th>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+
+
+                                                            </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <!-- Add rows button-->
+                                <div>
+                                                    <a class="btn btn-primary rounded-0 btn-block" id="insertRow" href="#">Add new row</a>
+                                                </div>
+
+                            <!--    </div><a style="font-size: 8pt; text-decoration: none" target="_blank" href="http://frontendfreecode.com">Free Frontend</a>-->
 
                                 <div class="col-md-12">
                                     <input type="submit" class="btn btn-primary" value="إضافة محضر معاية حادث 1"/>
                                 </div>
+
 
 
                                 <p class="my-5" align="right">
@@ -230,6 +299,15 @@ function myFunction() {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+<style>
+  .required:after {
+    content:" *";
+    color: red;
+  }
+</style></script>
+
+<script>
+
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {
@@ -398,8 +476,21 @@ function myFunction() {
         },
       },
     });
+
+        background: #0083B0;
+    background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
+    background: linear-gradient(to right, #0083B0, #00B4DB);
+    min-height: 100vh;
+}
+
+.form-control::placeholder {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: #aaa;
+}
   </script>
 <script src="../assets/js/plugins/choices.min.js"></script>
+<script src="../assets/js/addrow.table.js"></script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
