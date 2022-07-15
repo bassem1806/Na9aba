@@ -11,5 +11,7 @@ public interface DelegationRepository extends JpaRepository<Delegation,Long> {
 
     List<Delegation> findByGouvernorat(Gouvernorat gouvernorat);
 
+   /* List<Delegation>finfByname(Delegation delegation);*/
+
     List<Delegation> findByGouvernorat(Optional<Gouvernorat> byId);
 }

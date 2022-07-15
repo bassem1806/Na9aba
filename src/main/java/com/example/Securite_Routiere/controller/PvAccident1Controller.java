@@ -9,12 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.event.ListSelectionListener;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/PvAccidentnew/")
@@ -36,8 +33,8 @@ public class PvAccident1Controller {
 
     private final CauseAccidentRepository causeAccidentRepository;
     private final PartRepository partRepository;
+    private Delegation delegation;
 
-    private List<CauseAccident> css = new ArrayList<>();
 
     @Autowired
     public PvAccident1Controller(PvAccident1Repository pvAccident1Repository, UniteRepository uniteRepository, GouvernoratRepository gouvernoratRepository,
@@ -54,6 +51,9 @@ public class PvAccident1Controller {
         this.tempsRepository = tempsRepository;
         this.causeAccidentRepository = causeAccidentRepository;
         this.partRepository = partRepository;
+        
+        
+
 
     }
 
@@ -72,6 +72,15 @@ public class PvAccident1Controller {
         return "pvaccident1/listPvAccident1";
 
     }
+/*
+    @GetMapping("list1/{delegation}")
+
+    public List<Delegation> getListOfdelegationByName(@PathVariable Delegation delegation){
+
+            return  delegationRepository.finfByname(delegation);
+    }
+*/
+
 
     @GetMapping("add1")
     public String showAddPvAccident1Form(PvAccident1 pvAccident1, Model model) {

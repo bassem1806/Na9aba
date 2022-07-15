@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+  <!--  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">-->
     <link rel="icon" type="image/png" href="/assets/img/favicon.png">
     <title>
         إدارة الخدمات الفنية
@@ -44,16 +44,16 @@ function myFunction() {
     <div th:replace="fragments/menu :: menu" />
 
 </aside>
-<!--<div th:replace="fragments/header :: header" />-->
-<main >
+
+<main class="main-content position-relative max-height-vh-100 h-100 mt-1 ">
     <!-- Navbar -->
 
+    <div th:replace="fragments/header :: header" />
 
 
 
 
-
-    <div class="container my-12" >
+    <div class="container my-3" >
 
         <div class="card">
             <div class="card-body">
@@ -228,7 +228,7 @@ function myFunction() {
                                                                 <th scope="col">العمر</th>
                                                                 <th scope="col">الحالة</th>
                                                                 <th scope="col">الملاحظات</th>
-                                                                <th scope="col">bouton</th>
+                                                                <th scope="col"></th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
