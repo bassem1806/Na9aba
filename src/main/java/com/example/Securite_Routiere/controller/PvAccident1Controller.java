@@ -2,6 +2,7 @@ package com.example.Securite_Routiere.controller;
 
 import com.example.Securite_Routiere.entities.*;
 import com.example.Securite_Routiere.repositories.*;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Id;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ public class PvAccident1Controller {
     private final UniteRepository uniteRepository;
     private final GouvernoratRepository gouvernoratRepository;
 
-    private final DelegationRepository delegationRepository;
+    private DelegationRepository delegationRepository;
 
     private final SignauxCirculationRepository signauxCirculationRepository;
 
@@ -34,6 +36,26 @@ public class PvAccident1Controller {
     private final CauseAccidentRepository causeAccidentRepository;
     private final PartRepository partRepository;
     private Delegation delegation;
+
+
+
+
+    @RequestMapping(value="loadDelegationByGouvernorat/{id}",method = RequestMethod.GET)
+    public String loadDelegationByGouvernorat(@PathVariable("gouvernoratId") long gouvernoratId) {
+        //  System.out.println("init loadStatesByCountry");
+
+        System.out.println("l'id de gouvernorat gv ="+gouvernoratId);
+
+
+
+        List<Delegation> delegationByGV = delegationRepository.findByGouvernorat(gouvernoratRepository.findById(gouvernoratId).get());
+        System.out.println("la taille de la liste est egale ="+delegationByGV.size());
+        Gson gson = new Gson();
+
+        return gson.toJson(delegationRepository.findByGouvernorat((gouvernoratRepository.findById(gouvernoratId).get())));
+    }
+
+
 
 
     @Autowired
@@ -51,11 +73,13 @@ public class PvAccident1Controller {
         this.tempsRepository = tempsRepository;
         this.causeAccidentRepository = causeAccidentRepository;
         this.partRepository = partRepository;
-        
-        
+
+
 
 
     }
+
+
 
 
     @GetMapping("list1")
@@ -72,14 +96,8 @@ public class PvAccident1Controller {
         return "pvaccident1/listPvAccident1";
 
     }
-/*
-    @GetMapping("list1/{delegation}")
 
-    public List<Delegation> getListOfdelegationByName(@PathVariable Delegation delegation){
 
-            return  delegationRepository.finfByname(delegation);
-    }
-*/
 
 
     @GetMapping("add1")
@@ -115,27 +133,27 @@ public class PvAccident1Controller {
                                  @RequestParam("causeAccidents") List<Long> causeAccident,
                                  @RequestParam("parts") List<Long> part)
 
-    //,required = true)Long c)
+
 
 
     {
-        List<Delegation> delegationByGov = delegationRepository.findByGouvernorat(gouvernoratRepository.findById(11L));
+      //List<Delegation> delegationByGov = delegationRepository.findByGouvernorat(gouvernoratRepository.findById());
 
-        System.out.println("size listes  :" + delegationByGov.size());
+      //System.out.println("size listes  :" + delegationByGov.size());
 
         List<CauseAccident> parts;
+        
 
+       
 
         Unite unite = uniteRepository.findById(h).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid Unite Id:" + h));
         pvAccident1.setUnite(unite);
-        // System.out.println("id unite :"+ h);
-        //System.out.println("id gouvernoratId :"+k);
-        //  System.out.println("id gouvernoratId :"+b);
+
 
         Delegation delegation = delegationRepository.findById(b).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid Unite Id:" + b));
-        //   System.out.println("delegation  :" +delegation.getName());
+
 
         pvAccident1.setDelegation(delegation);
 
@@ -272,6 +290,10 @@ public class PvAccident1Controller {
 
         return "redirect:../PvAccidentnew/list1";
     }
+
+
+
+
 }
 
 

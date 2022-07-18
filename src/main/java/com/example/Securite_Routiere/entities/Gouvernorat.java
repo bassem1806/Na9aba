@@ -28,15 +28,6 @@ public class Gouvernorat {
     @OneToMany(mappedBy="gouvernorat")
     private List<Delegation> delegations;
 
-   /* public long getGouvernoratId() {
-        return gouvernoratId;
-    }
-
-    public void setGouvernoratId(long gouvernoratId) {
-        this.gouvernoratId = gouvernoratId;
-    }
-
-    */
 
     public String getName() {
         return name;
