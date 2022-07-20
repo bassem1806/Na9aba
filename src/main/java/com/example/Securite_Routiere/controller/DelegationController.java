@@ -34,7 +34,7 @@ public class DelegationController {
     @GetMapping("list")
     public String listDelegations(Model model) {
 
-        List<Delegation> d = (List<Delegation>)delegationRepository.findAll();
+        List<Delegation> d = delegationRepository.findAll();
         if(d.size()==0)
         {
             d = null;

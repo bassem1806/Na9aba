@@ -35,7 +35,7 @@ public class AccountController {
     @GetMapping("list")
     public String listUsers(Model model) {
 
-        List<User> users = (List<User>) userRepository.findAll();
+        List<User> users = userRepository.findAll();
         long nbr = userRepository.count();
         if (users.size() == 0)
             users = null;

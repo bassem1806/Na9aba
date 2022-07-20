@@ -48,7 +48,7 @@ public class LoginController {
 
 
 
-        Set<Role> userRoles = (Set<Role>) user.getRoles();
+        Set<Role> userRoles = user.getRoles();
         Object[] tab = userRoles.toArray();
         Role r =(Role)tab[0];
         String role = r.getRole();

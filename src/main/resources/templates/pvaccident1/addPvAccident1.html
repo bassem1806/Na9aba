@@ -24,11 +24,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous"
           referrerpolicy="no-referrer" />
-<!--
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
+
+
+
+
 
 
 
@@ -36,34 +35,40 @@
 
 
     <script src="/assets/js/jquery-1.7.1.min.js"></script>
-<!--
-
     <script type="text/javascript">
-
 $(document).ready(function(){
 
-	$('#listGouvernorat').on('change', function(){
+	$('#gouvernorat').on('change', function(){
 		var gouvernorat_id = $(this).val();
 
 		$.ajax({
 			type: 'GET',
-
-			url:'/PvAccidentnew/add1/loadDelegationByGouvernorat/' + gouvernorat_id,
-
+			url: '/PvAccidentnew/loadDelegationByGouvernorat/' + gouvernorat_id,
 			success: function(result) {
 				var result = JSON.parse(result);
-				var s = '';
+				var s = '<option value="">--من فضل إختر  المعتمدية--</option>';
 				for(var i = 0; i < result.length; i++) {
-					s += '<option value="' + result[i].id + '">' + result[i].libele + '</option>';
+					s += '<option value="' + result[i].delegationId + '">' + result[i].name + '</option>';
 				}
-				$('#listDelegation').html(s);
+				$('#gouvernorat1').empty();
+				$('#gouvernorat1').html(s);
 			}
 		});
 	});
 		});
 </script>
--->
 
+<!--
+    <script>
+        $('.Gouvernorat-select').on('change', function() {
+    var id = $(this).attr('data');
+    $('#gouvernorat-id').val(id);
+})
+
+// We must set the initial value, otherwise it will be null for the first option.
+$('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
+    </script>
+-->
 </head>
 
 <body class="g-sidenav-show rtl bg-gray-100">
@@ -88,6 +93,7 @@ $(document).ready(function(){
                 <div class="col-md-12">
                     <form action="#" th:action="@{/PvAccidentnew/addSave1}" th:object="${pvAccident1}" method="post" enctype="multipart/form-data">
                         <div class="row">
+
                             <div class="card-header pb-0 text-left bg-transparent">
                                 <h3 class="font-weight-bolder text-info text-center"> محضر معاينة حادث مرور</h3>
 
@@ -138,9 +144,9 @@ $(document).ready(function(){
                               <div class="col-sm-6">
                                     <label for="gouvernorat" class="col-form-label"  >الولاية</label>
 
-                                    <select name="gouvernoratId" class="form-control"  required>
+                                    <select name="gouvernoratId" class="form-control"  id="gouvernorat" >
                                         <option value="">--من فضل إختر  الولاية--</option>
-                                        <option  th:each="gv: ${gouvernorat}" th:value="${gv.gouvernoratId}" th:text="${gv.name}" id="gouvernorat"/>
+                                        <option  th:each="gv: ${gouvernorat}" th:value="${gv.gouvernoratId}" th:text="${gv.name}"  th:data="${gv.gouvernoratId}"/>
                                     </select>
 
                                 </div>
@@ -149,9 +155,8 @@ $(document).ready(function(){
                                 <div class="col-sm-6">
                                     <label for="gouvernorat1" class="col-form-label"  >المعتمدية</label>
 
-                                    <select name="gouvernoratId1" class="form-control"  required>
+                                    <select name="gouvernoratId1" class="form-control"   id="gouvernorat1">
                                         <option value="">--من فضل إختر  المعتمدية--</option>
-                                        <option  th:each="gv: ${delegation}" th:value="${gv.delegationId}" th:text="${gv.name}" id="gouvernorat1"/>
                                     </select>
 
                                 </div>
@@ -262,7 +267,7 @@ $(document).ready(function(){
                                                             <tbody>
                                                             <tr>
                                                               <th scope="row"></th>
-                                                                <td></td>
+                                                                <td> </td>
                                                                 <td></td>
                                                                 <td></td>
                                                                 <td></td>
@@ -278,7 +283,7 @@ $(document).ready(function(){
 
                                                     <!-- Add rows button-->
                                 <div>
-                                                    <a class="btn btn-primary rounded-0 btn-block" id="insertRow" href="#">Add new row</a>
+                                                    <a class="btn btn-primary rounded-0 btn-block" id="insertRow" href="#">إضافة مصاب</a>
                                                 </div>
 
                             <!--    </div><a style="font-size: 8pt; text-decoration: none" target="_blank" href="http://frontendfreecode.com">Free Frontend</a>-->
@@ -326,192 +331,6 @@ $(document).ready(function(){
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
-
-<script>
-
-    var ctx = document.getElementById("chart-bars").getContext("2d");
-
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "#fff",
-          data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-          maxBarThickness: 6
-        }, ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-            },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
-              beginAtZero: true,
-              padding: 15,
-              font: {
-                size: 14,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-              color: "#fff"
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false
-            },
-            ticks: {
-              display: false
-            },
-          },
-        },
-      },
-    });
-
-
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-    new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-            label: "Mobile apps",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#cb0c9f",
-            borderWidth: 3,
-            backgroundColor: gradientStroke1,
-            fill: true,
-            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-            maxBarThickness: 6
-
-          },
-          {
-            label: "Websites",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#3A416F",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            fill: true,
-            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-            maxBarThickness: 6
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#b2b9bf',
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#b2b9bf',
-              padding: 20,
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-
-        background: #0083B0;
-    background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
-    background: linear-gradient(to right, #0083B0, #00B4DB);
-    min-height: 100vh;
-}
-
-.form-control::placeholder {
-    font-style: italic;
-    font-size: 0.85rem;
-    color: #aaa;
-}
-  </script>
 <script src="../assets/js/plugins/choices.min.js"></script>
 <script src="../assets/js/addrow.table.js"></script>
 <script>
@@ -527,6 +346,12 @@ $(document).ready(function(){
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+
+<script type="text/javascript">
+            function loadContent(url) {
+                console.log(url)
+            }
+</script>
 </body>
 
 </html>

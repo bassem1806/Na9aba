@@ -19,41 +19,37 @@ import java.util.List;
 @RequestMapping("/PvAccidentnew/")
 public class PvAccident1Controller {
 
+    @Autowired
     private final PvAccident1Repository pvAccident1Repository;
+    @Autowired
     private final UniteRepository uniteRepository;
+    @Autowired
     private final GouvernoratRepository gouvernoratRepository;
 
-    private DelegationRepository delegationRepository;
+    @Autowired
+    private final DelegationRepository delegationRepository;
 
+    @Autowired
     private final SignauxCirculationRepository signauxCirculationRepository;
 
+    @Autowired
     private final TypeRouteRepository typeRouteRepository;
 
+    @Autowired
     private final SituationRouteRepository situationRouteRepository;
 
+    @Autowired
     private final TempsRepository tempsRepository;
 
+    @Autowired
     private final CauseAccidentRepository causeAccidentRepository;
+    @Autowired
     private final PartRepository partRepository;
     private Delegation delegation;
 
 
 
 
-    @RequestMapping(value="loadDelegationByGouvernorat/{id}",method = RequestMethod.GET)
-    public String loadDelegationByGouvernorat(@PathVariable("gouvernoratId") long gouvernoratId) {
-        //  System.out.println("init loadStatesByCountry");
-
-        System.out.println("l'id de gouvernorat gv ="+gouvernoratId);
-
-
-
-        List<Delegation> delegationByGV = delegationRepository.findByGouvernorat(gouvernoratRepository.findById(gouvernoratId).get());
-        System.out.println("la taille de la liste est egale ="+delegationByGV.size());
-        Gson gson = new Gson();
-
-        return gson.toJson(delegationRepository.findByGouvernorat((gouvernoratRepository.findById(gouvernoratId).get())));
-    }
 
 
 
@@ -101,7 +97,9 @@ public class PvAccident1Controller {
 
 
     @GetMapping("add1")
+
     public String showAddPvAccident1Form(PvAccident1 pvAccident1, Model model) {
+
 
 
         model.addAttribute("unite", uniteRepository.findAll());
@@ -116,7 +114,9 @@ public class PvAccident1Controller {
         model.addAttribute("pvAccident1", new PvAccident1());
         return "pvaccident1/addPvAccident1";
 
+
     }
+
 
     @PostMapping("addSave1")
 
@@ -137,9 +137,9 @@ public class PvAccident1Controller {
 
 
     {
-      //List<Delegation> delegationByGov = delegationRepository.findByGouvernorat(gouvernoratRepository.findById());
+      //List<Delegation> delegationByGov = delegationRepository.findByGouvernorat(gouvernoratRepository.findById(10L));
 
-      //System.out.println("size listes  :" + delegationByGov.size());
+     // System.out.println("size listes  :" + delegationByGov.size());
 
         List<CauseAccident> parts;
         
@@ -291,8 +291,23 @@ public class PvAccident1Controller {
         return "redirect:../PvAccidentnew/list1";
     }
 
+    @ResponseBody
+    @RequestMapping(value="loadDelegationByGouvernorat/{id}",method = RequestMethod.GET)
+    public String loadStatesByCountry(@PathVariable("id") long id) {
+
+        ArrayList<Delegation> delegationByGV = delegationRepository.findByGouvernorat(gouvernoratRepository.findById(id).get());
+
+        List<Delegation> delegations = new ArrayList<>();
+        for (Delegation temp : delegationByGV) {
+            delegations.add(new Delegation(temp.getDelegationId(), temp.getName()));
+        }
+
+        Gson gson = new Gson();
+
+      return gson.toJson(delegations);
 
 
+    }
 
 }
 

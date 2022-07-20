@@ -25,7 +25,7 @@ public class RoleController {
     @GetMapping("list")
     public String listRoles(Model model) {
 
-        List<Role> roles = (List<Role>) roleRepository.findAll();
+        List<Role> roles = roleRepository.findAll();
         long nbr =  roleRepository.count();
         if(roles.size()==0)
             roles = null;
