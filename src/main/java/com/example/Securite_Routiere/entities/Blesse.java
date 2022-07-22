@@ -3,6 +3,7 @@ package com.example.Securite_Routiere.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 public class Blesse {
@@ -12,12 +13,12 @@ public class Blesse {
     private long BlesseId;
 
     @NotBlank(message = "nom et prenom obligatoire ")
-    @Column(name = "NomPrenom_Blesse")
-    private String NomPrenom;
+    @Column(name = "firstname_Blesse")
+    private String firstname;
 
     @NotBlank(message = "Cin obligatoire ")
     @Column(name = "Cin_Blesse")
-    private int CIN;
+    private String CIN;
 
     @NotBlank(message = "Sexe obligatoire ")
     @Column(name = "sexe_Blesse")
@@ -26,7 +27,7 @@ public class Blesse {
 
     @NotBlank(message = "Age obligatoire ")
     @Column(name = "age_Blesse")
-    private int age;
+    private String age;
 
     @NotBlank(message = "Etat obligatoire ")
     @Column(name = "etat_Blesse")
@@ -34,6 +35,31 @@ public class Blesse {
 
     @Column(name = "observation_Blesse")
     private String Observation;
+
+    public Blesse(String firstname, String cin, String age, String sexe, String etatBlesse, String observation) {
+    }
+
+    public Blesse() {
+    }
+
+    public static void add(Blesse blesse) {
+    }
+
+
+    public Set<PvAccident1> getPvAccident1s() {
+        return pvAccident1s;
+    }
+
+    public void setPvAccident1s(Set<PvAccident1> pvAccident1s) {
+        this.pvAccident1s = pvAccident1s;
+    }
+
+    /**** Many To many pvaccident   ****/
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinTable(name = "pvaccident_blesse",
+            joinColumns = @JoinColumn(name = "blesse_id"),
+            inverseJoinColumns = @JoinColumn(name = "pvaccid_id"))
+    private Set<PvAccident1> pvAccident1s;
 
 
     public long getBlesseId() {
@@ -44,19 +70,19 @@ public class Blesse {
         BlesseId = blesseId;
     }
 
-    public String getNomPrenom() {
-        return NomPrenom;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setNomPrenom(String nomPrenom) {
-        NomPrenom = nomPrenom;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public int getCIN() {
+    public String getCIN() {
         return CIN;
     }
 
-    public void setCIN(int CIN) {
+    public void setCIN(String CIN) {
         this.CIN = CIN;
     }
 
@@ -68,11 +94,11 @@ public class Blesse {
         this.sexe = sexe;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -90,19 +116,5 @@ public class Blesse {
 
     public void setObservation(String observation) {
         Observation = observation;
-    }
-
-
-    public Blesse(long blesseId, String nomPrenom, int CIN, String sexe, int age, String etatBlesse, String observation) {
-        BlesseId = blesseId;
-        NomPrenom = nomPrenom;
-        this.CIN = CIN;
-        this.sexe = sexe;
-        this.age = age;
-        EtatBlesse = etatBlesse;
-        Observation = observation;
-    }
-
-    public Blesse() {
     }
 }

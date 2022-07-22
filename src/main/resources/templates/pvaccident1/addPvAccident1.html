@@ -250,7 +250,8 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
                                     <h5 class="text">   الأطراف المتضررة في الحادث</h5>
                                 </div>
                                                     <!--  Bootstrap table-->
-                                                    <div class="table-responsive">
+                                                    <div class="table-responsive" id="tab0">
+                                                        <form action="search" method="post">
                                                         <table class="table">
                                                             <thead>
                                                             <tr>
@@ -265,20 +266,20 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <tr>
+                                                            <tr th:each="blesse : ${blesses}">
                                                               <th scope="row"></th>
-                                                                <td> </td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-
+                                                                <td  th:text="${blesse.firstname}" >الإسم واللقب</td>
+                                                                <td th:text="${blesse.CIN}">  CIN</td>
+                                                                <td th:text="${blesse.sexe}"t> sexe</td>
+                                                                <td th:text="${blesse.age}" > age</td>
+                                                                <td th:text="${blesse.EtatBlesse}" > etat blesse</td>
+                                                                <td th:text="${blesse.Observation}">observation </td>
 
                                                             </tr>
 
                                                             </tbody>
                                                         </table>
+                                                            </form>
                                                     </div>
 
                                                     <!-- Add rows button-->
@@ -286,11 +287,12 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
                                                     <a class="btn btn-primary rounded-0 btn-block" id="insertRow" href="#">إضافة مصاب</a>
                                                 </div>
 
+                                <div>
+                                    <input type="submit" class="btn btn-primary" value="add to pv"/>
+                                </div>
+
                             <!--    </div><a style="font-size: 8pt; text-decoration: none" target="_blank" href="http://frontendfreecode.com">Free Frontend</a>-->
 
-                                <div class="col-md-12">
-                                    <input type="submit" class="btn btn-primary" value="إضافة محضر معاية حادث 1"/>
-                                </div>
 
 
 
@@ -346,12 +348,13 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
-
+<!--
 <script type="text/javascript">
             function loadContent(url) {
                 console.log(url)
             }
 </script>
+-->
 </body>
 
 </html>

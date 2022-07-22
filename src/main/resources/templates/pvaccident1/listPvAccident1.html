@@ -67,6 +67,7 @@
                   <th> الولاية</th>
                   <th> المعتمدية</th>
                   <th> سبب الحادث الرئيسي</th>
+
                   <th></th>
                   <th></th>
                 </tr>
@@ -78,6 +79,7 @@
                   <td th:text="${pvAccident1.delegation.gouvernorat.name}"></td>
                   <td th:text="${pvAccident1.delegation.name}"></td>
                   <td th:text="${pvAccident1.causePrincipale}"></td>
+
 
                   <td>
                     <a th:href="@{/PvAccidentnew/edit/{pvaccidId}(pvaccidId=${pvAccident1.id})}" class="btn btn-warning"   onclick="alert('confirmed');">edit <i class="fas fa-user-edit ml-2"></i></a></td>

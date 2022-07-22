@@ -12,40 +12,46 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Id;
 import javax.validation.Valid;
+import java.lang.reflect.Array;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/PvAccidentnew/")
 public class PvAccident1Controller {
 
-    @Autowired
+
     private final PvAccident1Repository pvAccident1Repository;
-    @Autowired
+
     private final UniteRepository uniteRepository;
-    @Autowired
+
     private final GouvernoratRepository gouvernoratRepository;
 
-    @Autowired
+
     private final DelegationRepository delegationRepository;
 
-    @Autowired
+
     private final SignauxCirculationRepository signauxCirculationRepository;
 
-    @Autowired
+
     private final TypeRouteRepository typeRouteRepository;
 
-    @Autowired
+
     private final SituationRouteRepository situationRouteRepository;
 
-    @Autowired
+
     private final TempsRepository tempsRepository;
 
-    @Autowired
+
     private final CauseAccidentRepository causeAccidentRepository;
-    @Autowired
+
     private final PartRepository partRepository;
     private Delegation delegation;
+
+    private  final Blesserepository blesseRepository;
 
 
 
@@ -58,7 +64,7 @@ public class PvAccident1Controller {
     public PvAccident1Controller(PvAccident1Repository pvAccident1Repository, UniteRepository uniteRepository, GouvernoratRepository gouvernoratRepository,
                                  DelegationRepository delegationRepository, SignauxCirculationRepository signauxCirculationRepository,
                                  TypeRouteRepository typeRouteRepository, SituationRouteRepository situationRouteRepository, TempsRepository tempsRepository,
-                                 CauseAccidentRepository causeAccidentRepository, PartRepository partRepository) {
+                                 CauseAccidentRepository causeAccidentRepository, PartRepository partRepository, Blesserepository blesserepository) {
         this.pvAccident1Repository = pvAccident1Repository;
         this.uniteRepository = uniteRepository;
         this.gouvernoratRepository = gouvernoratRepository;
@@ -69,10 +75,7 @@ public class PvAccident1Controller {
         this.tempsRepository = tempsRepository;
         this.causeAccidentRepository = causeAccidentRepository;
         this.partRepository = partRepository;
-
-
-
-
+        this.blesseRepository= blesserepository;
     }
 
 
@@ -111,8 +114,10 @@ public class PvAccident1Controller {
         model.addAttribute("temps", tempsRepository.findAll());
         model.addAttribute("causeAccidents", causeAccidentRepository.findAll());
         model.addAttribute("parts", partRepository.findAll());
+        model.addAttribute("blesses",blesseRepository.findAll());
         model.addAttribute("pvAccident1", new PvAccident1());
         return "pvaccident1/addPvAccident1";
+
 
 
     }
@@ -121,8 +126,6 @@ public class PvAccident1Controller {
     @PostMapping("addSave1")
 
     public String addPvAccident1(@Valid PvAccident1 pvAccident1, BindingResult result,
-
-
                                  @RequestParam(name = "uniteId", required = true) Long h,
                                  @RequestParam(name = "gouvernoratId", required = true) Long k,
                                  @RequestParam(name = "gouvernoratId1", required = true) Long b,
@@ -131,20 +134,36 @@ public class PvAccident1Controller {
                                  @RequestParam(name = "situationRouteId", required = true) Long z,
                                  @RequestParam(name = "tempsId", required = true) Long r,
                                  @RequestParam("causeAccidents") List<Long> causeAccident,
-                                 @RequestParam("parts") List<Long> part)
-
+                                 @RequestParam("parts") List<Long> part,
+                                 // attribut blesse
+                                 @RequestParam(name = "firstname", required = true) String firstName,
+                                 @RequestParam(name = "CIN", required = true) String cin,
+                                 @RequestParam(name = "sexe", required = true) String sexe,
+                                 @RequestParam(name = "age", required = true) String age,
+                                 @RequestParam(name = "EtatBlesse", required = true) String etatBlesse,
+                                 @RequestParam(name = "Observation", required = true) String observation)
 
 
 
     {
-      //List<Delegation> delegationByGov = delegationRepository.findByGouvernorat(gouvernoratRepository.findById(10L));
 
-     // System.out.println("size listes  :" + delegationByGov.size());
+        System.out.println("fn: "+firstName);
+        System.out.println("cin: "+cin);
+        System.out.println("sexe: "+sexe);
+        System.out.println("age: "+age);
+        System.out.println("etatBlesse: "+etatBlesse);
+        System.out.println("obs: "+observation);
 
-        List<CauseAccident> parts;
+
+
+
         
+        List<CauseAccident> parts;
 
-       
+
+
+
+
 
         Unite unite = uniteRepository.findById(h).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid Unite Id:" + h));
@@ -175,11 +194,43 @@ public class PvAccident1Controller {
 
         Temps temps = tempsRepository.findById(r).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid  Situation route Id:" + r));
-
         pvAccident1.setTemps(temps);
 
-        pvAccident1Repository.save(pvAccident1);
 
+
+
+
+
+
+
+
+        pvAccident1 = pvAccident1Repository.save(pvAccident1);
+
+        List<Blesse> blesses  =new ArrayList<>();
+        if (firstName != null && firstName.length() >0) {
+            String[] fn = firstName.split(",");
+            String[] cinarr = cin.split(",");
+            String[] sexearr = sexe.split(",");
+            String[] agearr = age.split(",");
+            String[] etatBlessearr = etatBlesse.split(",");
+            String[] obsarr = observation.split(",");
+            int ii = 0;
+            for (String f: fn ) {
+                Blesse bl = new Blesse();
+                bl.setFirstname(f);
+                bl.setCIN(cinarr[ii]);
+                bl.setAge(agearr[ii]);
+                bl.setSexe(sexearr[ii]);
+                bl.setEtatBlesse(etatBlessearr[ii]);
+                bl.setObservation(obsarr[ii]);
+                bl = blesseRepository.save(bl);
+                pvAccident1.addBlesse(bl);
+                blesses.add(bl);
+                ii++;
+            }
+        }
+
+        pvAccident1 = pvAccident1Repository.save(pvAccident1);
 
         return "redirect:list1";
 
@@ -238,6 +289,9 @@ public class PvAccident1Controller {
         model.addAttribute("parts", partRepository.findAll());
         model.addAttribute("idParts", pvAccident1.getParts());
 
+        model.addAttribute("blesses", blesseRepository.findAll());
+        model.addAttribute("idBlesses",pvAccident1.getBlesses());
+
         return "pvaccident1/updatePvAccident1";
     }
 
@@ -252,7 +306,8 @@ public class PvAccident1Controller {
                                     @RequestParam(name = "situationRouteId", required = true) Long z,
                                     @RequestParam(name = "tempsId", required = true) Long r,
                                     @RequestParam("causeAccidents") List<Long> causeAccident,
-                                    @RequestParam("parts") List<Long> part) {
+                                    @RequestParam("parts") List<Long> part,
+                                    @RequestParam("blesses") List<Long> blesse) {
         if (result.hasErrors()) {
 
             return "pvaccident1/updatePvAccident1";
@@ -308,6 +363,8 @@ public class PvAccident1Controller {
 
 
     }
+
+
 
 }
 

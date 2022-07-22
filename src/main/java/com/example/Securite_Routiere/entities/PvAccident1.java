@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -126,6 +127,28 @@ public class PvAccident1 {
             inverseJoinColumns = @JoinColumn(name = "part_id"))
     private Set<Part> parts;
 
+
+    /**** Many To many Blesse   ****/
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinTable(name = "pvaccident_blesse",
+            joinColumns = @JoinColumn(name = "pvaccid_id"),
+            inverseJoinColumns = @JoinColumn(name = "blesse_id"))
+    private Set<Blesse> blesses;
+
+
+    public Set<Blesse> getBlesses() {
+        return blesses;
+    }
+
+    public void setBlesses(Set<Blesse> blesses) {
+        this.blesses = blesses;
+    }
+
+    public void addBlesse(Blesse blesse) {
+        if (blesses == null)    blesses = new HashSet<>();
+        this.blesses.add(blesse);
+    }
+
     public Set<Part> getParts() {
         return parts;
     }
@@ -244,7 +267,11 @@ public class PvAccident1 {
     }
 
     public PvAccident1() {
+        this.blesses = new HashSet<>();
+        this.causeAccidents = new HashSet<>();
     }
 
 
+    public void setBlesse() {
+    }
 }
