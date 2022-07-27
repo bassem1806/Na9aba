@@ -246,6 +246,9 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
 
                                     </select>
                                 </div>
+
+
+
                                 <div class="card-body">
                                     <h5 class="text">   الأطراف المتضررة في الحادث</h5>
                                 </div>
@@ -268,12 +271,13 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
                                                             <tbody>
                                                             <tr th:each="blesse : ${blesses}">
                                                               <th scope="row"></th>
-                                                                <td  th:text="${blesse.firstname}" >الإسم واللقب</td>
-                                                                <td th:text="${blesse.CIN}">  CIN</td>
-                                                                <td th:text="${blesse.sexe}"t> sexe</td>
-                                                                <td th:text="${blesse.age}" > age</td>
-                                                                <td th:text="${blesse.EtatBlesse}" > etat blesse</td>
-                                                                <td th:text="${blesse.Observation}">observation </td>
+                                                                <td  th:text="${blesse.firstname}" th:value="firstname" >الإسم واللقب</td>
+                                                                <td th:text="${blesse.CIN}"th:value="CIN" >  CIN</td>
+                                                                <td th:text="${blesse.sexe}"th:value="sexe"> sexe</td>
+                                                                <td th:text="${blesse.age}" th:value="age" > age</td>
+                                                                <td th:text="${blesse.EtatBlesse}" th:value="EtatBlesse" > etat blesse</td>
+                                                                <td th:text="${blesse.Observation}" th:value="Observation" >observation </td>
+
 
                                                             </tr>
 
@@ -284,11 +288,11 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
 
                                                     <!-- Add rows button-->
                                 <div>
-                                                    <a class="btn btn-primary rounded-0 btn-block" id="insertRow" href="#">إضافة مصاب</a>
+                                                    <a class="btn btn-primary rounded-0 btn-block" id="insertRow" >إضافة مصاب</a>
                                                 </div>
 
                                 <div>
-                                    <input type="submit" class="btn btn-primary" value="add to pv"/>
+                                    <input type="submit" class="btn btn-primary" value="تسجيل محضر معاين حادث"/>
                                 </div>
 
                             <!--    </div><a style="font-size: 8pt; text-decoration: none" target="_blank" href="http://frontendfreecode.com">Free Frontend</a>-->
@@ -305,7 +309,7 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
                                 <div class="form-group col-md-8"></div>
 
                              </div>
-                              </form>
+                                 </form>
                 </div>
             </div>
         </div>
@@ -328,12 +332,12 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
 <script src="../assets/js/core/bootstrap.min.js"></script>
 <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-<script src="../assets/js/plugins/fullcalendar.min.js"></script>
-<script src="../assets/js/plugins/chartjs.min.js"></script>
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../assets/js/plugins/choices.min.js"></script>
+<!--script src="../assets/js/plugins/choices.min.js"></script-->
 <script src="../assets/js/addrow.table.js"></script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -345,7 +349,7 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
     }
   </script>
 <!-- Github buttons -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!--script async defer src="https://buttons.github.io/buttons.js"></--script-->
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 <!--

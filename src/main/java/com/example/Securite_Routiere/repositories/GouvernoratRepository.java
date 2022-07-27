@@ -11,8 +11,6 @@ import java.util.List;
 @Repository
 public interface GouvernoratRepository extends JpaRepository<Gouvernorat ,Long> {
 
-
-
-
-
 }
+
+

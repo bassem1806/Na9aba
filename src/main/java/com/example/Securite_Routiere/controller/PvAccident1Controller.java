@@ -147,12 +147,7 @@ public class PvAccident1Controller {
 
     {
 
-        System.out.println("fn: "+firstName);
-        System.out.println("cin: "+cin);
-        System.out.println("sexe: "+sexe);
-        System.out.println("age: "+age);
-        System.out.println("etatBlesse: "+etatBlesse);
-        System.out.println("obs: "+observation);
+
 
 
 
@@ -195,12 +190,6 @@ public class PvAccident1Controller {
         Temps temps = tempsRepository.findById(r).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid  Situation route Id:" + r));
         pvAccident1.setTemps(temps);
-
-
-
-
-
-
 
 
 
@@ -289,8 +278,7 @@ public class PvAccident1Controller {
         model.addAttribute("parts", partRepository.findAll());
         model.addAttribute("idParts", pvAccident1.getParts());
 
-        model.addAttribute("blesses", blesseRepository.findAll());
-        model.addAttribute("idBlesses",pvAccident1.getBlesses());
+
 
         return "pvaccident1/updatePvAccident1";
     }
@@ -305,9 +293,11 @@ public class PvAccident1Controller {
                                     @RequestParam(name = "typeRouteId", required = true) Long t,
                                     @RequestParam(name = "situationRouteId", required = true) Long z,
                                     @RequestParam(name = "tempsId", required = true) Long r,
-                                    @RequestParam("causeAccidents") List<Long> causeAccident,
-                                    @RequestParam("parts") List<Long> part,
-                                    @RequestParam("blesses") List<Long> blesse) {
+                                    @RequestParam("causeAccidents") List<Long> causeAccident
+
+
+
+                                    ) {
         if (result.hasErrors()) {
 
             return "pvaccident1/updatePvAccident1";

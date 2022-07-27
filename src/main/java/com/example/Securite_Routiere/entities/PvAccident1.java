@@ -265,13 +265,17 @@ public class PvAccident1 {
         this.pointKmaccid = pointKmaccid;
         this.causePrincipale= causePrincipale;
     }
+ public PvAccident1() {
+     this.blesses = new HashSet<>();
+     this.causeAccidents = new HashSet<>();
+     this.parts = new HashSet<>();
 
-    public PvAccident1() {
-        this.blesses = new HashSet<>();
-        this.causeAccidents = new HashSet<>();
-    }
+ }
 
 
-    public void setBlesse() {
+    public void setBlesse () {
+
+
+
     }
 }

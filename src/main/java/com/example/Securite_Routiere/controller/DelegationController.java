@@ -1,5 +1,5 @@
-package com.example.Securite_Routiere.controller;
-
+//package com.example.Securite_Routiere.controller;
+/*
 
 import com.example.Securite_Routiere.entities.Delegation;
 import com.example.Securite_Routiere.entities.Gouvernorat;
@@ -75,3 +75,4 @@ public class DelegationController {
 
 }
 
+*/
