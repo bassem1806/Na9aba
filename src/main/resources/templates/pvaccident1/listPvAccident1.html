@@ -62,25 +62,26 @@
               <!--table class="table table-striped table-responsive-md" -->
                 <thead>
                 <tr>
-                  <th>عدد المحضر</th>
+                  <th>عدد البرقية</th>
                   <th> الوحدة</th>
                   <th> الولاية</th>
                   <th> المعتمدية</th>
                   <th> سبب الحادث الرئيسي</th>
-
-                  <th></th>
-                  <th></th>
+                  <th>الإطلاع على المحضر</th>
+                  <th>تعديل المحضر</th>
+                  <th>محو المحضر</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="pvAccident1 : ${pvAccidents1}">
-                  <td th:text="${pvAccident1.id}"></td>
+                  <td th:text="${pvAccident1.numbarquia}"></td>
                   <td th:text="${pvAccident1.unite.name}"></td>
                   <td th:text="${pvAccident1.delegation.gouvernorat.name}"></td>
                   <td th:text="${pvAccident1.delegation.name}"></td>
                   <td th:text="${pvAccident1.causePrincipale}"></td>
 
-
+                  <td>
+                    <a th:href="@{/PvAccidentnew/show/{pvaccidId}(pvaccidId=${pvAccident1.id})}" class="btn btn-info" ><i class="fas fa-user-times ml-2"></i></a></td>
                   <td>
                     <a th:href="@{/PvAccidentnew/edit/{pvaccidId}(pvaccidId=${pvAccident1.id})}" class="btn btn-warning"   onclick="alert('confirmed');">edit <i class="fas fa-user-edit ml-2"></i></a></td>
                   <td>

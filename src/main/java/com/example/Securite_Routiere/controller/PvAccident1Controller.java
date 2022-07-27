@@ -336,6 +336,46 @@ public class PvAccident1Controller {
         return "redirect:../PvAccidentnew/list1";
     }
 
+
+    @GetMapping("show/{pvaccidId}")
+    public String showPvAccident1(@PathVariable("pvaccidId") long pvaccidId, Model model) {
+        PvAccident1 pvAccident1 = pvAccident1Repository.findById(pvaccidId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Pv Accident Id:" + pvaccidId));
+
+        model.addAttribute("pvAccident1", pvAccident1);
+
+        model.addAttribute("unite", uniteRepository.findAll());
+        model.addAttribute("idUnite", pvAccident1.getUnite().getName());
+
+        model.addAttribute("gouvernorat", gouvernoratRepository.findAll());
+        model.addAttribute("idGouvernourat", pvAccident1.getDelegation().getGouvernorat().getName());
+
+        model.addAttribute("delegation", delegationRepository.findAll());
+        model.addAttribute("idDelegation", pvAccident1.getDelegation().getName());
+
+        model.addAttribute("signauxCirculation", signauxCirculationRepository.findAll());
+        model.addAttribute("idSignauxCirculation", pvAccident1.getSignauxCirculation().getName());
+
+        model.addAttribute("typeRoute", typeRouteRepository.findAll());
+        model.addAttribute("idTypeRoute", pvAccident1.getTypeRoute().getName());
+
+        model.addAttribute("situationRoute", situationRouteRepository.findAll());
+        model.addAttribute("idSituationRoute", pvAccident1.getSituationRoute().getName());
+
+
+        model.addAttribute("temps", tempsRepository.findAll());
+        model.addAttribute("idTemps", pvAccident1.getTemps().getName());
+
+        model.addAttribute("causeAccidents", causeAccidentRepository.findAll());
+        model.addAttribute("idCauseAccidents", pvAccident1.getCauseAccidents());
+
+        model.addAttribute("parts", partRepository.findAll());
+        model.addAttribute("idParts", pvAccident1.getParts());
+
+
+
+        return "pvaccident1/showPvAccident1";
+    }
     @ResponseBody
     @RequestMapping(value="loadDelegationByGouvernorat/{id}",method = RequestMethod.GET)
     public String loadStatesByCountry(@PathVariable("id") long id) {
