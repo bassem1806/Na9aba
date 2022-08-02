@@ -278,4 +278,8 @@ public class PvAccident1 {
 
 
     }
+
+
+    public void setBlesses() {
+    }
 }

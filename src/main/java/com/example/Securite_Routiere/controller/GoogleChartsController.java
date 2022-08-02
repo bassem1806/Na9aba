@@ -3,8 +3,9 @@ import java.util.Map;
 import java.util.TreeMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class GoogleChartsController {
@@ -16,6 +17,10 @@ public class GoogleChartsController {
         graphData.put("2018", 3856);
         graphData.put("2019", 19807);
         model.addAttribute("chartData", graphData);
-        return "google-charts";
+
+        System.out.println("chart :");
+        return "home";
+
+
     }
 }

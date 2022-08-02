@@ -33,11 +33,6 @@ public class Home1Controller {
 
     @RequestMapping(value = "/home1")
     public ModelAndView home1( Model model) {
-
-
-
-
-
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             String date_time = dtf.format(now);

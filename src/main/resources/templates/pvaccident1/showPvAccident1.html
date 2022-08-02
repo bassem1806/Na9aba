@@ -187,6 +187,43 @@ function myFunction() {
                   </select>
 
 
+                  <div class="card-body">
+                    <h5 class="text">   الأطراف المتضررة في الحادث</h5>
+                  </div>
+                  <!--  Bootstrap table-->
+                  <div class="table-responsive" id="tab0">
+                    <form action="search" method="post">
+                      <table class="table">
+                        <thead>
+                        <tr>
+                          <th scope="col">ID </th>
+                          <th scope="col">الإسم واللقب</th>
+                          <th scope="col">ب.ت.و</th>
+                          <th scope="col">الجنس</th>
+                          <th scope="col">العمر</th>
+                          <th scope="col">الحالة</th>
+                          <th scope="col">الملاحظات</th>
+                          <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="blesse : ${blesses}">
+                          <th scope="row"></th>
+                          <td  th:text="${blesse.firstname}" th:value="firstname" >الإسم واللقب</td>
+                          <td th:text="${blesse.CIN}"th:value="CIN" >  CIN</td>
+                          <td th:text="${blesse.sexe}"th:value="sexe"> sexe</td>
+                          <td th:text="${blesse.age}" th:value="age" > age</td>
+                          <td th:text="${blesse.EtatBlesse}" th:value="EtatBlesse" > etat blesse</td>
+                          <td th:text="${blesse.Observation}" th:value="Observation" >observation </td>
+
+
+                        </tr>
+
+                        </tbody>
+                      </table>
+
+                    </form>
+                  </div>
 
 
 

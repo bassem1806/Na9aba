@@ -10,14 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Id;
 import javax.validation.Valid;
-import java.lang.reflect.Array;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/PvAccidentnew/")
@@ -51,20 +46,13 @@ public class PvAccident1Controller {
     private final PartRepository partRepository;
     private Delegation delegation;
 
-    private  final Blesserepository blesseRepository;
-
-
-
-
-
-
-
+    private final BlesseRepository blesseRepository;
 
     @Autowired
     public PvAccident1Controller(PvAccident1Repository pvAccident1Repository, UniteRepository uniteRepository, GouvernoratRepository gouvernoratRepository,
-                                 DelegationRepository delegationRepository, SignauxCirculationRepository signauxCirculationRepository,
-                                 TypeRouteRepository typeRouteRepository, SituationRouteRepository situationRouteRepository, TempsRepository tempsRepository,
-                                 CauseAccidentRepository causeAccidentRepository, PartRepository partRepository, Blesserepository blesserepository) {
+                                 DelegationRepository delegationRepository, SignauxCirculationRepository signauxCirculationRepository, TypeRouteRepository typeRouteRepository,
+                                 SituationRouteRepository situationRouteRepository, TempsRepository tempsRepository, CauseAccidentRepository causeAccidentRepository,
+                                 PartRepository partRepository, BlesseRepository blesseRepository) {
         this.pvAccident1Repository = pvAccident1Repository;
         this.uniteRepository = uniteRepository;
         this.gouvernoratRepository = gouvernoratRepository;
@@ -75,8 +63,12 @@ public class PvAccident1Controller {
         this.tempsRepository = tempsRepository;
         this.causeAccidentRepository = causeAccidentRepository;
         this.partRepository = partRepository;
-        this.blesseRepository= blesserepository;
+
+        this.blesseRepository = blesseRepository;
     }
+
+
+
 
 
 
@@ -114,10 +106,12 @@ public class PvAccident1Controller {
         model.addAttribute("temps", tempsRepository.findAll());
         model.addAttribute("causeAccidents", causeAccidentRepository.findAll());
         model.addAttribute("parts", partRepository.findAll());
-        model.addAttribute("blesses",blesseRepository.findAll());
-        model.addAttribute("pvAccident1", new PvAccident1());
-        return "pvaccident1/addPvAccident1";
 
+
+        model.addAttribute("pvAccident1", new PvAccident1());
+
+
+        return "pvaccident1/addPvAccident1";
 
 
     }
@@ -147,17 +141,7 @@ public class PvAccident1Controller {
 
     {
 
-
-
-
-
-
-        
         List<CauseAccident> parts;
-
-
-
-
 
 
         Unite unite = uniteRepository.findById(h).orElseThrow(() -> new IllegalArgumentException
@@ -243,7 +227,9 @@ public class PvAccident1Controller {
 
     }
 
-    @GetMapping("edit/{pvaccidId}")
+
+
+        @GetMapping("edit/{pvaccidId}")
     public String showPvAccident1FormToUpdate(@PathVariable("pvaccidId") long pvaccidId, Model model) {
         PvAccident1 pvAccident1 = pvAccident1Repository.findById(pvaccidId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Pv Accident Id:" + pvaccidId));
@@ -278,9 +264,13 @@ public class PvAccident1Controller {
         model.addAttribute("parts", partRepository.findAll());
         model.addAttribute("idParts", pvAccident1.getParts());
 
+      model.addAttribute("blesses",pvAccident1.getBlesses());
+       model.addAttribute("idblesse", pvAccident1.getBlesses());
+
 
 
         return "pvaccident1/updatePvAccident1";
+
     }
 
     @PostMapping("edit")
@@ -293,11 +283,19 @@ public class PvAccident1Controller {
                                     @RequestParam(name = "typeRouteId", required = true) Long t,
                                     @RequestParam(name = "situationRouteId", required = true) Long z,
                                     @RequestParam(name = "tempsId", required = true) Long r,
-                                    @RequestParam("causeAccidents") List<Long> causeAccident
+                                    @RequestParam("causeAccidents") List<Long> causeAccident,
+                                    @RequestParam("blesses") List<Blesse> blesseList)
 
 
 
-                                    ) {
+
+
+
+    {
+
+        System.out.println("size list blesse :"+blesseList.size() );
+
+
         if (result.hasErrors()) {
 
             return "pvaccident1/updatePvAccident1";
@@ -330,8 +328,18 @@ public class PvAccident1Controller {
                 ("Invalid  Situation route Id:" + r));
         pvAccident1.setTemps(temps);
 
+        Blesse blesses=blesseRepository.findById(z).orElseThrow(() -> new IllegalArgumentException
+        ("Invalid  Situation route Id:" + z));
 
-        pvAccident1Repository.save(pvAccident1);
+        pvAccident1.setBlesses();
+
+
+
+     pvAccident1Repository.save(pvAccident1);
+
+
+     //   pvAccident1 = pvAccident1Repository.save(pvAccident1);
+
 
         return "redirect:../PvAccidentnew/list1";
     }
@@ -372,6 +380,8 @@ public class PvAccident1Controller {
         model.addAttribute("parts", partRepository.findAll());
         model.addAttribute("idParts", pvAccident1.getParts());
 
+        model.addAttribute("blesses",pvAccident1.getBlesses());
+        model.addAttribute("idblesse", pvAccident1.getBlesses());
 
 
         return "pvaccident1/showPvAccident1";

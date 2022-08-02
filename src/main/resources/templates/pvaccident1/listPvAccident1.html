@@ -81,7 +81,7 @@
                   <td th:text="${pvAccident1.causePrincipale}"></td>
 
                   <td>
-                    <a th:href="@{/PvAccidentnew/show/{pvaccidId}(pvaccidId=${pvAccident1.id})}" class="btn btn-info" ><i class="fas fa-user-times ml-2"></i></a></td>
+                    <a th:href="@{/PvAccidentnew/show/{pvaccidId}(pvaccidId=${pvAccident1.id})}" class="btn btn-info" ><i class="fas fa-user-times ml-1"></i></a></td>
                   <td>
                     <a th:href="@{/PvAccidentnew/edit/{pvaccidId}(pvaccidId=${pvAccident1.id})}" class="btn btn-warning"   onclick="alert('confirmed');">edit <i class="fas fa-user-edit ml-2"></i></a></td>
                   <td>
@@ -166,7 +166,7 @@
       <script src="/assets/js/jquery-3.5.1.js"></script>
       <script src="/assets/js/jquery.dataTables.min.js"></script>
     <script src="../assets/js/dataTables.bootstrap5.min.js"></script>
-
+      <script src="https://kit.fontawesome.com/242ec8085c.js" crossorigin="anonymous"></script>
       <script src="../assets/js/plugins/choices.min.js"></script>
 
       <!-- Github buttons -->
@@ -194,13 +194,7 @@ $(function1() {
 });
 </script>
 
-      <style>
-  /* Custom style */
-  #myModal{
-      position: static;
-      display: block;
-  }
-</style>
+
 
 </body>
 

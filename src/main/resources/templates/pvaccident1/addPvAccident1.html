@@ -58,17 +58,7 @@ $(document).ready(function(){
 		});
 </script>
 
-<!--
-    <script>
-        $('.Gouvernorat-select').on('change', function() {
-    var id = $(this).attr('data');
-    $('#gouvernorat-id').val(id);
-})
 
-// We must set the initial value, otherwise it will be null for the first option.
-$('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
-    </script>
--->
 </head>
 
 <body class="g-sidenav-show rtl bg-gray-100">
@@ -220,8 +210,8 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
                                 </div>
 
                              <div class="col-sm-6"     >
-                                    <label for="causeAccident" class="form-label select-label" >أسباب الحادث</label><br>
-                                    <select name="causeAccidentId"  class="selectpicker" th:field="*{causeAccidents}" multiple required>
+                                    <label for="causeAccident"  >أسباب الحادث</label><br>
+                                    <select name="causeAccidentId"  class="form-control kt-selectpicker" th:field="*{causeAccidents}" multiple required>
                                         <option  th:each=" s :${causeAccidents} " th:value="${s.causeaccidentId}" th:text="${s.name}"  id="causeAccident"/>
 
                                     </select>
@@ -239,11 +229,10 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
                                     <h5 class="text">  الوسائل المشاركة في الحادث</h5>
                                 </div>
 
-                                <div class="col-sm-6"     >
+                                <div class="col-6"     >
                                     <label for="part" class="form-label select-label" > الوسائل المشاركة في الحادث</label><br>
-                                    <select name="part"  class="selectpicker" th:field="*{parts}" multiple  required>
-                                        <option  th:each=" p :${parts} " th:value="${p.Id}" th:text="${p.name}"  id="part"/>
-
+                                    <select name="part"  class="form-control kt-selectpicker"th:field="*{parts}" multiple  required id="part" >
+                                        <option  th:each=" p :${parts} " th:value="${p.Id}" th:text="${p.name}"  />
                                     </select>
                                 </div>
 
@@ -253,9 +242,9 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
                                     <h5 class="text">   الأطراف المتضررة في الحادث</h5>
                                 </div>
                                                     <!--  Bootstrap table-->
-                                                    <div class="table-responsive" id="tab0">
-                                                        <form action="search" method="post">
-                                                        <table class="table">
+                                                    <div class="table-responsive"  >
+
+                                                        <table class="table"  id="tbl-blesses">
                                                             <thead>
                                                             <tr>
                                                                 <th scope="col">ID </th>
@@ -270,25 +259,22 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
                                                             </thead>
                                                             <tbody>
                                                             <tr th:each="blesse : ${blesses}">
-                                                              <th scope="row"></th>
-                                                                <td  th:text="${blesse.firstname}" th:value="firstname" >الإسم واللقب</td>
+                                                              <td scope="row"></td>
+                                                              <td  th:text="${blesse.firstname}" th:value="firstname" >الإسم واللقب</td>
                                                                 <td th:text="${blesse.CIN}"th:value="CIN" >  CIN</td>
                                                                 <td th:text="${blesse.sexe}"th:value="sexe"> sexe</td>
                                                                 <td th:text="${blesse.age}" th:value="age" > age</td>
                                                                 <td th:text="${blesse.EtatBlesse}" th:value="EtatBlesse" > etat blesse</td>
                                                                 <td th:text="${blesse.Observation}" th:value="Observation" >observation </td>
-
-
                                                             </tr>
-
                                                             </tbody>
                                                         </table>
-                                                            </form>
+
                                                     </div>
 
                                                     <!-- Add rows button-->
-                                <div>
-                                                    <a class="btn btn-primary rounded-0 btn-block" id="insertRow" >إضافة مصاب</a>
+                                <div >
+                                                    <a class="btn btn-primary rounded-0 btn-block"  id="insertRow" >إضافة مصاب</a>
                                                 </div>
 
                                 <div>
@@ -336,8 +322,8 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!--script src="../assets/js/plugins/choices.min.js"></script-->
+<script src="/assets/js/bootstrap-select.min.js"></script>
+<script src="../assets/js/plugins/choices.min.js"></script>
 <script src="../assets/js/addrow.table.js"></script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -348,16 +334,27 @@ $('#gouvernorat-id').val($('.custom-select option:selected').attr('data'));
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+
+
+
+    <script type="text/javascript">
+    $('.ex-disable').click(function () {
+  $('.disable-example').prop('disabled', true);
+});
+
+$('.ex-enable').click(function () {
+  $('.disable-example').prop('disabled', false);
+  $('.disable-example').selectpicker('refresh');
+});
+    </script>
+
+
+
 <!-- Github buttons -->
 <!--script async defer src="https://buttons.github.io/buttons.js"></--script-->
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
-<!--
-<script type="text/javascript">
-            function loadContent(url) {
-                console.log(url)
-            }
-</script>
+
 -->
 </body>
 
