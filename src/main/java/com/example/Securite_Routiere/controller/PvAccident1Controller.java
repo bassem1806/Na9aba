@@ -48,6 +48,7 @@ public class PvAccident1Controller {
 
     private final BlesseRepository blesseRepository;
 
+
     @Autowired
     public PvAccident1Controller(PvAccident1Repository pvAccident1Repository, UniteRepository uniteRepository, GouvernoratRepository gouvernoratRepository,
                                  DelegationRepository delegationRepository, SignauxCirculationRepository signauxCirculationRepository, TypeRouteRepository typeRouteRepository,
@@ -209,23 +210,54 @@ public class PvAccident1Controller {
 
     }
 
-    @GetMapping("delete/{pvaccidId}")
+    @GetMapping("deletepv/{pvaccidId}")
 
 
-    public String deletePvAccident1(@PathVariable("pvaccidId") long pvaccidId, Model model) {
+    public String deletePvAccident1(@PathVariable("pvaccidId") long pvaccidId,Model model) {
 
 
         PvAccident1 pvAccident1 = pvAccident1Repository.findById(pvaccidId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid pvAccident1 Id:" + pvaccidId));
 
+       // Blesse blesse = blesseRepository.findById(blesseId)
+             //   .orElseThrow(() -> new IllegalArgumentException("Invalid pvAccident1 Id:" + blesseId));
+
+
         System.out.println("id pvaccidId :" + pvaccidId);
 
         pvAccident1Repository.delete(pvAccident1);
+
+
 
         return "redirect:../list1";
 
 
     }
+
+
+    @GetMapping("deletebl/{blesseId}")
+
+    public String deleteBlesse(@PathVariable("blesseId") long blesseId,   Model model) {
+
+        Blesse blesse = blesseRepository.findById(blesseId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Blesse Id:" + blesseId));
+
+        System.out.println("id blesse..." + blesseId);
+
+
+        blesseRepository.delete(blesse);
+
+        model.addAttribute("blesse", blesseRepository.findAll());
+
+     return "redirect:../edit";
+
+
+
+    }
+
+
+
+
 
 
 
@@ -283,8 +315,8 @@ public class PvAccident1Controller {
                                     @RequestParam(name = "typeRouteId", required = true) Long t,
                                     @RequestParam(name = "situationRouteId", required = true) Long z,
                                     @RequestParam(name = "tempsId", required = true) Long r,
-                                    @RequestParam("causeAccidents") List<Long> causeAccident,
-                                    @RequestParam("blesses") List<Blesse> blesseList)
+                                    @RequestParam("causeAccidents") List<Long> causeAccident)
+                                  //  @RequestParam("blesses") List<Blesse> blesseList
 
 
 
@@ -293,7 +325,7 @@ public class PvAccident1Controller {
 
     {
 
-        System.out.println("size list blesse :"+blesseList.size() );
+
 
 
         if (result.hasErrors()) {
@@ -331,17 +363,66 @@ public class PvAccident1Controller {
         Blesse blesses=blesseRepository.findById(z).orElseThrow(() -> new IllegalArgumentException
         ("Invalid  Situation route Id:" + z));
 
-        pvAccident1.setBlesses();
 
 
+        System.out.println("  id pv  : " +pvAccident1.getId());
 
      pvAccident1Repository.save(pvAccident1);
 
 
-     //   pvAccident1 = pvAccident1Repository.save(pvAccident1);
 
 
-        return "redirect:../PvAccidentnew/list1";
+
+        return "redirect:../list1";
+    }
+
+
+
+    @GetMapping("editbl/{pvaccidId}/{blesseId}")
+
+
+    public String showBlesseFormToUpdate(@PathVariable("pvaccidId") long pvaccidId, @PathVariable("blesseId") long blesseId, Model model) {
+
+
+
+        PvAccident1 pvAccident1= pvAccident1Repository.findById(pvaccidId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid blesse:" + pvaccidId));
+
+        System.out.println("  id pv  : " +pvAccident1.getId());
+
+        Blesse blesse = blesseRepository.findById(blesseId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid blesse:" + blesseId));
+
+
+
+        model.addAttribute("blesse", blesse);
+
+
+        System.out.println("  blesse name : " +blesse.getFirstname());
+        System.out.println("  blesse sexe : " +blesse.getSexe());
+        System.out.println(" blesse age : " +blesse.getAge());
+
+        return "blesse/updateBlesse";
+
+
+    }
+
+    @PostMapping("update")
+
+    public String updateBlesse(@Valid Blesse blesse, BindingResult result) {
+        if (result.hasErrors()) {
+            return "Blesse/updateBlesse";
+        }
+        System.out.println("  blesse name 1  : " +blesse.getFirstname());
+        System.out.println("  blesse sexe 1: " +blesse.getSexe());
+        System.out.println(" blesse age 1: " +blesse.getAge());
+
+
+        blesseRepository.save(blesse);
+
+
+        return "redirect:list";
+
     }
 
 

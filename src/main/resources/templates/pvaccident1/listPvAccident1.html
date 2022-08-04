@@ -85,7 +85,7 @@
                   <td>
                     <a th:href="@{/PvAccidentnew/edit/{pvaccidId}(pvaccidId=${pvAccident1.id})}" class="btn btn-warning"   onclick="alert('confirmed');">edit <i class="fas fa-user-edit ml-2"></i></a></td>
                   <td>
-                    <a th:href="@{/PvAccidentnew/delete/{pvaccidId}(pvaccidId=${pvAccident1.id})}" class="btn btn-danger" ><i class="fas fa-user-times ml-2"></i></a></td>
+                    <a th:href="@{/PvAccidentnew/deletepv/{pvaccidId}(pvaccidId=${pvAccident1.id})}" class="btn btn-danger" ><i class="fas fa-user-times ml-2"></i></a></td>
                 </tr>
                 </tbody>
               </table>
@@ -145,7 +145,7 @@
       <div>
         <h6 class="mb-0">Sidebar Colors</h6>
       </div>
-      <a href="javascript:void(0)" class="switch-trigger background-color">
+      <!--a href="javascript:void(0)" class="switch-trigger background-color">
         <div class="badge-colors my-2 text-end">
           <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
           <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
@@ -154,20 +154,20 @@
           <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
           <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
         </div>
-      </a>
+      </a-->
 
 
       <!--   Core JS Files   -->
-      <script src="../assets/js/core/popper.min.js"></script>
-      <script src="../assets/js/core/bootstrap.min.js"></script>
-      <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-      <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+      <script src="/assets/js/core/popper.min.js"></script>
+      <script src="/assets/js/core/bootstrap.min.js"></script>
+      <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+      <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
       <script src="/assets/js/plugins/fullcalendar.min.js"></script>
       <script src="/assets/js/jquery-3.5.1.js"></script>
       <script src="/assets/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/assets/js/dataTables.bootstrap5.min.js"></script>
       <script src="https://kit.fontawesome.com/242ec8085c.js" crossorigin="anonymous"></script>
-      <script src="../assets/js/plugins/choices.min.js"></script>
+      <script src="/assets/js/plugins/choices.min.js"></script>
 
       <!-- Github buttons -->
       <script async defer src="https://buttons.github.io/buttons.js"></script>

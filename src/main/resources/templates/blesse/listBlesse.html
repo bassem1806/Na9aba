@@ -62,19 +62,19 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="z : ${blesses}">
+                                <tr th:each="blesse : ${blesses}">
 
 
-                                    <td th:text="${z.blesseId}"></td>
-                                    <td th:text="${z.firstname}"></td>
-                                    <td th:text="${z.age}"></td>
-                                    <td th:text="${z.etatBlesse}"></td>
-                                    <td th:text="${z.observation}"></td>
+                                    <td th:text="${blesse.blesseId}"></td>
+                                    <td th:text="${blesse.firstname}"></td>
+                                    <td th:text="${blesse.age}"></td>
+                                    <td th:text="${blesse.etatBlesse}"></td>
+                                    <td th:text="${blesse.observation}"></td>
                                     <td>
-                                        <!--a th:href="@{/blesse/delete/{blesseId}(id=${blesseId})}" class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a-->
+                                        <a th:href="@{/blesse/edit/{blesseId}(blesseId=${blesse.blesseId})}" class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a>
                                     </td>
                                     <td>
-                                        <a th:href="@{/blesse/delete/{blesseId}(blesseId=${z.blesseId})}" class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a>
+                                        <a th:href="@{/blesse/delete/{blesseId}(blesseId=${blesse.blesseId})}" class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a>
                                     </td>
 
                                 </tr>
