@@ -9,12 +9,15 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.context.annotation.SessionScope;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@SessionScope
 @RequestMapping("/PvAccidentnew/")
 public class PvAccident1Controller {
 
@@ -261,7 +264,7 @@ public class PvAccident1Controller {
 
 
 
-        @GetMapping("edit/{pvaccidId}")
+        @GetMapping("editpv/{pvaccidId}")
     public String showPvAccident1FormToUpdate(@PathVariable("pvaccidId") long pvaccidId, Model model) {
         PvAccident1 pvAccident1 = pvAccident1Repository.findById(pvaccidId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Pv Accident Id:" + pvaccidId));
@@ -296,7 +299,7 @@ public class PvAccident1Controller {
         model.addAttribute("parts", partRepository.findAll());
         model.addAttribute("idParts", pvAccident1.getParts());
 
-      model.addAttribute("blesses",pvAccident1.getBlesses());
+       model.addAttribute("blesses",pvAccident1.getBlesses());
        model.addAttribute("idblesse", pvAccident1.getBlesses());
 
 
@@ -304,6 +307,26 @@ public class PvAccident1Controller {
         return "pvaccident1/updatePvAccident1";
 
     }
+
+    @GetMapping("/retour")
+        public String retour(){
+System.out.println("aa");
+        return   "redirect:/blesse/list";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @PostMapping("edit")
     public String updatePvAccident1(@Valid PvAccident1 pvAccident1, BindingResult result, Model model,
@@ -315,12 +338,16 @@ public class PvAccident1Controller {
                                     @RequestParam(name = "typeRouteId", required = true) Long t,
                                     @RequestParam(name = "situationRouteId", required = true) Long z,
                                     @RequestParam(name = "tempsId", required = true) Long r,
-                                    @RequestParam("causeAccidents") List<Long> causeAccident)
-                                  //  @RequestParam("blesses") List<Blesse> blesseList
+                                    @RequestParam("causeAccidents") List<Long> causeAccident,
 
 
-
-
+                                 /*  @RequestParam(name = "firstname", required = true) String firstName,
+                                    @RequestParam(name = "CIN", required = true) String cin,
+                                     @RequestParam(name = "sexe", required = true) String sexe,
+                                     @RequestParam(name = "age", required = true) String age,
+                                    @RequestParam(name = "EtatBlesse", required = true) String etatBlesse,
+                                   @RequestParam(name = "Observation", required = true) String observation)*/
+                                  @RequestParam("blesses") List<Blesse> blesseList)
 
 
     {
@@ -363,9 +390,15 @@ public class PvAccident1Controller {
         Blesse blesses=blesseRepository.findById(z).orElseThrow(() -> new IllegalArgumentException
         ("Invalid  Situation route Id:" + z));
 
+        System.out.println("name :" +blesses.getSexe());
+
 
 
         System.out.println("  id pv  : " +pvAccident1.getId());
+
+        System.out.println("  id blesse  : " +blesses.getBlesseId());
+
+
 
      pvAccident1Repository.save(pvAccident1);
 
@@ -376,7 +409,7 @@ public class PvAccident1Controller {
         return "redirect:../list1";
     }
 
-
+/*
 
     @GetMapping("editbl/{pvaccidId}/{blesseId}")
 
@@ -385,8 +418,10 @@ public class PvAccident1Controller {
 
 
 
-        PvAccident1 pvAccident1= pvAccident1Repository.findById(pvaccidId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid blesse:" + pvaccidId));
+       PvAccident1 pvAccident1= pvAccident1Repository.findById(pvaccidId)
+               .orElseThrow(() -> new IllegalArgumentException("Invalid blesse:" + pvaccidId));
+
+        model.addAttribute("pvAccident1", pvAccident1);
 
         System.out.println("  id pv  : " +pvAccident1.getId());
 
@@ -406,6 +441,10 @@ public class PvAccident1Controller {
 
 
     }
+*/
+
+
+   /*
 
     @PostMapping("update")
 
@@ -424,7 +463,7 @@ public class PvAccident1Controller {
         return "redirect:list";
 
     }
-
+*/
 
     @GetMapping("show/{pvaccidId}")
     public String showPvAccident1(@PathVariable("pvaccidId") long pvaccidId, Model model) {

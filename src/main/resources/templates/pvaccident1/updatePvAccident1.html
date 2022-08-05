@@ -297,26 +297,28 @@ $(document).ready(function(){
                         <td th:text="${blesse.EtatBlesse}" th:value="EtatBlesse" > etat blesse</td>
                         <td th:text="${blesse.Observation}" th:value="Observation" >observation </td>
                         <td>
-                          <a th:href="@{PvAccidentnew/editbl/{pvAccinpvaccidId}/{blesseId}(blesseId=${blesse.blesseId})}" class="btn btn-warning" >edit <i class="fas fa-user-edit ml-2"></i></a></td>
-
-                        <td> <div class="col-md-12">
-                          <input type="submit" class="btn btn-primary" value="تحيين مصاب "/>
-                        </div></td>
+                          <a th:href="@{/blesse/edit/{blesseId}(blesseId=${blesse.blesseId})}"class="btn btn-warning" >edit <i class="fas fa-user-edit ml-2"></i></a></td>
 
 
-                        <td>
-                          <a th:href="@{PvAccidentnew/deletebl/{blesseId}(blesseId=${blesse.blesseId})}" class="btn btn-danger" >delete<i class="fas fa-user-times ml-2"></i></a></td>
+                        <!--     <a th:href="@{/PvAccidentnew/retour}" class="btn btn-warning">edit</a>-->
+                         <td> <div class="col-md-12">
+                           <input type="submit" class="btn btn-primary" value="تحيين مصاب "/>
+                         </div></td>
 
-                      </tr>
-                      </tbody>
-                    </table>
 
-                  </div>
+                         <td>
+                           <a th:href="@{/blesse/delete/{blesseId}(blesseId=${blesse.blesseId})}" class="btn btn-danger" >delete<i class="fas fa-user-times ml-2"></i></a></td>
 
-                  <!-- Add rows button-->
-                  <!--div >
+                       </tr>
+                       </tbody>
+                     </table>
+
+                   </div>
+
+                < !-- Add rows button-->
+                  <div >
                     <a class="btn btn-primary rounded-0 btn-block"  id="insertRow" >إضافة مصاب</a>
-                  </div-->
+                  </div>
 
 
                   <div>

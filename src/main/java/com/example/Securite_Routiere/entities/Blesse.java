@@ -55,7 +55,7 @@ public class Blesse {
     }
 
     /**** Many To many pvaccident   ****/
-    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "pvaccident_blesse",
             joinColumns = @JoinColumn(name = "blesse_id"),
             inverseJoinColumns = @JoinColumn(name = "pvaccid_id"))

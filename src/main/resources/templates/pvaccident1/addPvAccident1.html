@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous"
           referrerpolicy="no-referrer" />
 
-
+    <link rel="stylesheet" href="sweetalert2.min.css">
 
 
 
@@ -278,7 +278,7 @@ $(document).ready(function(){
                                                 </div>
 
                                 <div>
-                                    <input type="submit" class="btn btn-primary" value="تسجيل محضر معاين حادث"/>
+                                    <input type="submit" id=" subnmtpv" class="btn btn-primary" onclick="Swal.fire" value="تسجيل محضر معاين حادث"/>
                                 </div>
 
                             <!--    </div><a style="font-size: 8pt; text-decoration: none" target="_blank" href="http://frontendfreecode.com">Free Frontend</a>-->
@@ -314,12 +314,13 @@ $(document).ready(function(){
 
 
 <!--   Core JS Files   -->
+<script src="sweetalert2.all.min.js"></script>
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
 <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
 
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="/assets/js/bootstrap-select.min.js"></script>
@@ -354,6 +355,20 @@ $('.ex-enable').click(function () {
 <!--script async defer src="https://buttons.github.io/buttons.js"></--script-->
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+
+<script>
+
+    Swal.fire({
+  position: 'top-middel',
+
+  icon: 'success',
+  title: 'انت بصدد إضافة محضر معاينة',
+  showConfirmButton: false,
+  timer: 2000
+})
+</script>
+
+
 
 -->
 </body>

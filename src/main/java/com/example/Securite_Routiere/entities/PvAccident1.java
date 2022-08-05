@@ -121,7 +121,7 @@ public class PvAccident1 {
     private Set<CauseAccident> causeAccidents;
 
     /**** Many To many part   ****/
-    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "pvaccident_part",
             joinColumns = @JoinColumn(name = "pvaccid_id"),
             inverseJoinColumns = @JoinColumn(name = "part_id"))
