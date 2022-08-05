@@ -97,4 +97,21 @@ public class BlesseController {
         return "redirect:list";
 
     }
+
+    @GetMapping("add")
+    public String showAddBlesseForm(Model model) {
+        Blesse blesse = new blesse();// object dont la valeur des attributs par defaut
+        model.addAttribute("blesse", blesse);
+        return "blesse/addBlesse";
+    }
+
+    @PostMapping("addSave")
+    //@ResponseBody
+    public String addBlesse(@Valid Blesse blesse, BindingResult result) {
+        if (result.hasErrors()) {
+            return "blesse/addBlesse";
+        }
+        blesseRepository.save(blesse);
+        return "redirect:list";
+    }
 }
