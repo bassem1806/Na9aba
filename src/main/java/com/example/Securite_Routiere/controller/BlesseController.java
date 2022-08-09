@@ -2,7 +2,9 @@ package com.example.Securite_Routiere.controller;
 
 
 import com.example.Securite_Routiere.entities.Blesse;
+import com.example.Securite_Routiere.entities.PvAccident1;
 import com.example.Securite_Routiere.repositories.BlesseRepository;
+import com.example.Securite_Routiere.repositories.PvAccident1Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -99,9 +101,11 @@ public class BlesseController {
     }
 
     @GetMapping("add")
+
     public String showAddBlesseForm(Model model) {
-        Blesse blesse = new blesse();// object dont la valeur des attributs par defaut
+        Blesse blesse = new Blesse();// object dont la valeur des attributs par defaut
         model.addAttribute("blesse", blesse);
+
         return "blesse/addBlesse";
     }
 

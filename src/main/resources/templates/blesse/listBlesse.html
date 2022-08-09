@@ -5,26 +5,36 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <!-- <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">-->
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <title>
-        إدارة الخدمات الفنية
-    </title>
+    <title>PVs - إدارة الخدمات الفنية  </title>
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />-->
     <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"integrity="sha256-/xUj+30JU5yExlq6GSYGSHK7tPXikynS70gEvDej/m4="
+            crossorigin="anonymous"></script>
+    <!-- Sweet Alert CDN -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../assets/js/plugins/sweetalert2.all.min.js"></script>
 </head>
 
 <!-- menu a droite  -->
 
 <body class="g-sidenav-show rtl bg-gray-100">
+
+
+
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret" id="sidenav-main">
 
     <div th:replace="fragments/menu :: menu" />
@@ -32,17 +42,22 @@
 </aside>
 <!--end  menu a droite  -->
 
-<main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg overflow-hidden">
+<main class="main-content position-relative max-height-vh-100 h-100 mt-1 ">
+
+
 
     <!-- Navbar header  -->
     <div th:replace="fragments/header :: header" />
 
     <div class="container my-2">
-
         <div class="card">
             <div class="card-body">
                 <div th:switch="${blesses}" class="container my-5">
 
+                    <p class="my-5">
+                        <a th:href="@{'/blesse/add'}" class="btn btn-primary">
+                            <i class="fas fa-user-plus ml-2"> إضافة مصاب جديد</i></a>
+                    </p>
                     <div class="col-md-10">
                         <h2 th:case="null">No Blesse yet!</h2>
                         <div th:case="*">
@@ -88,11 +103,23 @@
         </div>
     </div>
 
-
     <!-- Navbar footer  -->
     <div th:replace="fragments/footer :: footer" />
 
 
+    <div class="modal hide fade" id="confirmModal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Confirmation de la suppression</h3>
+        </div>
+        <div class="modal-body">
+            <p>Etes-vous sûr de vouloir supprimer cet élément ?</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" id="confirmModalNo">Non</a>
+            <a href="#" class="btn btn-primary" id="confirmModalYes">Oui</a>
+        </div>
+    </div>
 
 
 
@@ -121,209 +148,66 @@
             <div>
                 <h6 class="mb-0">Sidebar Colors</h6>
             </div>
-            <a href="javascript:void(0)" class="switch-trigger background-color">
-                <div class="badge-colors my-2 text-end">
-                    <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
-                </div>
-            </a>
+            <!--a href="javascript:void(0)" class="switch-trigger background-color">
+              <div class="badge-colors my-2 text-end">
+                <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
+                <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
+                <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
+                <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
+                <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
+                <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+              </div>
+            </a-->
 
 
             <!--   Core JS Files   -->
-            <script src="../assets/js/core/popper.min.js"></script>
-            <script src="../assets/js/core/bootstrap.min.js"></script>
-            <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-            <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-            <script src="../assets/js/plugins/fullcalendar.min.js"></script>
-            <script src="../assets/js/plugins/chartjs.min.js"></script>
-            <script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
+            <script src="/assets/js/core/popper.min.js"></script>
+            <script src="/assets/js/core/bootstrap.min.js"></script>
+            <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+            <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+            <script src="/assets/js/plugins/fullcalendar.min.js"></script>
+            <script src="/assets/js/jquery-3.5.1.js"></script>
+            <script src="/assets/js/jquery.dataTables.min.js"></script>
+            <script src="/assets/js/dataTables.bootstrap5.min.js"></script>
+            <script src="https://kit.fontawesome.com/242ec8085c.js" crossorigin="anonymous"></script>
+            <script src="/assets/js/plugins/choices.min.js"></script>
 
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "#fff",
-          data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-          maxBarThickness: 6
-        }, ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-            },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
-              beginAtZero: true,
-              padding: 15,
-              font: {
-                size: 14,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-              color: "#fff"
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false
-            },
-            ticks: {
-              display: false
-            },
-          },
-        },
-      },
-    });
-
-
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-    new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-            label: "Mobile apps",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#cb0c9f",
-            borderWidth: 3,
-            backgroundColor: gradientStroke1,
-            fill: true,
-            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-            maxBarThickness: 6
-
-          },
-          {
-            label: "Websites",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#3A416F",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            fill: true,
-            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-            maxBarThickness: 6
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#b2b9bf',
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#b2b9bf',
-              padding: 20,
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-  </script>
-            <script src="../assets/js/plugins/choices.min.js"></script>
-            <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
             <!-- Github buttons -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
             <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+
+            <script type="text/javascript">
+       $(document).ready(function () {
+
+        $('#example').DataTable(
+        );
+    });
+
+
+
+  </script>
+
+
+
+            <script>
+swal({
+  title: "Are you sure?",
+  text: "Your will not be able to recover this imaginary file!",
+  type: "danger",
+  showCancelButton: true,
+  confirmButtonClass: "btn-danger",
+  confirmButtonText: "Yes, delete it!",
+  closeOnConfirm: false
+},
+function(){
+  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+});
+
+ </script>
+
+
+
 </body>
 
 </html>

@@ -2,6 +2,7 @@ package com.example.Securite_Routiere.repositories;
 
 import com.example.Securite_Routiere.entities.*;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -19,12 +20,15 @@ public interface PvAccident1Repository extends PagingAndSortingRepository<PvAcci
         nativeQuery = true)
 List<Delegation> findByGouvernorat(Gouvernorat gouvernorat);
 */
-
+/*
     @Query(value="SELECT delegation, count(*) FROM pv_accident1 GROUP BY delegation",
-            nativeQuery=true)
-    List<Delegation> getAccidentByDelegation();
-
-
-
-
+            nativeQuery=true)*/
+/*
+    @Modifying
+    @Query("insert into Pvaccident1 (blesseId) select :blesseId from blesse")
+    public int modifyingQueryInsertPvaccident1(@Param("blesseId")Long id);
+*/
 }
+
+
+
