@@ -55,6 +55,8 @@ function myFunction() {
         <div class="col-md-12">
           <form action="#" th:action="@{/blesse/update}" th:object="${blesse}" method="post" enctype="multipart/form-data">
             <input  th:field="*{blesseId}" />
+            <input  type="text" name="pvId" th:value="${pvId}" hidden="true"/>
+
             <div class="row">
               <div class="card-header pb-0 text-left bg-transparent">
                 <h3 class="font-weight-bolder text-info text-center">    تحيين مصاب </h3>

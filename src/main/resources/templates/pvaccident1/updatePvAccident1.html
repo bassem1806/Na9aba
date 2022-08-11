@@ -298,7 +298,7 @@ $(document).ready(function(){
                         <td th:text="${blesse.EtatBlesse}" th:value="EtatBlesse" > etat blesse</td>
                         <td th:text="${blesse.Observation}" th:value="Observation" >observation </td>
                         <td>
-                          <a th:href="@{/blesse/edit/{blesseId}(blesseId=${blesse.blesseId})}"class="btn btn-warning" >edit <i class="fas fa-user-edit ml-2"></i></a></td>
+                          <a th:href="@{'/blesse/edit/'+${blesse.blesseId}+'/'+${pvAccident1.id}}" class="btn btn-warning" >edit <i class="fas fa-user-edit ml-2"></i></a></td>
 
 
                         <!--     <a th:href="@{/PvAccidentnew/retour}" class="btn btn-warning">edit</a>-->
@@ -317,9 +317,9 @@ $(document).ready(function(){
                    </div>
 
                 <!-- Add rows button-->
-                  <div >
+                  <!--div >
                     <a class="btn btn-primary rounded-0 btn-block"  id="insertRow" >إضافة مصاب</a>
-                  </div>
+                  </div-->
 
 
                   <div>

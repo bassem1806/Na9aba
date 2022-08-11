@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -134,6 +135,7 @@ public class PvAccident1 {
             joinColumns = @JoinColumn(name = "pvaccid_id"),
             inverseJoinColumns = @JoinColumn(name = "blesse_id"))
     private Set<Blesse> blesses;
+
 
 
     public Set<Blesse> getBlesses() {

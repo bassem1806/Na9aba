@@ -119,4 +119,6 @@ public class Blesse {
     }
 
 
+    public void setPvAccident1(PvAccident1 pvAccident1) {
+    }
 }

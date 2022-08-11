@@ -9,14 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.SessionScope;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @SessionScope
@@ -25,11 +23,14 @@ public class BlesseController {
 
 
     private final BlesseRepository blesseRepository;
+    private final PvAccident1Repository pvAccident1Repository;
+    private Long pvaccidId;
 
 
     @Autowired
-    public BlesseController(BlesseRepository blesseRepository) {
+    public BlesseController(BlesseRepository blesseRepository, PvAccident1Repository pvAccident1Repository) {
         this.blesseRepository = blesseRepository;
+        this.pvAccident1Repository = pvAccident1Repository;
     }
 
     @GetMapping("list")
@@ -37,10 +38,17 @@ public class BlesseController {
     public String listBlesses(Model model) {
 
         List<Blesse> lp = (List<Blesse>) blesseRepository.findAll();
+        List<PvAccident1> pv=(List<PvAccident1>) pvAccident1Repository.findAll();
 
         if (lp.size() == 0)
             lp = null;
         model.addAttribute("blesses", lp);
+        model.addAttribute("PvAccident1", pv);
+
+        System.out.println("pv size: " +pv.size());
+
+
+
 
         return "blesse/listBlesse";
 
@@ -53,7 +61,11 @@ public class BlesseController {
         Blesse blesse = blesseRepository.findById(blesseId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Blesse Id:" + blesseId));
 
+
+
         System.out.println("id blesse..." + blesseId);
+
+       // System.out.println("id pv..." +);
 
 
         blesseRepository.delete(blesse);
@@ -64,13 +76,15 @@ public class BlesseController {
 
     }
 
-    @GetMapping("edit/{blesseId}")
-
-    public String showBlesseFormToUpdate(@PathVariable("blesseId") long blesseId, Model model) {
+    @GetMapping("edit/{blesseId}/{pvId}")
+    public String showBlesseFormToUpdate(@PathVariable("blesseId") long blesseId, @PathVariable("pvId") long pvId, Model model) {
         Blesse blesse = blesseRepository.findById(blesseId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid blesse:" + blesseId));
 
+
+
         model.addAttribute("blesse", blesse);
+        model.addAttribute("pvId", pvId);
 
 
         System.out.println("  blesse name  : " +blesse.getFirstname());
@@ -83,21 +97,32 @@ public class BlesseController {
     }
 
     @PostMapping("update")
-
-    public String updateBlesse(@Valid Blesse blesse, BindingResult result) {
+    public String updateBlesse(@Valid Blesse blesse, @ModelAttribute("pvId") Long id, BindingResult result,Model model)  {
         if (result.hasErrors()) {
             return "Blesse/updateBlesse";
         }
+        System.out.println(" ******************* pv id : " +id+" *****************************");
+
         System.out.println("  blesse name 1  : " +blesse.getFirstname());
         System.out.println("  blesse sexe 1: " +blesse.getSexe());
         System.out.println(" blesse age 1: " +blesse.getAge());
 
+        PvAccident1 pvAccident1 = pvAccident1Repository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Invalid pv Id:" + id));
 
-        blesseRepository.save(blesse);
+        System.out.println(" pvid: " +pvAccident1.getId());
+        System.out.println(" pv modification: " +blesse.getObservation());
 
+        Blesse b = blesseRepository.findById(blesse.getBlesseId()).get();
+        b.setFirstname(blesse.getFirstname());
+        b.setSexe(blesse.getSexe());
+        b.setAge(blesse.getAge());
+        b.setEtatBlesse(blesse.getEtatBlesse());
+        b.setObservation(blesse.getObservation());
+        blesseRepository.save(b);
 
-        return "redirect:list";
-
+        return "redirect:/PvAccidentnew/editpv/"+id;
+      //  return "redirect:list";
     }
 
     @GetMapping("add")

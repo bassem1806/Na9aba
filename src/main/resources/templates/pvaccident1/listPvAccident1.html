@@ -90,7 +90,7 @@
                   <td>
                     <a th:href="@{/PvAccidentnew/editpv/{pvaccidId}(pvaccidId=${pvAccident1.id})}" class="btn btn-warning"   >edit <i class="fas fa-user-edit ml-2"></i></a></td>
                   <td>
-                    <a th:href="@{/PvAccidentnew/deletepv/{pvaccidId}(pvaccidId=${pvAccident1.id})}" class="delete"  > Delete<i class="fas fa-user-times ml-2"></i></a></td>
+                    <a th:href="@{/PvAccidentnew/deletepv/{pvaccidId}(pvaccidId=${pvAccident1.id})}" class="btn btn-danger"  > Delete<i class="fas fa-user-times ml-2"></i></a></td>
                 </tr>
                 </tbody>
               </table>
@@ -195,7 +195,8 @@
       <script>
       $('.delete').on('click',function(e){
       e.preventDefault();
-      var self =$(this);
+      var self = $(this);
+      console.log(self.data('title'));
 
 Swal.fire({
   title: 'هل أنت متأكد',
@@ -213,7 +214,7 @@ Swal.fire({
       'Your file has been deleted.',
       'success'
     )
-    location.href=self.attr('href');
+location.href = self.attr('href');
   }
 })
 })
