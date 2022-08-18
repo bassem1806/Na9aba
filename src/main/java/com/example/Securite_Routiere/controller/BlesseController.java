@@ -72,7 +72,9 @@ public class BlesseController {
 
         model.addAttribute("blesse", blesseRepository.findAll());
 
-        return "redirect:../list";
+       return "redirect:../list";
+
+       // return "redirect:/PvAccidentnew/editpv/"+id;
 
     }
 

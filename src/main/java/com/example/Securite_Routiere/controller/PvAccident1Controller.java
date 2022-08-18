@@ -300,7 +300,7 @@ public class PvAccident1Controller {
         model.addAttribute("parts", partRepository.findAll());
         model.addAttribute("idParts", pvAccident1.getParts());
 
-       model.addAttribute("blesse",pvAccident1.getBlesses());
+       model.addAttribute("blesses",pvAccident1.getBlesses());
        model.addAttribute("idblesse", pvAccident1.getBlesses());
 
 
@@ -339,7 +339,7 @@ System.out.println("aa");
                                     @RequestParam(name = "typeRouteId", required = true) Long t,
                                     @RequestParam(name = "situationRouteId", required = true) Long z,
                                     @RequestParam(name = "tempsId", required = true) Long r,
-                                    @RequestParam("causeAccidents") List<Long> causeAccident)
+                                    @RequestParam("causeAccidents") List<Long> causeAccident,
 
 
                                  /*  @RequestParam(name = "firstname", required = true) String firstName,
@@ -348,7 +348,7 @@ System.out.println("aa");
                                      @RequestParam(name = "age", required = true) String age,
                                     @RequestParam(name = "EtatBlesse", required = true) String etatBlesse,
                                    @RequestParam(name = "Observation", required = true) String observation)*/
-                               //   @RequestParam("blesses") List<Blesse> blesseList)
+                                  @RequestParam("blesses") List<Blesse> blesseList)
 
 
     {
