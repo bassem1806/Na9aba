@@ -248,7 +248,7 @@
           tension: 0.4,
           borderWidth: 1,
           borderRadius: 4,
-          borderSkipped: false,
+          borderSkipped: true,
           backgroundColor: "#7492e2",
           data: [450, 200, 100, 220, 500, 100, 400, 230, 500,120,10,30],
 >>>>>>> 7f1dda4 (add chart to home)
@@ -256,11 +256,18 @@
         }, ],
       },
       options: {
+
+      title:{
+        display:true,
+        text:'azertyrtyyryr  rryryry',
+             fontSize:25
+               },
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false,
+          position : 'right',
+            display: true,
           }
         },
         interaction: {
@@ -301,7 +308,7 @@
               drawTicks: false
             },
             ticks: {
-              display: false
+              display: true
             },
           },
         },
