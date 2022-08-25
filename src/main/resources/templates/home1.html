@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.3
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-=======
->>>>>>> 7f1dda4 (add chart to home)
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" xmlns:th="http://www.thymeleaf.org"
 
@@ -28,11 +10,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/assets/img/favicon.png">
-<<<<<<< HEAD
-=======
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
->>>>>>> 7f1dda4 (add chart to home)
   <title>
     إدارة الخدمات الفنية Home
   </title>
@@ -58,22 +37,6 @@
  <!-- menu a droite  -->
 
 <body class="g-sidenav-show rtl bg-gray-100">
-<<<<<<< HEAD
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret" id="sidenav-main">
-
-  <div th:replace="fragments/menu :: menu" />
-
-  </aside>
-    <!--end  menu a droite  -->
-
-  <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg overflow-hidden">
-
-
-
-    <!-- Navbar header  -->
-    <div th:replace="fragments/header :: header" />
-
-=======
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret" id="sidenav-main">
 
   <div th:replace="fragments/menu :: menu" />
@@ -84,7 +47,6 @@
   <!-- Navbar -->
 
   <div th:replace="fragments/header :: header" />
->>>>>>> 7f1dda4 (add chart to home)
 
 
     <div th:replace="fragments/widget :: widget" />
@@ -92,59 +54,25 @@
           <!-- Navbar footer  -->
 
 
-          <div class="col-xs-8 text-right" >
-            <h2>الحوادث حسب الولايات</h2>
-          </div>
+    <div class="container">
+      <div class="row">
 
-<!-- chart1-->
-
-    <div class="col-lg-6">
-      <div class="card z-index-2">
-        <div class="card-header pb-0">
-          <h6>الحوادث حسب الولايات</h6>
-          <p class="text-sm">
-
-
-          </p>
-        </div>
-        <div class="card-body p-3">
+        <div div class="col-6">
           <div class="chart">
-<<<<<<< HEAD
-            <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
-=======
             <canvas id="chart-bars" class="chart-canvas" height="300"></canvas>
->>>>>>> 7f1dda4 (add chart to home)
           </div>
         </div>
-      </div>
-    </div>
 
 
-    <!-- chart2-->
-    <div class="col-lg-6">
-      <div class="card z-index-2">
-        <div class="card-header pb-0">
-<<<<<<< HEAD
-          <h6>الحوادث حسب الولايات</h6>
-=======
-          <h6>مقارنة عدد الحوادث حسب نفس تافترة الزمنية</h6>
->>>>>>> 7f1dda4 (add chart to home)
-          <p class="text-sm">
 
 
-          </p>
-        </div>
-        <div class="card-body p-3">
+        <div class="col-6">
           <div class="chart">
-<<<<<<< HEAD
-            <canvas id="chart-line1" class="chart-canvas" height="300"></canvas>
-=======
             <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
->>>>>>> 7f1dda4 (add chart to home)
           </div>
         </div>
       </div>
-    </div>
+
 
 
 
@@ -217,31 +145,16 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
-<<<<<<< HEAD
-        <script src="/assets/js/highcharts.js"></script>
-=======
 
 
 
 
->>>>>>> 7f1dda4 (add chart to home)
         <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {
       type: "bar",
       data: {
-<<<<<<< HEAD
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "#fff",
-          data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-=======
         labels: ["نابل ","تونس", "جندوبة ", "أريانة", "منوبة", "بنزرت", "سوسة", "المنستير", "توزر", "قفصة"," الكاف","بن عروس",],
         datasets: [{
           label: "عدد الحوادث",
@@ -251,20 +164,20 @@
           borderSkipped: true,
           backgroundColor: "#7492e2",
           data: [450, 200, 100, 220, 500, 100, 400, 230, 500,120,10,30],
->>>>>>> 7f1dda4 (add chart to home)
           maxBarThickness: 6
         }, ],
       },
       options: {
-
-      title:{
-        display:true,
-        text:'azertyrtyyryr  rryryry',
-             fontSize:25
-               },
-        responsive: true,
+ responsive: true,
         maintainAspectRatio: false,
+
+
         plugins: {
+         title:{
+        display:true,
+        text:'عدد الحوادث حسب الولايات ',
+             fontSize:40
+             },
           legend: {
           position : 'right',
             display: true,
@@ -293,11 +206,7 @@
                 style: 'normal',
                 lineHeight: 2
               },
-<<<<<<< HEAD
-              color: "#fff"
-=======
               color: "#7492e2"
->>>>>>> 7f1dda4 (add chart to home)
             },
           },
           x: {
@@ -333,15 +242,9 @@
     new Chart(ctx2, {
       type: "line",
       data: {
-<<<<<<< HEAD
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-            label: "Mobile apps",
-=======
         labels: ["Janvier","Fevrier","Mars","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [{
             label: "الحوادث سنة 2021",
->>>>>>> 7f1dda4 (add chart to home)
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
@@ -349,20 +252,12 @@
             borderWidth: 3,
             backgroundColor: gradientStroke1,
             fill: true,
-<<<<<<< HEAD
-            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-=======
             data: [100,120,70,50, 40, 300, 220, 500, 250, 400, 230, 500],
->>>>>>> 7f1dda4 (add chart to home)
             maxBarThickness: 6
 
           },
           {
-<<<<<<< HEAD
-            label: "Websites",
-=======
             label: "الحوادث سنة 2022",
->>>>>>> 7f1dda4 (add chart to home)
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
@@ -370,11 +265,7 @@
             borderWidth: 3,
             backgroundColor: gradientStroke2,
             fill: true,
-<<<<<<< HEAD
-            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-=======
             data: [100,110,70,30, 90, 40, 140, 290, 290, 340, 230, 400],
->>>>>>> 7f1dda4 (add chart to home)
             maxBarThickness: 6
           },
         ],
@@ -383,6 +274,11 @@
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
+           title:{
+        display:true,
+        text:'مقارنة عدد الحوادث حسب نفس تافترة الزمنية ',
+             fontSize:40
+             },
           legend: {
             display: false,
           }
