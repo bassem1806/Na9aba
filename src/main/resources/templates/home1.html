@@ -118,9 +118,13 @@
             <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
           </div>
         </a>
+      </div>
+    </div>
+  </div>
 
 
   <!--   Core JS Files   -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
   <script src="/assets/js/core/popper.min.js"></script>
   <script src="/assets/js/core/bootstrap.min.js"></script>
   <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
@@ -128,8 +132,6 @@
 >
   <!--script src="/assets/js/plugins/chartjs.min.js"></script-->
    <!--script src="/assets/js/plugins/chartjs1.min.js"></script-->
-
-
 
   <script src="/assets/js/plugins/choices.min.js"></script>
   <script>
@@ -150,79 +152,98 @@
 
 
         <script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
+$( document ).ready(function() {
+    var ctx = $("canvas#chart-bars")[0].getContext("2d");
 
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["نابل ","تونس", "جندوبة ", "أريانة", "منوبة", "بنزرت", "سوسة", "المنستير", "توزر", "قفصة"," الكاف","بن عروس",],
-        datasets: [{
-          label: "عدد الحوادث",
-          tension: 0.4,
-          borderWidth: 1,
-          borderRadius: 4,
-          borderSkipped: true,
-          backgroundColor: "#7492e2",
-          data: [450, 200, 100, 220, 500, 100, 400, 230, 500,120,10,30],
-          maxBarThickness: 6
-        }, ],
-      },
-      options: {
- responsive: true,
-        maintainAspectRatio: false,
+    $.ajax({
+			type: 'GET',
+			url: '/getNumberAccident',
+			success: function(res) {
+			var labels = [];
+			var values = [];
+				var s = '<option value="">--من فضل إختر  المعتمدية--</option>';
+				for(var i = 0; i < res.length; i++) {
+				    console.log(res[i])
+					//s += '<option value="' + res[i] + '">' + res[i].name + '</option>';
+					labels.push(res[i][1]);
+					values.push(res[i][0]);
+				}
+				console.log(labels)
+				$('#gouvernorat1').empty();
+				$('#gouvernorat1').html(s);
+				new Chart(ctx, {
+                  type: "bar",
+                  data: {
+                    labels : labels,
+                    datasets: [{
+                      label: "عدد الحوادث",
+                      tension: 0.4,
+                      borderWidth: 1,
+                      borderRadius: 4,
+                      borderSkipped: true,
+                      backgroundColor: "#7492e2",
+                      data: values,
+                      maxBarThickness: 6
+                    }],
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                     title:{
+                        display:true,
+                        text:'عدد الحوادث حسب الولايات ',
+                         fontSize:40
+                         },
+                      legend: {
+                      position : 'right',
+                        display: true,
+                      }
+                    },
+                    interaction: {
+                      intersect: false,
+                      mode: 'index',
+                    },
+                    scales: {
+                      y: {
+                        grid: {
+                          drawBorder: false,
+                          display: false,
+                          drawOnChartArea: false,
+                          drawTicks: false,
+                        },
+                        ticks: {
+                          suggestedMin: 0,
+                          suggestedMax: 500,
+                          beginAtZero: true,
+                          padding: 15,
+                          font: {
+                            size: 14,
+                            family: "Open Sans",
+                            style: 'normal',
+                            lineHeight: 2
+                          },
+                          color: "#7492e2"
+                        },
+                      },
+                      x: {
+                        grid: {
+                          drawBorder: false,
+                          display: false,
+                          drawOnChartArea: false,
+                          drawTicks: false
+                        },
+                        ticks: {
+                          display: true
+                        },
+                      },
+                    },
+                  },
+                });
+                }
+            })
+			})
 
-
-        plugins: {
-         title:{
-        display:true,
-        text:'عدد الحوادث حسب الولايات ',
-             fontSize:40
-             },
-          legend: {
-          position : 'right',
-            display: true,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-            },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
-              beginAtZero: true,
-              padding: 15,
-              font: {
-                size: 14,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-              color: "#7492e2"
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false
-            },
-            ticks: {
-              display: true
-            },
-          },
-        },
-      },
-    });
 
 
     var ctx2 = document.getElementById("chart-line").getContext("2d");
@@ -242,7 +263,8 @@
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ["Janvier","Fevrier","Mars","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["جانفي","فيفري","مارس","أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+],
         datasets: [{
             label: "الحوادث سنة 2021",
             tension: 0.4,
@@ -280,7 +302,8 @@
              fontSize:40
              },
           legend: {
-            display: false,
+           position : 'top',
+            display: true,
           }
         },
         interaction: {
@@ -301,7 +324,7 @@
               padding: 10,
               color: '#b2b9bf',
               font: {
-                size: 11,
+                size: 14,
                 family: "Open Sans",
                 style: 'normal',
                 lineHeight: 2

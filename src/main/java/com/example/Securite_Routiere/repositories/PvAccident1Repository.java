@@ -24,8 +24,9 @@ public interface PvAccident1Repository extends JpaRepository<PvAccident1,Long> {
             " on p.delegation_id=d.delegation_id " +
             " left join sec_routierev0.Gouvernorat g " +
             " on  g.gouvernorat_id = d.gouvernorat_id " +
-            "GROUP BY g.gouvernorat_name ", nativeQuery = true)
+            "GROUP BY g.gouvernorat_name ORDER BY  COUNT(g.gouvernorat_name) desc ", nativeQuery = true)
     Object[] countTotalaccidByGov();
+
 
 
     /*@Query("SELECT c.year, COUNT(c.year)
