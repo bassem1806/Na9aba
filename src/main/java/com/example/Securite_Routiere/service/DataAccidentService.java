@@ -14,4 +14,6 @@ public class DataAccidentService {
         Object[] accidentData = pvAccident1Repository.countTotalaccidByGov();
         return accidentData;
     }
+
+
 }

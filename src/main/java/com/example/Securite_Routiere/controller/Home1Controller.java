@@ -9,6 +9,7 @@ import java.util.Map;
 import com.example.Securite_Routiere.service.DataAccidentService;
 import com.example.Securite_Routiere.repositories.DelegationRepository;
 import com.example.Securite_Routiere.repositories.GouvernoratRepository;
+import com.example.Securite_Routiere.service.DateAccidentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,12 @@ public class Home1Controller {
 
     @Autowired
     private DataAccidentService dataAccidentService;
+
+    @Autowired
+    private DateAccidentService dateAccidentService;
+
+
+
 
 
 
@@ -73,15 +80,34 @@ public class Home1Controller {
             return responseEntity;
         }
 
+    @RequestMapping(value = "/getdateAccident")
+    public ResponseEntity<?> getdateAccident(){
+        StringBuilder messageBuilder = new StringBuilder("test");
+        HttpStatus httpStatus = HttpStatus.OK;
+        Object[] accidentDate = null;
 
+        System.out.println("accid date :" +getdateAccident().getStatusCode());
+        try{
+            accidentDate = dateAccidentService.getdateAccident();
+            httpStatus = HttpStatus.OK;
+        }catch (Exception e){
+            messageBuilder.append("error load number accident");
+            log.error(messageBuilder.toString());
+            httpStatus = httpStatus.INTERNAL_SERVER_ERROR;
+        }
 
-
-
-
-
-
-
+        ResponseEntity<?> responseEntity = null;
+        if(httpStatus.equals(HttpStatus.OK)){
+            responseEntity = new ResponseEntity<>( accidentDate, httpStatus);
+        }else{
+            responseEntity = new ResponseEntity<>(messageBuilder.toString(), httpStatus);
+        }
+        System.out.println("accid date :" +getdateAccident() );
+        return responseEntity;
     }
+    }
+
+
 
 
 

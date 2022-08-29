@@ -29,11 +29,32 @@ public interface PvAccident1Repository extends JpaRepository<PvAccident1,Long> {
 
 
 
-    /*@Query("SELECT c.year, COUNT(c.year)
-    FROM Comment AS c
-    GROUP BY c.year
-    ORDER BY c.year DESC")
-List<Object[]> countTotalCommentsByYear();*/
+
+    @Query(value = "SELECT COUNT(g.gouvernorat_name),"+
+            "YEAR (p.dateaccid),"+
+            "monthname(p.dateaccid)"+
+           " FROM sec_routierev0.pv_accident1 p"+
+            "left join sec_routiereV0.Delegation d"+
+           " on p.delegation_id=d.delegation_id"+
+           " left join sec_routierev0.Gouvernorat g"+
+            "on  g.gouvernorat_id = d.gouvernorat_id"+
+           " WHERE YEAR (p.dateaccid) = 2022 OR "+
+          "  GROUP BY  year(p.dateaccid) ,MONTHname (p.dateaccid)"+
+            "ORDER BY Year, MONTHname", nativeQuery = true)
+    Object[] countTotalaccidByperiode();
+
+ /*   @Query(value = "SELECT COUNT(g.gouvernorat_name),"+
+            "YEAR (p.dateaccid),"+
+            "monthname(p.dateaccid)"+
+            " FROM sec_routierev0.pv_accident1 p"+
+            "left join sec_routiereV0.Delegation d"+
+            " on p.delegation_id=d.delegation_id"+
+            " left join sec_routierev0.Gouvernorat g"+
+            "on  g.gouvernorat_id = d.gouvernorat_id"+
+            " WHERE YEAR (p.dateaccid) = 2022 OR "+
+            "  GROUP BY  year(p.dateaccid) ,MONTHname (p.dateaccid)"+
+            "ORDER BY Year, MONTHname", nativeQuery = true)
+    Object[] countTotalaccidByperiode1();*/
 }
 
 
