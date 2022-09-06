@@ -12,13 +12,13 @@ import java.lang.*;
 @SpringBootApplication
 @ComponentScan
 
-public class SecurityRouterApplication {
+public class RecrutementApplication {
 
 	public static void main(String[] args) {
 
 
 
-		SpringApplication.run(SecurityRouterApplication.class, args);
+		SpringApplication.run(RecrutementApplication.class, args);
 
 
 
