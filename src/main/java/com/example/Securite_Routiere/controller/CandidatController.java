@@ -92,7 +92,6 @@ public class CandidatController {
         Gson gson = new Gson();
 
         return gson.toJson(delegations);
-
-
     }
+
 }

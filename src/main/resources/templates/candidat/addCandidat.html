@@ -117,14 +117,50 @@ $(document).ready(function(){
                                         <input type="text" th:field="*{Mere}" class="form-control" placeholder=" هوية الأم "  required/> <span th:if="${#fields.hasErrors('Mere')}" th:errors="*{Mere}" class="text-danger"></span>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <label for="DateAnniv" class="col-form-label">تاريخ الميلاد </label>
                                         <input type="date" th:field="*{DateAnniv}" class="form-control" id="DateAnniv" placeholder="تاريخ التسجيل" required/> <span th:if="${#fields.hasErrors('DateAnniv')}" th:errors="*{DateAnniv}" class="text-danger"></span>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <label for="lieux" class="col-form-label" id="lieux">  مكان الولادة </label>
                                         <input type="text" th:field="*{lieux}" class="form-control" placeholder=" مكان الولادة "  required/> <span th:if="${#fields.hasErrors('lieux')}" th:errors="*{lieux}" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="Sexe" class="col-form-label" id="Sexe" >  الجنس</label>
+
+                                        <select name="Fils" class="form-control"   >
+                                            <option value="">-- الجنس --</option>
+                                            <option value="1"> ذكر</option>
+                                            <option value="2"> أنثى</option>
+
+
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <label for="Etat" class="col-form-label" id="Etat" >الحالة العائلية</label>
+
+                                        <select name="Etat" class="form-control"   >
+                                            <option value="">-- إختر  الحالة العائلية--</option>
+                                            <option value="1">أعزب</option>
+                                            <option value="2">متزوج</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="Fils" class="col-form-label" id="Fils" > عدد الأبناء</label>
+
+                                        <select name="Fils" class="form-control"   >
+                                            <option value="">-- عدد الأبناء--</option>
+                                            <option value="1"> 1</option>
+                                            <option value="2"> 2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+
+                                        </select>
+
                                     </div>
 
                                     <div class="col-sm-6">
@@ -145,10 +181,37 @@ $(document).ready(function(){
                                             <option value="">--من فضل إختر  المعتمدية--</option>
                                         </select>
 
+
+
+
                                     </div>
 
 
-                                </div>
+
+                                </div></br>
+
+                           ****************************************************************************************************************************************
+                                <div class="row g-3">
+                                    <div class="col-sm-4">
+                                        <label for="NumCandidat" class="col-form-label" id="NumCandidat"> رقم ملف المترشح </label>
+                                        <input type="text" th:field="*{NumCandidat}" class="form-control" placeholder=" رقم ملف المترشح "  required/> <span th:if="${#fields.hasErrors('NumCandidat')}" th:errors="*{NumCandidat}" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <label for="Nom" class="col-form-label" id="Nom"> إسم المترشح </label>
+                                        <input type="text" th:field="*{Nom}" class="form-control" placeholder=" الإسم "  required/> <span th:if="${#fields.hasErrors('Nom')}" th:errors="*{Nom}" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <label for="Prenom" class="col-form-label" id="Prenom">لقب المترشح </label>
+                                        <input type="text" th:field="*{Prenom}" class="form-control" placeholder=" اللقب "  required/> <span th:if="${#fields.hasErrors('Prenom')}" th:errors="*{Prenom}" class="text-danger"></span>
+                                    </div>
+
+
+
+
+                                </div> </br>
+                                </br>
 
 
 
