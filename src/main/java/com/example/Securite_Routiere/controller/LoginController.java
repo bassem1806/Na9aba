@@ -42,6 +42,8 @@ public class LoginController {
         //  User user = userService.findUserByEmail(auth.getName());
         User user = userService.findUserByLogin(auth.getName());
 
+        System.out.println("user login" +user);
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("home");
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!--  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">-->
+    <!--  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">-->
     <link rel="icon" type="image/png" href="/assets/img/favicon.png">
     <title>
         إدارة الخدمات الفنية
@@ -56,68 +56,6 @@ $(document).ready(function(){
 		});
 </script>
 
-    <style>
-   #hideValuesOnSelect {
-      display: none;
-   }
-</style>
-
-
-    <script>
-
-
-   function displayDivDemo(id, elementValue) {
-      document.getElementById(id).style.display = elementValue.value == 2 ? 'block' : 'none';
-   }
-
-</script>
-
-    <style>
-   #hideValuesOnSelect1 {
-      display: none;
-   }
-</style>
-
-    <script>
-
-
-   function displayDivDemo1(id, elementValue) {
-      document.getElementById(id).style.display = elementValue.value == 2 ? 'block' : 'none';
-   }
-
-</script>
-
-
-    <style>
-   #hideValuesOnSelect2 {
-      display: none;
-   }
-</style>
-
-    <script>
-
-
-   function displayDivDemo2(id, elementValue) {
-      document.getElementById(id).style.display = elementValue.value == 2 ? 'block' : 'none';
-   }
-
-</script>
-
-
-    <style>
-   #hideValuesOnSelect3 {
-      display: none;
-   }
-</style>
-
-    <script>
-
-
-   function displayDivDemo3(id, elementValue) {
-      document.getElementById(id).style.display = elementValue.value == 2 ? 'block' : 'none';
-   }
-
-</script>
 
 </head>
 
@@ -151,33 +89,35 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-                                    <div class="col-sm-4">
-                                        <label for="concour" class="col-form-label" >  المناظرة</label>
+                                    <div class="col-sm-6">
+                                        <label for="concour" class="col-form-label"  id="concour">  المناظرة</label>
 
                                         <select name="concourId" class="form-control" required>
-                                            <option value="">--من فضل إختر   المناظرة--</option>
-                                            <option  th:each=" tr :${concour}" th:value="${tr.ConcourId}" th:text="${tr.name}" id="concour"/>
+
+
+                                            <option  th:each="th: ${concour}"
+                                                     th:value="${th.ConcourId}"
+                                                     th:text="${th.name}"
+                                                     th:selected="(${th.ConcourId} == ${idConcour})"
+
+                                            />
                                         </select>
                                     </div>
 
-                                                            <div class="col-sm-4">
-                                                                <label for="NumCandidat" class="col-form-label" id="NumCandidat"> رقم ملف المترشح </label>
-                                                                <input type="text" th:field="*{NumCandidat}" class="form-control" placeholder=" رقم ملف المترشح "  required/> <span th:if="${#fields.hasErrors('NumCandidat')}" th:errors="*{NumCandidat}" class="text-danger"></span>
-                                                            </div>
+                                    <div class="col-sm-4">
+                                        <label for="NumCandidat" class="col-form-label" id="NumCandidat"> رقم ملف المترشح </label>
+                                        <input type="text" th:field="*{NumCandidat}" class="form-control" placeholder=" رقم ملف المترشح "  required/> <span th:if="${#fields.hasErrors('NumCandidat')}" th:errors="*{NumCandidat}" class="text-danger"></span>
+                                    </div>
 
-                                                                <div class="col-sm-4">
-                                                                    <label for="Nom" class="col-form-label" id="Nom"> إسم المترشح </label>
-                                                                    <input type="text" th:field="*{Nom}" class="form-control" placeholder=" الإسم "  required/> <span th:if="${#fields.hasErrors('Nom')}" th:errors="*{Nom}" class="text-danger"></span>
-                                                                </div>
+                                    <div class="col-sm-4">
+                                        <label for="Nom" class="col-form-label" id="Nom"> إسم المترشح </label>
+                                        <input type="text" th:field="*{Nom}" class="form-control" placeholder=" الإسم "  required/> <span th:if="${#fields.hasErrors('Nom')}" th:errors="*{Nom}" class="text-danger"></span>
+                                    </div>
 
-                                                                <div class="col-sm-4">
-                                                                    <label for="Prenom" class="col-form-label" id="Prenom">لقب المترشح </label>
-                                                                    <input type="text" th:field="*{Prenom}" class="form-control" placeholder=" اللقب "  required/> <span th:if="${#fields.hasErrors('Prenom')}" th:errors="*{Prenom}" class="text-danger"></span>
-                                                                </div>
+                                    <div class="col-sm-4">
+                                        <label for="Prenom" class="col-form-label" id="Prenom">لقب المترشح </label>
+                                        <input type="text" th:field="*{Prenom}" class="form-control" placeholder=" اللقب "  required/> <span th:if="${#fields.hasErrors('Prenom')}" th:errors="*{Prenom}" class="text-danger"></span>
+                                    </div>
 
                                     <div class="col-sm-4">
                                         <label for="Pere" class="col-form-label" id="Pere"> إسم الأب </label>
@@ -217,21 +157,17 @@ $(document).ready(function(){
                                     </div>
 
                                     <div class="col-sm-4">
-                                        <label for="Etat" class="col-form-label" id="displayDivDemo">الحالة العائلية</label>
+                                        <label for="Etat" class="col-form-label" id="Etat" >الحالة العائلية</label>
 
-                                        <select onchange="displayDivDemo('hideValuesOnSelect', this)" class="form-control"  >
+                                        <select name="Etat" class="form-control"   >
                                             <option value="">-- إختر  الحالة العائلية--</option>
                                             <option value="1">أعزب</option>
                                             <option value="2">متزوج</option>
-
                                         </select>
 
-
                                     </div>
-
-
-                                    <div class="col-sm-4" id="hideValuesOnSelect">
-                                        <label for="Fils" class="col-form-label"  > عدد الأبناء</label>
+                                    <div class="col-sm-4">
+                                        <label for="Fils" class="col-form-label" id="Fils" > عدد الأبناء</label>
 
                                         <select name="Fils" class="form-control"   >
                                             <option value="">-- عدد الأبناء--</option>
@@ -245,9 +181,10 @@ $(document).ready(function(){
                                     </div>
 
 
+
                                 </div></br>
 
-                         ****************************************************************************************************************************************
+                                ****************************************************************************************************************************************
 
                                 <h6 class="font-weight-bolder text-info text-left" >   معطيات بطاقة التعريف الوطنية</h6>
                                 <div class="row g-3">
@@ -292,7 +229,7 @@ $(document).ready(function(){
                                     </div>
 
                                     <div class="col-sm-4">
-                                        <label for="Fils" class="col-form-label" id="Fils" > الوحدة الأمنية مرجع النظر</label>
+                                        <label for="Fils" class="col-form-label" id="Unite" > الوحدة الأمنية مرجع النظر</label>
 
                                         <select name="Fils" class="form-control"   >
                                             <option value="">--الوحدة الأمنية مرجع النظر--</option>
@@ -330,36 +267,32 @@ $(document).ready(function(){
                                     </div>
 
                                     <div class="col-sm-4">
-                                        <label for="Bureaudemplois" class="col-form-label" id="displayDivDemo1" >    التسجيل بمكتب الشغل</label>
+                                        <label for="Bureaudemplois" class="col-form-label" id="Bureaudemplois" >    التسجيل بمكتب الشغل</label>
 
-                                        <select onchange="displayDivDemo1('hideValuesOnSelect1', this)"  class="form-control"   >
+                                        <select name="Bureaudemplois" class="form-control"   >
                                             <option value="">--  التسجيل بمكتب الشغل--</option>
-                                            <option value="1">غير مسجل</option>
-                                            <option value="2"> مسجل</option>
-
+                                            <option value="1"> مسجل</option>
+                                            <option value="2">غير مسجل</option>
                                         </select>
                                     </div>
-
-                                    <div class="col-sm-4"id="hideValuesOnSelect1">
-                                        <label for="DateInsBureau" class="col-form-label">تاريخ السجيل بمكتب الشغل </label>
-                                        <input type="date" th:field="*{DateInsBureau}" class="form-control"  placeholder=" تاريخ السجيل بمكتب الشغل" />
-                                    </div>
-
-                                    </br>
 
                                     <div class="col-sm-4">
-                                        <label for="ServiceCivil" class="col-form-label" id="displayDivDemo3" >  خدمة مدنية</label>
+                                        <label for="DateInsBureau" class="col-form-label">تاريخ السجيل بمكتب الشغل </label>
+                                        <input type="date" th:field="*{DateInsBureau}" class="form-control" id="DateInsBureau" placeholder=" تاريخ السجيل بمكتب الشغل" /> <span th:if="${#fields.hasErrors('DateCin')}" th:errors="*{DateCin}" class="text-danger"></span>
+                                    </div>
 
-                                        <select onchange="displayDivDemo3('hideValuesOnSelect3', this)" name="ServiceCivil" class="form-control"   >
+                                    <div class="col-sm-4">
+                                        <label for="ServiceCivil" class="col-form-label" id="ServiceCivil" >  خدمة مدنية</label>
+
+                                        <select name="ServiceCivil" class="form-control"   >
                                             <option value="">--  خدمة مدنية--</option>
-                                            <option value="1"> لا</option>
-                                            <option value="2"> نعم</option>
-
+                                            <option value="1"> نعم</option>
+                                            <option value="2"> لا</option>
                                         </select>
                                     </div>
 
 
-                                    <div class="col-sm-4" id="hideValuesOnSelect3">
+                                    <div class="col-sm-4">
                                         <label for="dureservicecivil" class="col-form-label" >مدة العمل</label>
                                         <input type="text" th:field="*{Dureservicecivil}"  id="dureservicecivil"class="form-control" placeholder=" مدة العمل باللأشهر  "  /> <small>مدة العمل بالأشهر</small> <span th:if="${#fields.hasErrors('Dureservicecivil')}" th:errors="*{Dureservicecivil}" class="text-danger"></span>
                                     </div>
@@ -387,28 +320,19 @@ $(document).ready(function(){
                                     </div>
 
                                     <div class="col-sm-4">
-                                        <label for="permis" class="col-form-label" id="displayDivDemo2" >   رخصة سياقة</label>
+                                        <label for="permis" class="col-form-label" id="permis" >   رخصة سياقة</label>
 
-                                        <select name="permis" class="form-control"  onchange="displayDivDemo2('hideValuesOnSelect2', this)"   >
+                                        <select name="permis" class="form-control"   >
                                             <option value="">--   رخصة سياقة--</option>
-                                            <option value="1"> لا</option>
-                                            <option value="2"> نعم</option>
-
+                                            <option value="1"> نعم</option>
+                                            <option value="2"> لا</option>
                                         </select>
                                     </div>
 
-                                    <div class="col-sm-4" id="hideValuesOnSelect2">
+                                    <div class="col-sm-4">
                                         <label for="NumPermis" class="col-form-label" >رقم الرخصة</label>
                                         <input type="text" th:field="*{NumPermis}"  id="NumPermis"class="form-control" placeholder=" رقم الرخصة  "  required/>  <span th:if="${#fields.hasErrors('NumPermis')}" th:errors="*{NumPermis}" class="text-danger"></span>
                                     </div>
-
-
-
-                                    <div class="col-sm-6">
-
-                                        <input id="Aujourdhui" type="datetime-local" name="datesaissie" value="" readonly hidden >
-                                    </div>
-
 
 
                                 </div> </br>
@@ -416,37 +340,37 @@ $(document).ready(function(){
 
 
 
-                                                                <div>
-                                                                    <input type="submit"  id="btn-submit"  class="btn-submit" value="تسجيل ملف مترشح جديد "/>
-                                                                </div>
-                                                                    <p class="my-5" align="right">
-                                                                    <a th:href="@{'/Candidat/list'}" class="btn btn-secondary" >
+                                <div>
+                                    <input type="submit"  id="btn-submit"  class="btn-submit" value="تسجيل ملف مترشح جديد "/>
+                                </div>
+                                <p class="my-5" align="right">
+                                    <a th:href="@{'/Candidat/list1'}" class="btn btn-secondary" >
 
-                                                                        <i class="fas fa-solid fa-backward">الرجوع الى قائمة المترشحين</i></a>
-
-
-                                                                <div class="form-group col-md-8"></div>
-
-                                                             </div>
-                                                                 </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                        <i class="fas fa-solid fa-backward">الرجوع الى قائمة المترشحين</i></a>
 
 
-                                    <div th:replace="fragments/footer :: footer" />
+                                <div class="form-group col-md-8"></div>
+
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 
-                                </main>
+    <div th:replace="fragments/footer :: footer" />
 
 
+</main>
 
 
 
 
-                                <!--   Core JS Files   -->
+
+
+<!--   Core JS Files   -->
 <!--<script src="../assets/js/plugins/sweetalert2.all.min.js"></script-->
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
@@ -459,12 +383,8 @@ $(document).ready(function(){
 <script src="/assets/js/bootstrap-select.min.js"></script>
 <script src="../assets/js/plugins/choices.min.js"></script>
 <script src="../assets/js/addrow.table.js"></script>
-<script>
-document.getElementById("Aujourdhui").valueAsDate = new Date();
-</script>
 
 
-</script>
 
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -478,7 +398,7 @@ document.getElementById("Aujourdhui").valueAsDate = new Date();
 
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
     $('.ex-disable').click(function () {
   $('.disable-example').prop('disabled', true);
 });
@@ -502,7 +422,7 @@ $('.ex-enable').click(function () {
   position: 'top-start',
 
   icon: 'info',
-  title: 'انت بصدد إضافة مترشح جديد',
+  title: 'انت بصدد تعديل   المعطيات',
   showConfirmButton: false,
   timer: 2000
 })

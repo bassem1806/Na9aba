@@ -68,11 +68,7 @@ public class Candidat {
     @Column(name = "EmailCandidat")
     private String Email;
 
-    @Column(name = "NiveauCandidat")
-    private String Niveau;
 
-    @Column(name = "SpecialiteCandidat")
-    private String Specialite;
 
 
     @Column(name = "Bureaudemplois")
@@ -100,6 +96,35 @@ public class Candidat {
     @Column(name = "NumPermis")
     private String NumPermis;
 
+    @Column(name = "ServiceCivil")
+    private String ServiceCivil;
+
+    @Column(name = "DureServiceCivil")
+    private String Dureservicecivil;
+
+
+    public String getDatesaissie() {
+        return datesaissie;
+    }
+
+    public void setDatesaissie(String datesaissie) {
+        this.datesaissie = datesaissie;
+    }
+
+    @Column(name = "datesaissie")
+    private String datesaissie;
+
+    public String getAgentsaissie() {
+        return agentsaissie;
+    }
+
+    public void setAgentsaissie(String agentsaissie) {
+        this.agentsaissie = agentsaissie;
+    }
+
+    @Column(name = "agentsaissie")
+    private String agentsaissie;
+
     /**** Many To One delegation ****/
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -107,6 +132,65 @@ public class Candidat {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Delegation delegation;
 
+
+    public Concour getConcour() {
+        return concour;
+    }
+
+    public String getServiceCivil() {
+        return ServiceCivil;
+    }
+
+    public void setServiceCivil(String serviceCivil) {
+        ServiceCivil = serviceCivil;
+    }
+
+    public String getDureservicecivil() {
+        return Dureservicecivil;
+    }
+
+    public void setDureservicecivil(String dureservicecivil) {
+        Dureservicecivil = dureservicecivil;
+    }
+
+    public void setConcour(Concour concour) {
+        this.concour = concour;
+    }
+
+    /**** Many To One concour ****/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "concour_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Concour concour;
+
+
+    public Niveau getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(Niveau niveau) {
+        this.niveau = niveau;
+    }
+
+    /**** Many To One niveau ****/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "niveau_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Niveau niveau;
+
+    public Specialite getSpecialite() {
+        return specialite;
+    }
+
+    public void setSpecialite(Specialite specialite) {
+        this.specialite = specialite;
+    }
+
+    /**** Many To One Specialite ****/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "specialite_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Specialite specialite;
 
     public long getCandidatId() {
         return candidatId;
@@ -252,21 +336,11 @@ public class Candidat {
         Email = email;
     }
 
-    public String getNiveau() {
-        return Niveau;
-    }
 
-    public void setNiveau(String niveau) {
-        Niveau = niveau;
-    }
 
-    public String getSpecialite() {
-        return Specialite;
-    }
 
-    public void setSpecialite(String specialite) {
-        Specialite = specialite;
-    }
+
+
 
     public String getBureaudemplois() {
         return Bureaudemplois;
@@ -341,7 +415,7 @@ public class Candidat {
     }
 
 
-    public Candidat(long candidatId, String numCandidat, String nom, String prenom, String pere, String GPere, String mere, String sexe, String etat, String fils, String dateAnniv, String lieux, String cin, String emprinte, String dateCin, String adresse, String telephone, String email, String niveau, String specialite, String bureaudemplois, String dateInsBureau, String situationMilitaire, String dateInscrit, String unite, String paiement, String permis, String numPermis) {
+    public Candidat(long candidatId, String numCandidat, String nom, String prenom, String pere, String GPere, String mere, String sexe, String etat, String fils, String dateAnniv, String lieux, String cin, String emprinte, String dateCin, String adresse, String telephone, String email, String bureaudemplois, String dateInsBureau, String situationMilitaire, String dateInscrit, String unite, String paiement, String permis, String numPermis, String serviceCivil, String dureservicecivil, String datesaissie, String agentsaissie, Delegation delegation, Concour concour, Niveau niveau, Specialite specialite) {
         this.candidatId = candidatId;
         NumCandidat = numCandidat;
         Nom = nom;
@@ -360,8 +434,6 @@ public class Candidat {
         Adresse = adresse;
         this.telephone = telephone;
         Email = email;
-        Niveau = niveau;
-        Specialite = specialite;
         Bureaudemplois = bureaudemplois;
         DateInsBureau = dateInsBureau;
         SituationMilitaire = situationMilitaire;
@@ -370,6 +442,14 @@ public class Candidat {
         this.paiement = paiement;
         Permis = permis;
         NumPermis = numPermis;
+        ServiceCivil = serviceCivil;
+        Dureservicecivil = dureservicecivil;
+        this.datesaissie = datesaissie;
+        this.agentsaissie = agentsaissie;
+        this.delegation = delegation;
+        this.concour = concour;
+        this.niveau = niveau;
+        this.specialite = specialite;
     }
 
     public Candidat() {
