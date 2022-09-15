@@ -44,13 +44,16 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
         http.
                 authorizeRequests()
-                .antMatchers("/").permitAll() // accès pour tous users
+               // .antMatchers("/").permitAll() // accès pour tous users
                 .antMatchers("/login").permitAll() // accès pour tous users
                 .antMatchers("/registration").permitAll() // accès pour tous users
-                .antMatchers("/assets/**").permitAll() // accès pour tous users
+               .antMatchers("/assets/**").permitAll() // accès pour tous users
 
-                .antMatchers("/user/**").hasAuthority("ADMIN")
-                .antMatchers("/role/**").hasAuthority("ADMIN").anyRequest()
+              //  .antMatchers("/user/**").hasAuthority("ADMIN")
+                .antMatchers("/Candidat/**").hasAnyAuthority("ADMIN","AdminRecru")
+
+
+        .antMatchers("/role/**","/accounts/**","/PvAccidentnew/**","/PvAccident/**","/blesse/**","/registration").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin() // l'accès de fait via un formulaire
 
                 .loginPage("/login").failureUrl("/login?error=true") // fixer la page login
