@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-import com.example.Securite_Routiere.service.DataAccidentService;
+
 import com.example.Securite_Routiere.repositories.DelegationRepository;
 import com.example.Securite_Routiere.repositories.GouvernoratRepository;
-import com.example.Securite_Routiere.service.DateAccidentService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +31,7 @@ public class Home1Controller {
     @Autowired
     private GouvernoratRepository gouvernoratRepository;
 
-    @Autowired
-    private DataAccidentService dataAccidentService;
 
-    @Autowired
-    private DateAccidentService dateAccidentService;
 
 
 
@@ -54,7 +50,7 @@ public class Home1Controller {
             return new ModelAndView("home1", params);
 
         }
-
+/*
         @RequestMapping(value = "/getNumberAccident")
         public ResponseEntity<?> getNumberAccident(){
 
@@ -105,6 +101,8 @@ public class Home1Controller {
         System.out.println("accid date :" +getdateAccident() );
         return responseEntity;
     }
+
+ */
     }
 
 
