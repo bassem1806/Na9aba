@@ -10,13 +10,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 import javax.sql.DataSource;
 
 
 @Configuration
 @EnableWebSecurity
 
-public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
@@ -27,6 +28,9 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
     private String usersQuery;
     @Value("${spring.queries.roles-query}")
     private String rolesQuery;
+
+    public SecurityConfiguration() {
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
@@ -44,16 +48,13 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
         http.
                 authorizeRequests()
-               // .antMatchers("/").permitAll() // accès pour tous users
+                .antMatchers("/").permitAll() // accès pour tous users
                 .antMatchers("/login").permitAll() // accès pour tous users
                 .antMatchers("/registration").permitAll() // accès pour tous users
-               .antMatchers("/assets/**").permitAll() // accès pour tous users
+                .antMatchers("/assets/**").permitAll() // accès pour tous users
 
-              //  .antMatchers("/user/**").hasAuthority("ADMIN")
-                .antMatchers("/Candidat/**").hasAnyAuthority("ADMIN","AdminRecru")
-
-
-        .antMatchers("/role/**","/accounts/**","/PvAccidentnew/**","/PvAccident/**","/blesse/**","/registration").hasAuthority("ADMIN").anyRequest()
+                .antMatchers("/user/**").hasAuthority("ADMIN")
+                .antMatchers("/role/**").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin() // l'accès de fait via un formulaire
 
                 .loginPage("/login").failureUrl("/login?error=true") // fixer la page login

@@ -14,34 +14,35 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+<html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+  <link href="../assets/img/apple-icon.png" rel="apple-touch-icon" sizes="76x76">
+  <link href="../assets/img/favicon.png" rel="icon" type="image/png">
   <title>
     إدارة الخدمات الفنية
   </title>
   <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
   <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet"/>
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
   <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/42d5adcbca.js"></script>
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+  <link href="../assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
 </head>
 
 <!-- menu a droite  -->
 
 <body class="g-sidenav-show rtl bg-gray-100">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret" id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret"
+       id="sidenav-main">
 
-  <div th:replace="fragments/menu :: menu" />
+  <div th:replace="fragments/menu :: menu"/>
 
 </aside>
 <!--end  menu a droite  -->
@@ -49,73 +50,70 @@
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg overflow-hidden">
 
 
-
   <!-- Navbar header  -->
-  <div th:replace="fragments/header :: header" />
-
-
+  <div th:replace="fragments/header :: header"/>
 
 
   <div class="card">
     <div class="card-body">
       <div class="col-md-6 col-md-offset-3">
-        <form autocomplete="off" action="#" th:action="@{/registration}"
-              th:object="${user}" method="post" class="form-horizontal"
-              role="form">
+        <form action="#" autocomplete="off" class="form-horizontal"
+              method="post" role="form" th:action="@{/registration}"
+              th:object="${user}">
           <h2>إضافة مستخدم</h2>
           <div class="form-group">
             <div class="col-sm-9">
-              <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-                     class="validation-message"></label>
-              <input type="text" th:field="*{name}" placeholder="الإسم"
-                     class="form-control" />
+              <label class="validation-message" th:errors="*{name}"
+                     th:if="${#fields.hasErrors('name')}"></label>
+              <input class="form-control" placeholder="الإسم" th:field="*{name}"
+                     type="text"/>
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-sm-9">
-              <label	th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-                        class="validation-message"></label>
-              <input type="text" th:field="*{lastName}"
-                     placeholder="اللقب" class="form-control" />
+              <label class="validation-message" th:errors="*{lastName}"
+                     th:if="${#fields.hasErrors('lastName')}"></label>
+              <input class="form-control" placeholder="اللقب"
+                     th:field="*{lastName}" type="text"/>
             </div>
           </div>
           <div class="form-group">
-          <div class="col-sm-9">
-            <label	th:if="${#fields.hasErrors('CNRPS')}" th:errors="*{CNRPS}"
-                      class="validation-message"></label>
-            <input type="text" th:field="*{CNRPS}"
-                   placeholder="الرقم الموحد" class="form-control" />
-          </div>
-      </div>
-
-          <div class="form-group">
             <div class="col-sm-9">
-              <input type="text" th:field="*{login}" placeholder="Login"
-                     class="form-control" /> <label
-                    th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
-                    class="validation-message"></label>
-            </div>
-       <!--   <div class="form-group">
-            <div class="col-sm-9">
-              <input type="text" th:field="*{email}" placeholder="البريد الإلكتروني"
-                     class="form-control" /> <label
-                    th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                    class="validation-message"></label>
-            </div>-->
-          </div>
-          <div class="form-group">
-            <div class="col-sm-9">
-              <input type="password" th:field="*{password}"
-                     placeholder="كلمة العبور" class="form-control" /> <label
-                    th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                    class="validation-message"></label>
+              <label class="validation-message" th:errors="*{CNRPS}"
+                     th:if="${#fields.hasErrors('CNRPS')}"></label>
+              <input class="form-control" placeholder="الرقم الموحد"
+                     th:field="*{CNRPS}" type="text"/>
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-sm-9">
-              <button type="submit" class="btn btn-primary btn-block">Register User</button>
+              <input class="form-control" placeholder="Login" th:field="*{login}"
+                     type="text"/> <label
+                    class="validation-message" th:errors="*{login}"
+                    th:if="${#fields.hasErrors('login')}"></label>
+            </div>
+            <!--   <div class="form-group">
+                 <div class="col-sm-9">
+                   <input type="text" th:field="*{email}" placeholder="البريد الإلكتروني"
+                          class="form-control" /> <label
+                         th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                         class="validation-message"></label>
+                 </div>-->
+          </div>
+          <div class="form-group">
+            <div class="col-sm-9">
+              <input class="form-control" placeholder="كلمة العبور"
+                     th:field="*{password}" type="password"/> <label
+                    class="validation-message" th:errors="*{password}"
+                    th:if="${#fields.hasErrors('password')}"></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-9">
+              <button class="btn btn-primary btn-block" type="submit">Register User</button>
             </div>
           </div>
 
@@ -128,10 +126,7 @@
   </div>
 
   <!-- Navbar footer  -->
-  <div th:replace="fragments/footer :: footer" />
-
-
-
+  <div th:replace="fragments/footer :: footer"/>
 
 
   </div>
@@ -159,14 +154,18 @@
       <div>
         <h6 class="mb-0">Sidebar Colors</h6>
       </div>
-      <a href="javascript:void(0)" class="switch-trigger background-color">
+      <a class="switch-trigger background-color" href="javascript:void(0)">
         <div class="badge-colors my-2 text-end">
-          <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-primary active" data-color="primary"
+                          onclick="sidebarColor(this)"></span>
           <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
           <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-          <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-          <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-          <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+          <span class="badge filter bg-gradient-success" data-color="success"
+                onclick="sidebarColor(this)"></span>
+          <span class="badge filter bg-gradient-warning" data-color="warning"
+                onclick="sidebarColor(this)"></span>
+          <span class="badge filter bg-gradient-danger" data-color="danger"
+                onclick="sidebarColor(this)"></span>
         </div>
       </a>
 
@@ -176,178 +175,9 @@
       <script src="../assets/js/core/bootstrap.min.js"></script>
       <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
       <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-      <script src="../assets/js/plugins/fullcalendar.min.js"></script>
-      <script src="../assets/js/plugins/chartjs.min.js"></script>
-      <script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
-
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "#fff",
-          data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-          maxBarThickness: 6
-        }, ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-            },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
-              beginAtZero: true,
-              padding: 15,
-              font: {
-                size: 14,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-              color: "#fff"
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false
-            },
-            ticks: {
-              display: false
-            },
-          },
-        },
-      },
-    });
 
 
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
 
-    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-    new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-            label: "Mobile apps",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#cb0c9f",
-            borderWidth: 3,
-            backgroundColor: gradientStroke1,
-            fill: true,
-            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-            maxBarThickness: 6
-
-          },
-          {
-            label: "Websites",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#3A416F",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            fill: true,
-            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-            maxBarThickness: 6
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#b2b9bf',
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#b2b9bf',
-              padding: 20,
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-  </script>
       <script src="../assets/js/plugins/choices.min.js"></script>
       <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -357,7 +187,8 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-  </script>
+
+            </script>
       <!-- Github buttons -->
       <script async defer src="https://buttons.github.io/buttons.js"></script>
       <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
