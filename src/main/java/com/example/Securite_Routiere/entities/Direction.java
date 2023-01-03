@@ -10,49 +10,59 @@ import javax.validation.constraints.NotBlank;
 @Entity
 public class Direction {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int DirectionId;
+    private long DId ;
 
-    @NotBlank(message = "Code Direction  est vide ")
-    @Column(name = "Code Dorection ")
-    private long  CodeDirection;
+    @NotBlank(message = "nom Direction is mandatory")
+    @Column(name = "NomDir")
+    private String NomDir;
 
-    @NotBlank(message = "Libelle Direction   est obligatoire ")
-    @Column(name = "LibelleDirection ")
-    private String LibelleDirection;
+    @NotBlank(message = "Code Dirc  is mandatory ")
+    @Column(name = "CodeDir")
+    private int CodeDir;
 
-    /**** Many To One DirectionGeneral ****/
+    @Column(name = "etat")
+    private int etat;
+
+    //********* many to one direction general*******//
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "DirectionGeneral_Id", nullable = false)
+    @JoinColumn(name = "directiong_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private DirectionGeneral directionGeneral;
+    private DirectionGeneral directionGeneral ;
 
 
-//****** getter and Setter***//
-
-    public int getDirectionId() {
-        return DirectionId;
+    public long getDId() {
+        return DId;
     }
 
-    public void setDirectionId(int directionId) {
-        DirectionId = directionId;
+    public void setDId(long DId) {
+        this.DId = DId;
     }
 
-    public long getCodeDirection() {
-        return CodeDirection;
+    public String getNomDir() {
+        return NomDir;
     }
 
-    public void setCodeDirection(long codeDirection) {
-        CodeDirection = codeDirection;
+    public void setNomDir(String nomDir) {
+        NomDir = nomDir;
     }
 
-    public String getLibelleDirection() {
-        return LibelleDirection;
+    public int getCodeDir() {
+        return CodeDir;
     }
 
-    public void setLibelleDirection(String libelleDirection) {
-        LibelleDirection = libelleDirection;
+    public void setCodeDir(int codeDir) {
+        CodeDir = codeDir;
+    }
+
+    public int getEtat() {
+        return etat;
+    }
+
+    public void setEtat(int etat) {
+        this.etat = etat;
     }
 
     public DirectionGeneral getDirectionGeneral() {
@@ -63,12 +73,14 @@ public class Direction {
         this.directionGeneral = directionGeneral;
     }
 
-    public Direction(int directionId, long codeDirection, String libelleDirection, DirectionGeneral directionGeneral) {
-        DirectionId = directionId;
-        CodeDirection = codeDirection;
-        LibelleDirection = libelleDirection;
+    public Direction(long DId, String nomDir, int codeDir, int etat, DirectionGeneral directionGeneral) {
+        this.DId = DId;
+        NomDir = nomDir;
+        CodeDir = codeDir;
+        this.etat = etat;
         this.directionGeneral = directionGeneral;
     }
 
-
+    public Direction() {
+    }
 }
