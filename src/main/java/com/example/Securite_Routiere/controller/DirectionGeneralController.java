@@ -44,13 +44,14 @@ public class DirectionGeneralController {
     public String showAddDirectionGeneralForm(Model model) {
         DirectionGeneral directionGeneral = new DirectionGeneral();// object dont la valeur des attributs par defaut
         model.addAttribute("directionGeneral", directionGeneral);
+        System.out.println("direction general :" +directionGeneral);
         return "DirectionGeneral/addDirectionGeneral";
     }
 
 
     @PostMapping("addSave")
-    //@ResponseBody
-    public String addDirectiong(@Valid DirectionGeneral directionGeneral, BindingResult result) {
+
+    public String addDirectionGeneral(@Valid DirectionGeneral directionGeneral, BindingResult result) {
         if (result.hasErrors()) {
             return "DirectionGeneral/addDirectionGeneral";
         }
@@ -62,10 +63,10 @@ public class DirectionGeneralController {
     }
 
     @GetMapping("delete/{id}")
-    public String deleteDirectionGeneral(@PathVariable("id") long id, Model model) {
-        DirectionGeneral directiongGeneral= directionGeneralRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("Invalid Direction Général Id:" + id));
-directionGeneralRepository.delete(directiongGeneral);
+    public String deleteDirectionGeneral(@PathVariable("id") long DgId, Model model) {
+        DirectionGeneral directionGeneral= directionGeneralRepository.findById(DgId)
+                .orElseThrow(()-> new IllegalArgumentException("Invalid Direction Général Id:" + DgId));
+directionGeneralRepository.delete(directionGeneral);
         return "redirect:../list";
     }
 

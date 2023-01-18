@@ -3,6 +3,7 @@ package com.example.Securite_Routiere.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 
@@ -17,7 +18,6 @@ public class DirectionGeneral {
     @Column(name = "NomDirGen")
     private String NomDirGen;
 
-    @NotBlank(message = "Code Dirc General  is mandatory ")
     @Column(name = "CodeDirGen")
     private int CodeDirGen;
 

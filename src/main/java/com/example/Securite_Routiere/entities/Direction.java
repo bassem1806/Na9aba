@@ -28,10 +28,10 @@ public class Direction {
 
     //********* many to one direction general*******//
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "directiong_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private DirectionGeneral directionGeneral ;
+   // @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  //  @JoinColumn(name = "directiong_id", nullable = false)
+   // @OnDelete(action = OnDeleteAction.CASCADE)
+   // private DirectionGeneral directionGeneral ;
 
     public long getDId() {
         return DId;
@@ -65,21 +65,21 @@ public class Direction {
         this.etat = etat;
     }
 
-    public DirectionGeneral getDirectionGeneral() {
+   /* public DirectionGeneral getDirectionGeneral() {
         return directionGeneral;
     }
 
     public void setDirectionGeneral(DirectionGeneral directionGeneral) {
         this.directionGeneral = directionGeneral;
     }
-
+*/
 
     public Direction(long DId, String nomDir, int codeDir, int etat, DirectionGeneral directionGeneral) {
         this.DId = DId;
         NomDir = nomDir;
         CodeDir = codeDir;
         this.etat = etat;
-        this.directionGeneral = directionGeneral;
+       // this.directionGeneral = directionGeneral;
     }
 
     public Direction() {
