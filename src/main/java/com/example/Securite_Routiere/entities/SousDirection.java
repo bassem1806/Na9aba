@@ -30,12 +30,23 @@ public class SousDirection {
     @JoinColumn(name = "direction_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private  Direction direction;
-
+/*
     /**** Many To One direction general ****/
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  /*  @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "directiong_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private DirectionGeneral directionGeneral;
+*/
+
+/*
+    public DirectionGeneral getDirectionGeneral() {
+        return directionGeneral;
+    }
+
+    public void setDirectionGeneral(DirectionGeneral directionGeneral) {
+        this.directionGeneral = directionGeneral;
+    }
+*/
 
     public long getSdId() {
         return SdId;
@@ -77,21 +88,13 @@ public class SousDirection {
         this.direction = direction;
     }
 
-    public DirectionGeneral getDirectionGeneral() {
-        return directionGeneral;
-    }
 
-    public void setDirectionGeneral(DirectionGeneral directionGeneral) {
-        this.directionGeneral = directionGeneral;
-    }
-
-    public SousDirection(long sdId, String nomSDir, int codeDir, int etat, Direction direction, DirectionGeneral directionGeneral) {
+    public SousDirection(long sdId, String nomSDir, int codeDir, int etat, Direction direction) {
         SdId = sdId;
         NomSDir = nomSDir;
         CodeDir = codeDir;
         this.etat = etat;
         this.direction = direction;
-        this.directionGeneral = directionGeneral;
     }
 
     public SousDirection() {

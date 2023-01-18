@@ -27,11 +27,11 @@ public class Direction {
     private int etat;
 
     //********* many to one direction general*******//
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "directiong_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private DirectionGeneral directionGeneral ;
-
 
     public long getDId() {
         return DId;
@@ -72,6 +72,7 @@ public class Direction {
     public void setDirectionGeneral(DirectionGeneral directionGeneral) {
         this.directionGeneral = directionGeneral;
     }
+
 
     public Direction(long DId, String nomDir, int codeDir, int etat, DirectionGeneral directionGeneral) {
         this.DId = DId;
