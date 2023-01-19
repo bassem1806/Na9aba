@@ -62,13 +62,26 @@ public class DirectionGeneralController {
         return "redirect:list";
     }
 
-    @GetMapping("delete/{id}")
-    public String deleteDirectionGeneral(@PathVariable("id") long DgId, Model model) {
+    @GetMapping("delete/{DgId}")
+
+
+    public String deleteDirectionGeneral(@PathVariable("DgId") long DgId, Model model){
+
+
         DirectionGeneral directionGeneral= directionGeneralRepository.findById(DgId)
                 .orElseThrow(()-> new IllegalArgumentException("Invalid Direction Général Id:" + DgId));
-directionGeneralRepository.delete(directionGeneral);
-        return "redirect:../list";
+
+
+       directionGeneralRepository.delete(directionGeneral);
+
+        System.out.println("id dg : "  +directionGeneral.getDgId());
+return"redirect:../list";
+
     }
+
+
+
+
 
     @GetMapping("edit/{id}")
     public String showDirectionGeneralFormToUpdate(@PathVariable("id") long id, Model model) {

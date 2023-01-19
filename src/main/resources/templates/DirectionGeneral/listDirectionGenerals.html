@@ -76,7 +76,8 @@
                                     <td th:text="${directionGeneral.etat}"></td>
 
                                     <td><a th:href="@{/DirectionGeneral/edit/{id}(id=${DgId})}" class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td>
-                                    <td><a th:href="@{/DirectionGeneral/delete/{id}(id=${DgId})}" class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
+                                    <!--td><a th:href="@{/DirectionGeneral/delete/{DgId}(DgId=${directionGeneral.DgId})}" class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td-->
+                                    <td><a  th:href="@{/DirectionGeneral/delete/{DgId}(DgId=${directionGeneral.DgId})}" class="btn btn-danger"> حذف<i class="fas fa-user-times ml-2"></i></a></td>
 
                                 </tr>
                                 </tbody>
