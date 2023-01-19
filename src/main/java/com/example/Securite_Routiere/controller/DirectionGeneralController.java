@@ -83,10 +83,10 @@ return"redirect:../list";
 
 
 
-    @GetMapping("edit/{id}")
-    public String showDirectionGeneralFormToUpdate(@PathVariable("id") long id, Model model) {
-       DirectionGeneral directionGeneral = directionGeneralRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("Invalid Direction Général Id:" + id));
+    @GetMapping("edit/{DgId}")
+    public String showDirectionGeneralFormToUpdate(@PathVariable("DgId") long DgId, Model model) {
+       DirectionGeneral directionGeneral = directionGeneralRepository.findById(DgId)
+                .orElseThrow(()->new IllegalArgumentException("Invalid Direction Général Id:" + DgId));
 
         model.addAttribute("directionGeneral", directionGeneral);
 
@@ -94,7 +94,7 @@ return"redirect:../list";
     }
 
     @PostMapping("update")
-    public String updateDirectiong(@Valid DirectionGeneral directionGeneral, BindingResult result) {
+    public String updateDirectionGeneral(@Valid DirectionGeneral directionGeneral, BindingResult result) {
         if (result.hasErrors()) {
             return "DirectionGeneral/updateDirectionGeneral";
         }
