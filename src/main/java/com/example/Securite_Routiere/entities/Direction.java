@@ -19,19 +19,19 @@ public class Direction {
     @Column(name = "NomDir")
     private String NomDir;
 
-    @NotBlank(message = "Code Dirc  is mandatory ")
+
     @Column(name = "CodeDir")
     private int CodeDir;
 
-    @Column(name = "etat")
-    private int etat;
+    @Column(name = "etatD")
+    private int etatD;
 
     //********* many to one direction general*******//
 
-   // @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  //  @JoinColumn(name = "directiong_id", nullable = false)
-   // @OnDelete(action = OnDeleteAction.CASCADE)
-   // private DirectionGeneral directionGeneral ;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "DirectionGeneral_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private DirectionGeneral directionGeneral ;
 
     public long getDId() {
         return DId;
@@ -58,28 +58,28 @@ public class Direction {
     }
 
     public int getEtat() {
-        return etat;
+        return etatD;
     }
 
-    public void setEtat(int etat) {
-        this.etat = etat;
+    public void setEtat(int etatD) {
+        this.etatD = etatD;
     }
 
-   /* public DirectionGeneral getDirectionGeneral() {
+
+    public DirectionGeneral getDirectionGeneral() {
         return directionGeneral;
     }
 
     public void setDirectionGeneral(DirectionGeneral directionGeneral) {
         this.directionGeneral = directionGeneral;
     }
-*/
 
-    public Direction(long DId, String nomDir, int codeDir, int etat, DirectionGeneral directionGeneral) {
+    public Direction(long DId, String nomDir, int codeDir, int etatD, DirectionGeneral directionGeneral) {
         this.DId = DId;
         NomDir = nomDir;
         CodeDir = codeDir;
-        this.etat = etat;
-       // this.directionGeneral = directionGeneral;
+        this.etatD= etatD;
+        this.directionGeneral = directionGeneral;
     }
 
     public Direction() {
