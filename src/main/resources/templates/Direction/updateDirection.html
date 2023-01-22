@@ -17,7 +17,7 @@
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 
@@ -52,9 +52,9 @@
 
 
 
-                    <form action="#" th:action="@{/Direction/update}" th:object="${direction}" method="post" >
+                    <form action="#" th:action="@{/Direction/edit}" th:object="${direction}" method="post" >
 
-                        <input type="text" th:field="*{DId}" />
+                        <input type="hidden" th:field="*{DId}" />
                         <div class="row">
                             <div class="col-sm-7">
 
@@ -79,18 +79,19 @@
 
                         <div class="form-group col-md-8" >
                             <label for="CodeDir" class="col-form-label">رمز الإدارة </label> <input type="text" th:field="*{CodeDir}" class="form-control" id="CodeDir" placeholder="رمز الإدارة"> <span
-                                th:if="${#fields.hasErrors('CodeDirGen')}" th:errors="*{CodeDirGen}" class="text-danger"></span>
+                                th:if="${#fields.hasErrors('CodeDir')}" th:errors="*{CodeDir}" class="text-danger"></span>
                         </div>
+
                             <div class="form-group col-md-8" >
-                                <label for="etatD" class="col-form-label">رمز الإدارة </label> <input type="text" th:field="*{etatD}" class="form-control" id="etatD" placeholder="رمز الإدارة"> <span
-                                    th:if="${#fields.hasErrors('etatD')}" th:errors="*{etatD}" class="text-danger"></span>
+                                <label for="etatD" class="col-form-label">الوضعية </label> <input type="text" th:field="*{etatD}" class="form-control" id="etatD" placeholder=" الوضعية ">
+                                <span th:if="${#fields.hasErrors('etatD')}" th:errors="*{etatD}" class="text-danger"></span>
                             </div>
 
 
 
 
                             <div class="form-group col-md-12">
-                                <input type="submit" class="btn btn-primary" value="تحيين الإدارة العامة ">
+                                <input type="submit" class="btn btn-primary" value="تحيين الإدارة  ">
                             </div>
 
 
@@ -174,7 +175,7 @@
             <!-- Github buttons -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-            <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+            <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>

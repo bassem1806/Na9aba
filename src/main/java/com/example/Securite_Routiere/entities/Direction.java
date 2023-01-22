@@ -57,14 +57,13 @@ public class Direction {
         CodeDir = codeDir;
     }
 
-    public int getEtat() {
+    public int getEtatD() {
         return etatD;
     }
 
-    public void setEtat(int etatD) {
+    public void setEtatD(int etatD) {
         this.etatD = etatD;
     }
-
 
     public DirectionGeneral getDirectionGeneral() {
         return directionGeneral;
@@ -74,11 +73,12 @@ public class Direction {
         this.directionGeneral = directionGeneral;
     }
 
+
     public Direction(long DId, String nomDir, int codeDir, int etatD, DirectionGeneral directionGeneral) {
         this.DId = DId;
         NomDir = nomDir;
         CodeDir = codeDir;
-        this.etatD= etatD;
+        this.etatD = etatD;
         this.directionGeneral = directionGeneral;
     }
 

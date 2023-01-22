@@ -88,4 +88,20 @@ public class DirectionController {
         return "Direction/updateDirection";
     }
 
+    @PostMapping("edit")
+    public String updateDirection(@Valid Direction direction, BindingResult result, Model model, @RequestParam(name = "DirectionGeneralId", required = false) Long dg) {
+        if (result.hasErrors()) {
+            System.out.println("direction id : " +direction.getCodeDir());
+            return "Direction/updateDirection";
+        }
+        DirectionGeneral directionGeneral= directionGeneralRepository.findById(dg)
+                .orElseThrow(()-> new IllegalArgumentException("Invalid Directiong eneral Id:" + dg));
+        direction.setDirectionGeneral(directionGeneral);
+
+        directionRepository.save(direction);
+   return "redirect:../Direction/list";
+
+
+    }
+
 }
