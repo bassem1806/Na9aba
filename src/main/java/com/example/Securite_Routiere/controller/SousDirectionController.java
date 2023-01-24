@@ -85,6 +85,18 @@ public class SousDirectionController {
     }
 
 
+    @GetMapping("delete/{SdId}")
+    public String deleteDirection(@PathVariable("SdId") long SdId, Model model) {
+        SousDirection sousDirection = sousDirectionRepository.findById(SdId)
+                .orElseThrow(()-> new IllegalArgumentException("Invalid SousDirection Id:" + SdId));
+        sousDirectionRepository.delete(sousDirection);
+        model.addAttribute("sousDirection", sousDirectionRepository.findAll());
+
+        return "Direction/listDirections";
+    }
+
+
+
     @ResponseBody
     @RequestMapping(value = "loadDirectionByDirectionGeneral/{DgId}", method = RequestMethod.GET)
     public String loadStatesByCountry(@PathVariable("DgId") long DgId) {

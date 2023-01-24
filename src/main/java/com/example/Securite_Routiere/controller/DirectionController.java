@@ -66,8 +66,8 @@ public class DirectionController {
     }
 
     @GetMapping("delete/{DId}")
-    public String deleteDirection(@PathVariable("DId") long DId, Model model) {
-        Direction direction = directionRepository.findById(DId)
+    public String deleteSousDirection(@PathVariable("DId") long DId, Model model) {
+       Direction direction = directionRepository.findById(DId)
                 .orElseThrow(()-> new IllegalArgumentException("Invalid Direction Id:" + DId));
         directionRepository.delete(direction);
         model.addAttribute("directions", directionRepository.findAll());
