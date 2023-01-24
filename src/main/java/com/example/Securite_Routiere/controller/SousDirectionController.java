@@ -7,14 +7,12 @@ import com.example.Securite_Routiere.entities.SousDirection;
 import com.example.Securite_Routiere.repositories.DirectionGeneralRepository;
 import com.example.Securite_Routiere.repositories.DirectionRepository;
 import com.example.Securite_Routiere.repositories.SousDirectionRepository;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -86,5 +84,26 @@ public class SousDirectionController {
 
     }
 
+
+    @ResponseBody
+    @RequestMapping(value = "loadDirectionByDirectionGeneral/{DgId}", method = RequestMethod.GET)
+    public String loadStatesByCountry(@PathVariable("DgId") long DgId) {
+
+        System.out.println("init loadStatesByCountry");
+        System.out.println("l id de la direction générale st ="+DgId);
+
+      System.out.println("la taille de la liste est egale ="+directionRepository.findByDirectionGeneral(directionGeneralRepository.findById(DgId).get()));
+
+      List<Direction> directionByDg= directionRepository.findByDirectionGeneral(directionGeneralRepository.findById(DgId).get());
+
+
+        System.out.println("la taille de la liste est egale ="+directionByDg.size());
+
+        Gson gson = new Gson();
+     // GsonBuilder gsonBuilder = new GsonBuilder();
+     // Gson gson = gsonBuilder.registerTypeAdapter(Direction.class, new MessageAdapter()).create();
+        return gson.toJson(directionRepository.findByDirectionGeneral(directionGeneralRepository.findById(DgId).get()));
+
+    }
 
 }

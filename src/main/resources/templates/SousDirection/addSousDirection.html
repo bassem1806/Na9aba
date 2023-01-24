@@ -23,8 +23,32 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script src="..//cdn.jsdelivr.net/npm/sweetalert2011"></script>
+    <!--script src="..//cdn.jsdelivr.net/npm/sweetalert2011"></script-->
 
+    <!--script th:src="@{/js/jquery-1.7.1.min.js}"></script-->
+
+    <script src="/assets/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+$(document).ready(function(){
+
+	$('#listDirectionGeneral').on('change', function(){
+		var direction_general_id= $(this).val();
+
+		$.ajax({
+			type: 'GET',
+			url: '/SousDirection/loadDirectionByDirectionGeneral/' + direction_general_id ,
+			success: function(result) {
+				var result = JSON.parse(result);
+				var s = '';
+				for(var i = 0; i < result.length; i++) {
+					s += '<option value="' + result[i].DId + '">' + result[i].NomDir + '</option>';
+				}
+				$('#listDirection').html(s);
+			}
+		});
+	});
+		});
+</script>
 </head>
 
 <!-- menu a droite  -->
@@ -55,14 +79,14 @@
 
                             <div class="form-group col-md-8">
                                 <label for="directionGeneral" class="col-form-label" id="directionGeneral" >الإدارة العامة </label>
-                                <select name="DirectionGeneralId" class="form-control">
+                                <select id ="listDirectionGeneral" name="DirectionGeneralId" class="form-control">
                                     <option  th:each="dr: ${directionGenerals}" th:value="${dr.DgId}" th:text="${dr.NomDirGen}" />
                                 </select>
                             </div>
 
                             <div class="form-group col-md-8">
                                 <label for="direction" class="col-form-label" id="direction" >الإدارة  </label>
-                                <select name="DirectionId" class="form-control">
+                                <select  id="listDirection" name="DirectionId" class="form-control">
                                     <option  th:each="dr: ${directions}" th:value="${dr.DId}" th:text="${dr.NomDir}" />
                                 </select>
                             </div>
@@ -151,7 +175,7 @@
 
 
             <!--   Core JS Files   -->
-            <script src="../assets/js/sweetalert2.all.min.js"></script>
+            <!--script src="../assets/js/sweetalert2.all.min.js"></script-->
             <script src="../assets/js/core/popper.min.js"></script>
             <script src="../assets/js/core/bootstrap.min.js"></script>
             <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
