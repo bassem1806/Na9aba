@@ -14,16 +14,16 @@ public class SousDirection {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long SdId ;
 
-    @NotBlank(message = "nom Sous Direction is mandatory")
+
     @Column(name = "NomSDir")
     private String NomSDir;
 
-    @NotBlank(message = "Code Sous Dir  is mandatory ")
-    @Column(name = "CodeSDir")
-    private int CodeDir;
 
-    @Column(name = "etat")
-    private int etat;
+    @Column(name = "CodeSDir")
+    private int CodeSDir;
+
+    @Column(name = "etatSD")
+    private int etatSD;
 
     /**** Many To One direction ****/
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -33,7 +33,7 @@ public class SousDirection {
 
     /**** Many To One direction general ****/
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "directiong_id", nullable = false)
+    @JoinColumn(name = "directionGeneral_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private DirectionGeneral directionGeneral;
 
@@ -53,20 +53,20 @@ public class SousDirection {
         NomSDir = nomSDir;
     }
 
-    public int getCodeDir() {
-        return CodeDir;
+    public int getCodeSDir() {
+        return CodeSDir;
     }
 
-    public void setCodeDir(int codeDir) {
-        CodeDir = codeDir;
+    public void setCodeSDir(int codeSDir) {
+        CodeSDir = codeSDir;
     }
 
-    public int getEtat() {
-        return etat;
+    public int getEtatSD() {
+        return etatSD;
     }
 
-    public void setEtat(int etat) {
-        this.etat = etat;
+    public void setEtatSD(int etatSD) {
+        this.etatSD = etatSD;
     }
 
     public Direction getDirection() {
@@ -85,11 +85,11 @@ public class SousDirection {
         this.directionGeneral = directionGeneral;
     }
 
-    public SousDirection(long sdId, String nomSDir, int codeDir, int etat, Direction direction, DirectionGeneral directionGeneral) {
+    public SousDirection(long sdId, String nomSDir, int codeSDir, int etatSD, Direction direction, DirectionGeneral directionGeneral) {
         SdId = sdId;
         NomSDir = nomSDir;
-        CodeDir = codeDir;
-        this.etat = etat;
+        CodeSDir = codeSDir;
+        this.etatSD = etatSD;
         this.direction = direction;
         this.directionGeneral = directionGeneral;
     }
