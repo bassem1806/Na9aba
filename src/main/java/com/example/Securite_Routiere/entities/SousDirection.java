@@ -42,8 +42,9 @@ public class SousDirection {
     }
 
     public void setSdId(long sdId) {
-        SdId = sdId;
+        this.SdId = sdId;
     }
+
 
     public String getNomSDir() {
         return NomSDir;
@@ -96,4 +97,6 @@ public class SousDirection {
 
     public SousDirection() {
     }
+
+
 }

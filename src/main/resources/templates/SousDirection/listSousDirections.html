@@ -78,7 +78,7 @@
                             <td th:text="${sousDirection.CodeSDir}"></td>
                             <td th:text="${sousDirection.etatSD}"></td>
 
-                            <!--td><a th:href="@{/DirectionGeneral/edit/{DgId}(DgId=${directionGeneral.DgId})}" class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td-->
+
                             <td><a  th:href="@{/SousDirection/edit/{id}(id=${sousDirection.SdId})}" class="btn btn-warning"> تحيين<i class="fas fa-user-edit ml-2"></i></a></td>
                             <td><a  th:href="@{/SousDirection/delete/{id}(id=${sousDirection.SdId})}" class="btn btn-danger"> حذف<i class="fas fa-user-times ml-2"></i></a></td>
 

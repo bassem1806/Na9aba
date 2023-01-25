@@ -53,11 +53,12 @@
 
 
 
-                        <form action="#" th:action="@{/DirectionGeneral/update}" th:object="${directionGeneral}" method="post">
+                        <form action="#" th:action="@{/DirectionGeneral/add}" th:object="${directionGeneral}" method="post">
                         <div class="row">
 
                             <div class="form-group col-md-8" >
-                                    <label for="NomDirGen" class="col-form-label">إسم الإدارة العامة</label> <input type="text" th:field="*{NomDirGen}" class="form-control" id="NomDirGen" placeholder="إسم الإدارة"> <span
+                                    <label for="NomDirGen" class="col-form-label">إسم الإدارة العامة</label>
+                                <input type="text" th:field="*{NomDirGen}" class="form-control" id="NomDirGen" placeholder="إسم الإدارة"> <span
                                         th:if="${#fields.hasErrors('NomDirGen')}" th:errors="*{NomDirGen}" class="text-danger"></span>
                             </div>
 
@@ -149,6 +150,6 @@
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
             <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
-</body>
+  </body>
 
 </html>

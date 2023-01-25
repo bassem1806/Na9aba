@@ -96,6 +96,50 @@ public class SousDirectionController {
     }
 
 
+    @GetMapping("edit/{SdId}")
+    public String showDirectionFormToUpdate(@PathVariable("SdId") long SdId, Model model) {
+        SousDirection sousDirection = sousDirectionRepository.findById(SdId)
+                .orElseThrow(()->new IllegalArgumentException("Invalid Direction Id:" + SdId));
+
+        model.addAttribute("sousDirection", sousDirection);
+
+        model.addAttribute("directionGenerals", directionGeneralRepository.findAll());
+        model.addAttribute("idDirectionGeneral", sousDirection.getDirectionGeneral().getDgId());
+
+        model.addAttribute("directions", directionRepository.findAll());
+        model.addAttribute("idDirection", sousDirection.getDirection().getDId());
+
+        return "SousDirection/updateSousDirection";
+    }
+
+
+    @PostMapping("edit")
+    public String updateSousDirection(@Valid SousDirection sousdirection, BindingResult result, Model model,
+                                      @RequestParam(name = "DirectionGeneralId", required = false) Long dg,
+                                                   @RequestParam(name = "directionId", required = true) Long d) {
+        if (result.hasErrors()) {
+           // System.out.println("direction id : " +direction.getCodeDir());
+            return "SousDirection/updateSousDirection";
+        }
+        DirectionGeneral directionGeneral= directionGeneralRepository.findById(dg)
+                .orElseThrow(()-> new IllegalArgumentException("Invalid Directiong eneral Id:" + dg));
+
+        sousdirection.setDirectionGeneral(directionGeneral);
+
+        Direction direction = directionRepository.findById(d)
+                .orElseThrow(()-> new IllegalArgumentException("Invalid Direction Id:" + d));
+
+  sousdirection.setDirection(direction);
+
+
+  sousDirectionRepository.save(sousdirection);
+
+        return "redirect:../SousDirection/list";
+
+
+    }
+
+
 
     @ResponseBody
     @RequestMapping(value = "loadDirectionByDirectionGeneral/{DgId}", method = RequestMethod.GET)

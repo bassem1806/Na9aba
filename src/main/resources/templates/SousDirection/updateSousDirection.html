@@ -13,17 +13,38 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
-    <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!--link href="/assets/css/nucleo-icons.css" rel="stylesheet" /-->
+    <!--link href="/assets/css/nucleo-svg.css" rel="stylesheet" /-->
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!--link href="../assets/css/nucleo-svg.css" rel="stylesheet" /-->
     <!-- CSS Files -->
     <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+    <script src="/assets/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+$(document).ready(function(){
 
+	$('#listDirectionGeneral').on('change', function(){
+		var direction_general_id= $(this).val();
+
+		$.ajax({
+			type: 'GET',
+			url: '/SousDirection/loadDirectionByDirectionGeneral/' + direction_general_id ,
+			success: function(result) {
+				var result = JSON.parse(result);
+				var s = '';
+				for(var i = 0; i < result.length; i++) {
+					s += '<option value="' + result[i].DId + '">' + result[i].NomDir + '</option>';
+				}
+				$('#listDirection').html(s);
+			}
+		});
+	});
+		});
+</script>
 
 </head>
 
@@ -45,53 +66,63 @@
     <div th:replace="fragments/header :: header" />
 
     <div class="container my-5">
-        <h3>تحيين إدارة </h3>
+        <h3>تحيين الإدارة الفرعية</h3>
         <div class="card">
             <div class="card-body">
                 <div class="col-md-12">
 
 
+                    <form action="#" th:action="@{/SousDirection/edit}" th:object="${sousDirection}" method="post" >
 
-                    <form action="#" th:action="@{/Direction/edit}" th:object="${direction}" method="post" >
+                        <input type="hidden" th:field="*{SdId}" />
 
-                        <input type="hidden" th:field="*{DId}" />
                         <div class="row">
                             <div class="col-sm-7">
 
+                                <label for="directionGeneral" class="col-form-label" >الإدارة العامة</label>
+                                <!--label for="directionGeneral" class="col-form-label" >الإدارة العامة</label-->
+                                <select id="listDirectionGeneral" name="DirectionGeneralId" class="form-control">
+                                    <option  th:each="dr: ${directionGenerals}"
+                                             th:value="${dr.DgId}"
+                                             th:text="${dr.NomDirGen}"
+                                             th:selected="(${dr.DgId} == ${idDirectionGeneral})"
 
-                            <label for="directionGeneral" class="col-form-label" >الإدارة العامة</label>
-                            <select id="directionGeneral" name="DirectionGeneralId" class="form-control">
-                                <option  th:each="dr: ${directionGenerals}"
-                                         th:value="${dr.DgId}"
-                                         th:text="${dr.NomDirGen}"
-                                         th:selected="(${dr.DgId} == ${idDirectionGeneral})"
+                                    />
+                                </select>
 
-                                />
-                            </select>
+                                <label for="direction" class="col-form-label">Select Direction </label>
 
-                        </div>
+                                <select   id="listDirection" name="directionId" class="form-control">
+                                    <option  th:each="d: ${directions}"
+                                             th:value="${d.DId}"
+                                             th:text="${d.NomDir}"
+                                             th:selected="(${d.DId} == ${idDirection})"
+                                    />
+                                </select >
 
-                        <div class="form-group col-md-8" >
-                            <label for="NomDir" class="col-form-label">إسم الإدارة </label>
-                            <input type="text" th:field="*{NomDir}" class="form-control" id="NomDir" placeholder="إسم الإدارة"> <span
-                                th:if="${#fields.hasErrors('NomDir')}" th:errors="*{NomDir}" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group col-md-8" >
-                            <label for="CodeDir" class="col-form-label">رمز الإدارة </label> <input type="text" th:field="*{CodeDir}" class="form-control" id="CodeDir" placeholder="رمز الإدارة"> <span
-                                th:if="${#fields.hasErrors('CodeDir')}" th:errors="*{CodeDir}" class="text-danger"></span>
-                        </div>
+                            </div>
 
                             <div class="form-group col-md-8" >
-                                <label for="etatD" class="col-form-label">الوضعية </label> <input type="text" th:field="*{etatD}" class="form-control" id="etatD" placeholder=" الوضعية ">
-                                <span th:if="${#fields.hasErrors('etatD')}" th:errors="*{etatD}" class="text-danger"></span>
+                                <label for="NomSDir" class="col-form-label">إسم الإدارةالفرعية </label>
+                                <input type="text" th:field="*{NomSDir}" class="form-control" id="NomSDir" placeholder="إسم الإدارة"> <span
+                                    th:if="${#fields.hasErrors('NomSDir')}" th:errors="*{NomSDir}" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-8" >
+                                <label for="CodeSDir" class="col-form-label">رمز الإدارة الفرعية </label> <input type="text" th:field="*{CodeSDir}" class="form-control" id="CodeSDir" placeholder="رمز الإدارة"> <span
+                                    th:if="${#fields.hasErrors('CodeSDir')}" th:errors="*{CodeSDir}" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-8" >
+                                <label for="etatSD" class="col-form-label">وضعيةالإدارةالفرعية </label> <input type="text" th:field="*{etatSD}" class="form-control" id="etatSD" placeholder=" الوضعية ">
+                                <span th:if="${#fields.hasErrors('etatSD')}" th:errors="*{etatSD}" class="text-danger"></span>
                             </div>
 
 
 
 
                             <div class="form-group col-md-12">
-                                <input type="submit" class="btn btn-primary" value="تحيين الإدارة  ">
+                                <input type="submit" class="btn btn-primary" value="تحيين الإدارة الفرعية  ">
                             </div>
 
 
@@ -155,14 +186,14 @@
 
 
             <!--   Core JS Files   -->
-            <script src="/assets/js/core/popper.min.js"></script>
-            <script src="/assets/js/core/bootstrap.min.js"></script>
-            <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
-            <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
-            <script src="/assets/js/plugins/fullcalendar.min.js"></script>
-            <script src="/assets/js/plugins/chartjs.min.js"></script>
+            <script src="../assets/js/core/popper.min.js"></script>
+            <script src="../assets/js/core/bootstrap.min.js"></script>
+            <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+            <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+            <!--script src="/assets/js/plugins/fullcalendar.min.js"></script>--
+            <!--script src="/assets/js/plugins/chartjs.min.js"></script-->
 
-            <script src="/assets/js/plugins/choices.min.js"></script>
+            <script src="../assets/js/plugins/choices.min.js"></script>
             <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
