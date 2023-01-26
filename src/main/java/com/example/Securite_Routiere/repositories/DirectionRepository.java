@@ -12,4 +12,6 @@ import java.util.List;
 public interface DirectionRepository extends JpaRepository<Direction,Long> {
 
     List<Direction> findByDirectionGeneral(DirectionGeneral directionGeneral);
+
+
 }

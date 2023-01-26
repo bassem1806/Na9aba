@@ -10,13 +10,16 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long GradeId;
 
-    @NotBlank(message = "Code_Grade ")
+
     @Column(name = "Code_Grade")
     private int CodeGrade;
 
-    @NotBlank(message = "Libelle_Grade est obligatoire ")
+
     @Column(name = "Libelle_Grade")
     private String LibelleGrade;
+
+    @Column(name = "Categorie_Grade")
+    private String CategorieGrade;
 
 //********* Getter AND Setter******//
 
@@ -44,12 +47,24 @@ public class Grade {
     public void setLibelleGrade(String libelleGrade) {
         LibelleGrade = libelleGrade;
     }
+
+    public String getGategorieGrade() {
+        return CategorieGrade;
+    }
+
+    public void setGategorieGrade(String gategorieGrade) {
+        CategorieGrade = gategorieGrade;
+    }
+
     //********* Constructor with parameter******//
-    public Grade(long gradeId, int codeGrade, String libelleGrade) {
+
+    public Grade(long gradeId, int codeGrade, String libelleGrade, String categorieGrade) {
         GradeId = gradeId;
         CodeGrade = codeGrade;
         LibelleGrade = libelleGrade;
+        CategorieGrade = categorieGrade;
     }
+
     //********* Constructor without parameter******//
 
 

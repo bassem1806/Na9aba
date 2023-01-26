@@ -33,6 +33,10 @@ public class Agent {
     @Column(name = "Prenom_Pere")
     private String Prenom_Pere;
 
+
+    @Column(name = "Date_inscription")
+    private String DateInscription;
+
     /**** Many To One delegation ****/
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -48,7 +52,17 @@ public class Agent {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Grade grade;
 
+
+    /**** Many To One Sousdirection****/
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "sousdirection_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private SousDirection sousDirection;
+
 //********* Getter AND Setter******//
+
+
     public long getAgentId() {
         return AgentId;
     }
@@ -98,4 +112,52 @@ public class Agent {
     }
 
 
+    public String getDateInscription() {
+        return DateInscription;
+    }
+
+    public void setDateInscription(String dateInscription) {
+        DateInscription = dateInscription;
+    }
+
+    public Delegation getDelegation() {
+        return delegation;
+    }
+
+    public void setDelegation(Delegation delegation) {
+        this.delegation = delegation;
+    }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
+    public SousDirection getSousDirection() {
+        return sousDirection;
+    }
+
+    public void setSousDirection(SousDirection sousDirection) {
+        this.sousDirection = sousDirection;
+    }
+
+    public Agent(long agentId, long CIN, long CNRPS, String nom, String prenom, String prenom_Pere, String dateInscription, Delegation delegation, Grade grade, SousDirection sousDirection) {
+        AgentId = agentId;
+        this.CIN = CIN;
+        this.CNRPS = CNRPS;
+
+        Nom = nom;
+        Prenom = prenom;
+        Prenom_Pere = prenom_Pere;
+        DateInscription = dateInscription;
+        this.delegation = delegation;
+        this.grade = grade;
+        this.sousDirection = sousDirection;
+    }
+
+    public Agent() {
+    }
 }

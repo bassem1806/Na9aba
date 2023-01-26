@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>
+        إدارة الخدمات الفنية
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="..//cdn.jsdelivr.net/npm/sweetalert2011"></script>
+    <script src="/assets/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+$(document).ready(function(){
+
+	$('#gouvernorat').on('change', function(){
+		var gouvernorat_id = $(this).val();
+
+		$.ajax({
+			type: 'GET',
+			url:'/Agent/loadDelegationByGouvernorat/' + gouvernorat_id,
+				success: function(result) {
+				var result = JSON.parse(result);
+				var s = '<option value="">--من فضل إختر  المعتمدية--</option>';
+				for(var i = 0; i < result.length; i++) {
+					s += '<option value="' + result[i].delegationId + '">' + result[i].name + '</option>';
+				}
+				$('#gouvernorat1').empty();
+				$('#gouvernorat1').html(s);
+			}
+		});
+	});
+		});
+
+    </script>
+
+    <script type="text/javascript">
+$(document).ready(function(){
+
+	$('#listDirectionGeneral').on('change', function(){
+		var direction_general_id= $(this).val();
+
+		$.ajax({
+			type: 'GET',
+			url: '/Agent/loadDirectionByDirectionGeneral/' + direction_general_id ,
+			success: function(result) {
+				var result = JSON.parse(result);
+				var s = '';
+				for(var i = 0; i < result.length; i++) {
+					s += '<option value="' + result[i].DId + '">' + result[i].NomDir + '</option>';
+				}
+				$('#listDirection').html(s);
+			}
+		});
+	});
+		});
+</script>
+    <!--script type="text/javascript">
+$(document).ready(function(){
+
+	$('#listDirection').on('change', function(){
+		var direction_id= $(this).val();
+
+		$.ajax({
+			type: 'GET',
+			url: '/Agent/loadDirectionByDirection/' + direction_id ,
+			success: function(result) {
+				var result = JSON.parse(result);
+				var s = '';
+				for(var i = 0; i < result.length; i++) {
+					s += '<option value="' + result[i].SdId+ '">' + result[i].NomSDir + '</option>';
+				}
+				$('#listSousDirection').html(s);
+			}
+		});
+	});
+		});
+</script-->
+</head>
+
+<!-- menu a droite  -->
+
+<body class="g-sidenav-show rtl bg-gray-100">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret" id="sidenav-main">
+
+    <div th:replace="fragments/menu :: menu" />
+
+</aside>
+<!--end  menu a droite  -->
+
+<main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg overflow-hidden">
+
+
+
+    <!-- Navbar header  -->
+    <div th:replace="fragments/header :: header" />
+
+    <div class="container my-5">
+        <h3>إضافة موظف</h3>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-10">
+
+
+
+
+                    <form action="#" th:action="@{/Agent/add}" th:object="${agent}" method="post">
+                        <div class="row">
+
+                            <div class="card-header pb-0 text-left bg-transparent">
+                                <h3 class="font-weight-bolder text-info text-center"> ملف موظف </h3>
+
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label for="CNRPS" class="col-form-label">المعرف الوحيد </label>
+                                <input type="text" th:field="*{CNRPS}" class="form-control" id="CNRPS" placeholder="المعرف الوحيد"/>
+                                <span th:if="${#fields.hasErrors('CNRPS')}" th:errors="*{CNRPS}" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="CIN" class="col-form-label">رقم بطاقة التعريف الوطنية </label>
+                                <input type="text" th:field="*{CIN}" class="form-control" id="CIN" placeholder="رقم بطاقة التعريف الوطنية "/>
+                                <span th:if="${#fields.hasErrors('CIN')}" th:errors="*{CIN}" class="text-danger"></span>
+                            </div><br>
+
+                            <div class="form-group col-md-4">
+                                <label for="Prenom" class="col-form-label">الإسم </label>
+                                <input type="text" th:field="*{Prenom}" class="form-control" id="Prenom" placeholder="الإسم "/>
+                                <span th:if="${#fields.hasErrors('Prenom')}" th:errors="*{Prenom}" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="Nom" class="col-form-label">اللقب </label>
+                                <input type="text" th:field="*{Nom}" class="form-control" id="Nom" placeholder="اللقب "/>
+                                <span th:if="${#fields.hasErrors('Nom')}" th:errors="*{Nom}" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="Prenom_Pere" class="col-form-label">إسم الأب </label>
+                                <input type="text" th:field="*{Prenom_Pere}" class="form-control" id="Prenom_Pere" placeholder="إسم الأب "/>
+                                <span th:if="${#fields.hasErrors('Prenom_Pere')}" th:errors="*{Prenom_Pere}" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label class="col-form-label" for="gouvernorat">الولاية</label>
+
+                                <select class="form-control" id="gouvernorat" name="gouvernoratId">
+                                    <option value="">--من فضل إختر الولاية--</option>
+                                    <option th:data="${gv.gouvernoratId}" th:each="gv: ${gouvernorat}"
+                                            th:text="${gv.name}" th:value="${gv.gouvernoratId}"/>
+                                </select>
+
+                            </div>
+
+
+                            <div class="col-sm-3">
+                                <label class="col-form-label" for="gouvernorat1">المعتمدية</label>
+
+                                <select class="form-control" id="gouvernorat1" name="gouvernoratId1">
+                                    <option value="">--من فضل إختر المعتمدية--</option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group col-md-8">
+                                <label for="directionGeneral" class="col-form-label" id="directionGeneral" >الإدارة العامة </label>
+                                <select name="listDirectionGeneral" class="form-control">
+                                    <option  th:each="drg: ${directionGeneral}" th:value="${drg.DgId}" th:text="${drg.NomDirGen}" />
+                                </select>
+                            </div>
+
+
+                            <div class="form-group col-md-4">
+                                <label for="direction" class="col-form-label" id="direction" >الإدارة  </label>
+                                <select  id="listDirection" name="DirectionId" class="form-control">
+                                    <option  th:each="dr: ${direction}" th:value="${dr.DId}" th:text="${dr.NomDir}" />
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="sousDirections" class="col-form-label" id="sousDirections" >الإدارةالفرعية  </label>
+                                <select  id="listSousDirection" name="SdId" class="form-control">
+                                    <option  th:each="sd: ${sousDirections}" th:value="${sd.SdId}" th:text="${sd.NomSDir}" />
+                                </select>
+                            </div>
+
+
+
+
+                            <div class="form-group col-md-8" >
+
+                            </div>
+
+
+
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Navbar footer  -->
+    <div th:replace="fragments/footer :: footer" />
+
+
+
+
+
+    </div>
+</main>
+<div class="fixed-plugin">
+    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+        <i class="fa fa-cog py-2"> </i>
+    </a>
+    <div class="card shadow-lg ">
+        <div class="card-header pb-0 pt-3 ">
+            <div class="float-end">
+                <h5 class="mt-3 mb-0">Soft UI Configurator</h5>
+                <p>See our dashboard options.</p>
+            </div>
+            <div class="float-start mt-4">
+                <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+            <!-- End Toggle Button -->
+        </div>
+        <hr class="horizontal dark my-1">
+        <div class="card-body pt-sm-3 pt-0">
+            <!-- Sidebar Backgrounds -->
+            <div>
+                <h6 class="mb-0">Sidebar Colors</h6>
+            </div>
+            <a href="javascript:void(0)" class="switch-trigger background-color">
+                <div class="badge-colors my-2 text-end">
+                    <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+                </div>
+            </a>
+
+
+            <!--   Core JS Files   -->
+            <script src="../assets/js/sweetalert2.all.min.js"></script>
+            <script src="../assets/js/core/popper.min.js"></script>
+            <script src="../assets/js/core/bootstrap.min.js"></script>
+            <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+            <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+            <script src="../assets/js/plugins/choices.min.js"></script>
+
+            <!-- Github buttons -->
+            <script async defer src="https://buttons.github.io/buttons.js"></script>
+            <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+            <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+</body>
+
+</html>

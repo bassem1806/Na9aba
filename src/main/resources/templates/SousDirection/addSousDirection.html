@@ -87,7 +87,7 @@ $(document).ready(function(){
                             <div class="form-group col-md-8">
                                 <label for="direction" class="col-form-label" id="direction" >الإدارة  </label>
                                 <select  id="listDirection" name="DirectionId" class="form-control">
-                                    <option  th:each="dr: ${directions}" th:value="${dr.DId}" th:text="${dr.NomDir}" />
+                                    <option  th:each="dr: ${direction}" th:value="${dr.DId}" th:text="${dr.NomDir}" />
                                 </select>
                             </div>
 
