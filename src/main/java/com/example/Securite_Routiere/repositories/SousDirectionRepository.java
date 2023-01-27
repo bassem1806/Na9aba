@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface SousDirectionRepository  extends JpaRepository<SousDirection,Long> {
 
-     List <SousDirection> findByDirection(Direction direction);
-    // List<Direction> findByDirectionGeneral(DirectionGeneral directionGeneral);
+  List <SousDirection> findByDirection(Direction direction);
+
 }

@@ -36,26 +36,7 @@ public class AgentController {
         this.gradeRepository = gradeRepository;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "loadDirectionByDirectionGeneral/{DgId}", method = RequestMethod.GET)
-    public String loadStatesByCountry1(@PathVariable("DgId") long DgId) {
 
-        System.out.println("init loadStatesByCountry");
-        System.out.println("l id de la direction générale st ="+DgId);
-
-        System.out.println("la taille de la liste est egale ="+directionRepository.findByDirectionGeneral(directionGeneralRepository.findById(DgId).get()));
-
-        List<Direction> directionByDg= directionRepository.findByDirectionGeneral(directionGeneralRepository.findById(DgId).get());
-
-
-        System.out.println("la taille de la liste est egale ="+directionByDg.size());
-
-        Gson gson = new Gson();
-        // GsonBuilder gsonBuilder = new GsonBuilder();
-        // Gson gson = gsonBuilder.registerTypeAdapter(Direction.class, new MessageAdapter()).create();
-        return gson.toJson(directionRepository.findByDirectionGeneral(directionGeneralRepository.findById(DgId).get()));
-
-    }
 
     @GetMapping("list")
     //@ResponseBody
@@ -80,10 +61,11 @@ public class AgentController {
 
         model.addAttribute("gouvernorat", gouvernoratRepository.findAll());
         model.addAttribute("delegation", delegationRepository.findAll());
-        model.addAttribute("directionGeneral",directionGeneralRepository.findAll());
+        model.addAttribute("directionGenerals", directionGeneralRepository.findAll());
 
-        model.addAttribute("direction",directionRepository.findAll());
-        model.addAttribute("sousDirection",sousDirectionRepository.findAll());
+        model.addAttribute("directions", directionRepository.findAll());
+
+     model.addAttribute("sousDirection",sousDirectionRepository.findAll());
         model.addAttribute("grade",gradeRepository.findAll());
 
 
@@ -91,6 +73,7 @@ public class AgentController {
                 model.addAttribute("agent", new Agent());
 
       System.out.println("size dg :" +directionGeneralRepository.findAll().size());
+        System.out.println("size direction :" +directionRepository.findAll().size());
 
 
 
@@ -142,7 +125,7 @@ public class AgentController {
 
    @ResponseBody
     @RequestMapping(value = "loadDelegationByGouvernorat/{id}", method = RequestMethod.GET)
-    public String loadStatesByCountry(@PathVariable("id") long id) {
+    public String loadStatesByCountry1(@PathVariable("id") long id) {
 
         ArrayList<Delegation> delegationByGV = delegationRepository.findByGouvernorat(gouvernoratRepository.findById(id).get());
 
@@ -157,28 +140,46 @@ public class AgentController {
 
 
     }
-/*
+    @ResponseBody
+    @RequestMapping(value = "loadDirectionByDirectionGeneral/{DgId}", method = RequestMethod.GET)
+    public String loadStatesByCountry(@PathVariable("DgId") long DgId) {
+
+        System.out.println("init loadStatesByCountry");
+        System.out.println("l id de la direction générale st ="+DgId);
+
+        System.out.println("la taille de la liste est egale ="+directionRepository.findByDirectionGeneral(directionGeneralRepository.findById(DgId).get()));
+
+        List<Direction> directionByDg= directionRepository.findByDirectionGeneral(directionGeneralRepository.findById(DgId).get());
+
+
+        System.out.println("la taille de la liste est egale ="+directionByDg.size());
+
+        Gson gson = new Gson();
+        // GsonBuilder gsonBuilder = new GsonBuilder();
+        // Gson gson = gsonBuilder.registerTypeAdapter(Direction.class, new MessageAdapter()).create();
+        return gson.toJson(directionRepository.findByDirectionGeneral(directionGeneralRepository.findById(DgId).get()));
+
+    }
+
     @ResponseBody
     @RequestMapping(value = "loadSousDirectionByDirection/{DId}", method = RequestMethod.GET)
-    public String loadStatesByCountry1(@PathVariable("DId") long DId) {
+    public String loadStatesByCountry2(@PathVariable("DId") long DId) {
 
-        System.out.println("init loadStatesByCountry1");
-        System.out.println("l id de la direction st ="+DId);
+        System.out.println("init loadStatesByCountrysd");
+        System.out.println("l id de la direction d=" + DId);
 
-    System.out.println("la taille de la liste est egale ="+sousDirectionRepository.findByDirection(directionRepository.findById(DId).get()));
+        System.out.println("la taille de la liste est egale sd =" + sousDirectionRepository.findByDirection(directionRepository.findById(DId).get()));
 
 
+        List<SousDirection> sousDirectionByD = sousDirectionRepository.findByDirection(directionRepository.findById(DId).get());
 
-        List<SousDirection> sousDirectionByD =sousDirectionRepository.findByDirection(directionRepository.findById(DId).get());
-
- System.out.println("la taille de la liste est egale ="+sousDirectionByD.size());
+        System.out.println("la taille de la liste est egale  sd=" + sousDirectionByD.size());
 
         Gson gson = new Gson();
         // GsonBuilder gsonBuilder = new GsonBuilder();
         // Gson gson = gsonBuilder.registerTypeAdapter(Direction.class, new MessageAdapter()).create();
         return gson.toJson(sousDirectionRepository.findByDirection(directionRepository.findById(DId).get()));
 
-    }*/
-
+    }
 
 }

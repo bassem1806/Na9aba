@@ -80,6 +80,7 @@ $(document).ready(function(){
                             <div class="form-group col-md-8">
                                 <label for="directionGeneral" class="col-form-label" id="directionGeneral" >الإدارة العامة </label>
                                 <select id ="listDirectionGeneral" name="DirectionGeneralId" class="form-control">
+                                    <option value="">--من فضل إختر الإدارة العامة--</option>
                                     <option  th:each="dr: ${directionGenerals}" th:value="${dr.DgId}" th:text="${dr.NomDirGen}" />
                                 </select>
                             </div>
@@ -87,6 +88,7 @@ $(document).ready(function(){
                             <div class="form-group col-md-8">
                                 <label for="direction" class="col-form-label" id="direction" >الإدارة  </label>
                                 <select  id="listDirection" name="DirectionId" class="form-control">
+                                    <option value="">--من فضل إختر الإدارة --</option>
                                     <option  th:each="dr: ${direction}" th:value="${dr.DId}" th:text="${dr.NomDir}" />
                                 </select>
                             </div>

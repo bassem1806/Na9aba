@@ -89,103 +89,9 @@ console.log("zeaeaeaeae");
         <div>
 
 
-            <form class="search" methode="get" th:action="@{/Agent/list}">
 
 
-                <!--div class="col-12">
-                    <label class="col-form-label"> تاريخ الحادث </label>
-                    <input id="dateaccid " name="dateaccid" placeholder="تاريخ الحادث" type="date">
 
-
-                    <label class="col-form-label"> عدد المحضر </label>
-                    <input id="pvnum " name="pvnum" placeholder=" عدد المحضر" type="text">
-
-                    <label class="col-form-label"> سنة المحضر </label>
-                    <input id="anneePv " name="anneePv" placeholder="سنة المحضر" type="text">
-                </div>
-
-                <div class="col-2">
-
-
-                    <label class="col-form-label" for="gouvernorat">الولاية</label>
-                    <select class="form-control" id="gouvernorat" name="gouvernoratId">
-                        <option value="">--من فضل إختر الولاية--</option>
-                        <option th:data="${gv.gouvernoratId}" th:each="gv: ${gouvernorat}" th:text="${gv.name}"
-                                th:value="${gv.gouvernoratId}"/>
-                    </select>
-                    <label class="col-form-label" for="gouvernorat1">المعتمدية</label>
-
-                    <select class="form-control" id="gouvernorat1" name="gouvernoratId1">
-                        <option value="">--من فضل إختر المعتمدية--</option>
-                    </select>
-                    <label class="col-form-label" for="validationunite">الوحدة</label>
-
-                    <select class="form-select" id="validationunite" name="uniteId">
-                        <option value="">--من فضل إختر الوحدة المباشرة--</option>
-                        <option th:each="un: ${unite}" th:text="${un.name}" th:value="${un.id}"/>
-                    </select>
-                </div>
-
-
-                <button class="btn btn-primary" type="submit">بحث</button>
-
-                <a class="btn btn-primary" th:href="@{'/PvAccidentnew/list1/ 1'}">إعادة بحث </a>
-
-
-            </form>
-
-            <a class="btn btn-primary" th:href="@{'/PvAccidentnew/export'}">Export to CSV </a>
-        </div-->
-
-        <!--table class="table table-striped" id="example" style="width:100%">
-
-            <thead>
-            <tr>
-                <th><i class="icon_profile"></i><a
-                        th:href="@{'/PvAccidentnew/list1/' + ${currentPage} + '/dateaccid?sortDir=' + ${reverseSortDir}}">تاريخ
-                    الحادث</a></th>
-
-
-                <th><i class="icon_profile"></i><a
-                        th:href="@{'/PvAccidentnew/list1/' + ${currentPage} + '/datePv?sortDir=' + ${reverseSortDir}}">
-                    تاريخ المحضر</a></th>
-                <th> عدد المحضر</th>
-                <th> <i class="icon_profile"></i><a th:href="@{'/PvAccidentnew/list1/' + ${currentPage} + '/pv_num?sortDir=' + ${reverseSortDir}}">  عدد المحضر</a></th>
-                <th><i class="icon_profile"></i><a
-                        th:href="@{'/PvAccidentnew/list1/' + ${currentPage} + '/unite.name?sortDir=' + ${reverseSortDir}}">
-                    عالوحدة المتعهدة بالمحضر</a></th>
-                <th><i class="icon_profile"></i><a
-                        th:href="@{'/PvAccidentnew/list1/' + ${currentPage} + '/delegation.gouvernorat.name?sortDir=' + ${reverseSortDir}}">الولاية </a>
-                </th>
-
-                <-th> الولاية</th>
-                <th>الإطلاع على المحضر</th>
-                <th>تعديل المحضر</th>
-                <th>محو المحضر</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="pvAccident1 : ${pvAccidents1}">
-                <td th:text="${pvAccident1.dateaccid}"></td>
-                <td th:text="${pvAccident1.datePv}"></td>
-                <td th:text="${pvAccident1.PvNum}"></td>
-                <td th:text="${pvAccident1.unite.name}"></td>
-                <td th:text="${pvAccident1.delegation.gouvernorat.name}"></td>
-
-
-                <td>
-                    <a class="btn btn-info" th:href="@{/PvAccidentnew/show/{pvaccidId}(pvaccidId=${pvAccident1.id})}">
-                        Show<i class="fas fa-user-times ml-1"></i></a></td>
-                <td>
-                    <a class="btn btn-warning"
-                       th:href="@{/PvAccidentnew/editpv/{pvaccidId}(pvaccidId=${pvAccident1.id})}">edit <i class="fas fa-user-edit ml-2"></i></a></td>
-                <td>
-                    <a class="btn btn-danger"
-                       th:href="@{/PvAccidentnew/deletepv/{pvaccidId}(pvaccidId=${pvAccident1.id})}"> Delete<i class="fas fa-user-times ml-2"></i></a></td>
-            </tr>
-            </tbody>
-
-        </table-->
                 <table class="table table-striped table-responsive-md">
                     <thead>
                     <tr>
@@ -261,14 +167,15 @@ console.log("zeaeaeaeae");
 
         </footer>
 
-    </div>    <!-- Navbar footer  -->
+       <!-- Navbar footer  -->
 
 
     <div th:replace="fragments/footer :: footer"/>
 
 
-    </div>
-</main>
+       </div>
+
+  </main>
 <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
         <i class="fa fa-cog py-2"> </i>

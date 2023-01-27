@@ -47,9 +47,7 @@ $(document).ready(function(){
 	});
 		});
 
-    </script>
 
-    <script type="text/javascript">
 $(document).ready(function(){
 
 	$('#listDirectionGeneral').on('change', function(){
@@ -64,33 +62,36 @@ $(document).ready(function(){
 				for(var i = 0; i < result.length; i++) {
 					s += '<option value="' + result[i].DId + '">' + result[i].NomDir + '</option>';
 				}
+
 				$('#listDirection').html(s);
 			}
 		});
 	});
 		});
-</script>
-    <!--script type="text/javascript">
-$(document).ready(function(){
 
+
+$(document).ready(function(){
+console.log("Hello world! 1f");
 	$('#listDirection').on('change', function(){
 		var direction_id= $(this).val();
+console.log("Hello world! 1");
 
 		$.ajax({
 			type: 'GET',
-			url: '/Agent/loadDirectionByDirection/' + direction_id ,
+			url: '/Agent/loadSousDirectionByDirection/' + direction_id ,
 			success: function(result) {
 				var result = JSON.parse(result);
 				var s = '';
 				for(var i = 0; i < result.length; i++) {
 					s += '<option value="' + result[i].SdId+ '">' + result[i].NomSDir + '</option>';
 				}
+				console.log("Hello world! 2");
 				$('#listSousDirection').html(s);
 			}
 		});
 	});
 		});
-</script-->
+</script>
 </head>
 
 <!-- menu a droite  -->
@@ -111,7 +112,7 @@ $(document).ready(function(){
     <div th:replace="fragments/header :: header" />
 
     <div class="container my-5">
-        <h3>إضافة موظف</h3>
+        <!--h3>إضافة موظف</h3-->
         <div class="card">
             <div class="card-body">
                 <div class="col-md-10">
@@ -177,25 +178,30 @@ $(document).ready(function(){
 
                             </div>
 
-                            <div class="form-group col-md-8">
+
+
+                            <div class="form-group col-md-4">
                                 <label for="directionGeneral" class="col-form-label" id="directionGeneral" >الإدارة العامة </label>
-                                <select name="listDirectionGeneral" class="form-control">
-                                    <option  th:each="drg: ${directionGeneral}" th:value="${drg.DgId}" th:text="${drg.NomDirGen}" />
+                                <select id ="listDirectionGeneral" name="DirectionGeneralId" class="form-control">
+                                    <option value="">--من فضل إختر الإدارة العامة--</option>
+                                    <option  th:each="dr: ${directionGenerals}" th:value="${dr.DgId}" th:text="${dr.NomDirGen}" />
                                 </select>
                             </div>
-
 
                             <div class="form-group col-md-4">
                                 <label for="direction" class="col-form-label" id="direction" >الإدارة  </label>
                                 <select  id="listDirection" name="DirectionId" class="form-control">
+
+                                    <option value="">--من فضل إختر الإدارة --</option>
                                     <option  th:each="dr: ${direction}" th:value="${dr.DId}" th:text="${dr.NomDir}" />
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="sousDirections" class="col-form-label" id="sousDirections" >الإدارةالفرعية  </label>
-                                <select  id="listSousDirection" name="SdId" class="form-control">
-                                    <option  th:each="sd: ${sousDirections}" th:value="${sd.SdId}" th:text="${sd.NomSDir}" />
+                                <label for="sousDirection" class="col-form-label" id="sousDirection" >الإدارةالفرعية  </label>
+                                <select  id="listSousDirection" name="SousDirectionId" class="form-control">
+                                    <option value="">--من فضل إختر الإدارةالفرعية --</option>
+                                    <option  th:each="sd: ${sousDirection}" th:value="${sd.SdId}" th:text="${sd.NomSDir}" />
                                 </select>
                             </div>
 
@@ -274,7 +280,7 @@ $(document).ready(function(){
             <!-- Github buttons -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-            <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
-</body>
+            <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+    </body>
 
 </html>

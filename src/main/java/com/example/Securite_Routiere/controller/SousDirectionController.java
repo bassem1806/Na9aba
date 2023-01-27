@@ -143,7 +143,7 @@ public class SousDirectionController {
 
     @ResponseBody
     @RequestMapping(value = "loadDirectionByDirectionGeneral/{DgId}", method = RequestMethod.GET)
-    public String loadStatesByCountry(@PathVariable("DgId") long DgId) {
+    public String loadStatesByCountry3(@PathVariable("DgId") long DgId) {
 
         System.out.println("init loadStatesByCountry");
         System.out.println("l id de la direction générale st ="+DgId);
