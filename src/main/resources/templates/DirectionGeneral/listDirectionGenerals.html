@@ -69,7 +69,8 @@
                                        </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="directionGeneral : ${directionGenerals}">
+                                <tr th:each="directionGeneral : ${directionGenerals}"
+                                    th:style="${directionGeneral.etat == 0} ? 'background: orange' : 'background: white'">
                                      <td th:text="${directionGeneral.DgId}"></td>
                                     <td th:text="${directionGeneral.NomDirGen}"></td>
                                     <td th:text="${directionGeneral.CodeDirGen}"></td>

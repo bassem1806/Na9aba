@@ -14,7 +14,7 @@ public class DirectionGeneral {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long DgId ;
 
-    @NotBlank(message = "nom  is mandatory")
+
     @Column(name = "NomDirGen")
     private String NomDirGen;
 

@@ -1,8 +1,10 @@
 package com.example.Securite_Routiere.controller;
 
+import antlr.debug.MessageAdapter;
 import com.example.Securite_Routiere.entities.*;
 import com.example.Securite_Routiere.repositories.*;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -176,9 +178,10 @@ public class AgentController {
         System.out.println("la taille de la liste est egale  sd=" + sousDirectionByD.size());
 
         Gson gson = new Gson();
-        // GsonBuilder gsonBuilder = new GsonBuilder();
-        // Gson gson = gsonBuilder.registerTypeAdapter(Direction.class, new MessageAdapter()).create();
-        return gson.toJson(sousDirectionRepository.findByDirection(directionRepository.findById(DId).get()));
+GsonBuilder gsonBuilder = new GsonBuilder();
+
+       return gson.toJson(sousDirectionRepository.findByDirection(directionRepository.findById(DId).get()));
+
 
     }
 

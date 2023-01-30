@@ -188,6 +188,8 @@ console.log("Hello world! 1");
                                 </select>
                             </div>
 
+
+
                             <div class="form-group col-md-4">
                                 <label for="direction" class="col-form-label" id="direction" >الإدارة  </label>
                                 <select  id="listDirection" name="DirectionId" class="form-control">
@@ -198,12 +200,15 @@ console.log("Hello world! 1");
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="sousDirection" class="col-form-label" id="sousDirection" >الإدارةالفرعية  </label>
-                                <select  id="listSousDirection" name="SousDirectionId" class="form-control">
+                                <label for="sousDirections" class="col-form-label" id="sousDirections" >الإدارةالفرعية  </label>
+                                <select  id="listSousDirection" name="sousdirectionId" class="form-control">
                                     <option value="">--من فضل إختر الإدارةالفرعية --</option>
-                                    <option  th:each="sd: ${sousDirection}" th:value="${sd.SdId}" th:text="${sd.NomSDir}" />
+                                    <option  th:each="sd: ${sousDirections}" th:value="${sd.SdId}" th:text="${sd.NomSDir}" />
                                 </select>
                             </div>
+
+
+
 
 
 

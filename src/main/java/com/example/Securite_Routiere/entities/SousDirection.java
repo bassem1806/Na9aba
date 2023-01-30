@@ -5,10 +5,9 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity
-public class SousDirection {
+public class SousDirection{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,11 +30,6 @@ public class SousDirection {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private  Direction direction;
 
-    /**** Many To One direction general ****/
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "directionGeneral_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private DirectionGeneral directionGeneral;
 
     public long getSdId() {
         return SdId;
@@ -77,7 +71,7 @@ public class SousDirection {
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
-
+/*
     public DirectionGeneral getDirectionGeneral() {
         return directionGeneral;
     }
@@ -85,14 +79,14 @@ public class SousDirection {
     public void setDirectionGeneral(DirectionGeneral directionGeneral) {
         this.directionGeneral = directionGeneral;
     }
-
-    public SousDirection(long sdId, String nomSDir, int codeSDir, int etatSD, Direction direction, DirectionGeneral directionGeneral) {
+*/
+    public SousDirection(long sdId, String nomSDir, int codeSDir, int etatSD, Direction direction ) {
         SdId = sdId;
         NomSDir = nomSDir;
         CodeSDir = codeSDir;
         this.etatSD = etatSD;
         this.direction = direction;
-        this.directionGeneral = directionGeneral;
+       // this.directionGeneral = directionGeneral;
     }
 
     public SousDirection() {

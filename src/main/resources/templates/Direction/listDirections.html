@@ -71,7 +71,8 @@
                 </thead>
                 <tbody>
 
-                <tr th:each="direction: ${directions}">
+                <tr th:each="direction: ${directions}"
+                    th:style="${direction.etatD == 0} ? 'background: orange' : 'background: white'">
                   <td th:text="${direction.directionGeneral.NomDirGen}"></td>
                   <td th:text="${direction.NomDir}"></td>
                   <td th:text="${direction.CodeDir}"></td>

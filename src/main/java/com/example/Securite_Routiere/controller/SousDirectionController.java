@@ -76,7 +76,7 @@ public class SousDirectionController {
         // System.out.println("libille artile" +article.getLabel());
 
 
-        sousdirection.setDirectionGeneral(directionGeneral);
+       // sousdirection.setDirectionGeneral(directionGeneral);
 
 
   sousDirectionRepository.save(sousdirection);
@@ -104,7 +104,7 @@ public class SousDirectionController {
         model.addAttribute("sousDirection", sousDirection);
 
         model.addAttribute("directionGenerals", directionGeneralRepository.findAll());
-        model.addAttribute("idDirectionGeneral", sousDirection.getDirectionGeneral().getDgId());
+       // model.addAttribute("idDirectionGeneral", sousDirection.getDirectionGeneral().getDgId());
 
         model.addAttribute("directions", directionRepository.findAll());
         model.addAttribute("idDirection", sousDirection.getDirection().getDId());
@@ -121,11 +121,12 @@ public class SousDirectionController {
            // System.out.println("direction id : " +direction.getCodeDir());
             return "SousDirection/updateSousDirection";
         }
+        /*
         DirectionGeneral directionGeneral= directionGeneralRepository.findById(dg)
                 .orElseThrow(()-> new IllegalArgumentException("Invalid Directiong eneral Id:" + dg));
 
         sousdirection.setDirectionGeneral(directionGeneral);
-
+*/
         Direction direction = directionRepository.findById(d)
                 .orElseThrow(()-> new IllegalArgumentException("Invalid Direction Id:" + d));
 
