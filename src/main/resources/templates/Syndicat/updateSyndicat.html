@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" xmlns:th="http://www.thymeleaf.org">
 
@@ -13,17 +12,17 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
-    <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+    <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script src="..//cdn.jsdelivr.net/npm/sweetalert2011"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2011"></script>
 
 </head>
 
@@ -45,7 +44,7 @@
     <div th:replace="fragments/header :: header" />
 
     <div class="container my-5">
-        <h3>إضافة إدارة عامة</h3>
+        <h3>تحيين نقابة</h3>
         <div class="card">
             <div class="card-body">
                 <div class="col-md-10">
@@ -53,27 +52,30 @@
 
 
 
-                        <form action="#" th:action="@{/DirectionGeneral/addSave}" th:object="${directionGeneral}" method="post">
+                    <form action="#" th:action="@{/Syndicat/update}" th:object="${syndicat}" method="post">
+
+                        <input type="text" th:field="*{SynId}" />
+                        <div class="row">
                         <div class="row">
 
                             <div class="form-group col-md-8" >
-                                    <label for="NomDirGen" class="col-form-label">إسم الإدارة العامة</label>
-                                <input type="text" th:field="*{NomDirGen}" class="form-control" id="NomDirGen" placeholder="إسم الإدارة"> <span
-                                        th:if="${#fields.hasErrors('NomDirGen')}" th:errors="*{NomDirGen}" class="text-danger"></span>
+                                <label for="NomSyndicat" class="col-form-label">إسم النقابة</label>
+                                <input type="text" th:field="*{NomSyndicat}" class="form-control" id="NomSyndicat" placeholder="إسم النقابة"> <span
+                                    th:if="${#fields.hasErrors('NomSyndicat')}" th:errors="*{NomSyndicat}" class="text-danger"></span>
                             </div>
 
                             <div class="form-group col-md-8" >
-                                <label for="CodeDirGen" class="col-form-label">رمز الإدارة العامة</label> <input type="text" th:field="*{CodeDirGen}" class="form-control" id="CodeDirGen" placeholder="رمز الإدارة"> <span
-                                    th:if="${#fields.hasErrors('CodeDirGen')}" th:errors="*{CodeDirGen}" class="text-danger"></span>
+                                <label for="CodeSyndicat" class="col-form-label">رمز النقابة</label> <input type="text" th:field="*{CodeSyndicat}" class="form-control" id="CodeSyndicat" placeholder="رمز النقابة "> <span
+                                    th:if="${#fields.hasErrors('CodeSyndicat')}" th:errors="*{CodeDirGen}" class="text-danger"></span>
                             </div>
 
                             <div class="form-group col-md-8" >
-                                <label for="etat" class="col-form-label">وضعية الإدارة العامة</label> <input type="text" th:field="*{etat}" class="form-control" id="etat" placeholder="وضعية الإدارة"> <span
-                                    th:if="${#fields.hasErrors('etat')}" th:errors="*{etat}" class="text-danger"></span>
+                                <label for="etatSyn" class="col-form-label">وضعية النقابة</label> <input type="text" th:field="*{etatSyn}" class="form-control" id="etatSyn" placeholder="وضعية النقابة"> <span
+                                    th:if="${#fields.hasErrors('etatSyn')}" th:errors="*{etatSyn}" class="text-danger"></span>
                             </div>
 
                             <div id="ex1" class="col-md-6"  >
-                                <input type="submit"   class="btn btn-primary" value="إضافة الإدارة العامة">
+                                <input type="submit"   class="btn btn-primary" value="تحيين">
 
 
                             </div >
@@ -139,17 +141,17 @@
 
 
             <!--   Core JS Files   -->
-            <script src="../assets/js/sweetalert2.all.min.js"></script>
-            <script src="../assets/js/core/popper.min.js"></script>
-            <script src="../assets/js/core/bootstrap.min.js"></script>
-            <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-            <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-            <script src="../assets/js/plugins/choices.min.js"></script>
+            <script src="/assets/js/sweetalert2.all.min.js"></script>
+            <script src="/assets/js/core/popper.min.js"></script>
+            <script src="/assets/js/core/bootstrap.min.js"></script>
+            <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+            <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+            <script src="/assets/js/plugins/choices.min.js"></script>
 
             <!-- Github buttons -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-            <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
-  </body>
+            <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+</body>
 
 </html>

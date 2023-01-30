@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -53,8 +54,9 @@ public class SyndicatController {
 
         Syndicat syndicat = new Syndicat();
 
+        System.out.println("syndicat  eaeaeaeae azeazeazeae:" );
         model.addAttribute("syndicat", syndicat);
-        System.out.println("syndicat  :" +syndicat);
+
 
         return "Syndicat/addSyndicat";
     }
@@ -62,9 +64,49 @@ public class SyndicatController {
     @PostMapping("addSave")
 
     public String addSyndicat(@Valid Syndicat syndicat, BindingResult result) {
-
+        if (result.hasErrors()) {
+            System.out.println("syndicat  eaeaeaeae azeazeazeae azeaeae615464:"  );
+            return "Syndicat/addSyndicat";
+        }
+        System.out.println("syndicat  :" +syndicat.getNomSyndicat());
+        System.out.println("syndicat  :" +syndicat.getCodeSyndicat());
+syndicatRepository.save(syndicat);
 
                 return "redirect:list";
+    }
+
+    @GetMapping("delete/{SynId}")
+
+    public String deleteDirectionGeneral(@PathVariable("SynId") long SynId, Model model){
+
+        Syndicat syndicat=syndicatRepository.findById(SynId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Syndicat  Id:" + SynId));
+
+             syndicatRepository.delete(syndicat);
+
+        return"redirect:../list";
+
+    }
+
+    @GetMapping("edit/{SynId}")
+    public String showSyndicatFormToUpdate(@PathVariable("SynId") long SynId, Model model) {
+        Syndicat syndicat=syndicatRepository.findById(SynId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Syndicat  Id:" + SynId));
+
+        model.addAttribute("syndicat", syndicat);
+
+        return "Syndicat/updateSyndicat";
+
+    }
+
+    @PostMapping("update")
+    public String updateSyndicat(@Valid Syndicat syndicat, BindingResult result) {
+        if (result.hasErrors()) {
+            return "Syndicat/updateSyndicat";
+        }
+        syndicatRepository.save(syndicat);
+        return"redirect:list";
+
     }
 
 }

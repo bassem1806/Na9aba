@@ -71,9 +71,7 @@
                                 <tbody>
 
                                 <tr th:each="syndicat : ${syndicats}"
-                                th:style="${syndicat.etatSyn == 0} ? 'background: orange' : 'background: white'">
-
-
+                                    th:style="${syndicat.etatSyn == 0} ? 'background: orange' : 'background: white'">
                                     <td th:text="${syndicat.SynId}"></td>
                                     <td th:text="${syndicat.NomSyndicat}"></td>
                                     <td th:text="${syndicat.CodeSyndicat}"></td>
