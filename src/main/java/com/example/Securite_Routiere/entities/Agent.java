@@ -6,6 +6,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import java.util.Set;
+
 @Entity
 public class Agent {
 
@@ -60,6 +63,16 @@ public class Agent {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private SousDirection sousDirection;
 
+
+    /**** Many To Many  syndicat****/
+  /*
+
+    @ManyToMany
+    @JoinTable(name = "Agent_Syndicat",
+            joinColumns = @JoinColumn(name = "agent_id"),
+            inverseJoinColumns = @JoinColumn(name = "syndicat_id"))
+    private Set<Syndicat> syndicats;
+*/
 //********* Getter AND Setter******//
 
 
@@ -128,13 +141,7 @@ public class Agent {
         this.delegation = delegation;
     }
 
-    public Grade getGrade() {
-        return grade;
-    }
 
-    public void setGrade(Grade grade) {
-        this.grade = grade;
-    }
 
     public SousDirection getSousDirection() {
         return sousDirection;
@@ -144,11 +151,27 @@ public class Agent {
         this.sousDirection = sousDirection;
     }
 
+  /*  public Set<Syndicat> getSyndicats() {
+        return syndicats;
+    }
+
+    public void setSyndicats(Set<Syndicat> syndicats) {
+        this.syndicats = syndicats;
+    }
+*/
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
     public Agent(long agentId, long CIN, long CNRPS, String nom, String prenom, String prenom_Pere, String dateInscription, Delegation delegation, Grade grade, SousDirection sousDirection) {
         AgentId = agentId;
         this.CIN = CIN;
         this.CNRPS = CNRPS;
-
         Nom = nom;
         Prenom = prenom;
         Prenom_Pere = prenom_Pere;

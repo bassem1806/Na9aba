@@ -77,7 +77,7 @@ syndicatRepository.save(syndicat);
 
     @GetMapping("delete/{SynId}")
 
-    public String deleteDirectionGeneral(@PathVariable("SynId") long SynId, Model model){
+    public String deleteSyndicat(@PathVariable("SynId") long SynId, Model model){
 
         Syndicat syndicat=syndicatRepository.findById(SynId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Syndicat  Id:" + SynId));

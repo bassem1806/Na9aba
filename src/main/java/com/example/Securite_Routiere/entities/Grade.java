@@ -1,5 +1,8 @@
 package com.example.Securite_Routiere.entities;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -21,8 +24,17 @@ public class Grade {
     @Column(name = "Categorie_Grade")
     private String CategorieGrade;
 
-//********* Getter AND Setter******//
 
+
+
+    //********* many to one Agent*******//
+/*
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "Agent_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Agent agent ;
+*/
+//********* Getter AND Setter******//
 
     public long getGradeId() {
         return GradeId;
@@ -48,13 +60,16 @@ public class Grade {
         LibelleGrade = libelleGrade;
     }
 
-    public String getGategorieGrade() {
+    public String getCategorieGrade() {
         return CategorieGrade;
     }
 
-    public void setGategorieGrade(String gategorieGrade) {
-        CategorieGrade = gategorieGrade;
+    public void setCategorieGrade(String categorieGrade) {
+        CategorieGrade = categorieGrade;
     }
+
+
+
 
     //********* Constructor with parameter******//
 
@@ -63,7 +78,9 @@ public class Grade {
         CodeGrade = codeGrade;
         LibelleGrade = libelleGrade;
         CategorieGrade = categorieGrade;
+
     }
+
 
     //********* Constructor without parameter******//
 

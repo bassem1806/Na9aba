@@ -13,17 +13,17 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script src="..//cdn.jsdelivr.net/npm/sweetalert2011"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2011"></script>
     <script src="/assets/js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript">
 $(document).ready(function(){
@@ -207,6 +207,22 @@ console.log("Hello world! 1");
                                 </select>
                             </div>
 
+                            <div class="form-group col-md-4">
+                                <label for="grade" class="col-form-label" id="grade" >الرتبة  </label>
+                                <select  id="grade" name="grade" class="form-control">
+                                    <option value="">--من فضل إختر الرتبة --</option>
+                                    <option  th:each="gr: ${grade}" th:value="${gr.GradeId}" th:text="${gr.LibelleGrade}" />
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="syndicat" class="col-form-label" id="syndicat" >النقابة  </label>
+                                <select  id="syndicat" name="syndicat" class="form-control">
+                                    <option value="">--من فضل إختر النقابة --</option>
+                                    <option  th:each="sy: ${syndicat}" th:value="${sy.SynId}" th:text="${sy.NomSyndicat}" />
+                                </select>
+                            </div>
+
 
 
 
@@ -275,12 +291,12 @@ console.log("Hello world! 1");
 
 
             <!--   Core JS Files   -->
-            <script src="../assets/js/sweetalert2.all.min.js"></script>
-            <script src="../assets/js/core/popper.min.js"></script>
-            <script src="../assets/js/core/bootstrap.min.js"></script>
-            <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-            <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-            <script src="../assets/js/plugins/choices.min.js"></script>
+            <script src="/assets/js/sweetalert2.all.min.js"></script>
+            <script src="/assets/js/core/popper.min.js"></script>
+            <script src="/assets/js/core/bootstrap.min.js"></script>
+            <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+            <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+            <script src="/assets/js/plugins/choices.min.js"></script>
 
             <!-- Github buttons -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>

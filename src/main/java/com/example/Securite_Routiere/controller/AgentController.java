@@ -1,6 +1,6 @@
 package com.example.Securite_Routiere.controller;
 
-import antlr.debug.MessageAdapter;
+
 import com.example.Securite_Routiere.entities.*;
 import com.example.Securite_Routiere.repositories.*;
 import com.google.gson.Gson;
@@ -27,7 +27,9 @@ public class AgentController {
     private final SousDirectionRepository sousDirectionRepository;
   private final GradeRepository gradeRepository;
 
-@Autowired
+  // private final SyndicatRepository syndicatRepository;
+
+    @Autowired
     public AgentController(AgentRepository agentRepository, GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository, DirectionGeneralRepository directionGeneralRepository, DirectionRepository directionRepository, SousDirectionRepository sousDirectionRepository, GradeRepository gradeRepository) {
         this.agentRepository = agentRepository;
         this.gouvernoratRepository = gouvernoratRepository;
@@ -36,7 +38,12 @@ public class AgentController {
         this.directionRepository = directionRepository;
         this.sousDirectionRepository = sousDirectionRepository;
         this.gradeRepository = gradeRepository;
+   // this.syndicatRepository = syndicatRepository;
     }
+
+
+
+
 
 
 
@@ -69,6 +76,8 @@ public class AgentController {
 
      model.addAttribute("sousDirection",sousDirectionRepository.findAll());
         model.addAttribute("grade",gradeRepository.findAll());
+
+       // model.addAttribute("syndicat", syndicatRepository.findAll());
 
 
 

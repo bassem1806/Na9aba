@@ -10,6 +10,7 @@ import java.lang.*;
 
 
 @SpringBootApplication
+
 @ComponentScan
 
 public class RecrutementApplication {
