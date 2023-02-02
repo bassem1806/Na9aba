@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/DirectionGeneral/")
 public class DirectionGeneralController {
 
-    private  final DirectionGeneralRepository  directionGeneralRepository;
+    private final DirectionGeneralRepository directionGeneralRepository;
 
     @Autowired
     public DirectionGeneralController(DirectionGeneralRepository directionGeneralRepository) {
@@ -30,9 +30,9 @@ public class DirectionGeneralController {
 
     public String listDirectionGenerals(Model model) {
 
-        List<DirectionGeneral> lp = (List<DirectionGeneral>)directionGeneralRepository.findAll();
+        List<DirectionGeneral> lp = (List<DirectionGeneral>) directionGeneralRepository.findAll();
 
-        if(lp.size()==0)
+        if (lp.size() == 0)
             lp = null;
         model.addAttribute("directionGenerals", lp);
 
@@ -44,7 +44,7 @@ public class DirectionGeneralController {
     public String showAddDirectionGeneralForm(Model model) {
         DirectionGeneral directionGeneral = new DirectionGeneral();// object dont la valeur des attributs par defaut
         model.addAttribute("directionGeneral", directionGeneral);
-        System.out.println("direction general :" +directionGeneral);
+        System.out.println("direction general :" + directionGeneral);
         return "DirectionGeneral/addDirectionGeneral";
     }
 
@@ -57,7 +57,7 @@ public class DirectionGeneralController {
         }
         directionGeneralRepository.save(directionGeneral);
 
-        System.out.println("direction general :" +directionGeneral);
+        System.out.println("direction general :" + directionGeneral);
 
         return "redirect:list";
     }
@@ -65,28 +65,25 @@ public class DirectionGeneralController {
     @GetMapping("delete/{DgId}")
 
 
-    public String deleteDirectionGeneral(@PathVariable("DgId") long DgId, Model model){
+    public String deleteDirectionGeneral(@PathVariable("DgId") long DgId, Model model) {
 
 
-        DirectionGeneral directionGeneral= directionGeneralRepository.findById(DgId)
-                .orElseThrow(()-> new IllegalArgumentException("Invalid Direction Général Id:" + DgId));
+        DirectionGeneral directionGeneral = directionGeneralRepository.findById(DgId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Direction Général Id:" + DgId));
 
 
-       directionGeneralRepository.delete(directionGeneral);
+        directionGeneralRepository.delete(directionGeneral);
 
-        System.out.println("id dg : "  +directionGeneral.getDgId());
-return"redirect:../list";
+        System.out.println("id dg : " + directionGeneral.getDgId());
+        return "redirect:../list";
 
     }
 
 
-
-
-
     @GetMapping("edit/{DgId}")
     public String showDirectionGeneralFormToUpdate(@PathVariable("DgId") long DgId, Model model) {
-       DirectionGeneral directionGeneral = directionGeneralRepository.findById(DgId)
-                .orElseThrow(()->new IllegalArgumentException("Invalid Direction Général Id:" + DgId));
+        DirectionGeneral directionGeneral = directionGeneralRepository.findById(DgId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Direction Général Id:" + DgId));
 
         model.addAttribute("directionGeneral", directionGeneral);
 
@@ -99,7 +96,7 @@ return"redirect:../list";
             return "DirectionGeneral/updateDirectionGeneral";
         }
         directionGeneralRepository.save(directionGeneral);
-            return"redirect:list";
+        return "redirect:list";
 
     }
 }

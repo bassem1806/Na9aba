@@ -3,7 +3,7 @@ package com.example.Securite_Routiere.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="role")
+@Table(name = "role")
 public class Role {
 
     @Id
@@ -13,6 +13,13 @@ public class Role {
 
     @Column(name = "role")
     private String role;
+
+    public Role(String role) {
+        this.role = role;
+    }
+
+    public Role() {
+    }
 
     public int getId() {
         return id;
@@ -28,13 +35,6 @@ public class Role {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public Role(String role) {
-        this.role = role;
-    }
-
-    public Role() {
     }
 }
 

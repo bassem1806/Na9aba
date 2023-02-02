@@ -8,7 +8,7 @@ public class Syndicat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long SynId ;
+    private long SynId;
 
 
     @Column(name = "NomSyndicat")
@@ -21,14 +21,24 @@ public class Syndicat {
     private int etatSyn;
 
 
-
     /**** Many To many Syndicat   ****/
- /*   @ManyToMany
+    @ManyToMany
     @JoinTable(name = "Agent_Syndicat",
             joinColumns = @JoinColumn(name = "syndicat_id"),
             inverseJoinColumns = @JoinColumn(name = "agent_id"))
-    private Set<Agent> agents1;
-*/
+    private Set<Agent> agents;
+
+    public Syndicat(long synId, String nomSyndicat, int codeSyndicat, int etatSyn, Set<Agent> agents) {
+        SynId = synId;
+        NomSyndicat = nomSyndicat;
+        CodeSyndicat = codeSyndicat;
+        this.etatSyn = etatSyn;
+        this.agents = agents;
+    }
+
+    public Syndicat() {
+    }
+
     public long getSynId() {
         return SynId;
     }
@@ -60,23 +70,12 @@ public class Syndicat {
     public void setEtatSyn(int etatSyn) {
         this.etatSyn = etatSyn;
     }
-/*
-    public Set<Agent> getAgents() {
-        return agents1;
+
+    public Set<Agent> getAgents1() {
+        return agents;
     }
 
-    public void setAgents(Set<Agent> agents) {
-        this.agents1 = agents1;
-    }
-*/
-    public Syndicat(long synId, String nomSyndicat, int codeSyndicat, int etatSyn) {
-        SynId = synId;
-        NomSyndicat = nomSyndicat;
-        CodeSyndicat = codeSyndicat;
-        this.etatSyn = etatSyn;
-      //  this.agents1 = agents1;
-    }
-
-    public Syndicat() {
+    public void setAgents1(Set<Agent> agents1) {
+        this.agents = agents;
     }
 }

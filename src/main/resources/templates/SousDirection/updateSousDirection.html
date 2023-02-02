@@ -1,25 +1,24 @@
-
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+<html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link href="../assets/img/apple-icon.png" rel="apple-touch-icon" sizes="76x76">
+    <link href="../assets/img/favicon.png" rel="icon" type="image/png">
     <title>
         إدارة الخدمات الفنية
     </title>
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <!-- Nucleo Icons -->
     <!--link href="/assets/css/nucleo-icons.css" rel="stylesheet" /-->
     <!--link href="/assets/css/nucleo-svg.css" rel="stylesheet" /-->
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/42d5adcbca.js"></script>
     <!--link href="../assets/css/nucleo-svg.css" rel="stylesheet" /-->
     <!-- CSS Files -->
-    <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+    <link href="/assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -44,16 +43,18 @@ $(document).ready(function(){
 		});
 	});
 		});
-</script>
+
+    </script>
 
 </head>
 
 <!-- menu a droite  -->
 
 <body class="g-sidenav-show rtl bg-gray-100">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret" id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret"
+       id="sidenav-main">
 
-    <div th:replace="fragments/menu :: menu" />
+    <div th:replace="fragments/menu :: menu"/>
 
 </aside>
 <!--end  menu a droite  -->
@@ -61,9 +62,8 @@ $(document).ready(function(){
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg overflow-hidden">
 
 
-
     <!-- Navbar header  -->
-    <div th:replace="fragments/header :: header" />
+    <div th:replace="fragments/header :: header"/>
 
     <div class="container my-5">
         <h3>تحيين الإدارة الفرعية</h3>
@@ -72,64 +72,69 @@ $(document).ready(function(){
                 <div class="col-md-12">
 
 
-                    <form action="#" th:action="@{/SousDirection/edit}" th:object="${sousDirection}" method="post" >
+                    <form action="#" method="post" th:action="@{/SousDirection/edit}" th:object="${sousDirection}">
 
-                        <input type="hidden" th:field="*{SdId}" />
+                        <input th:field="*{SdId}" type="hidden"/>
 
                         <div class="row">
                             <div class="col-sm-7">
 
-                                <label for="directionGeneral" class="col-form-label" >الإدارة العامة</label>
+                                <label class="col-form-label" for="directionGeneral">الإدارة العامة</label>
                                 <!--label for="directionGeneral" class="col-form-label" >الإدارة العامة</label-->
-                                <select id="listDirectionGeneral" name="DirectionGeneralId" class="form-control">
-                                    <option  th:each="dr: ${directionGenerals}"
-                                             th:value="${dr.DgId}"
-                                             th:text="${dr.NomDirGen}"
-                                             th:selected="(${dr.DgId} == ${idDirectionGeneral})"
+                                <select class="form-control" id="listDirectionGeneral" name="DirectionGeneralId">
+                                    <option th:each="dr: ${directionGenerals}"
+                                            th:selected="(${dr.DgId} == ${idDirectionGeneral})"
+                                            th:text="${dr.NomDirGen}"
+                                            th:value="${dr.DgId}"
 
                                     />
                                 </select>
 
-                                <label for="direction" class="col-form-label">Select Direction </label>
+                                <label class="col-form-label" for="direction">Select Direction </label>
 
-                                <select   id="listDirection" name="directionId" class="form-control">
-                                    <option  th:each="d: ${directions}"
-                                             th:value="${d.DId}"
-                                             th:text="${d.NomDir}"
-                                             th:selected="(${d.DId} == ${idDirection})"
+                                <select class="form-control" id="listDirection" name="directionId">
+                                    <option th:each="d: ${directions}"
+                                            th:selected="(${d.DId} == ${idDirection})"
+                                            th:text="${d.NomDir}"
+                                            th:value="${d.DId}"
                                     />
-                                </select >
+                                </select>
 
                             </div>
 
-                            <div class="form-group col-md-8" >
-                                <label for="NomSDir" class="col-form-label">إسم الإدارةالفرعية </label>
-                                <input type="text" th:field="*{NomSDir}" class="form-control" id="NomSDir" placeholder="إسم الإدارة"> <span
-                                    th:if="${#fields.hasErrors('NomSDir')}" th:errors="*{NomSDir}" class="text-danger"></span>
+                            <div class="form-group col-md-8">
+                                <label class="col-form-label" for="NomSDir">إسم الإدارةالفرعية </label>
+                                <input class="form-control" id="NomSDir" placeholder="إسم الإدارة" th:field="*{NomSDir}"
+                                       type="text"> <span
+                                    class="text-danger" th:errors="*{NomSDir}"
+                                    th:if="${#fields.hasErrors('NomSDir')}"></span>
                             </div>
 
-                            <div class="form-group col-md-8" >
-                                <label for="CodeSDir" class="col-form-label">رمز الإدارة الفرعية </label> <input type="text" th:field="*{CodeSDir}" class="form-control" id="CodeSDir" placeholder="رمز الإدارة"> <span
-                                    th:if="${#fields.hasErrors('CodeSDir')}" th:errors="*{CodeSDir}" class="text-danger"></span>
+                            <div class="form-group col-md-8">
+                                <label class="col-form-label" for="CodeSDir">رمز الإدارة الفرعية </label> <input
+                                    class="form-control" id="CodeSDir" placeholder="رمز الإدارة" th:field="*{CodeSDir}"
+                                    type="text"> <span
+                                    class="text-danger" th:errors="*{CodeSDir}"
+                                    th:if="${#fields.hasErrors('CodeSDir')}"></span>
                             </div>
 
-                            <div class="form-group col-md-8" >
-                                <label for="etatSD" class="col-form-label">وضعيةالإدارةالفرعية </label> <input type="text" th:field="*{etatSD}" class="form-control" id="etatSD" placeholder=" الوضعية ">
-                                <span th:if="${#fields.hasErrors('etatSD')}" th:errors="*{etatSD}" class="text-danger"></span>
+                            <div class="form-group col-md-8">
+                                <label class="col-form-label" for="etatSD">وضعيةالإدارةالفرعية </label> <input
+                                    class="form-control" id="etatSD" placeholder=" الوضعية " th:field="*{etatSD}"
+                                    type="text">
+                                <span class="text-danger" th:errors="*{etatSD}"
+                                      th:if="${#fields.hasErrors('etatSD')}"></span>
                             </div>
-
-
 
 
                             <div class="form-group col-md-12">
-                                <input type="submit" class="btn btn-primary" value="تحيين الإدارة الفرعية  ">
+                                <input class="btn btn-primary" type="submit" value="تحيين الإدارة الفرعية  ">
                             </div>
 
 
-                            <div class="form-group col-md-8" >
+                            <div class="form-group col-md-8">
 
                             </div>
-
 
 
                         </div>
@@ -140,12 +145,8 @@ $(document).ready(function(){
     </div>
 
 
-
     <!-- Navbar footer  -->
-    <div th:replace="fragments/footer :: footer" />
-
-
-
+    <div th:replace="fragments/footer :: footer"/>
 
 
     </div>
@@ -173,14 +174,18 @@ $(document).ready(function(){
             <div>
                 <h6 class="mb-0">Sidebar Colors</h6>
             </div>
-            <a href="javascript:void(0)" class="switch-trigger background-color">
+            <a class="switch-trigger background-color" href="javascript:void(0)">
                 <div class="badge-colors my-2 text-end">
-                    <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-primary active" data-color="primary"
+                          onclick="sidebarColor(this)"></span>
                     <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
                     <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-success" data-color="success"
+                          onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-warning" data-color="warning"
+                          onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-danger" data-color="danger"
+                          onclick="sidebarColor(this)"></span>
                 </div>
             </a>
 
@@ -202,7 +207,8 @@ $(document).ready(function(){
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-  </script>
+
+            </script>
             <!-- Github buttons -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

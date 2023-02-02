@@ -16,23 +16,23 @@ import javax.faces.bean.SessionScoped;
 /**
  * Created by JBoss Tools
  */
-@ManagedBean(name="user")
+@ManagedBean(name = "user")
 @SessionScoped
 public class User {
-	private String name;
+    private String name;
 
-	public User() {
-	}
+    public User() {
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String sayHello() {
-		return "greeting";
-	}
+    public String sayHello() {
+        return "greeting";
+    }
 }

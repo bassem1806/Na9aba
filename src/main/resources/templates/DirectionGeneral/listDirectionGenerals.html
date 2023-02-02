@@ -1,34 +1,34 @@
-
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+<html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link href="/assets/img/apple-icon.png" rel="apple-touch-icon" sizes="76x76">
+    <link href="/assets/img/favicon.png" rel="icon" type="image/png">
     <title>
         إدارة الخدمات الفنية
     </title>
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <!-- Nucleo Icons -->
-    <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="/assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- Font Awesome Icons -->
     <!-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>-->
-    <script src="/assets/js/fontawesome.js" crossorigin="anonymous"></script>
-    <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <script crossorigin="anonymous" src="/assets/js/fontawesome.js"></script>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- CSS Files -->
-    <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+    <link href="/assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
 </head>
 
 <!-- menu a droite  -->
 
 <body class="g-sidenav-show rtl bg-gray-100">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret" id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret"
+       id="sidenav-main">
 
-    <div th:replace="fragments/menu :: menu" />
+    <div th:replace="fragments/menu :: menu"/>
 
 </aside>
 <!--end  menu a droite  -->
@@ -36,61 +36,59 @@
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg overflow-hidden">
 
 
-
     <!-- Navbar header  -->
-    <div th:replace="fragments/header :: header" />
-
-
+    <div th:replace="fragments/header :: header"/>
 
 
     <div class="container my-2">
         <div class="card">
             <div class="card-body">
-                <div th:switch="${directionGenerals}" class="container my-5">
+                <div class="container my-5" th:switch="${directionGenerals}">
 
                     <div class="col-md-10">
                         <h2 th:case="null">لا يوجد إدارات </h2>
                         <div th:case="*">
 
                             <h2 align="center"> الإدارات العامة </h2>
-                            <p class="my-5" align="right">
-                                <a th:href="@{'/DirectionGeneral/add'}" class="btn btn-primary">
+                            <p align="right" class="my-5">
+                                <a class="btn btn-primary" th:href="@{'/DirectionGeneral/add'}">
                                     <i class="fa fa-university"> إضافة إدارة عامة </i></a>
                             </p>
                             <table class="table table-striped table-responsive-md">
                                 <thead>
                                 <tr>
-                                    <th>معرف الإدارة العامة  </th>
+                                    <th>معرف الإدارة العامة</th>
                                     <th> الإدارة العامة</th>
                                     <th> رمز الإدارة العامة</th>
-                                    <th> الوضعية </th>
-                                    <th> تحيين </th>
-                                    <th> محو </th>
-                                       </tr>
+                                    <th> الوضعية</th>
+                                    <th> تحيين</th>
+                                    <th> محو</th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="directionGeneral : ${directionGenerals}"
                                     th:style="${directionGeneral.etat == 0} ? 'background: orange' : 'background: white'">
-                                     <td th:text="${directionGeneral.DgId}"></td>
+                                    <td th:text="${directionGeneral.DgId}"></td>
                                     <td th:text="${directionGeneral.NomDirGen}"></td>
                                     <td th:text="${directionGeneral.CodeDirGen}"></td>
                                     <td th:text="${directionGeneral.etat}"></td>
 
                                     <!--td><a th:href="@{/DirectionGeneral/edit/{DgId}(DgId=${directionGeneral.DgId})}" class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td-->
-                                    <td><a  th:href="@{/DirectionGeneral/edit/{id}(id=${directionGeneral.DgId})}" class="btn btn-warning"> تحيين<i class="fas fa-user-edit ml-2"></i></a></td>
-                                    <td><a  th:href="@{/DirectionGeneral/delete/{DgId}(DgId=${directionGeneral.DgId})}" class="btn btn-danger"> حذف<i class="fas fa-user-times ml-2"></i></a></td>
+                                    <td><a class="btn btn-warning"
+                                           th:href="@{/DirectionGeneral/edit/{id}(id=${directionGeneral.DgId})}"> تحيين<i class="fas fa-user-edit ml-2"></i></a></td>
+                                    <td><a class="btn btn-danger"
+                                           th:href="@{/DirectionGeneral/delete/{DgId}(DgId=${directionGeneral.DgId})}"> حذف<i class="fas fa-user-times ml-2"></i></a></td>
 
                                 </tr>
                                 </tbody>
                             </table>
-                            <p class="my-5" align="right">
-                                <a th:href="@{'/home1'}" class="btn btn-secondary" >
+                            <p align="right" class="my-5">
+                                <a class="btn btn-secondary" th:href="@{'/home1'}">
 
-                                    <i class="fas fa-solid fa-backward">              الصفحة الرئيسية</i></a>
+                                    <i class="fas fa-solid fa-backward"> الصفحة الرئيسية</i></a>
 
 
                         </div>
-
 
 
                     </div>
@@ -100,10 +98,7 @@
     </div>
 
     <!-- Navbar footer  -->
-    <div th:replace="fragments/footer :: footer" />
-
-
-
+    <div th:replace="fragments/footer :: footer"/>
 
 
     </div>
@@ -131,14 +126,18 @@
             <div>
                 <h6 class="mb-0">Sidebar Colors</h6>
             </div>
-            <a href="javascript:void(0)" class="switch-trigger background-color">
+            <a class="switch-trigger background-color" href="javascript:void(0)">
                 <div class="badge-colors my-2 text-end">
-                    <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-primary active" data-color="primary"
+                          onclick="sidebarColor(this)"></span>
                     <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
                     <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-success" data-color="success"
+                          onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-warning" data-color="warning"
+                          onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-danger" data-color="danger"
+                          onclick="sidebarColor(this)"></span>
                 </div>
             </a>
 
@@ -160,7 +159,8 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-  </script>
+
+            </script>
             <!-- Github buttons -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

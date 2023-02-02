@@ -12,17 +12,17 @@
 
     <!-- classpath for JSF 1.0 -->
     <path id="compile.classpath">
-        <pathelement path ="${webinf.dir}/lib/commons-beanutils.jar"/>
-        <pathelement path ="${webinf.dir}/lib/commons-collections.jar"/>
-        <pathelement path ="${webinf.dir}/lib/commons-digester.jar"/>
-        <pathelement path ="${webinf.dir}/lib/commons-logging.jar"/>
-        <pathelement path ="${webinf.dir}/lib/jsf-api.jar"/>
-        <pathelement path ="${webinf.dir}/lib/jsf-impl.jar"/>
-        <pathelement path ="${webinf.dir}/lib/jstl.jar"/>
-        <pathelement path ="${webinf.dir}/lib/standard.jar"/>
-        <pathelement path ="${webinf.dir}/classes"/>
-        <pathelement path ="${classpath.external}"/>
-        <pathelement path ="${classpath}"/>
+        <pathelement path="${webinf.dir}/lib/commons-beanutils.jar"/>
+        <pathelement path="${webinf.dir}/lib/commons-collections.jar"/>
+        <pathelement path="${webinf.dir}/lib/commons-digester.jar"/>
+        <pathelement path="${webinf.dir}/lib/commons-logging.jar"/>
+        <pathelement path="${webinf.dir}/lib/jsf-api.jar"/>
+        <pathelement path="${webinf.dir}/lib/jsf-impl.jar"/>
+        <pathelement path="${webinf.dir}/lib/jstl.jar"/>
+        <pathelement path="${webinf.dir}/lib/standard.jar"/>
+        <pathelement path="${webinf.dir}/classes"/>
+        <pathelement path="${classpath.external}"/>
+        <pathelement path="${classpath}"/>
     </path>
 
     <!-- define your folder for deployment -->
@@ -37,11 +37,11 @@
     <target name="resources">
         <copy todir="${webinf.dir}/classes" includeEmptyDirs="no">
             <fileset dir="JavaSource">
-            <patternset>
-                <include name="**/*.conf"/>
-                <include name="**/*.properties"/>
-                <include name="**/*.xml"/>
-            </patternset>
+                <patternset>
+                    <include name="**/*.conf"/>
+                    <include name="**/*.properties"/>
+                    <include name="**/*.xml"/>
+                </patternset>
             </fileset>
         </copy>
     </target>
@@ -55,9 +55,9 @@
 
     <!-- Remove classes directory for clean build -->
     <target name="clean"
-      description="Prepare for clean build">
-      <delete dir="${webinf.dir}/classes"/>
-      <mkdir  dir="${webinf.dir}/classes"/>
+            description="Prepare for clean build">
+        <delete dir="${webinf.dir}/classes"/>
+        <mkdir dir="${webinf.dir}/classes"/>
     </target>
 
     <!-- Build entire project -->
@@ -66,22 +66,22 @@
 
     <!-- Create binary distribution -->
     <target name="war" depends="build">
-      <mkdir dir="${build.dir}"/>
-      <war
-        basedir="${webroot.dir}"
-        warfile="${build.dir}/${project.distname}.war"
-        webxml="${webinf.dir}/web.xml">
-        <exclude name="WEB-INF/${build.dir}/**"/>
-        <exclude name="WEB-INF/src/**"/>
-        <exclude name="WEB-INF/web.xml"/>
-       </war>
+        <mkdir dir="${build.dir}"/>
+        <war
+                basedir="${webroot.dir}"
+                warfile="${build.dir}/${project.distname}.war"
+                webxml="${webinf.dir}/web.xml">
+            <exclude name="WEB-INF/${build.dir}/**"/>
+            <exclude name="WEB-INF/src/**"/>
+            <exclude name="WEB-INF/web.xml"/>
+        </war>
 
     </target>
 
     <target name="deploy" depends="war">
-       <delete file="${deploy.dir}/${project.distname}.war"/>
-       <delete dir="${deploy.dir}/${project.distname}"/>
-       <copy file="${build.dir}/${project.distname}.war" todir="${deploy.dir}"/>
+        <delete file="${deploy.dir}/${project.distname}.war"/>
+        <delete dir="${deploy.dir}/${project.distname}"/>
+        <copy file="${build.dir}/${project.distname}.war" todir="${deploy.dir}"/>
     </target>
 
 </project>

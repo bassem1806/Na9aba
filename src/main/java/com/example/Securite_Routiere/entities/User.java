@@ -2,15 +2,13 @@ package com.example.Securite_Routiere.entities;
 
 import org.hibernate.validator.constraints.Length;
 
-
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -47,6 +45,11 @@ public class User {
 
     @Column(name = "active")
     private int active;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public Set<Role> getRoles() {
         return roles;
@@ -56,14 +59,6 @@ public class User {
         this.roles = roles;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
-
-
-
     public int getId() {
         return id;
     }
@@ -71,7 +66,6 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
-
 
 
     public String getPassword() {
@@ -121,7 +115,6 @@ public class User {
     public void setCNRPS(String CNRPS) {
         this.CNRPS = CNRPS;
     }
-
 
 
 }

@@ -1,12 +1,8 @@
 package com.example.Securite_Routiere;
 
 import org.springframework.boot.SpringApplication;
-
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import org.springframework.context.annotation.ComponentScan;
-
-import java.lang.*;
 
 
 @SpringBootApplication
@@ -15,14 +11,12 @@ import java.lang.*;
 
 public class RecrutementApplication {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
 
-
-		SpringApplication.run(RecrutementApplication.class, args);
-
+        SpringApplication.run(RecrutementApplication.class, args);
 
 
-	}
+    }
 
 }

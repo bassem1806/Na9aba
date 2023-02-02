@@ -1,29 +1,29 @@
-
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+<html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <!-- <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">-->
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <title>PVs - إدارة الخدمات الفنية  </title>
+    <link href="../assets/img/favicon.png" rel="icon" type="image/png">
+    <title>PVs - إدارة الخدمات الفنية </title>
     <!--     Fonts and icons     -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />-->
     <!-- Nucleo Icons -->
-    <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/assets/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="/assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/assets/css/dataTables.bootstrap5.min.css" rel="stylesheet"/>
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/42d5adcbca.js"></script>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- CSS Files -->
-    <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+    <link href="../assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"integrity="sha256-/xUj+30JU5yExlq6GSYGSHK7tPXikynS70gEvDej/m4="
-            crossorigin="anonymous"></script>
+    <script crossorigin="anonymous"
+            integrity="sha256-/xUj+30JU5yExlq6GSYGSHK7tPXikynS70gEvDej/m4="
+            src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Sweet Alert CDN -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../assets/js/plugins/sweetalert2.all.min.js"></script>
@@ -34,10 +34,10 @@
 <body class="g-sidenav-show rtl bg-gray-100">
 
 
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret"
+       id="sidenav-main">
 
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret" id="sidenav-main">
-
-    <div th:replace="fragments/menu :: menu" />
+    <div th:replace="fragments/menu :: menu"/>
 
 </aside>
 <!--end  menu a droite  -->
@@ -45,17 +45,16 @@
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 ">
 
 
-
     <!-- Navbar header  -->
-    <div th:replace="fragments/header :: header" />
+    <div th:replace="fragments/header :: header"/>
 
     <div class="container my-2">
         <div class="card">
             <div class="card-body">
-                <div th:switch="${blesses}" class="container my-5">
+                <div class="container my-5" th:switch="${blesses}">
 
                     <p class="my-5">
-                        <a th:href="@{'/blesse/add'}" class="btn btn-primary">
+                        <a class="btn btn-primary" th:href="@{'/blesse/add'}">
                             <i class="fas fa-user-plus ml-2"> إضافة مصاب جديد</i></a>
                     </p>
                     <div class="col-md-10">
@@ -88,10 +87,12 @@
                                     <td>
 
 
-                                        <a th:href="@{/blesse/edit/{blesseId}(blesseId=${blesse.blesseId})}" class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a>
+                                        <a class="btn btn-warning"
+                                           th:href="@{/blesse/edit/{blesseId}(blesseId=${blesse.blesseId})}"><i class="fas fa-user-edit ml-2"></i></a>
                                     </td>
                                     <td>
-                                        <a th:href="@{/blesse/delete/{blesseId}(blesseId=${blesse.blesseId})}" class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a>
+                                        <a class="btn btn-danger"
+                                           th:href="@{/blesse/delete/{blesseId}(blesseId=${blesse.blesseId})}"><i class="fas fa-user-times ml-2"></i></a>
                                     </td>
 
                                 </tr>
@@ -106,23 +107,22 @@
     </div>
 
     <!-- Navbar footer  -->
-    <div th:replace="fragments/footer :: footer" />
+    <div th:replace="fragments/footer :: footer"/>
 
 
     <div class="modal hide fade" id="confirmModal">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
             <h3>Confirmation de la suppression</h3>
         </div>
         <div class="modal-body">
             <p>Etes-vous sûr de vouloir supprimer cet élément ?</p>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" id="confirmModalNo">Non</a>
-            <a href="#" class="btn btn-primary" id="confirmModalYes">Oui</a>
+            <a class="btn" href="#" id="confirmModalNo">Non</a>
+            <a class="btn btn-primary" href="#" id="confirmModalYes">Oui</a>
         </div>
     </div>
-
 
 
     </div>
@@ -171,7 +171,7 @@
             <script src="/assets/js/jquery-3.5.1.js"></script>
             <script src="/assets/js/jquery.dataTables.min.js"></script>
             <script src="/assets/js/dataTables.bootstrap5.min.js"></script>
-            <script src="https://kit.fontawesome.com/242ec8085c.js" crossorigin="anonymous"></script>
+            <script crossorigin="anonymous" src="https://kit.fontawesome.com/242ec8085c.js"></script>
             <script src="/assets/js/plugins/choices.min.js"></script>
 
             <!-- Github buttons -->
@@ -188,8 +188,8 @@
 
 
 
-  </script>
 
+            </script>
 
 
             <script>
@@ -206,8 +206,8 @@ function(){
   swal("Deleted!", "Your imaginary file has been deleted.", "success");
 });
 
- </script>
 
+            </script>
 
 
 </body>

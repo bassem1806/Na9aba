@@ -17,6 +17,7 @@ import java.util.List;
 public class RoleController {
 
     private final RoleRepository roleRepository;
+
     @Autowired
     public RoleController(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
@@ -26,8 +27,8 @@ public class RoleController {
     public String listRoles(Model model) {
 
         List<Role> roles = roleRepository.findAll();
-        long nbr =  roleRepository.count();
-        if(roles.size()==0)
+        long nbr = roleRepository.count();
+        if (roles.size() == 0)
             roles = null;
         model.addAttribute("roles", roles);
         model.addAttribute("nbr", nbr);
@@ -50,13 +51,9 @@ public class RoleController {
         System.out.println(roleName);
         Role r = new Role(roleName);
         Role rSaved = roleRepository.save(r);
-        System.out.println("role = "+ rSaved);
+        System.out.println("role = " + rSaved);
         return "redirect:list";
     }
-
-
-
-
 
 
 }

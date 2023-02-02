@@ -2,7 +2,6 @@ package com.example.Securite_Routiere.controller;
 
 
 import com.example.Securite_Routiere.entities.Agent;
-import com.example.Securite_Routiere.entities.DirectionGeneral;
 import com.example.Securite_Routiere.entities.Syndicat;
 import com.example.Securite_Routiere.repositories.AgentRepository;
 import com.example.Securite_Routiere.repositories.SyndicatRepository;
@@ -39,10 +38,10 @@ public class SyndicatController {
         List<Agent> ag = (List<Agent>) agentRepository.findAll();
 
 
-        if(lp.size()==0)
+        if (lp.size() == 0)
             lp = null;
         model.addAttribute("syndicats", lp);
-        model.addAttribute("agent",ag);
+        model.addAttribute("agent", ag);
 
         return "Syndicat/listSyndicats";
 
@@ -54,7 +53,7 @@ public class SyndicatController {
 
         Syndicat syndicat = new Syndicat();
 
-        System.out.println("syndicat  eaeaeaeae azeazeazeae:" );
+        System.out.println("syndicat  eaeaeaeae azeazeazeae:");
         model.addAttribute("syndicat", syndicat);
 
 
@@ -65,32 +64,32 @@ public class SyndicatController {
 
     public String addSyndicat(@Valid Syndicat syndicat, BindingResult result) {
         if (result.hasErrors()) {
-            System.out.println("syndicat  eaeaeaeae azeazeazeae azeaeae615464:"  );
+            System.out.println("syndicat  eaeaeaeae azeazeazeae azeaeae615464:");
             return "Syndicat/addSyndicat";
         }
-        System.out.println("syndicat  :" +syndicat.getNomSyndicat());
-        System.out.println("syndicat  :" +syndicat.getCodeSyndicat());
-syndicatRepository.save(syndicat);
+        System.out.println("syndicat  :" + syndicat.getNomSyndicat());
+        System.out.println("syndicat  :" + syndicat.getCodeSyndicat());
+        syndicatRepository.save(syndicat);
 
-                return "redirect:list";
+        return "redirect:list";
     }
 
     @GetMapping("delete/{SynId}")
 
-    public String deleteSyndicat(@PathVariable("SynId") long SynId, Model model){
+    public String deleteSyndicat(@PathVariable("SynId") long SynId, Model model) {
 
-        Syndicat syndicat=syndicatRepository.findById(SynId)
+        Syndicat syndicat = syndicatRepository.findById(SynId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Syndicat  Id:" + SynId));
 
-             syndicatRepository.delete(syndicat);
+        syndicatRepository.delete(syndicat);
 
-        return"redirect:../list";
+        return "redirect:../list";
 
     }
 
     @GetMapping("edit/{SynId}")
     public String showSyndicatFormToUpdate(@PathVariable("SynId") long SynId, Model model) {
-        Syndicat syndicat=syndicatRepository.findById(SynId)
+        Syndicat syndicat = syndicatRepository.findById(SynId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Syndicat  Id:" + SynId));
 
         model.addAttribute("syndicat", syndicat);
@@ -105,7 +104,7 @@ syndicatRepository.save(syndicat);
             return "Syndicat/updateSyndicat";
         }
         syndicatRepository.save(syndicat);
-        return"redirect:list";
+        return "redirect:list";
 
     }
 

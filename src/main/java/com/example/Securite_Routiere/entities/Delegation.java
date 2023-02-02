@@ -11,19 +11,27 @@ import javax.validation.constraints.NotBlank;
 public class Delegation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name= "delegation_id")
+    @Column(name = "delegation_id")
     private long delegationId;
 
-    @NotBlank(message="Delegation nom est obligatoire")
-    @Column(name= "delegation_name")
+    @NotBlank(message = "Delegation nom est obligatoire")
+    @Column(name = "delegation_name")
     private String name;
 
 
     /**** Many To One  gov****/
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "gouvernorat_id" )
+    @JoinColumn(name = "gouvernorat_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private  Gouvernorat gouvernorat;
+    private Gouvernorat gouvernorat;
+
+    public Delegation(long delegationId, String name) {
+        this.delegationId = delegationId;
+        this.name = name;
+    }
+
+    public Delegation() {
+    }
 
     public Gouvernorat getGouvernorat() {
         return gouvernorat;
@@ -32,7 +40,6 @@ public class Delegation {
     public void setGouvernorat(Gouvernorat gouvernorat) {
         this.gouvernorat = gouvernorat;
     }
-
 
     public long getDelegationId() {
         return delegationId;
@@ -48,13 +55,5 @@ public class Delegation {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Delegation(long delegationId, String name) {
-        this.delegationId = delegationId;
-        this.name = name;
-    }
-
-    public Delegation() {
     }
 }

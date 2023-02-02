@@ -2,17 +2,16 @@ package com.example.Securite_Routiere.entities;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 
-public class DirectionGeneral {
+public class DirectionGeneral implements Serializable {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long DgId ;
+    private long DgId;
 
 
     @Column(name = "NomDirGen")
@@ -23,6 +22,17 @@ public class DirectionGeneral {
 
     @Column(name = "etat")
     private int etat;
+
+    public DirectionGeneral(long dgId, String nomDirGen, int codeDirGen, int etat) {
+        DgId = dgId;
+        NomDirGen = nomDirGen;
+        CodeDirGen = codeDirGen;
+        this.etat = etat;
+
+    }
+
+    public DirectionGeneral() {
+    }
 
     public long getDgId() {
         return DgId;
@@ -54,17 +64,5 @@ public class DirectionGeneral {
 
     public void setEtat(int etat) {
         this.etat = etat;
-    }
-
-
-    public DirectionGeneral(long dgId, String nomDirGen, int codeDirGen, int etat) {
-        DgId = dgId;
-        NomDirGen = nomDirGen;
-        CodeDirGen = codeDirGen;
-        this.etat = etat;
-
-    }
-
-    public DirectionGeneral() {
     }
 }

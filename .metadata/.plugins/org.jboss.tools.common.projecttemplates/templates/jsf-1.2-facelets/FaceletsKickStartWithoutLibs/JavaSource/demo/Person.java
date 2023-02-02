@@ -7,23 +7,23 @@
  *
  * Contributors:
  *     Exadel, Inc. and Red Hat, Inc. - initial API and implementation
- ******************************************************************************/ 
+ ******************************************************************************/
 package demo;
 
 /**
  * Created by JBoss Tools
  */
 public class Person {
-	private String name;
+    private String name;
 
-	public Person() {
-	}
+    public Person() {
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SyndicatRepository  extends JpaRepository <Syndicat , Long> {
+public interface SyndicatRepository extends JpaRepository<Syndicat, Long> {
 }

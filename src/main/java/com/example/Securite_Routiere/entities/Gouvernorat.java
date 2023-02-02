@@ -1,33 +1,34 @@
 package com.example.Securite_Routiere.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 
 public class Gouvernorat {
-@Id
- @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 
- @Column(name = "gouvernorat_id")
+    @Column(name = "gouvernorat_id")
     public long gouvernoratId;
     @NotBlank(message = "Cause Accident est obligatoire ")
     @Column(name = "gouvernorat_name")
-   private String name;
+    private String name;
 
 
     /**** one To many delegation****/
-    @OneToMany(mappedBy="gouvernorat")
+    @OneToMany(mappedBy = "gouvernorat")
     private List<Delegation> delegations;
 
+
+    public Gouvernorat(long gouvernoratId, String name) {
+        this.gouvernoratId = gouvernoratId;
+        this.name = name;
+    }
+
+    public Gouvernorat() {
+    }
 
     public String getName() {
         return name;
@@ -45,14 +46,6 @@ public class Gouvernorat {
         this.gouvernoratId = id;
     }
 
-    public Gouvernorat(long gouvernoratId, String name) {
-        this.gouvernoratId =gouvernoratId;
-        this.name = name;
-    }
-
-    public Gouvernorat() {
-    }
-
     public long getGouvernoratId() {
         return gouvernoratId;
     }
@@ -68,8 +61,6 @@ public class Gouvernorat {
     public void setDelegations(List<Delegation> delegations) {
         this.delegations = delegations;
     }
-
-
 
 
 }

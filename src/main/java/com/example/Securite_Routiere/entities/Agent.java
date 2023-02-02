@@ -1,30 +1,30 @@
 package com.example.Securite_Routiere.entities;
 
 
-import javax.persistence.Entity;
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-public class Agent {
+public class Agent implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long AgentId;
 
-    @NotBlank(message = "CIN ")
+
     @Column(name = "CIN")
-    private long  CIN;
+    private long CIN;
 
-    @NotBlank(message = "CNRPS ")
+
     @Column(name = "CNRPS")
-    private long  CNRPS;
+    private long CNRPS;
 
-    @NotBlank(message = "nom est obligatoire ")
+
     @Column(name = "NOM")
     private String Nom;
 
@@ -65,16 +65,33 @@ public class Agent {
 
 
     /**** Many To Many  syndicat****/
-  /*
+
 
     @ManyToMany
     @JoinTable(name = "Agent_Syndicat",
             joinColumns = @JoinColumn(name = "agent_id"),
             inverseJoinColumns = @JoinColumn(name = "syndicat_id"))
     private Set<Syndicat> syndicats;
-*/
+
 //********* Getter AND Setter******//
 
+
+    public Agent(long agentId, long CIN, long CNRPS, String nom, String prenom, String prenom_Pere, String dateInscription, Delegation delegation, Grade grade, SousDirection sousDirection, Set<Syndicat> syndicats) {
+        AgentId = agentId;
+        this.CIN = CIN;
+        this.CNRPS = CNRPS;
+        Nom = nom;
+        Prenom = prenom;
+        Prenom_Pere = prenom_Pere;
+        DateInscription = dateInscription;
+        this.delegation = delegation;
+        this.grade = grade;
+        this.sousDirection = sousDirection;
+        this.syndicats = syndicats;
+    }
+
+    public Agent() {
+    }
 
     public long getAgentId() {
         return AgentId;
@@ -124,7 +141,6 @@ public class Agent {
         Prenom_Pere = prenom_Pere;
     }
 
-
     public String getDateInscription() {
         return DateInscription;
     }
@@ -141,8 +157,6 @@ public class Agent {
         this.delegation = delegation;
     }
 
-
-
     public SousDirection getSousDirection() {
         return sousDirection;
     }
@@ -151,14 +165,13 @@ public class Agent {
         this.sousDirection = sousDirection;
     }
 
-  /*  public Set<Syndicat> getSyndicats() {
+    public Set<Syndicat> getSyndicats() {
         return syndicats;
     }
 
     public void setSyndicats(Set<Syndicat> syndicats) {
         this.syndicats = syndicats;
     }
-*/
 
     public Grade getGrade() {
         return grade;
@@ -166,21 +179,5 @@ public class Agent {
 
     public void setGrade(Grade grade) {
         this.grade = grade;
-    }
-
-    public Agent(long agentId, long CIN, long CNRPS, String nom, String prenom, String prenom_Pere, String dateInscription, Delegation delegation, Grade grade, SousDirection sousDirection) {
-        AgentId = agentId;
-        this.CIN = CIN;
-        this.CNRPS = CNRPS;
-        Nom = nom;
-        Prenom = prenom;
-        Prenom_Pere = prenom_Pere;
-        DateInscription = dateInscription;
-        this.delegation = delegation;
-        this.grade = grade;
-        this.sousDirection = sousDirection;
-    }
-
-    public Agent() {
     }
 }

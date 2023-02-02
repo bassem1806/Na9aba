@@ -1,10 +1,6 @@
 package com.example.Securite_Routiere.entities;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Grade {
@@ -25,8 +21,6 @@ public class Grade {
     private String CategorieGrade;
 
 
-
-
     //********* many to one Agent*******//
 /*
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -35,6 +29,17 @@ public class Grade {
     private Agent agent ;
 */
 //********* Getter AND Setter******//
+
+    public Grade(long gradeId, int codeGrade, String libelleGrade, String categorieGrade) {
+        GradeId = gradeId;
+        CodeGrade = codeGrade;
+        LibelleGrade = libelleGrade;
+        CategorieGrade = categorieGrade;
+
+    }
+
+    public Grade() {
+    }
 
     public long getGradeId() {
         return GradeId;
@@ -60,31 +65,17 @@ public class Grade {
         LibelleGrade = libelleGrade;
     }
 
-    public String getCategorieGrade() {
-        return CategorieGrade;
-    }
-
-    public void setCategorieGrade(String categorieGrade) {
-        CategorieGrade = categorieGrade;
-    }
-
-
-
 
     //********* Constructor with parameter******//
 
-    public Grade(long gradeId, int codeGrade, String libelleGrade, String categorieGrade) {
-        GradeId = gradeId;
-        CodeGrade = codeGrade;
-        LibelleGrade = libelleGrade;
-        CategorieGrade = categorieGrade;
-
+    public String getCategorieGrade() {
+        return CategorieGrade;
     }
 
 
     //********* Constructor without parameter******//
 
-
-    public Grade() {
+    public void setCategorieGrade(String categorieGrade) {
+        CategorieGrade = categorieGrade;
     }
 }

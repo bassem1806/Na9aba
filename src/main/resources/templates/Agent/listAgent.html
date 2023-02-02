@@ -10,7 +10,8 @@
 
     <script crossorigin="anonymous"
             integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
-            referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+            referrerpolicy="no-referrer"
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <title>
         إدارة الخدمات الفنية Home
     </title>
@@ -56,6 +57,7 @@ console.log("zeaeaeaeae");
 	});
 		});
 
+
     </script>
 
 
@@ -89,93 +91,92 @@ console.log("zeaeaeaeae");
         <div>
 
 
+            <table class="table table-striped table-responsive-md">
+                <thead>
+                <tr>
+                    <th> الإسم واللقب</th>
+                    <th> المعرف الوحيد</th>
+                    <th> الرتبة</th>
+                    <th> الإدارة العامة</th>
+                    <th> الإدارة</th>
+                    <th> الإدارةالفرعية</th>
+                    <th> الولاية</th>
+                    <th> النقابة</th>
+                    <th> تحيين</th>
+                    <th> محو</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="direction: ${directions}">
+                    <td th:text="${direction.directionGeneral.NomDirGen}"></td>
+                    <td th:text="${direction.NomDir}"></td>
+                    <td th:text="${direction.CodeDir}"></td>
+                    <td th:text="${direction.etatD}"></td>
+
+                    <!--td><a th:href="@{/DirectionGeneral/edit/{DgId}(DgId=${directionGeneral.DgId})}" class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td-->
+                    <td><a class="btn btn-warning" th:href="@{/Direction/edit/{id}(id=${direction.DId})}"> تحيين<i
+                            class="fas fa-user-edit ml-2"></i></a></td>
+                    <td><a class="btn btn-danger" th:href="@{/Direction/delete/{id}(id=${direction.DId})}"> حذف<i
+                            class="fas fa-user-times ml-2"></i></a></td>
+
+                </tr>
+                </tbody>
+            </table>
+            <footer class="panel-footer" style="font-size: large">
+
+                <!--nav aria-label="Page navigation example">
+                    Total Items [[${totalItems}]] : Page [[${currentPage}]] of [[${totalPages}]]
+
+                    <ul class="pagination">
+
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/PvAccidentnew/list1/1}" th:if="${currentPage > 1}">First</a>
+                            <span th:unless="${currentPage > 1}">First</span>
+                        </li>
 
 
+                        <li class="page-item">
+                            <a th:href="@{'/PvAccidentnew/list1/' + ${currentPage - 1}}"
+                               th:if="${currentPage > 1}">Previous</a>
+                            <span th:unless="${currentPage > 1}">Previous</span>
+                        </li>
 
-                <table class="table table-striped table-responsive-md">
-                    <thead>
-                    <tr>
-                        <th> الإسم واللقب </th>
-                        <th> المعرف الوحيد </th>
-                        <th>  الرتبة  </th>
-                        <th> الإدارة العامة </th>
-                        <th> الإدارة  </th>
-                        <th> الإدارةالفرعية  </th>
-                        <th> الولاية   </th>
-                        <th> النقابة   </th>
-                        <th> تحيين </th>
-                        <th> محو </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <tr th:each="direction: ${directions}">
-                        <td th:text="${direction.directionGeneral.NomDirGen}"></td>
-                        <td th:text="${direction.NomDir}"></td>
-                        <td th:text="${direction.CodeDir}"></td>
-                        <td th:text="${direction.etatD}"></td>
-
-                        <!--td><a th:href="@{/DirectionGeneral/edit/{DgId}(DgId=${directionGeneral.DgId})}" class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td-->
-                        <td><a  th:href="@{/Direction/edit/{id}(id=${direction.DId})}" class="btn btn-warning"> تحيين<i class="fas fa-user-edit ml-2"></i></a></td>
-                        <td><a  th:href="@{/Direction/delete/{id}(id=${direction.DId})}" class="btn btn-danger"> حذف<i class="fas fa-user-times ml-2"></i></a></td>
-
-                    </tr>
-                    </tbody>
-                </table>
-        <footer class="panel-footer" style="font-size: large">
-
-            <!--nav aria-label="Page navigation example">
-                Total Items [[${totalItems}]] : Page [[${currentPage}]] of [[${totalPages}]]
-
-                <ul class="pagination">
-
-                    <li class="page-item">
-                        <a class="page-link" th:href="@{/PvAccidentnew/list1/1}" th:if="${currentPage > 1}">First</a>
-                        <span th:unless="${currentPage > 1}">First</span>
-                    </li>
+                        <li class="page-item">
+                         <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                            <a th:href="@{'/PvAccidentnew/list1/' + ${i}}" th:if="${i != currentPage}">[[${i}]]</a>
+                         <span th:unless="${i != currentPage}">[[${i}]]</span>
+                         </span>
+                        </li>
 
 
-                    <li class="page-item">
-                        <a th:href="@{'/PvAccidentnew/list1/' + ${currentPage - 1}}"
-                           th:if="${currentPage > 1}">Previous</a>
-                        <span th:unless="${currentPage > 1}">Previous</span>
-                    </li>
-
-                    <li class="page-item">
-                     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                        <a th:href="@{'/PvAccidentnew/list1/' + ${i}}" th:if="${i != currentPage}">[[${i}]]</a>
-                     <span th:unless="${i != currentPage}">[[${i}]]</span>
-                     </span>
-                    </li>
+                        <li class="page-item">
+                            <a th:href="@{'/PvAccidentnew/list1/' + ${currentPage + 1}}"
+                               th:if="${currentPage < totalPages}">Next</a>
+                            <span th:unless="${currentPage < totalPages}">Next</span>
+                        </li>
 
 
-                    <li class="page-item">
-                        <a th:href="@{'/PvAccidentnew/list1/' + ${currentPage + 1}}"
-                           th:if="${currentPage < totalPages}">Next</a>
-                        <span th:unless="${currentPage < totalPages}">Next</span>
-                    </li>
+                        <li class="page-item">
+                            <a th:href="@{'/PvAccidentnew/list1/' + ${totalPages}}"
+                               th:if="${currentPage < totalPages}">Last</a>
+                            <span th:unless="${currentPage < totalPages}">Last</span>
+                        </li>
+
+                    </ul>
+                </nav-->
+
+            </footer>
+
+            <!-- Navbar footer  -->
 
 
-                    <li class="page-item">
-                        <a th:href="@{'/PvAccidentnew/list1/' + ${totalPages}}"
-                           th:if="${currentPage < totalPages}">Last</a>
-                        <span th:unless="${currentPage < totalPages}">Last</span>
-                    </li>
-
-                </ul>
-            </nav-->
-
-        </footer>
-
-       <!-- Navbar footer  -->
+            <div th:replace="fragments/footer :: footer"/>
 
 
-    <div th:replace="fragments/footer :: footer"/>
+        </div>
 
-
-       </div>
-
-  </main>
+</main>
 <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
         <i class="fa fa-cog py-2"> </i>
@@ -239,6 +240,7 @@ console.log("zeaeaeaeae");
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+
 
 </script>
 

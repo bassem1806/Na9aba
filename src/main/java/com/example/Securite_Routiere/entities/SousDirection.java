@@ -5,13 +5,14 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class SousDirection{
+public class SousDirection implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long SdId ;
+    private long SdId;
 
 
     @Column(name = "NomSDir")
@@ -28,8 +29,20 @@ public class SousDirection{
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "direction_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private  Direction direction;
+    private Direction direction;
 
+
+    public SousDirection(long sdId, String nomSDir, int codeSDir, int etatSD, Direction direction) {
+        SdId = sdId;
+        NomSDir = nomSDir;
+        CodeSDir = codeSDir;
+        this.etatSD = etatSD;
+        this.direction = direction;
+
+    }
+
+    public SousDirection() {
+    }
 
     public long getSdId() {
         return SdId;
@@ -38,7 +51,6 @@ public class SousDirection{
     public void setSdId(long sdId) {
         this.SdId = sdId;
     }
-
 
     public String getNomSDir() {
         return NomSDir;
@@ -72,25 +84,16 @@ public class SousDirection{
         this.direction = direction;
     }
 /*
-    public DirectionGeneral getDirectionGeneral() {
-        return directionGeneral;
+    @Override
+    public String toString() {
+        return "SousDirection{" +
+                "SdId=" + SdId +
+                ", NomSDir='" + NomSDir + '\'' +
+                ", CodeSDir=" + CodeSDir +
+                ", etatSD=" + etatSD +
+                ", direction=" + direction +
+                '}';
     }
 
-    public void setDirectionGeneral(DirectionGeneral directionGeneral) {
-        this.directionGeneral = directionGeneral;
-    }
-*/
-    public SousDirection(long sdId, String nomSDir, int codeSDir, int etatSD, Direction direction ) {
-        SdId = sdId;
-        NomSDir = nomSDir;
-        CodeSDir = codeSDir;
-        this.etatSD = etatSD;
-        this.direction = direction;
-       // this.directionGeneral = directionGeneral;
-    }
-
-    public SousDirection() {
-    }
-
-
+ */
 }

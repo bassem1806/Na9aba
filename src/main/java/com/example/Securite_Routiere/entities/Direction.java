@@ -6,14 +6,15 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 @Entity
-public class Direction {
+public class Direction implements Serializable {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long DId ;
+    private long DId;
 
     @NotBlank(message = "nom Direction is mandatory")
     @Column(name = "NomDir")
@@ -31,7 +32,18 @@ public class Direction {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "DirectionGeneral_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private DirectionGeneral directionGeneral ;
+    private DirectionGeneral directionGeneral;
+
+    public Direction(long DId, String nomDir, int codeDir, int etatD, DirectionGeneral directionGeneral) {
+        this.DId = DId;
+        NomDir = nomDir;
+        CodeDir = codeDir;
+        this.etatD = etatD;
+        this.directionGeneral = directionGeneral;
+    }
+
+    public Direction() {
+    }
 
     public long getDId() {
         return DId;
@@ -71,17 +83,5 @@ public class Direction {
 
     public void setDirectionGeneral(DirectionGeneral directionGeneral) {
         this.directionGeneral = directionGeneral;
-    }
-
-
-    public Direction(long DId, String nomDir, int codeDir, int etatD, DirectionGeneral directionGeneral) {
-        this.DId = DId;
-        NomDir = nomDir;
-        CodeDir = codeDir;
-        this.etatD = etatD;
-        this.directionGeneral = directionGeneral;
-    }
-
-    public Direction() {
     }
 }

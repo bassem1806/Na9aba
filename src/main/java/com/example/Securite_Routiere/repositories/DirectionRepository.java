@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DirectionRepository extends JpaRepository<Direction,Long> {
+public interface DirectionRepository extends JpaRepository<Direction, Long> {
 
     List<Direction> findByDirectionGeneral(DirectionGeneral directionGeneral);
 

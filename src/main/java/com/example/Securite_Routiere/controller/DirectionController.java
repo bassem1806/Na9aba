@@ -21,7 +21,7 @@ public class DirectionController {
     private final DirectionRepository directionRepository;
     private final DirectionGeneralRepository directionGeneralRepository;
 
-@Autowired
+    @Autowired
     public DirectionController(DirectionRepository directionRepository, DirectionGeneralRepository directionGeneralRepository) {
         this.directionRepository = directionRepository;
         this.directionGeneralRepository = directionGeneralRepository;
@@ -31,9 +31,9 @@ public class DirectionController {
 
     public String listDirections(Model model) {
 
-        List<Direction> lp = (List<Direction>)directionRepository.findAll();
+        List<Direction> lp = (List<Direction>) directionRepository.findAll();
 
-        if(lp.size()==0)
+        if (lp.size() == 0)
             lp = null;
         model.addAttribute("directions", lp);
 
@@ -54,11 +54,11 @@ public class DirectionController {
     @PostMapping("addSave")
 
     public String addDirection(@Valid Direction direction, BindingResult result,
-                               @RequestParam(name = "DirectionGeneralId",required = true)long d) {
+                               @RequestParam(name = "DirectionGeneralId", required = true) long d) {
 
-    DirectionGeneral directionGeneral=directionGeneralRepository.findById(d).orElseThrow(()-> new IllegalArgumentException
-                ("Invalid directiong Id:" +d));
-    direction.setDirectionGeneral(directionGeneral);
+        DirectionGeneral directionGeneral = directionGeneralRepository.findById(d).orElseThrow(() -> new IllegalArgumentException
+                ("Invalid directiong Id:" + d));
+        direction.setDirectionGeneral(directionGeneral);
 
         directionRepository.save(direction);
 
@@ -67,8 +67,8 @@ public class DirectionController {
 
     @GetMapping("delete/{DId}")
     public String deleteSousDirection(@PathVariable("DId") long DId, Model model) {
-       Direction direction = directionRepository.findById(DId)
-                .orElseThrow(()-> new IllegalArgumentException("Invalid Direction Id:" + DId));
+        Direction direction = directionRepository.findById(DId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Direction Id:" + DId));
         directionRepository.delete(direction);
         model.addAttribute("directions", directionRepository.findAll());
 
@@ -79,7 +79,7 @@ public class DirectionController {
     @GetMapping("edit/{DId}")
     public String showDirectionFormToUpdate(@PathVariable("DId") long DId, Model model) {
         Direction direction = directionRepository.findById(DId)
-                .orElseThrow(()->new IllegalArgumentException("Invalid Direction Id:" + DId));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Direction Id:" + DId));
 
         model.addAttribute("direction", direction);
         model.addAttribute("directionGenerals", directionGeneralRepository.findAll());
@@ -91,15 +91,15 @@ public class DirectionController {
     @PostMapping("edit")
     public String updateDirection(@Valid Direction direction, BindingResult result, Model model, @RequestParam(name = "DirectionGeneralId", required = false) Long dg) {
         if (result.hasErrors()) {
-            System.out.println("direction id : " +direction.getCodeDir());
+            System.out.println("direction id : " + direction.getCodeDir());
             return "Direction/updateDirection";
         }
-        DirectionGeneral directionGeneral= directionGeneralRepository.findById(dg)
-                .orElseThrow(()-> new IllegalArgumentException("Invalid Directiong eneral Id:" + dg));
+        DirectionGeneral directionGeneral = directionGeneralRepository.findById(dg)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Directiong eneral Id:" + dg));
         direction.setDirectionGeneral(directionGeneral);
 
         directionRepository.save(direction);
-   return "redirect:../Direction/list";
+        return "redirect:../Direction/list";
 
 
     }

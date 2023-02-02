@@ -7,7 +7,7 @@
  *
  * Contributors:
  *     Exadel, Inc. and Red Hat, Inc. - initial API and implementation
- ******************************************************************************/ 
+ ******************************************************************************/
 package demo;
 
 /**
@@ -15,19 +15,19 @@ package demo;
  */
 public class User {
 
-	private String name;
+    private String name;
 
-	/**
-	 * @return User Name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @return User Name
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * @param User Name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @param User Name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 }
