@@ -76,18 +76,24 @@ $(document).ready(function(){
 
 	$('#listDirection').on('change', function(){
 		var direction_id= $(this).val();
-console.log("Hello world! 1f");
+		console.log("Hello world 2eme code");
+console.log("Hello world!  3 eme etape");
 		$.ajax({
 			type: 'GET',
 			url: '/Agent/loadSousDirectionByDirection/' + direction_id ,
 			success: function(result) {
+			console.log("Hello world!  4 eme etape");
 				var result = JSON.parse(result);
+			console.log("Hello world!  5 eme etape" +result);
 				var s = '';
 				for(var i = 0; i < result.length; i++) {
-					s += '<option value="' + result[i].SdId + '">' + result[i].NomSDir + '</option>';
+				console.log("Hello world!  6 eme etape");
+					s += '<option value="' + result[i].sdId + '">' + result[i].nomSDir + '</option>';
+console.log("Hello world!  7 eme etape");
 				}
 
 				$('#listSousDirection').html(s);
+				console.log("Hello world!  8eme etape");
 			}
 		});
 	});
@@ -209,9 +215,9 @@ console.log("Hello world! 1f");
 
                             <div class="form-group col-md-4">
                                 <label class="col-form-label" for="sousDirection" id="sousDirection">الإدارةالفرعية </label>
-                                <select class="form-control" id="listSousDirection" name="SousDirectionId">
+                                <select class="form-control" id="listSousDirection"   name="SousDirectionId">
                                     <option value="">--من فضل إختر الإدارةالفرعية --</option>
-                                    <option th:each="sd: ${sousDirections}" th:text="${sd.NomSDir}" th:value="${sd.SdId}"/>
+                                    <option th:each="sd: ${sousDirection }" th:text="${sd.nomSDir}" th:value="${sd.sdId}"/>
                                 </select>
                             </div>
 

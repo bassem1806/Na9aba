@@ -3,6 +3,8 @@ package com.example.Securite_Routiere.controller;
 
 import com.example.Securite_Routiere.entities.*;
 import com.example.Securite_Routiere.repositories.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,14 +171,14 @@ public class AgentController {
 
     @ResponseBody
     @RequestMapping(value = "loadSousDirectionByDirection/{DId}", method = RequestMethod.GET)
-    public String loadStatesByCountry2(@PathVariable("DId") long DId) {
+    public String loadStatesByCountry2(@PathVariable("DId") long DId) throws JsonProcessingException {
 
         System.out.println("init loadStatesByCountry2");
         System.out.println("l id de la direction  =" + DId);
 
         System.out.println("la taille de la liste est egale =" + sousDirectionRepository.findByDirection(directionRepository.findById(DId).get()));
 
-        List<SousDirection> sousDirectionByD =sousDirectionRepository.findByDirection(directionRepository.findById(DId).get());
+        List<SousDirection> sousDirectionByD = sousDirectionRepository.findByDirection(directionRepository.findById(DId).get());
 
 
         System.out.println("la taille de la liste est egale =" + sousDirectionByD.size());
@@ -184,12 +186,17 @@ public class AgentController {
         System.out.println("la taille de la liste est egale =" + sousDirectionByD.get(0).getNomSDir());
 
 
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().excludeFieldsWithModifiers(Transient).create();
 
-        return gson.toJson(sousDirectionRepository.findByDirection(directionRepository.findById(DId).get()));
+        //Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().excludeFieldsWithModifiers(Transient).create();
+        //Gson gson = new Gson();
 
+        //return gson.toJson(sousDirectionByD);
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.writeValueAsString(sousDirectionByD);
     }
 
 }
+
 
 
