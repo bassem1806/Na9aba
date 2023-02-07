@@ -222,7 +222,7 @@ console.log("Hello world!  7 eme etape");
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label class="col-form-label" for="grade" id="grade">الرتبة </label>
+                                <label class="col-form-label" for="grade" id="grade1">الرتبة </label>
                                 <select class="form-control" id="grade" name="GradeId">
                                     <option value="">--من فضل إختر الرتبة --</option>
                                     <option th:each="gr: ${grade}" th:text="${gr.LibelleGrade}" th:value="${gr.GradeId}"/>
@@ -230,7 +230,7 @@ console.log("Hello world!  7 eme etape");
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label class="col-form-label" for="syndicat" id="syndicat">النقابة </label>
+                                <label class="col-form-label" for="syndicat" id="syndicat1">النقابة </label>
                                 <select class="form-control" id="syndicat" name="syndicat">
                                     <option value="">--من فضل إختر النقابة --</option>
                                     <option th:each="sy: ${syndicat}" th:text="${sy.NomSyndicat}"

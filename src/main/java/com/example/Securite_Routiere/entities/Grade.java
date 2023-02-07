@@ -7,7 +7,7 @@ public class Grade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long GradeId;
+    private Long GradeId;
 
 
     @Column(name = "Code_Grade")
@@ -30,22 +30,12 @@ public class Grade {
 */
 //********* Getter AND Setter******//
 
-    public Grade(long gradeId, int codeGrade, String libelleGrade, String categorieGrade) {
-        GradeId = gradeId;
-        CodeGrade = codeGrade;
-        LibelleGrade = libelleGrade;
-        CategorieGrade = categorieGrade;
 
-    }
-
-    public Grade() {
-    }
-
-    public long getGradeId() {
+    public Long getGradeId() {
         return GradeId;
     }
 
-    public void setGradeId(long gradeId) {
+    public void setGradeId(Long gradeId) {
         GradeId = gradeId;
     }
 
@@ -65,17 +55,21 @@ public class Grade {
         LibelleGrade = libelleGrade;
     }
 
-
-    //********* Constructor with parameter******//
-
     public String getCategorieGrade() {
         return CategorieGrade;
     }
 
-
-    //********* Constructor without parameter******//
-
     public void setCategorieGrade(String categorieGrade) {
         CategorieGrade = categorieGrade;
+    }
+
+    public Grade(Long gradeId, int codeGrade, String libelleGrade, String categorieGrade) {
+        GradeId = gradeId;
+        CodeGrade = codeGrade;
+        LibelleGrade = libelleGrade;
+        CategorieGrade = categorieGrade;
+    }
+
+    public Grade() {
     }
 }

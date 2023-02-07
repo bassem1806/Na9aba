@@ -1,24 +1,25 @@
+
 <!DOCTYPE html>
-<html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org">
+<html lang="ar" dir="rtl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-    <link href="../assets/img/apple-icon.png" rel="apple-touch-icon" sizes="76x76">
-    <link href="../assets/img/favicon.png" rel="icon" type="image/png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <title>
         إدارة الخدمات الفنية
     </title>
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet"/>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
-    <script crossorigin="anonymous" src="https://kit.fontawesome.com/42d5adcbca.js"></script>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
-    <link href="../assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
+    <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -29,10 +30,9 @@
 <!-- menu a droite  -->
 
 <body class="g-sidenav-show rtl bg-gray-100">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret"
-       id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret" id="sidenav-main">
 
-    <div th:replace="fragments/menu :: menu"/>
+    <div th:replace="fragments/menu :: menu" />
 
 </aside>
 <!--end  menu a droite  -->
@@ -40,8 +40,9 @@
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg overflow-hidden">
 
 
+
     <!-- Navbar header  -->
-    <div th:replace="fragments/header :: header"/>
+    <div th:replace="fragments/header :: header" />
 
     <div class="container my-5">
         <h3>إضافة إدارة عامة</h3>
@@ -50,47 +51,37 @@
                 <div class="col-md-10">
 
 
-                    <form action="#" method="post" th:action="@{/DirectionGeneral/addSave}"
-                          th:object="${directionGeneral}">
+
+
+                        <form action="#" th:action="@{/DirectionGeneral/update}" th:object="${directionGeneral}" method="post">
                         <div class="row">
 
-                            <div class="form-group col-md-8">
-                                <label class="col-form-label" for="NomDirGen">إسم الإدارة العامة</label>
-                                <input class="form-control" id="NomDirGen" placeholder="إسم الإدارة" th:field="*{NomDirGen}"
-                                       type="text"> <span
-                                    class="text-danger" th:errors="*{NomDirGen}"
-                                    th:if="${#fields.hasErrors('NomDirGen')}"></span>
+                            <div class="form-group col-md-8" >
+                                    <label for="NomDirGen" class="col-form-label">إسم الإدارة العامة</label> <input type="text" th:field="*{NomDirGen}" class="form-control" id="NomDirGen" placeholder="إسم الإدارة"> <span
+                                        th:if="${#fields.hasErrors('NomDirGen')}" th:errors="*{NomDirGen}" class="text-danger"></span>
                             </div>
 
-                            <div class="form-group col-md-8">
-                                <label class="col-form-label" for="CodeDirGen">رمز الإدارة العامة</label> <input
-                                    class="form-control" id="CodeDirGen" placeholder="رمز الإدارة" th:field="*{CodeDirGen}"
-                                    type="text"> <span
-                                    class="text-danger" th:errors="*{CodeDirGen}"
-                                    th:if="${#fields.hasErrors('CodeDirGen')}"></span>
+                            <div class="form-group col-md-8" >
+                                <label for="CodeDirGen" class="col-form-label">رمز الإدارة العامة</label> <input type="text" th:field="*{CodeDirGen}" class="form-control" id="CodeDirGen" placeholder="رمز الإدارة"> <span
+                                    th:if="${#fields.hasErrors('CodeDirGen')}" th:errors="*{CodeDirGen}" class="text-danger"></span>
                             </div>
 
-                            <div class="form-group col-md-8">
-                                <label class="col-form-label" for="etat">وضعية الإدارة العامة</label> <input class="form-control"
-                                                                                                             id="etat"
-                                                                                                             placeholder="وضعية الإدارة"
-                                                                                                             th:field="*{etat}"
-                                                                                                             type="text">
-                                <span
-                                        class="text-danger" th:errors="*{etat}"
-                                        th:if="${#fields.hasErrors('etat')}"></span>
+                            <div class="form-group col-md-8" >
+                                <label for="etat" class="col-form-label">وضعية الإدارة العامة</label> <input type="text" th:field="*{etat}" class="form-control" id="etat" placeholder="وضعية الإدارة"> <span
+                                    th:if="${#fields.hasErrors('etat')}" th:errors="*{etat}" class="text-danger"></span>
                             </div>
 
-                            <div class="col-md-6" id="ex1">
-                                <input class="btn btn-primary" type="submit" value="إضافة الإدارة العامة">
+                            <div id="ex1" class="col-md-6"  >
+                                <input type="submit"   class="btn btn-primary" value="إضافة الإدارة العامة">
 
+
+                            </div >
+
+
+                            <div class="form-group col-md-8" >
 
                             </div>
 
-
-                            <div class="form-group col-md-8">
-
-                            </div>
 
 
                         </div>
@@ -101,8 +92,12 @@
     </div>
 
 
+
     <!-- Navbar footer  -->
-    <div th:replace="fragments/footer :: footer"/>
+    <div th:replace="fragments/footer :: footer" />
+
+
+
 
 
     </div>
@@ -130,18 +125,14 @@
             <div>
                 <h6 class="mb-0">Sidebar Colors</h6>
             </div>
-            <a class="switch-trigger background-color" href="javascript:void(0)">
+            <a href="javascript:void(0)" class="switch-trigger background-color">
                 <div class="badge-colors my-2 text-end">
-                    <span class="badge filter bg-gradient-primary active" data-color="primary"
-                          onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
                     <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
                     <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-success" data-color="success"
-                          onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-warning" data-color="warning"
-                          onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-danger" data-color="danger"
-                          onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
                 </div>
             </a>
 

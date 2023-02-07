@@ -84,21 +84,21 @@ public class SousDirectionController {
     }
 
 
-    @GetMapping("delete/{SdId}")
-    public String deleteDirection(@PathVariable("SdId") long SdId, Model model) {
-        SousDirection sousDirection = sousDirectionRepository.findById(SdId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid SousDirection Id:" + SdId));
+    @GetMapping("delete/{sdId}")
+    public String deleteDirection(@PathVariable("sdId") Long sdId, Model model) {
+        SousDirection sousDirection = sousDirectionRepository.findById(sdId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid SousDirection Id:" + sdId));
         sousDirectionRepository.delete(sousDirection);
         model.addAttribute("sousDirection", sousDirectionRepository.findAll());
 
-        return "Direction/listDirections";
+        return "redirect:../list";
     }
 
 
-    @GetMapping("edit/{SdId}")
-    public String showDirectionFormToUpdate(@PathVariable("SdId") long SdId, Model model) {
-        SousDirection sousDirection = sousDirectionRepository.findById(SdId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Direction Id:" + SdId));
+    @GetMapping("edit/{sdId}")
+    public String showDirectionFormToUpdate(@PathVariable("sdId") Long sdId, Model model) {
+        SousDirection sousDirection = sousDirectionRepository.findById(sdId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Direction Id:" + sdId));
 
         model.addAttribute("sousDirection", sousDirection);
 

@@ -84,7 +84,7 @@ public class AgentController {
         System.out.println("size direction :" + directionRepository.findAll().size());
 
         System.out.println("size direction sd :" + sousDirectionRepository.findAll().size());
-
+        System.out.println("grade liste :" + gradeRepository.findAll().size());
 
         return "Agent/addAgent";
 
@@ -99,9 +99,9 @@ public class AgentController {
                            @RequestParam(name = "gouvernoratId1", required = true) Long b,
                            @RequestParam(name = "DirectionGeneralId", required = true) Long dg,
                            @RequestParam(name = "DirectionId", required = true) Long d,
-                           @RequestParam(name = "SousDirectionId", required = false) Long sd,
-                           @RequestParam(name = " GradeId", required = false) Long g,
-                           @RequestParam(name = " SyndicatId", required = false) Long sy) {
+                           @RequestParam(name = "SousDirectionId", required = true) Long sd,
+                           @RequestParam(name = " GradeId", required =false) Long gr,
+                           @RequestParam(name = " SyndicatId", required =false ) Long sy) {
 
 
         Delegation delegation = delegationRepository.findById(b).orElseThrow(() -> new IllegalArgumentException
@@ -112,21 +112,23 @@ public class AgentController {
                 ("Invalid sous direction Id:" + sd));
         agent.setSousDirection(sousDirection);
 
-        Grade grade = gradeRepository.findById(g).orElseThrow(() -> new IllegalArgumentException
-                ("Invalid  grade Id:" + g));
+        Grade grade = gradeRepository.findById(gr).orElseThrow(() -> new IllegalArgumentException
+                ("Invalid  grade Id:" + gr));
         agent.setGrade(grade);
 
         Syndicat syndicat = syndicatRepository.findById(sy).orElseThrow(() -> new IllegalArgumentException
-                ("Invalid  grade Id:" + sy));
+                ("Invalid  sundicat Id:" + sy));
 
 
         agent.setSyndicats((Set<Syndicat>) syndicat);
 
 
+
+
         agent = agentRepository.save(agent);
 
 
-        return "redirect:list1";
+        return "redirect:list";
 
     }
 

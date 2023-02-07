@@ -71,15 +71,15 @@
 
                             <td th:text="${sousDirection.direction.directionGeneral.NomDirGen}"></td>
                             <td th:text="${sousDirection.direction.NomDir}"></td>
-                            <td th:text="${sousDirection.NomSDir}"></td>
-                            <td th:text="${sousDirection.CodeSDir}"></td>
+                            <td th:text="${sousDirection.nomSDir}"></td>
+                            <td th:text="${sousDirection.codeSDir}"></td>
                             <td th:text="${sousDirection.etatSD}"></td>
 
 
                             <td><a class="btn btn-warning"
-                                   th:href="@{/SousDirection/edit/{id}(id=${sousDirection.SdId})}"> تحيين<i class="fas fa-user-edit ml-2"></i></a></td>
+                                   th:href="@{/SousDirection/edit/{id}(id=${sousDirection.sdId})}"> تحيين<i class="fas fa-user-edit ml-2"></i></a></td>
                             <td><a class="btn btn-danger"
-                                   th:href="@{/SousDirection/delete/{id}(id=${sousDirection.SdId})}"> حذف<i class="fas fa-user-times ml-2"></i></a></td>
+                                   th:href="@{/SousDirection/delete/{id}(id=${sousDirection.sdId})}"> حذف<i class="fas fa-user-times ml-2"></i></a></td>
 
                         </tr>
                         </tbody>
