@@ -225,17 +225,25 @@ console.log("Hello world!  7 eme etape");
                                 <label class="col-form-label" for="grade" id="grade1">الرتبة </label>
                                 <select class="form-control" id="grade" name="GradeId">
                                     <option value="">--من فضل إختر الرتبة --</option>
-                                    <option th:each="gr: ${grade}" th:text="${gr.LibelleGrade}" th:value="${gr.GradeId}"/>
+                                    <option th:each="gr: ${grades}" th:text="${gr.LibelleGrade}" th:value="${gr.GradeId}"/>
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label class="col-form-label" for="syndicat" id="syndicat1">النقابة </label>
-                                <select class="form-control" id="syndicat" name="syndicat">
+                                <select class="form-control" id="syndicat" name="SyndicatId">
                                     <option value="">--من فضل إختر النقابة --</option>
                                     <option th:each="sy: ${syndicat}" th:text="${sy.NomSyndicat}"
                                             th:value="${sy.SynId}"/>
                                 </select>
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label class="col-form-label" for="DateInscription">date</label>
+                                <input class="form-control" id="DateInscription" placeholder="date" th:field="*{DateInscription}"
+                                       type="date"/>
+                                <span class="text-danger" th:errors="*{DateInscription}" th:if="${#fields.hasErrors('DateInscription')}"></span>
                             </div>
 
 

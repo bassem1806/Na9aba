@@ -8,7 +8,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 @Controller
-public class GoogleChartsController {
+public class
+GoogleChartsController {
     @RequestMapping(value = "/home")
     public String getPieChart(Model model) {
         Map<String, Integer> graphData = new TreeMap<>();

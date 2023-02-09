@@ -1,6 +1,7 @@
 package com.example.Securite_Routiere.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Grade {
@@ -21,13 +22,7 @@ public class Grade {
     private String CategorieGrade;
 
 
-    //********* many to one Agent*******//
-/*
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "Agent_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Agent agent ;
-*/
+
 //********* Getter AND Setter******//
 
 
@@ -72,4 +67,6 @@ public class Grade {
 
     public Grade() {
     }
+
+
 }

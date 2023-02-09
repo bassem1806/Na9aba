@@ -108,16 +108,22 @@ console.log("zeaeaeaeae");
                 </thead>
                 <tbody>
 
-                <tr th:each="direction: ${directions}">
-                    <td th:text="${direction.directionGeneral.NomDirGen}"></td>
-                    <td th:text="${direction.NomDir}"></td>
-                    <td th:text="${direction.CodeDir}"></td>
-                    <td th:text="${direction.etatD}"></td>
+                <tr th:each="agent: ${agents}">
+                    <td th:text="${agent.Nom}+' '+${agent.Prenom}"></td>
+                    <td th:text="${agent.CNRPS}"></td>
+                    <td th:text="${agent.grade.LibelleGrade}"></td>
+                    <td th:text="${agent.sousDirection.direction.directionGeneral.NomDirGen}"></td>
+                    <td th:text="${agent.sousDirection.direction.NomDir}"></td>
+                    <td th:text="${agent.sousDirection.nomSDir}"></td>
+                    <td th:text="${agent.delegation.gouvernorat.name}"></td>
+                    <td th:text="${agent.syndicat.NomSyndicat}"></td>
 
-                    <!--td><a th:href="@{/DirectionGeneral/edit/{DgId}(DgId=${directionGeneral.DgId})}" class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td-->
-                    <td><a class="btn btn-warning" th:href="@{/Direction/edit/{id}(id=${direction.DId})}"> تحيين<i
+
+
+
+                    <td><a class="btn btn-warning" th:href="@{/Agent/edit/{id}(id=${agent.AgentId})}"> تحيين<i
                             class="fas fa-user-edit ml-2"></i></a></td>
-                    <td><a class="btn btn-danger" th:href="@{/Direction/delete/{id}(id=${direction.DId})}"> حذف<i
+                    <td><a class="btn btn-danger" th:href="@{/Agent/delete/{id}(id=${agent.AgentId})}"> حذف<i
                             class="fas fa-user-times ml-2"></i></a></td>
 
                 </tr>
@@ -176,7 +182,7 @@ console.log("zeaeaeaeae");
 
         </div>
 
-</main>
+ </main>
 <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
         <i class="fa fa-cog py-2"> </i>

@@ -1,7 +1,6 @@
 package com.example.Securite_Routiere.entities;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Syndicat {
@@ -22,18 +21,18 @@ public class Syndicat {
 
 
     /**** Many To many Syndicat   ****/
-    @ManyToMany
+ /*   @ManyToMany
     @JoinTable(name = "Agent_Syndicat",
             joinColumns = @JoinColumn(name = "syndicat_id"),
             inverseJoinColumns = @JoinColumn(name = "agent_id"))
     private Set<Agent> agents;
-
-    public Syndicat(long synId, String nomSyndicat, int codeSyndicat, int etatSyn, Set<Agent> agents) {
+*/
+    public Syndicat(long synId, String nomSyndicat, int codeSyndicat, int etatSyn) {
         SynId = synId;
         NomSyndicat = nomSyndicat;
         CodeSyndicat = codeSyndicat;
         this.etatSyn = etatSyn;
-        this.agents = agents;
+
     }
 
     public Syndicat() {
@@ -71,11 +70,5 @@ public class Syndicat {
         this.etatSyn = etatSyn;
     }
 
-    public Set<Agent> getAgents1() {
-        return agents;
-    }
 
-    public void setAgents1(Set<Agent> agents1) {
-        this.agents = agents;
-    }
 }

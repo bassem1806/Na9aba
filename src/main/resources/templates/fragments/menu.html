@@ -5,21 +5,21 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-    <link href="../assets/img/apple-icon.png" rel="apple-touch-icon" sizes="76x76">
-    <link href="../assets/img/favicon.png" rel="icon" type="image/png">
+    <link href="/assets/img/apple-icon.png" rel="apple-touch-icon" sizes="76x76">
+    <link href="/assets/img/favicon.png" rel="icon" type="image/png">
     <title>
         إدارة الخدمات الفنية
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet"/>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <link href="/assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- Font Awesome Icons -->
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/42d5adcbca.js"></script>
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- CSS Files -->
-    <link href="../assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
+    <link href="/assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
 </head>
 
 <!-- menu a droite  -->
@@ -67,7 +67,7 @@
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')">
-                    <a class="nav-link " th:href="@{'/PvAccident/list'}">
+                    <a class="nav-link " th:href="@{'/Agent/list'}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
                             <svg height="12px" version="1.1" viewBox="0 0 42 42" width="12px"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -87,10 +87,10 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text me-1">محاضر الحوادث المرورية</span>
+                        <span class="nav-link-text me-1">قائمة المنخرطين</span>
                     </a>
                 </li>
-                <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')">
+                <!--li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')">
                     <a class="nav-link " th:href="@{'/PvAccidentnew/list1'}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
                             <svg height="12px" version="1.1" viewBox="0 0 43 36" width="12px"
@@ -165,7 +165,7 @@
                         </div>
                         <span class="nav-link-text me-1">قائمة المترشحين</span>
                     </a>
-                </li>
+                </li-->
                 <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')">
                     <a class="nav-link " th:href="@{'/accounts/list/'}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
@@ -237,7 +237,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text me-1">لتصرف في الحقوق </span>
+                        <span class="nav-link-text me-1">التصرف في الحقوق </span>
                     </a>
                 </li>
 

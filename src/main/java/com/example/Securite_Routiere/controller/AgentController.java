@@ -6,7 +6,6 @@ import com.example.Securite_Routiere.repositories.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/Agent/")
@@ -57,7 +56,8 @@ public class AgentController {
         model.addAttribute("agents", lp);
 
 
-        return "Agent/listAgent";
+
+        return "Agent/listAgents";
 
     }
 
@@ -72,8 +72,8 @@ public class AgentController {
 
         model.addAttribute("directions", directionRepository.findAll());
 
-        model.addAttribute("sousDirection", sousDirectionRepository.findAll());
-        model.addAttribute("grade", gradeRepository.findAll());
+        model.addAttribute("sousDirections", sousDirectionRepository.findAll());
+        model.addAttribute("grades", gradeRepository.findAll());
 
         model.addAttribute("syndicat", syndicatRepository.findAll());
 
@@ -100,38 +100,58 @@ public class AgentController {
                            @RequestParam(name = "DirectionGeneralId", required = true) Long dg,
                            @RequestParam(name = "DirectionId", required = true) Long d,
                            @RequestParam(name = "SousDirectionId", required = true) Long sd,
-                           @RequestParam(name = " GradeId", required =false) Long gr,
-                           @RequestParam(name = " SyndicatId", required =false ) Long sy) {
+                           @RequestParam(name = "GradeId", required = true) Long g,
+                           @RequestParam(name = "SyndicatId", required = true) Long sy) {
 
+        System.out.println("bonjourrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr les amis");
 
         Delegation delegation = delegationRepository.findById(b).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid Delegation Id:" + b));
         agent.setDelegation(delegation);
 
+        System.out.println("delegation " + delegationRepository.findById(b));
+
         SousDirection sousDirection = sousDirectionRepository.findById(sd).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid sous direction Id:" + sd));
         agent.setSousDirection(sousDirection);
 
-        Grade grade = gradeRepository.findById(gr).orElseThrow(() -> new IllegalArgumentException
-                ("Invalid  grade Id:" + gr));
+        System.out.println("Sousdirection " + sousDirectionRepository.findById(sd));
+
+        Grade grade = gradeRepository.findById(g).orElseThrow(() -> new IllegalArgumentException
+                ("Invalid grade Id:" + g));
         agent.setGrade(grade);
+        System.out.println("grade id :" + gradeRepository.findById(g));
 
         Syndicat syndicat = syndicatRepository.findById(sy).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid  sundicat Id:" + sy));
-
-
-        agent.setSyndicats((Set<Syndicat>) syndicat);
-
-
-
-
+agent.setSyndicat(syndicat);
         agent = agentRepository.save(agent);
-
 
         return "redirect:list";
 
     }
 
+    @GetMapping("delete/{AgentId}")
+
+
+    public String deleteDirectionGeneral(@PathVariable("AgentId") long AgentId, Model model) {
+
+Agent agent = agentRepository.findById(AgentId)
+        .orElseThrow(() -> new IllegalArgumentException("Invalid agent Id:" + AgentId));
+        agentRepository.delete(agent);
+       return "redirect:../list";
+
+    }
+
+    @GetMapping("edit/{AgentId}")
+    public String showDirectionGeneralFormToUpdate(@PathVariable("AgentId") long AgentId, Model model) {
+        Agent agent = agentRepository.findById(AgentId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid agent Id:" + AgentId));
+
+        model.addAttribute("agent", agent);
+
+        return "Agent/updateAgent";
+    }
 
     @ResponseBody
     @RequestMapping(value = "loadDelegationByGouvernorat/{id}", method = RequestMethod.GET)

@@ -7,7 +7,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 public class Agent implements Serializable {
@@ -56,6 +55,7 @@ public class Agent implements Serializable {
     private Grade grade;
 
 
+
     /**** Many To One Sousdirection****/
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -63,20 +63,14 @@ public class Agent implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private SousDirection sousDirection;
 
+    /**** Many To One syndicat ****/
 
-    /**** Many To Many  syndicat****/
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "syndicat_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Syndicat syndicat;
 
-
-    @ManyToMany
-    @JoinTable(name = "Agent_Syndicat",
-            joinColumns = @JoinColumn(name = "agent_id"),
-            inverseJoinColumns = @JoinColumn(name = "syndicat_id"))
-    private Set<Syndicat> syndicats;
-
-//********* Getter AND Setter******//
-
-
-    public Agent(long agentId, long CIN, long CNRPS, String nom, String prenom, String prenom_Pere, String dateInscription, Delegation delegation, Grade grade, SousDirection sousDirection, Set<Syndicat> syndicats) {
+    public Agent(long agentId, long CIN, long CNRPS, String nom, String prenom, String prenom_Pere, String dateInscription, Delegation delegation, Grade grade, SousDirection sousDirection, Syndicat syndicat) {
         AgentId = agentId;
         this.CIN = CIN;
         this.CNRPS = CNRPS;
@@ -87,11 +81,26 @@ public class Agent implements Serializable {
         this.delegation = delegation;
         this.grade = grade;
         this.sousDirection = sousDirection;
-        this.syndicats = syndicats;
+        this.syndicat = syndicat;
     }
+
+    /**** Many To Many  syndicat****/
+
+/*
+    @ManyToMany
+    @JoinTable(name = "Agent_Syndicat",
+            joinColumns = @JoinColumn(name = "agent_id"),
+            inverseJoinColumns = @JoinColumn(name = "syndicat_id"))
+    private Set<Syndicat> syndicats;
+*/
+//********* Getter AND Setter******//
+
+
+
 
     public Agent() {
     }
+
 
     public long getAgentId() {
         return AgentId;
@@ -165,13 +174,6 @@ public class Agent implements Serializable {
         this.sousDirection = sousDirection;
     }
 
-    public Set<Syndicat> getSyndicats() {
-        return syndicats;
-    }
-
-    public void setSyndicats(Set<Syndicat> syndicats) {
-        this.syndicats = syndicats;
-    }
 
     public Grade getGrade() {
         return grade;
@@ -179,5 +181,30 @@ public class Agent implements Serializable {
 
     public void setGrade(Grade grade) {
         this.grade = grade;
+    }
+
+    public Syndicat getSyndicat() {
+        return syndicat;
+    }
+
+    public void setSyndicat(Syndicat syndicat) {
+        this.syndicat = syndicat;
+    }
+
+    @Override
+    public String toString() {
+        return "Agent{" +
+                "AgentId=" + AgentId +
+                ", CIN=" + CIN +
+                ", CNRPS=" + CNRPS +
+                ", Nom='" + Nom + '\'' +
+                ", Prenom='" + Prenom + '\'' +
+                ", Prenom_Pere='" + Prenom_Pere + '\'' +
+                ", DateInscription='" + DateInscription + '\'' +
+                ", delegation=" + delegation +
+                ", grade=" + grade +
+                ", sousDirection=" + sousDirection +
+                ", syndicat=" + syndicat +
+                '}';
     }
 }
