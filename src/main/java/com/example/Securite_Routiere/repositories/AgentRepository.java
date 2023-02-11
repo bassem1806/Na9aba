@@ -20,4 +20,18 @@ public interface AgentRepository extends JpaRepository<Agent, Long> {
     List<Object> getCountBySyndicat();
 
 
+
+
+    @Query(value = "SELECT COUNT(a.cnrps) ," +
+   " sd.nomsdir" +
+
+  " FROM syndicat01.agent a" +
+   " left join syndicat01.sous_direction sd"+
+   " ON a.sousdirection_id = sd.sd_id" +
+
+   " GROUP BY sd.nomsdir ORDER BY  COUNT(a.cnrps) desc ",nativeQuery = true)
+    List<Object> getCountBySDirection();
+
+
+
 }

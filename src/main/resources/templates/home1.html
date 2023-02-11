@@ -64,8 +64,13 @@
 
             <div class="col-6">
                 <div class="chart">
+                    <canvas class="chart-canvas" height="300" id="chart-bars1"></canvas>
+                </div>
+            <div class="col-12">
+                <div class="chart">
                     <canvas class="chart-canvas" height="300" id="chart-line"></canvas>
                 </div>
+
             </div>
         </div>
 
@@ -148,23 +153,25 @@
 <script>
 $( document ).ready(function() {
     var ctx = $("canvas#chart-bars")[0].getContext("2d");
- console.log("Hello world!");
+
     $.ajax({
 			type: 'GET',
 			url: '/home1/loadNbsyndicat',
 			success: function(res) {
-console.log("res :" +res);
-console.log("res :" +res.length);
+
+
 			var labels = [];
 			var values = [];
+
+
 var s = '';
 				for(var i = 0; i < res.length; i++) {
 
 					labels.push(res[i][1]);
-						console.log("labes:" +labels);
+
 
 					values.push(res[i][0]);
-					console.log("value:" +values);
+
 				}
 
 				$('#azert').empty();
@@ -238,124 +245,225 @@ var s = '';
                     },
                   },
                 });
+                },
+            });
+			});
+</script>
+<script>
+var ctx2 = $("canvas#chart-line")[0].getContext("2d");
+
+
+
+var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+
+var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+
+
+
+
+new Chart(ctx2, {
+type: "line",
+data: {
+labels: ["جانفي","فيفري","مارس","أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+],
+datasets: [{
+label: "الحوادث سنة 2021",
+tension: 0.4,
+borderWidth: 0,
+pointRadius: 0,
+borderColor: "#cb0c9f",
+borderWidth: 3,
+backgroundColor: gradientStroke1,
+fill: true,
+data: [100,120,70,50, 40, 300, 220, 500, 250, 400, 230, 500],
+maxBarThickness: 6
+
+},
+{
+label: "الحوادث سنة 2022",
+tension: 0.4,
+borderWidth: 0,
+pointRadius: 0,
+borderColor: "#3A416F",
+borderWidth: 3,
+backgroundColor: gradientStroke2,
+fill: true,
+data: [100,110,70,30, 90, 40, 140, 290, 290, 340, 230, 400],
+maxBarThickness: 6
+},
+],
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+title:{
+display:true,
+text:'مقارنة عدد الحوادث حسب نفس تافترة الزمنية ',
+fontSize:40
+},
+legend: {
+position : 'top',
+display: true,
+}
+},
+interaction: {
+intersect: false,
+mode: 'index',
+},
+scales: {
+y: {
+grid: {
+drawBorder: false,
+display: true,
+drawOnChartArea: true,
+drawTicks: false,
+borderDash: [5, 5]
+},
+ticks: {
+display: true,
+padding: 10,
+color: '#b2b9bf',
+font: {
+size: 14,
+family: "Open Sans",
+style: 'normal',
+lineHeight: 2
+},
+}
+},
+x: {
+grid: {
+drawBorder: false,
+display: false,
+drawOnChartArea: false,
+drawTicks: false,
+borderDash: [5, 5]
+},
+ticks: {
+display: true,
+color: '#b2b9bf',
+padding: 20,
+font: {
+size: 11,
+family: "Open Sans",
+style: 'normal',
+lineHeight: 2
+},
+}
+},
+},
+},
+
+});
+</script>
+
+<script>
+$( document ).ready(function() {
+    var ctx = $("canvas#chart-bars1")[0].getContext("2d");
+ console.log("Hello world!");
+    $.ajax({
+			type: 'GET',
+			url: '/home1/loadNbsdirection',
+			success: function(res) {
+console.log("res :" +res);
+console.log("res :" +res.length);
+			var labels = [];
+			var values = [];
+
+
+var s = '';
+				for(var i = 0; i < res.length; i++) {
+
+					labels.push(res[i][1]);
+						console.log("labes:" +labels);
+
+					values.push(res[i][0]);
+					console.log("value:" +values);
+				}
+
+				$('#azert1').empty();
+				$('#azert1').html(s);
+				new Chart(ctx, {
+                  type: "bar",
+                  data: {
+                    labels : labels,
+                    datasets: [{
+                      label: "عدد المنخرطين",
+                      tension: 0.4,
+                      borderWidth: 1,
+                      borderRadius: 4,
+                      borderSkipped: true,
+                      backgroundColor: "#7492e2",
+                      data: values,
+                      maxBarThickness: 6
+                    }],
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                     title:{
+                        display:true,
+                        text:'عدد المنخرطين حسب الإدارات ',
+                         fontSize:40
+                         },
+                      legend: {
+                      position : 'right',
+                        display: true,
+                      }
+                    },
+                    interaction: {
+                      intersect: false,
+                      mode: 'index',
+                    },
+                    scales: {
+                      y: {
+                        grid: {
+                          drawBorder: false,
+                          display: false,
+                          drawOnChartArea: false,
+                          drawTicks: false,
+                        },
+                        ticks: {
+                          suggestedMin: 0,
+                          suggestedMax: 500,
+                          beginAtZero: true,
+                          padding: 15,
+                          font: {
+                            size: 14,
+                            family: "Open Sans",
+                            style: 'normal',
+                            lineHeight: 2
+                          },
+                          color: "#7492e2"
+                        },
+                      },
+                      x: {
+                        grid: {
+                          drawBorder: false,
+                          display: false,
+                          drawOnChartArea: false,
+                          drawTicks: false
+                        },
+                        ticks: {
+                          display: true
+                        },
+                      },
+                    },
+                  },
+                });
                 }
             })
-			})
-
-  var ctx2 = $("canvas#chart-line")[0].getContext("2d");
-
-
-
-  var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-
-
-
-    new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["جانفي","فيفري","مارس","أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-],
-        datasets: [{
-            label: "الحوادث سنة 2021",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#cb0c9f",
-            borderWidth: 3,
-            backgroundColor: gradientStroke1,
-            fill: true,
-            data: [100,120,70,50, 40, 300, 220, 500, 250, 400, 230, 500],
-            maxBarThickness: 6
-
-          },
-          {
-            label: "الحوادث سنة 2022",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#3A416F",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            fill: true,
-            data: [100,110,70,30, 90, 40, 140, 290, 290, 340, 230, 400],
-            maxBarThickness: 6
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-           title:{
-        display:true,
-        text:'مقارنة عدد الحوادث حسب نفس تافترة الزمنية ',
-             fontSize:40
-             },
-          legend: {
-           position : 'top',
-            display: true,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#b2b9bf',
-              font: {
-                size: 14,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#b2b9bf',
-              padding: 20,
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-
+			});
 </script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;

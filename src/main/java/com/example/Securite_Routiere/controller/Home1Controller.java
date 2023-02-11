@@ -56,50 +56,35 @@ public class Home1Controller {
         return new ModelAndView("home1", params);
 
     }
-/*
-  @GetMapping("/report/Syndicat")
 
-  public String sysndicats (Model model) throws JsonProcessingException {
-
-      List<Object> getCountBySyndicat= agentRepository.getCountBySyndicat();
-   // model.addAttribute("syndicatCount",agentRepository.getCountBySyndicat() );
-
-    System.out.println( "syndicat count sise " +agentRepository.getCountBySyndicat().size());
-      System.out.println( "syndicat count name " +agentRepository.getCountBySyndicat().toString());
-
-      ObjectMapper mapper = new ObjectMapper();
-
-     // return mapper.writeValueAsString(getCountBySyndicat);
-      return "/home1";
-
-
-  }
-*/
     @ResponseBody
     @RequestMapping(value = "loadNbsyndicat", method = RequestMethod.GET)
     public List<Object> loadStatesByCountry2() throws JsonProcessingException {
 
         System.out.println("init loadStatesByCountry2");
 
-
         List<Object> nbsyndicat=agentRepository.getCountBySyndicat();
 
-       // List<SousDirection> sousDirectionByD = sousDirectionRepository.findByDirection(directionRepository.findById(DId).get());
-
-
-        System.out.println("la taille de la liste est egale =" + agentRepository.getCountBySyndicat().size());
+                System.out.println("la taille de la liste est egale =" + agentRepository.getCountBySyndicat().size());
         System.out.println("la taille de la liste est egale =" + agentRepository.getCountBySyndicat().get(0));
         System.out.println("la taille de la liste est egale =" + agentRepository.getCountBySyndicat().get(0).toString());
 
-
-
-        //Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().excludeFieldsWithModifiers(Transient).create();
-        //Gson gson = new Gson();
-
         return nbsyndicat;
-      //  ObjectMapper mapper = new ObjectMapper();
 
-       // return mapper.writeValueAsString(nbsyndicat);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "loadNbsdirection", method = RequestMethod.GET)
+    public List<Object> loadStatesByCountry() throws JsonProcessingException {
+
+        System.out.println("init loadStatesByCountry");
+
+        List<Object> nbdirection =agentRepository.getCountBySDirection();
+
+        System.out.println("nbdirection : " +agentRepository.getCountBySDirection());
+
+        return nbdirection;
+
     }
 
 }

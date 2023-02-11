@@ -32,7 +32,7 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/home"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/home1"}, method = RequestMethod.GET)
     public ModelAndView accueil() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
