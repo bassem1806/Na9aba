@@ -69,9 +69,17 @@
 
             </div>
             <div class="row">
-            <div class="col-12">
+
+            <div class="col-6">
                 <div class="chart">
                     <canvas class="chart-canvas" height="300" id="chart-line"></canvas>
+                </div>
+            </div>
+
+                <div class="col-6">
+                    <div class="chart">
+                        <canvas class="chart-canvas" height="300" id="chart-bars2"></canvas>
+                    </div>
                 </div>
             </div>
             </div>
@@ -371,7 +379,7 @@ lineHeight: 2
 <script>
 $( document ).ready(function() {
     var ctx = $("canvas#chart-bars1")[0].getContext("2d");
- console.log("Hello world!");
+
     $.ajax({
 			type: 'GET',
 			url: '/home1/loadNbsdirection',
@@ -416,6 +424,105 @@ var s = '';
                      title:{
                         display:true,
                         text:'عدد المنخرطين حسب الإدارات ',
+                         fontSize:40
+                         },
+                      legend: {
+                      position : 'right',
+                        display: true,
+                      }
+                    },
+                    interaction: {
+                      intersect: false,
+                      mode: 'index',
+                    },
+                    scales: {
+                      y: {
+                        grid: {
+                          drawBorder: false,
+                          display: false,
+                          drawOnChartArea: false,
+                          drawTicks: false,
+                        },
+                        ticks: {
+                          suggestedMin: 0,
+                          suggestedMax: 500,
+                          beginAtZero: true,
+                          padding: 15,
+                          font: {
+                            size: 14,
+                            family: "Open Sans",
+                            style: 'normal',
+                            lineHeight: 2
+                          },
+                          color: "#7492e2"
+                        },
+                      },
+                      x: {
+                        grid: {
+                          drawBorder: false,
+                          display: false,
+                          drawOnChartArea: false,
+                          drawTicks: false
+                        },
+                        ticks: {
+                          display: true
+                        },
+                      },
+                    },
+                  },
+                });
+                }
+            })
+			});
+</script>
+<script>
+$( document ).ready(function() {
+    var ctx = $("canvas#chart-bars2")[0].getContext("2d");
+ console.log("Hello world!");
+    $.ajax({
+			type: 'GET',
+			url: '/home1/loadNbgrade',
+			success: function(res) {
+console.log("res :" +res);
+console.log("res :" +res.length);
+			var labels = [];
+			var values = [];
+
+
+var s = '';
+				for(var i = 0; i < res.length; i++) {
+
+					labels.push(res[i][1]);
+						console.log("labes:" +labels);
+
+					values.push(res[i][0]);
+					console.log("value:" +values);
+				}
+
+				$('#azert1').empty();
+				$('#azert1').html(s);
+				new Chart(ctx, {
+                  type: "bar",
+                  data: {
+                    labels : labels,
+                    datasets: [{
+                      label: "عدد المنخرطين",
+                      tension: 0.4,
+                      borderWidth: 1,
+                      borderRadius: 4,
+                      borderSkipped: true,
+                      backgroundColor: "#7492e2",
+                      data: values,
+                      maxBarThickness: 6
+                    }],
+                  },
+                  options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                     title:{
+                        display:true,
+                        text:'عدد المنخرطين حسب الرتب ',
                          fontSize:40
                          },
                       legend: {

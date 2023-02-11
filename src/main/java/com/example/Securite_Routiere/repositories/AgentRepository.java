@@ -34,4 +34,25 @@ public interface AgentRepository extends JpaRepository<Agent, Long> {
 
 
 
+    @Query(value = "SELECT COUNT(a.cnrps) ," +
+            " g.libelle_grade" +
+
+            " FROM syndicat01.agent a" +
+            " left join syndicat01.grade g"+
+            " ON a.grade_id = g.grade_id" +
+
+            " GROUP BY g.libelle_grade ORDER BY  COUNT(a.cnrps) desc ",nativeQuery = true)
+    List<Object> getCountByGrade();
+
+/*
+    @Query(value =" SELECT COUNT(a.cnrps) ,"+
+   " g.libelle_grade"+
+    "FROM syndicat01.agent a" +
+    "left join syndicat01.grade g"+
+    "ON a.grade_id = g.grade_id"+
+   " GROUP BY g.libelle_grade ",nativeQuery = true)
+    List<Object> getCountByGrade();
+
+
+ */
 }

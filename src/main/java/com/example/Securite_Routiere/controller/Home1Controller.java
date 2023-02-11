@@ -87,6 +87,20 @@ public class Home1Controller {
 
     }
 
+    @ResponseBody
+    @RequestMapping(value = "loadNbgrade", method = RequestMethod.GET)
+    public List<Object> loadStatesByCountry1() throws JsonProcessingException {
+
+        System.out.println("init loadStatesByCountry1");
+
+
+        List<Object> nbgrade=agentRepository.getCountByGrade();
+        System.out.println("nbdirection : " +agentRepository.getCountByGrade());
+
+        return nbgrade;
+
+    }
+
 }
 
 
