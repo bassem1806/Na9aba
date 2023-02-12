@@ -33,26 +33,23 @@ public interface AgentRepository extends JpaRepository<Agent, Long> {
     List<Object> getCountBySDirection();
 
 
-
     @Query(value = "SELECT COUNT(a.cnrps) ," +
             " g.libelle_grade" +
 
             " FROM syndicat01.agent a" +
-            " left join syndicat01.grade g"+
+            " left join syndicat01.grade g" +
             " ON a.grade_id = g.grade_id" +
 
-            " GROUP BY g.libelle_grade ORDER BY  COUNT(a.cnrps) desc ",nativeQuery = true)
-    List<Object> getCountByGrade();
-
-/*
-    @Query(value =" SELECT COUNT(a.cnrps) ,"+
-   " g.libelle_grade"+
-    "FROM syndicat01.agent a" +
-    "left join syndicat01.grade g"+
-    "ON a.grade_id = g.grade_id"+
-   " GROUP BY g.libelle_grade ",nativeQuery = true)
+            " GROUP BY g.libelle_grade ORDER BY  COUNT(a.cnrps) desc ", nativeQuery = true)
     List<Object> getCountByGrade();
 
 
- */
+    @Query(value = "SELECT COUNT(a.agent_id)," +
+            " YEAR (a.date_inscription) ," +
+            " MONTH (a.date_inscription)" +
+            "FROM syndicat01.agent a" +
+
+            "  WHERE( YEAR(a.date_inscription) = YEAR(CURDATE())     or YEAR(a.date_inscription) = YEAR(CURDATE()) - 1)" +
+            "GROUP BY YEAR(a.date_inscription), MONTH (a.date_inscription)", nativeQuery = true)
+    List<Object> getCountnbagentperiode();
 }

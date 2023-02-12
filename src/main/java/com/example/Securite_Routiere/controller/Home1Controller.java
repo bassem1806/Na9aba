@@ -3,14 +3,16 @@ package com.example.Securite_Routiere.controller;
 import com.example.Securite_Routiere.repositories.AgentRepository;
 import com.example.Securite_Routiere.repositories.DelegationRepository;
 import com.example.Securite_Routiere.repositories.GouvernoratRepository;
-//import com.example.Securite_Routiere.service.dataSyndicatService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
@@ -56,7 +58,7 @@ public class Home1Controller {
         return new ModelAndView("home1", params);
 
     }
-
+    /*** methode nb abbonne par syndicat**/
     @ResponseBody
     @RequestMapping(value = "loadNbsyndicat", method = RequestMethod.GET)
     public List<Object> loadStatesByCountry2() throws JsonProcessingException {
@@ -73,6 +75,7 @@ public class Home1Controller {
 
     }
 
+    /*** methode nb abbonne par s direction**/
     @ResponseBody
     @RequestMapping(value = "loadNbsdirection", method = RequestMethod.GET)
     public List<Object> loadStatesByCountry() throws JsonProcessingException {
@@ -87,6 +90,7 @@ public class Home1Controller {
 
     }
 
+    /*** methode nb abbonne par grade**/
     @ResponseBody
     @RequestMapping(value = "loadNbgrade", method = RequestMethod.GET)
     public List<Object> loadStatesByCountry1() throws JsonProcessingException {
@@ -94,10 +98,24 @@ public class Home1Controller {
         System.out.println("init loadStatesByCountry1");
 
 
-        List<Object> nbgrade=agentRepository.getCountByGrade();
-        System.out.println("nbdirection : " +agentRepository.getCountByGrade());
+        List<Object> nbgrade = agentRepository.getCountByGrade();
+        System.out.println("nbdirection : " + agentRepository.getCountByGrade());
 
         return nbgrade;
+
+    }
+
+    /*** methode nb abbonne par periode **/
+    @ResponseBody
+    @RequestMapping(value = "loadNbagentperiode", method = RequestMethod.GET)
+    public List<Object> loadStatesByCountry3() throws JsonProcessingException {
+
+        System.out.println("init loadStatesByCountry3");
+
+        List<Object> nbagentperiode = agentRepository.getCountnbagentperiode();
+        System.out.println("nbagent periode : " + agentRepository.getCountnbagentperiode());
+
+        return nbagentperiode;
 
     }
 
