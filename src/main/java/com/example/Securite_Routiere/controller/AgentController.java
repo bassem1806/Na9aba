@@ -3,16 +3,19 @@ package com.example.Securite_Routiere.controller;
 
 import com.example.Securite_Routiere.entities.*;
 import com.example.Securite_Routiere.repositories.*;
+import com.example.Securite_Routiere.service.AgentService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +23,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/Agent/")
 public class AgentController {
-
+    @Autowired
+    private final AgentService agentService;
     private final AgentRepository agentRepository;
     private final GouvernoratRepository gouvernoratRepository;
     private final DelegationRepository delegationRepository;
@@ -32,6 +36,7 @@ public class AgentController {
     private final SyndicatRepository syndicatRepository;
     private int Transient;
 
+
     @Autowired
     public AgentController(AgentRepository agentRepository, GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository, DirectionGeneralRepository directionGeneralRepository, DirectionRepository directionRepository, SousDirectionRepository sousDirectionRepository, GradeRepository gradeRepository, SyndicatRepository syndicatRepository) {
         this.agentRepository = agentRepository;
@@ -42,9 +47,12 @@ public class AgentController {
         this.sousDirectionRepository = sousDirectionRepository;
         this.gradeRepository = gradeRepository;
         this.syndicatRepository = syndicatRepository;
+        agentService = null;
     }
 
 
+
+    /*
     @GetMapping("list")
     //@ResponseBody
     public String listAgents(Model model) {
@@ -56,6 +64,61 @@ public class AgentController {
         model.addAttribute("agents", lp);
 
 
+
+        return "Agent/listAgents";
+
+    }
+*/
+/******* pagination get the first page *******/
+
+    @GetMapping("list/{pageNumber}")
+
+    public String getOnePage(Model model, String DateInscription, String DirectionGeneralId, String DirectionId, String SousDirectionId, String gouvernoratId1,String SyndicatId,String GradeId, @PathVariable("pageNumber") int currentPage) {
+     Page<Agent> page=null;
+        int totalPages = 0;
+        long totalItems = 0;
+        List<Agent> agents = null;
+
+
+        page=agentService.findPage(currentPage);
+        totalPages = page.getTotalPages();
+        totalItems = page.getTotalElements();
+        agents=page.getContent();
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("agents", agents);
+
+
+
+        return "Agent/listAgents";
+
+    }
+
+    /******* sorting with filed  *******/
+
+    @GetMapping("list/{pageNumber}/{field}")
+
+    public String getPageWithSort(Model model,
+                                  @PathVariable("pageNumber") int currentPage,
+                                  @PathVariable String field,
+                                  @PathParam("sortDir") String sortDir) {
+        System.out.println("pagination :");
+        Page<Agent> page = agentService.findAlLWithSort(field, sortDir, currentPage);
+
+        List<Agent> agents = page.getContent();
+        int totalPages = page.getTotalPages();
+        long totalItems = page.getTotalElements();
+
+
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalItems", totalItems);
+
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+        model.addAttribute("agents", agents);
 
         return "Agent/listAgents";
 

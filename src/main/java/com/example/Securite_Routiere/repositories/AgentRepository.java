@@ -1,14 +1,22 @@
 package com.example.Securite_Routiere.repositories;
 
 import com.example.Securite_Routiere.entities.Agent;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface AgentRepository extends JpaRepository<Agent, Long> {
+public interface AgentRepository extends PagingAndSortingRepository<Agent, Long> {
+
+    static Page<Agent> findsort(Pageable pageable) {
+
+        return AgentRepository.findsort(pageable);
+    }
 
     @Query(value = "SELECT COUNT(s.nom_syndicat) ," +
             " s.nom_syndicat" +

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-      xmlns:th="http://www.thymeleaf.org">
+<html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8"/>
@@ -67,7 +66,7 @@
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')">
-                    <a class="nav-link " th:href="@{'/Agent/list'}">
+                    <a class="nav-link " th:href="@{'/Agent/list/1'}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center ms-2 d-flex align-items-center justify-content-center">
                             <svg height="12px" version="1.1" viewBox="0 0 42 42" width="12px"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -295,6 +294,7 @@
 
 
                     <!--   Core JS Files   -->
+                    <script src="/assets/js/popper.min.js"></script>
                     <script src="/assets/js/core/popper.min.js"></script>
                     <script src="/assets/js/core/bootstrap.min.js"></script>
                     <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
