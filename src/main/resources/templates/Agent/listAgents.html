@@ -113,15 +113,18 @@ console.log("zeaeaeaeae");
                 <tr>
                     <th> الإسم واللقب</th>
                     <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/CNRPS?sortDir=' + ${reverseSortDir}}"> المعرف الوحيد</a></th>
-                    <!--th> المعرف الوحيد</th-->
-                    <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/GradeId?sortDir=' + ${reverseSortDir}}"> الرتبة</a></th>
-                    <!--th> الرتبة</th-->
-                    <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/sousDirection.direction.directionGeneral.NomDirGen?sortDir=' + ${reverseSortDir}}"> الإدارة العامة</a></th>
-                    <!--th> الإدارة العامة</th-->
-                    <th> الإدارة</th>
-                    <th> الإدارةالفرعية</th>
-                    <th> الولاية</th>
-                    <th> النقابة</th>
+
+                    <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/grade.libelleGrade?sortDir=' + ${reverseSortDir}}"> الرتبة</a></th>
+<th>الإدارة العامة</th>
+                    <th>الإدارة </th>
+                    <!--th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/sousDirection.direction.directionGeneral.nomDirGen?sortDir=' + ${reverseSortDir}}"> الإدارة العامة</a></th>
+                    <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/sousDirection.direction.nomDir?sortDir=' + ${reverseSortDir}}"> الإدارة </a></th-->
+                    <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/sousDirection.nomSDir?sortDir=' + ${reverseSortDir}}"> الإدارةالفرعية </a></th>
+                    <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/delegation.gouvernorat.name?sortDir=' + ${reverseSortDir}}"> الولاية </a></th>
+                    <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/syndicat.nomSyndicat?sortDir=' + ${reverseSortDir}}"> النقابة </a></th>
+
+                    <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/dateInscription?sortDir=' + ${reverseSortDir}}">  تاريخ التسجيل</a></th>
+
                     <th> تحيين</th>
                     <th> محو</th>
                 </tr>
@@ -131,12 +134,13 @@ console.log("zeaeaeaeae");
                 <tr th:each="agent: ${agents}">
                     <td th:text="${agent.Nom}+' '+${agent.Prenom}"></td>
                     <td th:text="${agent.CNRPS}"></td>
-                    <td th:text="${agent.grade.LibelleGrade}"></td>
+                    <td th:text="${agent.grade.libelleGrade}"></td>
                     <td th:text="${agent.sousDirection.direction.directionGeneral.NomDirGen}"></td>
                     <td th:text="${agent.sousDirection.direction.NomDir}"></td>
                     <td th:text="${agent.sousDirection.nomSDir}"></td>
                     <td th:text="${agent.delegation.gouvernorat.name}"></td>
                     <td th:text="${agent.syndicat.NomSyndicat}"></td>
+                    <td th:text="${agent.DateInscription}"></td>
 
 
 
@@ -153,20 +157,20 @@ console.log("zeaeaeaeae");
             <footer class="panel-footer" style="font-size: large">
 
                 <nav aria-label="Page navigation example">
-                    Total Items [[${totalItems}]] : Page [[${currentPage}]] of [[${totalPages}]]
+                    العدد الجملي [[${totalItems}]] : صفحة [[${currentPage}]] من [[${totalPages}]]
 
                     <ul class="pagination">
 
                         <li class="page-item">
-                            <a class="page-link" th:href="@{/Agent/list/1}" th:if="${currentPage > 1}">First</a>
-                            <span th:unless="${currentPage > 1}">First</span>
+                            <a class="page-link" th:href="@{/Agent/list/1}" th:if="${currentPage > 1}">الصفحة الاولى</a>
+                            <span th:unless="${currentPage > 1}">الصفحة الاولى</span>
                         </li>
 
 
                         <li class="page-item">
                             <a th:href="@{'/Agent/list/' + ${currentPage - 1}}"
-                               th:if="${currentPage > 1}">Previous</a>
-                            <span th:unless="${currentPage > 1}">Previous</span>
+                               th:if="${currentPage > 1}">الصفحة السابقة</a>
+                            <span th:unless="${currentPage > 1}">الصفحة السابقة</span>
                         </li>
 
                         <li class="page-item">
@@ -179,15 +183,15 @@ console.log("zeaeaeaeae");
 
                         <li class="page-item">
                             <a th:href="@{'/Agent/list/' + ${currentPage + 1}}"
-                               th:if="${currentPage < totalPages}">Next</a>
-                            <span th:unless="${currentPage < totalPages}">Next</span>
+                               th:if="${currentPage < totalPages}">التالي</a>
+                            <span th:unless="${currentPage < totalPages}">التالي</span>
                         </li>
 
 
                         <li class="page-item">
                             <a th:href="@{'/Agent/list/' + ${totalPages}}"
-                               th:if="${currentPage < totalPages}">Last</a>
-                            <span th:unless="${currentPage < totalPages}">Last</span>
+                               th:if="${currentPage < totalPages}">الصفحة الأخيرة</a>
+                            <span th:unless="${currentPage < totalPages}">الصفحة الأخيرة</span>
                         </li>
 
                     </ul>

@@ -7,14 +7,14 @@ public class Syndicat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long SynId;
+    private long synId;
 
 
     @Column(name = "NomSyndicat")
-    private String NomSyndicat;
+    private String nomSyndicat;
 
     @Column(name = "CodeSyndicat")
-    private int CodeSyndicat;
+    private int codeSyndicat;
 
     @Column(name = "etatSyn")
     private int etatSyn;
@@ -27,39 +27,29 @@ public class Syndicat {
             inverseJoinColumns = @JoinColumn(name = "agent_id"))
     private Set<Agent> agents;
 */
-    public Syndicat(long synId, String nomSyndicat, int codeSyndicat, int etatSyn) {
-        SynId = synId;
-        NomSyndicat = nomSyndicat;
-        CodeSyndicat = codeSyndicat;
-        this.etatSyn = etatSyn;
-
-    }
-
-    public Syndicat() {
-    }
 
     public long getSynId() {
-        return SynId;
+        return synId;
     }
 
     public void setSynId(long synId) {
-        SynId = synId;
+        this.synId = synId;
     }
 
     public String getNomSyndicat() {
-        return NomSyndicat;
+        return nomSyndicat;
     }
 
     public void setNomSyndicat(String nomSyndicat) {
-        NomSyndicat = nomSyndicat;
+        this.nomSyndicat = nomSyndicat;
     }
 
     public int getCodeSyndicat() {
-        return CodeSyndicat;
+        return codeSyndicat;
     }
 
     public void setCodeSyndicat(int codeSyndicat) {
-        CodeSyndicat = codeSyndicat;
+        this.codeSyndicat = codeSyndicat;
     }
 
     public int getEtatSyn() {
@@ -70,5 +60,13 @@ public class Syndicat {
         this.etatSyn = etatSyn;
     }
 
+    public Syndicat(long synId, String nomSyndicat, int codeSyndicat, int etatSyn) {
+        this.synId = synId;
+        this.nomSyndicat = nomSyndicat;
+        this.codeSyndicat = codeSyndicat;
+        this.etatSyn = etatSyn;
+    }
 
+    public Syndicat() {
+    }
 }

@@ -36,8 +36,8 @@ public class Direction implements Serializable {
 
     public Direction(long DId, String nomDir, int codeDir, int etatD, DirectionGeneral directionGeneral) {
         this.DId = DId;
-        NomDir = nomDir;
-        CodeDir = codeDir;
+        this.NomDir = nomDir;
+       this.CodeDir = codeDir;
         this.etatD = etatD;
         this.directionGeneral = directionGeneral;
     }

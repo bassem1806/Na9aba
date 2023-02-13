@@ -37,7 +37,7 @@ public class Agent implements Serializable {
 
 
     @Column(name = "Date_inscription")
-    private String DateInscription;
+    private String dateInscription;
 
     /**** Many To One delegation ****/
 
@@ -77,7 +77,7 @@ public class Agent implements Serializable {
         Nom = nom;
         Prenom = prenom;
         Prenom_Pere = prenom_Pere;
-        DateInscription = dateInscription;
+       this.dateInscription = dateInscription;
         this.delegation = delegation;
         this.grade = grade;
         this.sousDirection = sousDirection;
@@ -151,11 +151,11 @@ public class Agent implements Serializable {
     }
 
     public String getDateInscription() {
-        return DateInscription;
+        return dateInscription;
     }
 
     public void setDateInscription(String dateInscription) {
-        DateInscription = dateInscription;
+        dateInscription = dateInscription;
     }
 
     public Delegation getDelegation() {
@@ -200,7 +200,7 @@ public class Agent implements Serializable {
                 ", Nom='" + Nom + '\'' +
                 ", Prenom='" + Prenom + '\'' +
                 ", Prenom_Pere='" + Prenom_Pere + '\'' +
-                ", DateInscription='" + DateInscription + '\'' +
+                ", dateInscription='" + dateInscription + '\'' +
                 ", delegation=" + delegation +
                 ", grade=" + grade +
                 ", sousDirection=" + sousDirection +

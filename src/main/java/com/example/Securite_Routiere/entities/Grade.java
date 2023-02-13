@@ -8,18 +8,18 @@ public class Grade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long GradeId;
+    private Long gradeId;
 
 
     @Column(name = "Code_Grade")
-    private int CodeGrade;
+    private int codeGrade;
 
 
     @Column(name = "Libelle_Grade")
-    private String LibelleGrade;
+    private String libelleGrade;
 
     @Column(name = "Categorie_Grade")
-    private String CategorieGrade;
+    private String categorieGrade;
 
 
 
@@ -27,46 +27,45 @@ public class Grade {
 
 
     public Long getGradeId() {
-        return GradeId;
+        return gradeId;
     }
 
     public void setGradeId(Long gradeId) {
-        GradeId = gradeId;
+        this.gradeId = gradeId;
     }
 
     public int getCodeGrade() {
-        return CodeGrade;
+        return codeGrade;
     }
 
     public void setCodeGrade(int codeGrade) {
-        CodeGrade = codeGrade;
+        this.codeGrade = codeGrade;
     }
 
     public String getLibelleGrade() {
-        return LibelleGrade;
+        return libelleGrade;
     }
 
     public void setLibelleGrade(String libelleGrade) {
-        LibelleGrade = libelleGrade;
+        this.libelleGrade = libelleGrade;
     }
 
     public String getCategorieGrade() {
-        return CategorieGrade;
+        return categorieGrade;
     }
 
     public void setCategorieGrade(String categorieGrade) {
-        CategorieGrade = categorieGrade;
-    }
-
-    public Grade(Long gradeId, int codeGrade, String libelleGrade, String categorieGrade) {
-        GradeId = gradeId;
-        CodeGrade = codeGrade;
-        LibelleGrade = libelleGrade;
-        CategorieGrade = categorieGrade;
+        this.categorieGrade = categorieGrade;
     }
 
     public Grade() {
     }
 
 
+    public Grade(Long gradeId, int codeGrade, String libelleGrade, String categorieGrade) {
+        this.gradeId = gradeId;
+        this.codeGrade = codeGrade;
+        this.libelleGrade = libelleGrade;
+        this.categorieGrade = categorieGrade;
+    }
 }
