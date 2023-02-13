@@ -109,9 +109,10 @@ console.log("zeaeaeaeae");
 
             <!--table class="table table-striped table-responsive-md"-->
             <form th:action="@{/Agent/list/1/search}" method="get">
-                <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
-                <button type="submit" class="btn btn-info" >Search</button>
-                <button type="submit" class="btn btn-info" >Reset</button>
+                <input type="text" name="keyword" th:value="${keyword}"  placeholder="بحث" size="50" >
+                <button type="submit"   class="btn btn-info" >بحث</button>
+                <a class="btn btn-info" th:href="@{/Agent/list/1}"> إعادة البحث</a>
+                <!--button type="submit" class="btn btn-info" >إعادة البحث</button-->
             </form>
                 <table class="table table-striped" id="example" style="width:100%">
                 <thead>
