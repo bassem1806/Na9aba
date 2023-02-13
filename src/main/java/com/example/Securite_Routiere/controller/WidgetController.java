@@ -42,24 +42,24 @@ public class WidgetController {
         return nbAgent;
 
     }
-
+*/
     @ResponseBody
     @RequestMapping(value = "loadNbAgent", method = RequestMethod.GET)
-    public int  nbagnet1() throws JsonProcessingException
+    public int  nbagent() throws JsonProcessingException
 
     {
 
-      int x= agentRepository.nbAgent();
+      int x= agentRepository.nbagent();
 
 
 
 
-        System.out.println("la taille de la liste est egale =" + agentRepository.nbAgent());
+        System.out.println("la taille de la liste est egale =" + agentRepository.nbagent());
 
         return x;
 
     }
 
-*/
+
 
 }

@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AgentService {
     @Autowired
@@ -30,6 +32,19 @@ public class AgentService {
         Pageable pageable = PageRequest.of(pageNumber - 1, 3, sort);
 
         return agentRepository.findAll(pageable);
+    }
+
+
+    public List<Agent> getAllAgent(){
+        List<Agent> agents = (List<Agent>) agentRepository.findAll();
+        return agents;
+    }
+
+    /*
+     * TODO: Get Shop By keyword
+     */
+    public List<Agent> getByKeyword(String keyword){
+        return agentRepository.findByKeyword(keyword);
     }
 
 }

@@ -69,6 +69,22 @@ public class AgentController {
 
     }
 */
+    /******* search *******/
+
+    @RequestMapping(path = {"list/{pageNumber}/search"})
+    public String listAgents(Agent agent, Model model, String keyword) {
+
+        System.out.println(" methode recherche in");
+        if(keyword!=null) {
+            List<Agent> agents = agentService.getByKeyword(keyword);
+            model.addAttribute("agents", agents);
+        }else {
+            List<Agent> agents = agentService.getAllAgent();
+            model.addAttribute("agents", agents);}
+        return "Agent/listAgents";
+    }
+
+
 /******* pagination get the first page *******/
 
     @GetMapping("list/{pageNumber}")
@@ -188,7 +204,9 @@ public class AgentController {
         Syndicat syndicat = syndicatRepository.findById(sy).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid  sundicat Id:" + sy));
 agent.setSyndicat(syndicat);
-        agent = agentRepository.save(agent);
+
+agent= (Agent) agentRepository.save(agent);
+     //   agent = agentRepository.save(agent);
 
         return "redirect:list";
 
@@ -197,9 +215,9 @@ agent.setSyndicat(syndicat);
     @GetMapping("delete/{AgentId}")
 
 
-    public String deleteDirectionGeneral(@PathVariable("AgentId") long AgentId, Model model) {
+    public String deleteDirectionGeneral(@PathVariable("AgentId") long AgentId, Model model) throws Throwable {
 
-Agent agent = agentRepository.findById(AgentId)
+Agent agent = (Agent) agentRepository.findById(AgentId)
         .orElseThrow(() -> new IllegalArgumentException("Invalid agent Id:" + AgentId));
         agentRepository.delete(agent);
        return "redirect:../list";
@@ -207,8 +225,8 @@ Agent agent = agentRepository.findById(AgentId)
     }
 
     @GetMapping("edit/{AgentId}")
-    public String showDirectionGeneralFormToUpdate(@PathVariable("AgentId") long AgentId, Model model) {
-        Agent agent = agentRepository.findById(AgentId)
+    public String showDirectionGeneralFormToUpdate(@PathVariable("AgentId") long AgentId, Model model) throws Throwable {
+        Agent agent = (Agent) agentRepository.findById(AgentId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid agent Id:" + AgentId));
 
         model.addAttribute("agent", agent);
@@ -280,6 +298,8 @@ Agent agent = agentRepository.findById(AgentId)
 
         return mapper.writeValueAsString(sousDirectionByD);
     }
+
+
 
 }
 
