@@ -61,14 +61,19 @@
 
             <div class="col-6" div>
                 <div class="chart">
-                    <canvas class="chart-canvas" height="300" id="chart-bars"></canvas>
+                    <!--canvas class="chart-canvas" height="300" width="500" id="chart-bars"></canvas-->
+                    <canvas class="chart-canvas" height="300"  width="500" id="bar-chart1"></canvas>
                 </div>
             </div>
 
 
             <div class="col-6">
                 <div class="chart">
-                    <canvas class="chart-canvas" height="300" id="chart-bars1"></canvas>
+                    <!--canvas class="chart-canvas" height="300"  width="500" id="chart-bars1"></canvas-->
+                    <canvas class="chart-canvas" height="300"  width="500" id="bar-chart"></canvas>
+                    bar-chart
+
+
                 </div>
 
             </div>
@@ -76,13 +81,21 @@
 
             <div class="col-6">
                 <div class="chart">
-                    <canvas class="chart-canvas" height="300" id="chart-line"></canvas>
+                    <canvas id="line-chart" width="500" height="300"></canvas>
+
+
+
                 </div>
             </div>
 
+
                 <div class="col-6">
                     <div class="chart">
-                        <canvas class="chart-canvas" height="300" id="chart-bars2"></canvas>
+                        <!--canvas class="chart-canvas" height="300"  width="500" id="chart-bars2"></canvas-->
+                        <!--canvas class="chart-canvas" height="300"  width="500" id="pie-chart"></canvas-->
+                        <canvas id="pie-chart" width="500" height="300"></canvas>
+
+
                     </div>
                 </div>
             </div>
@@ -147,7 +160,7 @@
 <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
 
 <script src="/assets/js/plugins/chartjs.min.js"></script>
-<!--script src="/assets/js/plugins/chartjs1.min.js"></script-->
+
 
 <script src="/assets/js/plugins/choices.min.js"></script>
 <script>
@@ -168,8 +181,126 @@
 
 <script src="/assets/js/soft-ui-dashboard.min.js"></script>
 
+<script>
+
+    $.getJSON( "/home1/loadNbagentperiode", function( res ) {
+    x = []
+    y = []
+    z = []
+
+    xly = []
+    yly = []
+    zly = []
+
+    console.log("nb ag:"+res)
+   $.each(res,function(i, data){
+
+
+       x[i] = data[0]
+       y[i] = data[1]
+       z[i] = data[2]
+
+
+
+        console.log("xly:"+xly);
+         console.log("yly:"+yly);
+          console.log("zly:"+zly);
+
+  console.log("x:"+x);
+         console.log("y:"+y);
+          console.log("z:"+z);
+
+    })
+
+new Chart(document.getElementById("line-chart"), {
+
+  type: 'line',
+  data: {
+    labels: x,
+    datasets: [{
+        data: y,
+        label: "2023",
+        borderColor: "#3e95cd",
+        fill: false
+      }, {
+        data: z,
+        label: "2022",
+        borderColor: "#8e5ea2",
+        fill: false
+      },
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'World population per region (in millions)'
+    }
+  }
+  });
+});
+
+</script>
+
+
 
 <script>
+
+    $.getJSON( "/home1/loadNbsyndicat", function( res ) {
+    x = []
+    y = []
+
+
+
+
+
+    console.log("nb ag:"+res)
+   $.each(res,function(i, data){
+
+
+       x[i] = data[0]
+       y[i] = data[1]
+
+
+
+
+
+  console.log("x:"+x);
+         console.log("y:"+y);
+
+
+    })
+
+
+
+
+
+new Chart(document.getElementById("bar-chart1"), {
+    type: 'bar',
+    data: {
+      labels: y,
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: x
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'عدد المنخرطين حسب النقابات'
+      }
+    }
+    });
+});
+
+</script>
+
+
+
+<!--script>
 $( document ).ready(function() {
     var ctx = $("canvas#chart-bars")[0].getContext("2d");
 
@@ -181,8 +312,6 @@ $( document ).ready(function() {
 
 			var labels = [];
 			var values = [];
-
-
 var s = '';
 				for(var i = 0; i < res.length; i++) {
 
@@ -202,10 +331,10 @@ var s = '';
                     datasets: [{
                       label: "عدد المنخرطين",
                       tension: 0.4,
-                      borderWidth: 1,
-                      borderRadius: 4,
+                      borderWidth: 0.5,
+                      borderRadius: 10,
                       borderSkipped: true,
-                      backgroundColor: "#7492e2",
+                      backgroundColor: "#1b27d1",
                       data: values,
                       maxBarThickness: 6
                     }],
@@ -217,7 +346,7 @@ var s = '';
                      title:{
                         display:true,
                         text:'عدد المنخرطين حسب النقابات ',
-                         fontSize:40
+                         fontSize:80
                          },
                       legend: {
                       position : 'right',
@@ -247,7 +376,7 @@ var s = '';
                             style: 'normal',
                             lineHeight: 2
                           },
-                          color: "#7492e2"
+                          color: "#4f4c3e"
                         },
                       },
                       x: {
@@ -267,126 +396,64 @@ var s = '';
                 },
             });
 			});
-</script>
+</script-->
+
 <script>
-var ctx2 = $("canvas#chart-line")[0].getContext("2d");
 
-
-
-var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+    $.getJSON( "/home1/loadNbsdirection", function( res ) {
+    x = []
+    y = []
 
 
 
 
-new Chart(ctx2, {
-type: "line",
-data: {
-labels: ["جانفي","فيفري","مارس","أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-],
-datasets: [{
-label: "الحوادث سنة 2021",
-tension: 0.4,
-borderWidth: 0,
-pointRadius: 0,
-borderColor: "#cb0c9f",
-borderWidth: 3,
-backgroundColor: gradientStroke1,
-fill: true,
-data: [100,120,70,50, 40, 300, 220, 500, 250, 400, 230, 500],
-maxBarThickness: 6
 
-},
-{
-label: "الحوادث سنة 2022",
-tension: 0.4,
-borderWidth: 0,
-pointRadius: 0,
-borderColor: "#3A416F",
-borderWidth: 3,
-backgroundColor: gradientStroke2,
-fill: true,
-data: [100,110,70,30, 90, 40, 140, 290, 290, 340, 230, 400],
-maxBarThickness: 6
-},
-],
-},
-options: {
-responsive: true,
-maintainAspectRatio: false,
-plugins: {
-title:{
-display:true,
-text:'مقارنة عدد الحوادث حسب نفس تافترة الزمنية ',
-fontSize:40
-},
-legend: {
-position : 'top',
-display: true,
-}
-},
-interaction: {
-intersect: false,
-mode: 'index',
-},
-scales: {
-y: {
-grid: {
-drawBorder: false,
-display: true,
-drawOnChartArea: true,
-drawTicks: false,
-borderDash: [5, 5]
-},
-ticks: {
-display: true,
-padding: 10,
-color: '#b2b9bf',
-font: {
-size: 14,
-family: "Open Sans",
-style: 'normal',
-lineHeight: 2
-},
-}
-},
-x: {
-grid: {
-drawBorder: false,
-display: false,
-drawOnChartArea: false,
-drawTicks: false,
-borderDash: [5, 5]
-},
-ticks: {
-display: true,
-color: '#b2b9bf',
-padding: 20,
-font: {
-size: 11,
-family: "Open Sans",
-style: 'normal',
-lineHeight: 2
-},
-}
-},
-},
-},
+    console.log("nb ag:"+res)
+   $.each(res,function(i, data){
 
+
+       x[i] = data[0]
+       y[i] = data[1]
+
+
+
+
+
+  console.log("x:"+x);
+         console.log("y:"+y);
+
+
+    })
+
+
+
+
+
+new Chart(document.getElementById("bar-chart"), {
+    type: 'bar',
+    data: {
+      labels: y,
+      datasets: [
+        {
+          label: "منخرط ",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: x
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'عدد المنخرطين حسب الإدارات الفرعية'
+      }
+    }
+    });
 });
 
 </script>
 
-<script>
+<!--script>
 $( document ).ready(function() {
     var ctx = $("canvas#chart-bars1")[0].getContext("2d");
 
@@ -394,8 +461,8 @@ $( document ).ready(function() {
 			type: 'GET',
 			url: '/home1/loadNbsdirection',
 			success: function(res) {
-console.log("res :" +res);
-console.log("res :" +res.length);
+
+
 			var labels = [];
 			var values = [];
 
@@ -404,10 +471,10 @@ var s = '';
 				for(var i = 0; i < res.length; i++) {
 
 					labels.push(res[i][1]);
-						console.log("labes:" +labels);
+
 
 					values.push(res[i][0]);
-					console.log("value:" +values);
+
 				}
 
 				$('#azert1').empty();
@@ -422,7 +489,7 @@ var s = '';
                       borderWidth: 1,
                       borderRadius: 4,
                       borderSkipped: true,
-                      backgroundColor: "#7492e2",
+                      backgroundColor: "#1b27d1",
                       data: values,
                       maxBarThickness: 6
                     }],
@@ -434,7 +501,7 @@ var s = '';
                      title:{
                         display:true,
                         text:'عدد المنخرطين حسب الإدارات الفرعية ',
-                         fontSize:40
+                         fontSize:80
                          },
                       legend: {
                       position : 'right',
@@ -464,7 +531,7 @@ var s = '';
                             style: 'normal',
                             lineHeight: 2
                           },
-                          color: "#7492e2"
+                           color: "#4f4c3e"
                         },
                       },
                       x: {
@@ -484,17 +551,16 @@ var s = '';
                 }
             })
 			});
-</script>
-<script>
+</script-->
+<!--script>
 $( document ).ready(function() {
     var ctx = $("canvas#chart-bars2")[0].getContext("2d");
- console.log("Hello world!");
+
     $.ajax({
 			type: 'GET',
 			url: '/home1/loadNbgrade',
 			success: function(res) {
-console.log("res :" +res);
-console.log("res :" +res.length);
+
 			var labels = [];
 			var values = [];
 
@@ -503,10 +569,10 @@ var s = '';
 				for(var i = 0; i < res.length; i++) {
 
 					labels.push(res[i][1]);
-						console.log("labes:" +labels);
+
 
 					values.push(res[i][0]);
-					console.log("value:" +values);
+
 				}
 
 				$('#azert1').empty();
@@ -521,7 +587,7 @@ var s = '';
                       borderWidth: 1,
                       borderRadius: 4,
                       borderSkipped: true,
-                      backgroundColor: "#7492e2",
+                      backgroundColor: "#1b27d1",
                       data: values,
                       maxBarThickness: 6
                     }],
@@ -533,7 +599,7 @@ var s = '';
                      title:{
                         display:true,
                         text:'عدد المنخرطين حسب الرتب ',
-                         fontSize:40
+                         fontSize:80
                          },
                       legend: {
                       position : 'right',
@@ -563,7 +629,7 @@ var s = '';
                             style: 'normal',
                             lineHeight: 2
                           },
-                          color: "#7492e2"
+                          color: "#4f4c3e"
                         },
                       },
                       x: {
@@ -583,6 +649,46 @@ var s = '';
                 }
             })
 			});
+</script-->
+
+<script>
+
+    $.getJSON( "/home1/loadNbgrade", function( res ) {
+    x = []
+    y = []
+    console.log("nb ag:"+res)
+   $.each(res,function(i, data){
+
+
+       x[i] = data[0]
+       y[i] = data[1]
+
+  console.log("xpiechart:"+x);
+         console.log("ypiechart:"+y);
+
+
+    })
+
+
+	new Chart(document.getElementById("pie-chart"), {
+    type: 'pie',
+    data: {
+      labels: y,
+      datasets: [{
+        label: "منخرط ",
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        data: x
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'عدد المنخرطين حسب الرتب'
+      }
+    }
+   });
+});
+
 </script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;

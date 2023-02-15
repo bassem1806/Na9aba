@@ -73,7 +73,7 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
 
     /******* Search Bar *********/
 
-    @Query(value =" SELECT * FROM syndicat01.agent a where (a.date_inscription like %:keyword% ) or (a.cnrps like %:keyword%)  ;" ,nativeQuery = true)
+    @Query(value =" SELECT * FROM syndicat01.agent a where (a.date_inscription like %:keyword% ) or (a.cnrps like %:keyword%) or (a.nom like %:keyword%)or (a.prenom like %:keyword%)  ;" ,nativeQuery = true)
     List<Agent> findByKeyword(@Param("keyword") String keyword);
 /*
     @Query(value =" SELECT"+
@@ -101,4 +101,15 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
 
     */
 
+    /******* nb abbonnée par periode *********/
+/*
+    @Query(value = "SELECT COUNT(a.agent_id)," +
+            " YEAR (a.date_inscription) ," +
+            " MONTH (a.date_inscription)" +
+            "FROM syndicat01.agent a" +
+
+            "  WHERE( YEAR(a.date_inscription) = YEAR(CURDATE()))" +
+            "GROUP BY YEAR(a.date_inscription), MONTH (a.date_inscription)", nativeQuery = true)
+    List<Object> getCountnbagentperiode();
+    */
 }

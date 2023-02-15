@@ -72,7 +72,7 @@ public class AgentController {
     /******* search *******/
 
     @RequestMapping(path = {"list/{pageNumber}/search"})
-    public String listAgents(Agent agent, Model model, String keyword) {
+    public String listAgents(Agent agent, Model model, String keyword ) {
 
         System.out.println(" methode recherche in");
         if(keyword!=null) {
