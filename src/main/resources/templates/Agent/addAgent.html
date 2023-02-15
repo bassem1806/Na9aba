@@ -99,6 +99,31 @@ console.log("Hello world!  7 eme etape");
 	});
 		});
     </script>
+
+    <script>
+function controle(){
+var saisie =document.getElementById("CNRPS").value;
+alert("Vous avez saisi : "+ saisie);
+console.log( "alert:" +saisie);
+
+const cnrps = saisie;
+console.log(cnrps.substring(0, 8));
+const cnrps1=(cnrps.substring(0, 8))
+console.log("cnrps.substring :"+cnrps);
+console.log("cnrps1:" +cnrps1);
+const cnrps2=(cnrps.substring(8, 10))
+console.log("cnrps2:" +cnrps2);
+const result = cnrps1 % 97;
+console.log("modulo97:" +result);
+
+if (cnrps2 == result) {
+  alert("CNRPS Exacte : "+ saisie);
+} else {
+  alert("Merci de verifier le CNRPS : "+ saisie);
+}
+
+}
+</script>
 </head>
 
 <!-- menu a droite  -->
@@ -138,6 +163,7 @@ console.log("Hello world!  7 eme etape");
                                 <label class="col-form-label" for="CNRPS">المعرف الوحيد </label>
                                 <input class="form-control" id="CNRPS" placeholder="المعرف الوحيد" th:field="*{CNRPS}"
                                        type="text"/>
+                                <input type="button" id="bouton" value="Contrôler" onclick="controle()">
                                 <span class="text-danger" th:errors="*{CNRPS}"
                                       th:if="${#fields.hasErrors('CNRPS')}"></span>
                             </div>
