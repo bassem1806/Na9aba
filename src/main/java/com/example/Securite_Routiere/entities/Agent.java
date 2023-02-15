@@ -101,7 +101,6 @@ public class Agent implements Serializable {
     public Agent() {
     }
 
-
     public long getAgentId() {
         return AgentId;
     }
@@ -155,7 +154,7 @@ public class Agent implements Serializable {
     }
 
     public void setDateInscription(String dateInscription) {
-        dateInscription = dateInscription;
+        this.dateInscription = dateInscription;
     }
 
     public Delegation getDelegation() {
@@ -166,21 +165,20 @@ public class Agent implements Serializable {
         this.delegation = delegation;
     }
 
-    public SousDirection getSousDirection() {
-        return sousDirection;
-    }
-
-    public void setSousDirection(SousDirection sousDirection) {
-        this.sousDirection = sousDirection;
-    }
-
-
     public Grade getGrade() {
         return grade;
     }
 
     public void setGrade(Grade grade) {
         this.grade = grade;
+    }
+
+    public SousDirection getSousDirection() {
+        return sousDirection;
+    }
+
+    public void setSousDirection(SousDirection sousDirection) {
+        this.sousDirection = sousDirection;
     }
 
     public Syndicat getSyndicat() {

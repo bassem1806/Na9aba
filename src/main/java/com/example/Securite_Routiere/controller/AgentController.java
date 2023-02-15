@@ -206,9 +206,9 @@ public class AgentController {
 agent.setSyndicat(syndicat);
 
 agent= (Agent) agentRepository.save(agent);
-     //   agent = agentRepository.save(agent);
 
-        return "redirect:list";
+
+        return "redirect:list/1";
 
     }
 
@@ -220,7 +220,7 @@ agent= (Agent) agentRepository.save(agent);
 Agent agent = (Agent) agentRepository.findById(AgentId)
         .orElseThrow(() -> new IllegalArgumentException("Invalid agent Id:" + AgentId));
         agentRepository.delete(agent);
-       return "redirect:../list";
+       return "redirect:../list/1";
 
     }
 
