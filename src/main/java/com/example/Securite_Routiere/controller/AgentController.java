@@ -32,7 +32,7 @@ public class AgentController {
     private final DirectionRepository directionRepository;
     private final SousDirectionRepository sousDirectionRepository;
     private final GradeRepository gradeRepository;
-
+    private boolean affiche = false ;
     private final SyndicatRepository syndicatRepository;
     private int Transient;
 
@@ -306,8 +306,13 @@ Agent agent = (Agent) agentRepository.findById(AgentId)
         return mapper.writeValueAsString(sousDirectionByD);
     }
 
+    public boolean isAffiche() {
+        return affiche;
+    }
 
-
+    public void setAffiche(boolean affiche) {
+        this.affiche = affiche;
+    }
 }
 
 

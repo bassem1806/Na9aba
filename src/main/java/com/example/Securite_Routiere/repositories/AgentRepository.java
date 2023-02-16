@@ -76,7 +76,7 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
    int nbagent();
 
     /******* Search Bar *********/
-
+/*
     @Query(value =" SELECT * FROM syndicat01.agent a where (a.date_inscription like %:keyword% ) or (a.cnrps like %:keyword%) or (a.nom like %:keyword%)or (a.prenom like %:keyword%)  ;" ,nativeQuery = true)
     List<Agent> findByKeyword(@Param("keyword") String keyword);
 /*
@@ -104,29 +104,36 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
     List<Agent> findByKeyword(@Param("keyword") String keyword);
 
     */
-/*
+
     @Query(value =" SELECT"+
-            " a.cin,a.cnrps,a.date_inscription,a.nom,a.prenom,a.prenom_pere,g.libelle_grade"+
-            "FROM syndicat01.agent a "+
-            " left join syndicat01.grade g" +
-            " ON a.grade_id = g.grade_id" +
-            "  where (a.cin like %:keyword% or " +
-            "a.cnrps like %:keyword% or" +
-            "a.date_inscription like %:keyword% or" +
-            "a.nom like %:keyword% or" +
-            "a.prenom_pere like %:keyword% or" +
-            "g.libelle_grade like %:keyword% )" +
+            " a.cin, a.cnrps, a.date_inscription, a.nom, a.prenom, a.prenom_pere, g.libelle_grade"+
+            " ,a.agent_id, a.delegation_id, gr.gouvernorat_id, a.grade_id, a.sousdirection_id,a.syndicat_id" +
+            " FROM syndicat01.agent as a "+
+            " JOIN syndicat01.grade as g ON a.grade_id = g.grade_id" +
+            " JOIN syndicat01.Delegation as d ON a.delegation_id = d.delegation_id"+
+            " JOIN syndicat01.Gouvernorat  as gr ON  gr.gouvernorat_id = d.gouvernorat_id"+
+            " where (a.cin like %:keyword% or " +
+            " a.cnrps like %:keyword% or " +
+            " a.date_inscription like %:keyword% or " +
+            " a.nom like %:keyword% or " +
+            " a.prenom_pere like %:keyword% or " +
+            " d.delegation_id like %:keyword% or " +
+            " gr.gouvernorat_id like %:keyword% or " +
+            " g.libelle_grade like %:keyword% )" +
             " GROUP BY a.cnrps" ,nativeQuery = true)
     List<Agent> findByKeyword(@Param("keyword") String keyword);
 
-*/
+
+
+
+
 
     /*
     @Query(value =" SELECT"+
             " a.cin,a.cnrps,a.date_inscription,a.nom,a.prenom,a.prenom_pere,g.libelle_grade,"+
             " d.delegation_name,gr.gouvernorat_name,sd.nomsdir,dr.nom_dir,dg.nom_dir_gen"+
             "FROM syndicat01.agent a "+
-            "left join syndicat01.grade g ON a.grade_id =g.grade_id" +
+            "left join syndicat01.grade g ON a.grade_id =: g.grade_id" +
             "left join syndicat01.Delegation d on a.delegation_id=d.delegation_id"+
             " left join syndicat01.Gouvernorat gr on  gr.gouvernorat_id = d.gouvernorat_id"+
             " left join syndicat01.sous_direction sd ON a.sousdirection_id = sd.sd_id"+

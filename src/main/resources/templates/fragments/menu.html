@@ -19,6 +19,41 @@
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- CSS Files -->
     <link href="/assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
+    <style>
+    .menu ul {
+      margin: 0;
+      list-style: none;
+      padding-left: 20px;
+      display: none;
+    }
+
+    .menu .title {
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .menu .title::before {
+      content: '▶ ';
+      font-size: 80%;
+      color: green;
+    }
+
+    .menu.open .title::before {
+      content: '▼ ';
+    }
+
+    .menu.open ul {
+      display: block;
+    }
+  </style>
+    <script>
+    let menuElem = document.getElementById('sweeties');
+    let titleElem = menuElem.querySelector('.title');
+
+    titleElem.onclick = function() {
+      menuElem.classList.toggle('open');
+    };
+  </script>
 </head>
 
 <!-- menu a droite  -->
@@ -243,6 +278,15 @@
                 </li>
 
             </ul>
+            <!--div id="sweeties" class="menu">
+                <span class="title">zaeaeaeae (click me)!</span>
+                <ul>
+                    <li>Cake</li>
+                    <li>Donut</li>
+                    <li>Honey</li>
+                </ul>
+
+            </div-->
         </div>
 
 

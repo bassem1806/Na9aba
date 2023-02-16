@@ -2,6 +2,7 @@
 <html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <link href="/assets/img/apple-icon.png" rel="apple-touch-icon" sizes="76x76">
@@ -101,6 +102,8 @@ console.log("Hello world!  7 eme etape");
     </script>
 
     <script>
+
+
 function controle(){
 var saisie =document.getElementById("CNRPS").value;
 alert("Vous avez saisi : "+ saisie);
@@ -116,13 +119,24 @@ console.log("cnrps2:" +cnrps2);
 const result = cnrps1 % 97;
 console.log("modulo97:" +result);
 
+
+
 if (cnrps2 == result) {
+
   alert("CNRPS Exacte : "+ saisie);
+
+myFunction()
+
 } else {
   alert("Merci de verifier le CNRPS : "+ saisie);
-}
+
 
 }
+
+
+
+
+
 
 function myFunction() {
   var x = document.getElementById("myDIV");
@@ -133,7 +147,7 @@ function myFunction() {
   }
 }
 
-
+}
 </script>
     <style>
 #myDIV {
@@ -172,7 +186,7 @@ function myFunction() {
 
                     </div>
 
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-3"  >
                         <label class="col-form-label" for="CNRPS">المعرف الوحيد </label>
                         <input class="form-control" id="CNRPS" placeholder="المعرف الوحيد" name="CNRPS" type="text"/>
                         <!--input type="button"  class="btn btn-danger" id="bouton" value="التثبت من م.و قبل المواصلة" onclick="controle()"-->
@@ -180,11 +194,11 @@ function myFunction() {
                     </div>
 
                     <input type="button"  class="btn btn-danger" id="btn1" value="التثبت من م.و قبل المواصلة" onclick="controle()">
-                    <input type="button"  class="btn btn-info" id="btn2" value=" المواصلة" onclick="myFunction()">
+                    <!--input type="button"    style="display:none" class="btn btn-info"  id="secondBtn" value=" المواصلة" onclick="myFunction()"-->
 
 
 
-                    <form action="#" method="post" th:action="@{/Agent/addSave}" th:object="${agent}" id="myDIV">
+                    <form  action="#" method="post" th:action="@{/Agent/addSave}" th:object="${agent}" id="myDIV">
                         <div class="row">
 
                             <!--div class="card-header pb-0 text-left bg-transparent">
