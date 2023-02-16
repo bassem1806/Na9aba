@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Agent implements Serializable {
@@ -39,6 +40,13 @@ public class Agent implements Serializable {
     @Column(name = "Date_inscription")
     private String dateInscription;
 
+
+    @Column(name = "agent_saisie")
+    private String agentSaisie;
+
+    @Column(name = "date_saisie")
+    private String dateSaisie;
+
     /**** Many To One delegation ****/
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -70,7 +78,7 @@ public class Agent implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Syndicat syndicat;
 
-    public Agent(long agentId, long CIN, long CNRPS, String nom, String prenom, String prenom_Pere, String dateInscription, Delegation delegation, Grade grade, SousDirection sousDirection, Syndicat syndicat) {
+    public Agent(long agentId, long CIN, long CNRPS, String nom, String prenom,String agentSaisie,String dateSaisie ,String prenom_Pere, String dateInscription ,Delegation delegation, Grade grade, SousDirection sousDirection, Syndicat syndicat) {
         AgentId = agentId;
         this.CIN = CIN;
         this.CNRPS = CNRPS;
@@ -82,7 +90,12 @@ public class Agent implements Serializable {
         this.grade = grade;
         this.sousDirection = sousDirection;
         this.syndicat = syndicat;
+
+        this.agentSaisie = agentSaisie;
+        this.dateSaisie =dateSaisie;
     }
+
+
 
     /**** Many To Many  syndicat****/
 
@@ -189,6 +202,22 @@ public class Agent implements Serializable {
         this.syndicat = syndicat;
     }
 
+    public String getAgentSaisie() {
+        return agentSaisie;
+    }
+
+    public void setAgentSaisie(String agentSaisie) {
+        this.agentSaisie = agentSaisie;
+    }
+
+    public String getDateSaisie() {
+        return dateSaisie;
+    }
+
+    public void setDateSaisie(String dateSaisie) {
+        this.dateSaisie = dateSaisie;
+    }
+
     @Override
     public String toString() {
         return "Agent{" +
@@ -204,5 +233,8 @@ public class Agent implements Serializable {
                 ", sousDirection=" + sousDirection +
                 ", syndicat=" + syndicat +
                 '}';
+    }
+
+    public void setDateSaisie(DateTimeFormatter ofLocalizedTime) {
     }
 }

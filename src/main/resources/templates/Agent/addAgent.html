@@ -122,22 +122,15 @@ console.log("modulo97:" +result);
 
 
 if (cnrps2 == result) {
+window.alert("CNRPS Exacte : " + saisie );
 
-  alert("CNRPS Exacte : "+ saisie);
 
 myFunction()
 
 } else {
-  alert("Merci de verifier le CNRPS : "+ saisie);
-
+  window.alert("CNRPS n'est pas Exacte Merci de verifier : " + saisie );
 
 }
-
-
-
-
-
-
 function myFunction() {
   var x = document.getElementById("myDIV");
   if (x.style.display === "none") {

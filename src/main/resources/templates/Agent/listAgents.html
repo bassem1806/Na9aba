@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org">
+<html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec=http://www.thymeleaf.org/extras/spring-security
+      xmlns:shiro=http://www.pollix.at/thymeleaf/shiro>
 
 
 <head>
@@ -127,6 +129,7 @@ console.log("zeaeaeaeae");
                     <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/sousDirection.direction.nomDir?sortDir=' + ${reverseSortDir}}"> الإدارة </a></th-->
                     <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/sousDirection.nomSDir?sortDir=' + ${reverseSortDir}}"> الإدارةالفرعية </a></th>
                     <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/delegation.gouvernorat.name?sortDir=' + ${reverseSortDir}}"> الولاية </a></th>
+                    <!--th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/delegation.delegation_name?sortDir=' + ${reverseSortDir}}"> deleg </a></th-->
                     <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/syndicat.nomSyndicat?sortDir=' + ${reverseSortDir}}"> النقابة </a></th>
 
                     <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/dateInscription?sortDir=' + ${reverseSortDir}}">  تاريخ التسجيل</a></th>
@@ -144,7 +147,8 @@ console.log("zeaeaeaeae");
                     <td th:text="${agent.sousDirection.direction.directionGeneral.NomDirGen}"></td>
                     <td th:text="${agent.sousDirection.direction.NomDir}"></td>
                     <td th:text="${agent.sousDirection.nomSDir}"></td>
-                    <td th:text="${agent.delegation.gouvernorat.name}"></td>
+                    <!--td th:text="${agent.delegation.gouvernorat.name}"></td-->
+                    <td th:text="${agent.delegation.name}"></td>
                     <td th:text="${agent.syndicat.NomSyndicat}"></td>
                     <td th:text="${agent.dateInscription}"></td>
 

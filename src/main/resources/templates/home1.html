@@ -29,8 +29,8 @@
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
 
     <!-- CSS Files -->
-    <!--link href="/assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/-->
-    <link href="/assets/css/soft-ui-dashboard.css" id="pagestyle" rel="stylesheet"/>
+    <link href="/assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
+    <!--link href="/assets/css/soft-ui-dashboard.css" id="pagestyle" rel="stylesheet"/-->
     <link href="/assets/css/soft-ui-dashboard.min.css" id="pagestyle1" rel="stylesheet"/>
 
 </head>
@@ -176,8 +176,8 @@
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-<!--script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script-->
-<script src="/assets/js/soft-ui-dashboard.min.js"></script>
+<script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+<!--script src="/assets/js/soft-ui-dashboard.min.js"></script-->
 
 <script src="/assets/js/soft-ui-dashboard.min.js"></script>
 
@@ -196,9 +196,9 @@
    $.each(res,function(i, data){
 
 
-       x[i] = data[0]
-       y[i] = data[1]
-       z[i] = data[2]
+       x[i] = data[2]
+       y[i] = data[2]
+       z[i] = data[0]
 
 
 
@@ -206,7 +206,7 @@
          console.log("yly:"+yly);
           console.log("zly:"+zly);
 
-  console.log("x:"+x);
+        console.log("x:"+x);
          console.log("y:"+y);
           console.log("z:"+z);
 

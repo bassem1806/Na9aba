@@ -4,11 +4,14 @@ package com.example.Securite_Routiere.controller;
 import com.example.Securite_Routiere.entities.*;
 import com.example.Securite_Routiere.repositories.*;
 import com.example.Securite_Routiere.service.AgentService;
+import com.example.Securite_Routiere.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,8 +19,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -32,13 +38,13 @@ public class AgentController {
     private final DirectionRepository directionRepository;
     private final SousDirectionRepository sousDirectionRepository;
     private final GradeRepository gradeRepository;
-    private boolean affiche = false ;
+private final UserService userService;
     private final SyndicatRepository syndicatRepository;
     private int Transient;
 
 
     @Autowired
-    public AgentController(AgentRepository agentRepository, GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository, DirectionGeneralRepository directionGeneralRepository, DirectionRepository directionRepository, SousDirectionRepository sousDirectionRepository, GradeRepository gradeRepository, SyndicatRepository syndicatRepository) {
+    public AgentController(AgentRepository agentRepository, GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository, DirectionGeneralRepository directionGeneralRepository, DirectionRepository directionRepository, SousDirectionRepository sousDirectionRepository, GradeRepository gradeRepository, UserService userService, SyndicatRepository syndicatRepository) {
         this.agentRepository = agentRepository;
         this.gouvernoratRepository = gouvernoratRepository;
         this.delegationRepository = delegationRepository;
@@ -46,6 +52,7 @@ public class AgentController {
         this.directionRepository = directionRepository;
         this.sousDirectionRepository = sousDirectionRepository;
         this.gradeRepository = gradeRepository;
+        this.userService = userService;
         this.syndicatRepository = syndicatRepository;
         agentService = null;
     }
@@ -209,12 +216,23 @@ public class AgentController {
                 ("Invalid  sundicat Id:" + sy));
 agent.setSyndicat(syndicat);
 
-agent= (Agent) agentRepository.save(agent);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByLogin(auth.getName());
+
+        agent.setAgentSaisie(user.getName() + "" + user.getLastName());
+        agent.setDateSaisie(String.valueOf(LocalDateTime.now()));
+
+
+
+//agent= (Agent) agentRepository.save(agent);
 
         if (agentRepository.existsByCNRPS(agent.getCNRPS())) {
-           // throw new RuntimeException(" CNRPS is already present");
+
             return "error/403";
         }
+      else {
+          agent= (Agent) agentRepository.save(agent);
+      }
         return "redirect:list/1";
 
     }
@@ -241,6 +259,8 @@ Agent agent = (Agent) agentRepository.findById(AgentId)
         return "Agent/updateAgent";
     }
 
+
+    /************ loadDelegationByGouvernorat/{id}   ******/
     @ResponseBody
     @RequestMapping(value = "loadDelegationByGouvernorat/{id}", method = RequestMethod.GET)
     public String loadStatesByCountry1(@PathVariable("id") long id) {
@@ -258,7 +278,7 @@ Agent agent = (Agent) agentRepository.findById(AgentId)
 
 
     }
-
+    /************ loadDirectionByDirectionGeneral/{DgId}   ******/
     @ResponseBody
     @RequestMapping(value = "loadDirectionByDirectionGeneral/{DgId}", method = RequestMethod.GET)
     public String loadStatesByCountry(@PathVariable("DgId") long DgId) {
@@ -279,6 +299,7 @@ Agent agent = (Agent) agentRepository.findById(AgentId)
 
     }
 
+    /************ loadSousDirectionByDirection/{DId}  ******/
     @ResponseBody
     @RequestMapping(value = "loadSousDirectionByDirection/{DId}", method = RequestMethod.GET)
     public String loadStatesByCountry2(@PathVariable("DId") long DId) throws JsonProcessingException {
@@ -306,13 +327,7 @@ Agent agent = (Agent) agentRepository.findById(AgentId)
         return mapper.writeValueAsString(sousDirectionByD);
     }
 
-    public boolean isAffiche() {
-        return affiche;
-    }
 
-    public void setAffiche(boolean affiche) {
-        this.affiche = affiche;
-    }
 }
 
 

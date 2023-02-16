@@ -19,7 +19,7 @@ public class AgentService {
 
     public Page<Agent> findPage(int pageNumber) {
 
-        Pageable pageable = PageRequest.of(pageNumber - 1, 3);
+        Pageable pageable = PageRequest.of(pageNumber - 1, 30);
         return agentRepository.findAll(pageable);
 
     }
@@ -29,7 +29,7 @@ public class AgentService {
                 ? Sort.by(field).descending()
                 : Sort.by(field).ascending();
 
-        Pageable pageable = PageRequest.of(pageNumber - 1, 3, sort);
+        Pageable pageable = PageRequest.of(pageNumber - 1, 30, sort);
 
         return agentRepository.findAll(pageable);
     }
