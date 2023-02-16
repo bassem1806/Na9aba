@@ -165,6 +165,10 @@ public class AgentController {
         System.out.println("size direction sd :" + sousDirectionRepository.findAll().size());
         System.out.println("grade liste :" + gradeRepository.findAll().size());
 
+
+
+
+
         return "Agent/addAgent";
 
     }
@@ -207,7 +211,10 @@ agent.setSyndicat(syndicat);
 
 agent= (Agent) agentRepository.save(agent);
 
-
+        if (agentRepository.existsByCNRPS(agent.getCNRPS())) {
+           // throw new RuntimeException(" CNRPS is already present");
+            return "error/403";
+        }
         return "redirect:list/1";
 
     }

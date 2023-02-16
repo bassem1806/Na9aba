@@ -3,7 +3,6 @@ package com.example.Securite_Routiere.repositories;
 import com.example.Securite_Routiere.entities.Agent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -18,6 +17,11 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
 
         return AgentRepository.findsort(pageable);
     }
+
+/***** serch if existe by cnrps
+ * @param CNRPS*****/
+    Boolean existsByCNRPS(long CNRPS);
+
 /******* nb abbonnée par syndicat *********/
     @Query(value = "SELECT COUNT(s.nom_syndicat) ," +
             " s.nom_syndicat" +
@@ -100,16 +104,47 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
     List<Agent> findByKeyword(@Param("keyword") String keyword);
 
     */
-
-    /******* nb abbonnée par periode *********/
 /*
-    @Query(value = "SELECT COUNT(a.agent_id)," +
-            " YEAR (a.date_inscription) ," +
-            " MONTH (a.date_inscription)" +
-            "FROM syndicat01.agent a" +
+    @Query(value =" SELECT"+
+            " a.cin,a.cnrps,a.date_inscription,a.nom,a.prenom,a.prenom_pere,g.libelle_grade"+
+            "FROM syndicat01.agent a "+
+            " left join syndicat01.grade g" +
+            " ON a.grade_id = g.grade_id" +
+            "  where (a.cin like %:keyword% or " +
+            "a.cnrps like %:keyword% or" +
+            "a.date_inscription like %:keyword% or" +
+            "a.nom like %:keyword% or" +
+            "a.prenom_pere like %:keyword% or" +
+            "g.libelle_grade like %:keyword% )" +
+            " GROUP BY a.cnrps" ,nativeQuery = true)
+    List<Agent> findByKeyword(@Param("keyword") String keyword);
 
-            "  WHERE( YEAR(a.date_inscription) = YEAR(CURDATE()))" +
-            "GROUP BY YEAR(a.date_inscription), MONTH (a.date_inscription)", nativeQuery = true)
-    List<Object> getCountnbagentperiode();
-    */
+*/
+
+    /*
+    @Query(value =" SELECT"+
+            " a.cin,a.cnrps,a.date_inscription,a.nom,a.prenom,a.prenom_pere,g.libelle_grade,"+
+            " d.delegation_name,gr.gouvernorat_name,sd.nomsdir,dr.nom_dir,dg.nom_dir_gen"+
+            "FROM syndicat01.agent a "+
+            "left join syndicat01.grade g ON a.grade_id =g.grade_id" +
+            "left join syndicat01.Delegation d on a.delegation_id=d.delegation_id"+
+            " left join syndicat01.Gouvernorat gr on  gr.gouvernorat_id = d.gouvernorat_id"+
+            " left join syndicat01.sous_direction sd ON a.sousdirection_id = sd.sd_id"+
+            " left join syndicat01.direction dr ON sd.direction_id =dr.did"+
+            "left join syndicat01.direction_general dg ON dr.direction_general_id = dg.dg_id"+
+            "  where (a.cin like %:keyword% or " +
+            "a.cnrps like %:keyword% or" +
+            "a.date_inscription like %:keyword% or" +
+            "a.nom like %:keyword% or" +
+            "a.prenom_pere like %:keyword% or" +
+            "g.libelle_grade like %:keyword% or" +
+            "d.delegation_name like %:keyword% or" +
+            "gr.gouvernorat_name like %:keyword% or" +
+            "sd.nomsdir like %:keyword% or" +
+            "dr.nom_dir like %:keyword% or" +
+            "dg.nom_dir_gen like %:keyword% ); " ,nativeQuery = true)
+    List<Agent> findByKeyword(@Param("keyword") String keyword);
+     */
+
+
 }

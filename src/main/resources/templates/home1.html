@@ -93,7 +93,7 @@
                     <div class="chart">
                         <!--canvas class="chart-canvas" height="300"  width="500" id="chart-bars2"></canvas-->
                         <!--canvas class="chart-canvas" height="300"  width="500" id="pie-chart"></canvas-->
-                        <canvas id="pie-chart" width="500" height="300"></canvas>
+                        <canvas id="pie-chart" width="250" height="250"></canvas>
 
 
                     </div>
@@ -405,9 +405,6 @@ var s = '';
     y = []
 
 
-
-
-
     console.log("nb ag:"+res)
    $.each(res,function(i, data){
 
@@ -416,17 +413,11 @@ var s = '';
        y[i] = data[1]
 
 
-
-
-
   console.log("x:"+x);
          console.log("y:"+y);
 
 
     })
-
-
-
 
 
 new Chart(document.getElementById("bar-chart"), {

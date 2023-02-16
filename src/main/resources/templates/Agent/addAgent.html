@@ -123,16 +123,7 @@ if (cnrps2 == result) {
 }
 
 }
-</script>
 
-
-    <style>
-#myDIV {
-
-  display:none;
-}
-</style>
-    <script>
 function myFunction() {
   var x = document.getElementById("myDIV");
   if (x.style.display === "none") {
@@ -141,7 +132,16 @@ function myFunction() {
     x.style.display = "none";
   }
 }
+
+
 </script>
+    <style>
+#myDIV {
+
+  display:none;
+}
+</style>
+
 </head>
 
 <!-- menu a droite  -->
@@ -179,8 +179,8 @@ function myFunction() {
 
                     </div>
 
-                    <input type="button"  class="btn btn-danger" id="bouton" value="التثبت من م.و قبل المواصلة" onclick="controle()">
-                    <input type="button"  class="btn btn-info" id="bouton1" value=" المواصلة" onclick="myFunction()">
+                    <input type="button"  class="btn btn-danger" id="btn1" value="التثبت من م.و قبل المواصلة" onclick="controle()">
+                    <input type="button"  class="btn btn-info" id="btn2" value=" المواصلة" onclick="myFunction()">
 
 
 
@@ -195,7 +195,7 @@ function myFunction() {
 
                             <div class="form-group col-md-3">
                                 <label class="col-form-label" for="CNRPS">المعرف الوحيد </label>
-                                <input class="form-control" id="CNRPS" placeholder="المعرف الوحيد" th:field="*{CNRPS}"
+                                <input class="form-control" id="CNRPS" placeholder="المعرف الوحيد" name="CNRPS"  th:field="*{CNRPS}"
                                        type="text"/>
 
 
