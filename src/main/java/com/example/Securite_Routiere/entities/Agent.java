@@ -221,14 +221,7 @@ public class Agent implements Serializable {
     @Override
     public String toString() {
         return "Agent{" +
-                "AgentId=" + AgentId +
-                ", CIN=" + CIN +
-                ", CNRPS=" + CNRPS +
-                ", Nom='" + Nom + '\'' +
-                ", Prenom='" + Prenom + '\'' +
-                ", Prenom_Pere='" + Prenom_Pere + '\'' +
-                ", dateInscription='" + dateInscription + '\'' +
-                ", delegation=" + delegation +
+                "delegation=" + delegation +
                 ", grade=" + grade +
                 ", sousDirection=" + sousDirection +
                 ", syndicat=" + syndicat +

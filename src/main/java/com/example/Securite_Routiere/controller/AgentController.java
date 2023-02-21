@@ -16,14 +16,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
-import java.time.LocalDate;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -41,10 +47,12 @@ public class AgentController {
 private final UserService userService;
     private final SyndicatRepository syndicatRepository;
     private int Transient;
+    private RestTemplate restTemplate;
+
 
 
     @Autowired
-    public AgentController(AgentRepository agentRepository, GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository, DirectionGeneralRepository directionGeneralRepository, DirectionRepository directionRepository, SousDirectionRepository sousDirectionRepository, GradeRepository gradeRepository, UserService userService, SyndicatRepository syndicatRepository) {
+    public AgentController(AgentRepository agentRepository,GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository, DirectionGeneralRepository directionGeneralRepository, DirectionRepository directionRepository, SousDirectionRepository sousDirectionRepository, GradeRepository gradeRepository, UserService userService, SyndicatRepository syndicatRepository) {
         this.agentRepository = agentRepository;
         this.gouvernoratRepository = gouvernoratRepository;
         this.delegationRepository = delegationRepository;
@@ -55,11 +63,11 @@ private final UserService userService;
         this.userService = userService;
         this.syndicatRepository = syndicatRepository;
         agentService = null;
+
     }
 
 
-
-    /*
+/*
     @GetMapping("list")
     //@ResponseBody
     public String listAgents(Model model) {
@@ -82,17 +90,53 @@ private final UserService userService;
     public String listAgents(Agent agent, Model model, String keyword ) {
 
         System.out.println(" methode recherche in");
-        if(keyword!=null) {
-            List<Agent> agents = agentService.getByKeyword(keyword);
-            model.addAttribute("agents", agents);
-        }else {
+        if(keyword != null) {
+
+            List<Agent> agents1 = agentService.getByKeyword(keyword);
+            model.addAttribute("agents1", agents1);
+            System.out.println("taille de la liste keyword rempli :" +agents1.size());
+            return "Agent/listAgents1";
+        }
+
+        else {
             List<Agent> agents = agentService.getAllAgent();
-            model.addAttribute("agents", agents);}
-        return "Agent/listAgents";
+            model.addAttribute("agents", agents);
+            System.out.println("taille de la liste keyword vide :" +agents.size());
+            return "Agent/listAgents";
+        }
+
     }
 
+    /******* export to csv *******/
+    @GetMapping("export")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
 
-/******* pagination get the first page *******/
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Agent" + currentDateTime + ".csv";
+        response.setHeader(headerKey, headerValue);
+
+       // List<User> listUsers = service.listAll();
+        List<Agent> agents = (List<Agent>) agentRepository.findAll();
+        System.out.println("taille de la liste keyword :" +agents.size());
+
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] csvHeader = {"nom ", "prenom ","CNRPS",  "date insecription","Grade"};
+        String[] nameMapping = {"Nom", "prenom", "CNRPS",  "dateInscription","grade"};
+
+        csvWriter.writeHeader(csvHeader);
+
+        for (Agent agent : agents) {
+            csvWriter.write(agent, nameMapping);
+        }
+
+        csvWriter.close();
+
+    }
+
+    /******* pagination get the first page *******/
 
     @GetMapping("list/{pageNumber}")
 

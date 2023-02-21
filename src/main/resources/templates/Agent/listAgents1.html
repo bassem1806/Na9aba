@@ -100,12 +100,9 @@ console.log("zeaeaeaeae");
     <!-- Navbar footer  -->
 
 
-    <!--div class="container my-3"-->
-    <div class="container my-5" th:switch="${Agents}">
-        <p class="my-5">
-            <a class="btn btn-primary" th:href="@{'/Agent/add'}">
-                <i class="fas fa-user-plus ml-2"> إضافة ملف موظف</i></a>
-        </p>
+    <div class="container my-3"-->
+    <div class="container my-5" th:switch="${Agents1}">
+
         <div>
 
 
@@ -116,14 +113,14 @@ console.log("zeaeaeaeae");
                 <a class="btn btn-info" th:href="@{/Agent/list/1}"> إعادة البحث</a>
                 <!--button type="submit" class="btn btn-info" >إعادة البحث</button-->
             </form>
-                <table class="table table-striped" id="example" style="width:100%">
+            <table class="table table-striped" id="example" style="width:100%">
                 <thead>
                 <tr>
                     <th> الإسم واللقب</th>
                     <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/CNRPS?sortDir=' + ${reverseSortDir}}"> المعرف الوحيد</a></th>
 
                     <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/grade.libelleGrade?sortDir=' + ${reverseSortDir}}"> الرتبة</a></th>
-<th>الإدارة العامة</th>
+                    <th>الإدارة العامة</th>
                     <th>الإدارة </th>
                     <!--th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/sousDirection.direction.directionGeneral.nomDirGen?sortDir=' + ${reverseSortDir}}"> الإدارة العامة</a></th>
                     <th><i class="icon_profile"></i><a th:href="@{'/Agent/list/' + ${currentPage} + '/sousDirection.direction.nomDir?sortDir=' + ${reverseSortDir}}"> الإدارة </a></th-->
@@ -219,7 +216,7 @@ console.log("zeaeaeaeae");
 
         </div>
 
- </main>
+</main>
 <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
         <i class="fa fa-cog py-2"> </i>
