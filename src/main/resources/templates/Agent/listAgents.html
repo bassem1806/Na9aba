@@ -1,38 +1,27 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec=http://www.thymeleaf.org/extras/spring-security
-      xmlns:shiro=http://www.pollix.at/thymeleaf/shiro>
-
+<html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <link href="/assets/img/apple-icon.png" rel="apple-touch-icon" sizes="76x76">
     <link href="/assets/img/favicon.png" rel="icon" type="image/png">
-
-    <script crossorigin="anonymous"
-            integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
-            referrerpolicy="no-referrer"
-            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <title>
-        إدارة الخدمات الفنية Home
+        إدارة الخدمات الفنية
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
-
     <!-- Nucleo Icons -->
     <link href="/assets/css/nucleo-icons.css" rel="stylesheet"/>
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/bootstrap3.4.min.css}">
-    <!--script src="/assets/css/bootstrap.min.css"></script>
-    <script src="/assets/css/bootstrap3.4.min.css"></script-->
-
+    <!-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>-->
+    <script crossorigin="anonymous" src="/assets/js/fontawesome.js"></script>
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
-
+    <link rel="stylesheet" href="@{/assets/css/bootstrap3.4.min.css}">
     <!-- CSS Files -->
     <link href="/assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
+</head>
 
 
     <script>
@@ -87,7 +76,7 @@ console.log("zeaeaeaeae");
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret"
        id="sidenav-main">
 
-    <div th:replace="fragments/menu :: menu"/>
+    <div th:replace="fragments/menu :: menu" />
 
 </aside>
 
@@ -101,8 +90,8 @@ console.log("zeaeaeaeae");
 
 
     <!--div class="container my-3"-->
-    <div class="container my-5" th:switch="${Agents}">
-        <p class="my-5">
+    <div class="container my-3" th:switch="${Agents}">
+        <p class="my-8">
             <a class="btn btn-primary" th:href="@{'/Agent/add'}">
                 <i class="fas fa-user-plus ml-2"> إضافة ملف موظف</i></a>
         </p>

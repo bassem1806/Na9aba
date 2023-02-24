@@ -1,53 +1,42 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org">
 
-
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <link href="/assets/img/apple-icon.png" rel="apple-touch-icon" sizes="76x76">
     <link href="/assets/img/favicon.png" rel="icon" type="image/png">
-
-    <script crossorigin="anonymous"
-            integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
-            referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <title>
-        إدارة الخدمات الفنية Home
+        إدارة الخدمات الفنية
+
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
-
     <!-- Nucleo Icons -->
     <link href="/assets/css/nucleo-icons.css" rel="stylesheet"/>
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
-
-    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/bootstrap3.4.min.css}">
     <!-- Font Awesome Icons -->
-
+    <!-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>-->
     <script crossorigin="anonymous" src="/assets/js/fontawesome.js"></script>
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
-
     <!-- CSS Files -->
     <link href="/assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
-    <!--link href="/assets/css/soft-ui-dashboard.css" id="pagestyle" rel="stylesheet"/-->
-    <link href="/assets/css/soft-ui-dashboard.min.css" id="pagestyle1" rel="stylesheet"/>
-
 </head>
 
 <!-- menu a droite  -->
 
 <body class="g-sidenav-show rtl bg-gray-100">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret"
-       id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-end me-3 rotate-caret" id="sidenav-main">
 
     <div th:replace="fragments/menu :: menu"/>
 
 </aside>
+<!--end  menu a droite  -->
 
-<main class="main-content position-relative max-height-vh-100 h-100 mt-1 ">
-    <!-- Navbar -->
+<main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg overflow-hidden">
 
+
+    <!-- Navbar header  -->
     <div th:replace="fragments/header :: header"/>
 
 
@@ -65,7 +54,6 @@
                     <canvas class="chart-canvas" height="300"  width="500" id="bar-chart1"></canvas>
                 </div>
             </div>
-
 
             <div class="col-6">
                 <div class="chart">
@@ -171,7 +159,6 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-
 </script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -179,7 +166,21 @@
 <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 <!--script src="/assets/js/soft-ui-dashboard.min.js"></script-->
 
-<script src="/assets/js/soft-ui-dashboard.min.js"></script>
+<!--script src="/assets/js/soft-ui-dashboard.min.js"></script-->
+<script>
+
+    $.getJSON( "/widget/loadNbAgent", function( res ) {
+
+
+
+    console.log("nb ag widget :"+res)
+
+
+return res;
+
+    })
+</script>
+
 
 <script>
 
@@ -280,16 +281,16 @@ new Chart(document.getElementById("bar-chart1"), {
       labels: y,
       datasets: [
         {
-          label: "Population (millions)",
+          label: "عدد المنخرطين حسب النقابات",
           backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
           data: x
         }
       ]
     },
     options: {
-      legend: { display: false },
+      legend: { display: true },
       title: {
-        display: true,
+        display:false,
         text: 'عدد المنخرطين حسب النقابات'
       }
     }
@@ -426,7 +427,7 @@ new Chart(document.getElementById("bar-chart"), {
       labels: y,
       datasets: [
         {
-          label: "منخرط ",
+          label: "عدد المنخرطين حسب الإدارات الفرعية ",
           backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
           data: x
         }
@@ -444,203 +445,7 @@ new Chart(document.getElementById("bar-chart"), {
 
 </script>
 
-<!--script>
-$( document ).ready(function() {
-    var ctx = $("canvas#chart-bars1")[0].getContext("2d");
 
-    $.ajax({
-			type: 'GET',
-			url: '/home1/loadNbsdirection',
-			success: function(res) {
-
-
-			var labels = [];
-			var values = [];
-
-
-var s = '';
-				for(var i = 0; i < res.length; i++) {
-
-					labels.push(res[i][1]);
-
-
-					values.push(res[i][0]);
-
-				}
-
-				$('#azert1').empty();
-				$('#azert1').html(s);
-				new Chart(ctx, {
-                  type: "bar",
-                  data: {
-                    labels : labels,
-                    datasets: [{
-                      label: "عدد المنخرطين",
-                      tension: 0.4,
-                      borderWidth: 1,
-                      borderRadius: 4,
-                      borderSkipped: true,
-                      backgroundColor: "#1b27d1",
-                      data: values,
-                      maxBarThickness: 6
-                    }],
-                  },
-                  options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                     title:{
-                        display:true,
-                        text:'عدد المنخرطين حسب الإدارات الفرعية ',
-                         fontSize:80
-                         },
-                      legend: {
-                      position : 'right',
-                        display: true,
-                      }
-                    },
-                    interaction: {
-                      intersect: false,
-                      mode: 'index',
-                    },
-                    scales: {
-                      y: {
-                        grid: {
-                          drawBorder: false,
-                          display: false,
-                          drawOnChartArea: false,
-                          drawTicks: false,
-                        },
-                        ticks: {
-                          suggestedMin: 0,
-                          suggestedMax: 500,
-                          beginAtZero: true,
-                          padding: 15,
-                          font: {
-                            size: 14,
-                            family: "Open Sans",
-                            style: 'normal',
-                            lineHeight: 2
-                          },
-                           color: "#4f4c3e"
-                        },
-                      },
-                      x: {
-                        grid: {
-                          drawBorder: false,
-                          display: false,
-                          drawOnChartArea: false,
-                          drawTicks: false
-                        },
-                        ticks: {
-                          display: true
-                        },
-                      },
-                    },
-                  },
-                });
-                }
-            })
-			});
-</script-->
-<!--script>
-$( document ).ready(function() {
-    var ctx = $("canvas#chart-bars2")[0].getContext("2d");
-
-    $.ajax({
-			type: 'GET',
-			url: '/home1/loadNbgrade',
-			success: function(res) {
-
-			var labels = [];
-			var values = [];
-
-
-var s = '';
-				for(var i = 0; i < res.length; i++) {
-
-					labels.push(res[i][1]);
-
-
-					values.push(res[i][0]);
-
-				}
-
-				$('#azert1').empty();
-				$('#azert1').html(s);
-				new Chart(ctx, {
-                  type: "bar",
-                  data: {
-                    labels : labels,
-                    datasets: [{
-                      label: "عدد المنخرطين",
-                      tension: 0.4,
-                      borderWidth: 1,
-                      borderRadius: 4,
-                      borderSkipped: true,
-                      backgroundColor: "#1b27d1",
-                      data: values,
-                      maxBarThickness: 6
-                    }],
-                  },
-                  options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                     title:{
-                        display:true,
-                        text:'عدد المنخرطين حسب الرتب ',
-                         fontSize:80
-                         },
-                      legend: {
-                      position : 'right',
-                        display: true,
-                      }
-                    },
-                    interaction: {
-                      intersect: false,
-                      mode: 'index',
-                    },
-                    scales: {
-                      y: {
-                        grid: {
-                          drawBorder: false,
-                          display: false,
-                          drawOnChartArea: false,
-                          drawTicks: false,
-                        },
-                        ticks: {
-                          suggestedMin: 0,
-                          suggestedMax: 500,
-                          beginAtZero: true,
-                          padding: 15,
-                          font: {
-                            size: 14,
-                            family: "Open Sans",
-                            style: 'normal',
-                            lineHeight: 2
-                          },
-                          color: "#4f4c3e"
-                        },
-                      },
-                      x: {
-                        grid: {
-                          drawBorder: false,
-                          display: false,
-                          drawOnChartArea: false,
-                          drawTicks: false
-                        },
-                        ticks: {
-                          display: true
-                        },
-                      },
-                    },
-                  },
-                });
-                }
-            })
-			});
-</script-->
 
 <script>
 

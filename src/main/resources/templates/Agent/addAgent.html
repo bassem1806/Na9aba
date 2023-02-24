@@ -20,11 +20,106 @@
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- CSS Files -->
     <link href="/assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <script src="/assets/js/select2.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2011"></script>
     <script src="/assets/js/jquery-1.7.1.min.js"></script>
+
+    <!-- script envoie de donnée gson -->
+<script>
+    $("#e6").select2({
+    placeholder: "Search for a repository",
+    minimumInputLength: 1,
+    ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+    url: "/Agent/loadAgentR",
+    dataType: 'json',
+    quietMillis: 250,
+    data: function (term, page) {
+    return {
+    q: term, // search term
+    };
+    },
+    results: function (data, page) { // parse the results into the format expected by Select2.
+    // since we are using custom formatting functions we do not need to alter the remote JSON data
+    return { results: data.items };
+    },
+    cache: true
+    },
+    initSelection: function(element, callback) {
+    // the input tag has a value attribute preloaded that points to a preselected repository's id
+    // this function resolves that id attribute to an object that select2 can render
+    // using its formatResult renderer - that way the repository name is shown preselected
+    var id = $(element).val();
+    if (id !== "") {
+    $.ajax("/Agent/loadAgentR/" + id, {
+    dataType: "json"
+    }).done(function(data) { callback(data); });
+    }
+    },
+    formatResult: repoFormatResult, // omitted for brevity, see the source of this page
+    formatSelection: repoFormatSelection,  // omitted for brevity, see the source of this page
+    dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
+    escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+    });
+</script>
+    <!--script>
+let dropdown = $('#locality-dropdown');
+
+dropdown.empty();
+
+dropdown.append('<option selected="true" disabled>Choose State/Province</option>');
+dropdown.prop('selectedIndex', 0);
+
+const  url = '/Agent/loadAgentR';
+
+// Populate dropdown with list of provinces
+$.getJSON(url, function (data) {
+console.log("size agentR data :" + data)
+  $.each(data, function (key, entry) {
+    dropdown.append($('<option></option>').attr('value', entry.cnrpsR).text(entry.cnrpsR));
+  })
+});
+
+    </script-->
+<!--script>
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', ' /Agent/loadAgentR');
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === 4) {
+    var reponse = JSON.parse(xhr.responseText);
+
+       console.log("size agentR:" + reponse.length)
+
+  console.log("size agentR:" + reponse[0].cnrpsR)
+
+ $("#e10_2").select2({
+            data:{ results: reponse, text: 'CNRPS' },
+            formatSelection: format,
+            formatResult: format
+    });
+
+
+}
+
+};
+
+
+xhr.send();
+
+</script-->
+
+    <!-- script control input saisie -->
+<script>
+   function controlecnrps(){
+var saisie =document.getElementById("CNRPS").value;
+console.log("entrer fct ---***-----:" + saisie);
+alert("Vous avez saisi : "+ saisie);
+};
+</script>
     <script type="text/javascript">
 $(document).ready(function(){
 
@@ -101,7 +196,8 @@ console.log("Hello world!  7 eme etape");
 		});
     </script>
 
-    <script>
+    <!-- script control est verification cnrps 10 bit  -->
+    <!--script>
 
 
 function controle(){
@@ -141,13 +237,20 @@ function myFunction() {
 }
 
 }
-</script>
+</script-->
+
+
+
+
     <style>
 #myDIV {
 
   display:none;
 }
 </style>
+
+
+
 
 </head>
 
@@ -179,26 +282,40 @@ function myFunction() {
 
                     </div>
 
-                    <div class="form-group col-md-3"  >
+                    <form th:action="@{/Agent/add/search}" method="get">
+
+                        <select id="e6"> zrrzerzerzrzrzrzrzrzrzrzrzrzrzerzr</select>
+                        <button type="submit"   class="btn btn-info" >بحث</button>
+
+
+                    </form>
+
+
+                    <!--div class="form-group col-md-3"  >
                         <label class="col-form-label" for="CNRPS">المعرف الوحيد </label>
+
+
                         <input class="form-control" id="CNRPS" placeholder="المعرف الوحيد" name="CNRPS" type="text"/>
-                        <!--input type="button"  class="btn btn-danger" id="bouton" value="التثبت من م.و قبل المواصلة" onclick="controle()"-->
+                        <input type="button"  class="btn btn-danger" id="bouton" value="التثبت من م.و قبل المواصلة" onclick="controle()">
 
                     </div>
 
-                    <input type="button"  class="btn btn-danger" id="btn1" value="التثبت من م.و قبل المواصلة" onclick="controle()">
-                    <!--input type="button"    style="display:none" class="btn btn-info"  id="secondBtn" value=" المواصلة" onclick="myFunction()"-->
+                    <input type="button"  class="btn btn-danger" id="btn1" value="التثبت من م.و قبل المواصلة" onclick="controlecnrps()">
+                    <input type="button"    style="display:none" class="btn btn-info"  id="secondBtn" value=" المواصلة" onclick="myFunction()"-->
+
+                   <!-- id="myDIV"-->
+
+                    <form  action="#" method="post" th:action="@{/Agent/addSave}" th:object="${agent}" >
 
 
-
-                    <form  action="#" method="post" th:action="@{/Agent/addSave}" th:object="${agent}" id="myDIV">
                         <div class="row">
 
-                            <!--div class="card-header pb-0 text-left bg-transparent">
-                                <h3 class="font-weight-bolder text-info text-center"> ملف موظف </h3>
 
+
+                            <!--div-- class="form-group col-md-8">
+                                <label class="col-form-label" for="CIN"> cin </label> <input class="form-control" id="CIN" placeholder=" cin" th:field="*{agentrempl.CIN}"
+                                    type="text"> <span class="text-danger" th:errors="*{CIN}" th:if="${#fields.hasErrors('CIN')}"></span>
                             </div-->
-
 
                             <div class="form-group col-md-3">
                                 <label class="col-form-label" for="CNRPS">المعرف الوحيد </label>
@@ -388,10 +505,11 @@ function myFunction() {
             <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
             <script src="/assets/js/plugins/choices.min.js"></script>
 
+
             <!-- Github buttons -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
             <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
-</body>
+    </body>
 
 </html>

@@ -43,67 +43,50 @@
     <div class="card">
         <div class="card-body">
             <div class="col-md-6 col-md-offset-3">
-                <form action="#" autocomplete="off" class="form-horizontal"
-                      method="post" role="form" th:action="@{/registration}"
-                      th:object="${user}">
-                    <h2>إضافة مستخدم</h2>
-                    <div class="form-group">
-                        <div class="col-sm-9">
-                            <label class="validation-message" th:errors="*{name}"
-                                   th:if="${#fields.hasErrors('name')}"></label>
-                            <input class="form-control" placeholder="الإسم" th:field="*{name}"
-                                   type="text"/>
-                        </div>
-                    </div>
+                <form >
+                    <h2>مجلدات</h2>
 
-                    <div class="form-group">
-                        <div class="col-sm-9">
-                            <label class="validation-message" th:errors="*{lastName}"
-                                   th:if="${#fields.hasErrors('lastName')}"></label>
-                            <input class="form-control" placeholder="اللقب"
-                                   th:field="*{lastName}" type="text"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-9">
-                            <label class="validation-message" th:errors="*{CNRPS}"
-                                   th:if="${#fields.hasErrors('CNRPS')}"></label>
-                            <input class="form-control" placeholder="الرقم الموحد"
-                                   th:field="*{CNRPS}" type="text"/>
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-sm-9">
-                            <input class="form-control" placeholder="Login" th:field="*{login}"
-                                   type="text"/> <label
-                                class="validation-message" th:errors="*{login}"
-                                th:if="${#fields.hasErrors('login')}"></label>
-                        </div>
-                        <!--   <div class="form-group">
-                             <div class="col-sm-9">
-                               <input type="text" th:field="*{email}" placeholder="البريد الإلكتروني"
-                                      class="form-control" /> <label
-                                     th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                                     class="validation-message"></label>
-                             </div>-->
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-9">
-                            <input class="form-control" placeholder="كلمة العبور"
-                                   th:field="*{password}" type="password"/> <label
-                                class="validation-message" th:errors="*{password}"
-                                th:if="${#fields.hasErrors('password')}"></label>
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-sm-9">
-                            <button class="btn btn-primary btn-block" type="submit">Register User</button>
-                        </div>
-                    </div>
 
-                    <span th:utext="${successMessage}"></span>
+
+
+
+
+
+
+                    <div class="container my-5" >
+                        <p class="my-5">
+                            <a class="btn btn-primary" th:href="@{'/DirectionGeneral/add'}">
+                                <!--i class="fas fa-user-plus ml-2"--> إضافةإدارة عامة</i> <img src="dinosaur.jpg">
+                            </a>
+
+
+                            <a class="btn btn-primary" th:href="@{'/Direction/add'}">
+                                <!--i class="fas fa-user-plus ml-2"--> إضافةإدارة </i></a>
+
+                            <a class="btn btn-primary" th:href="@{'/SousDirection/add'}">
+                                <!--i class="fas fa-user-plus ml-2"--> إضافةإدارة فرعية </i></a>
+                        </p>
+
+                        <p class="my-5">
+                            <a class="btn btn-primary" th:href="@{'/Syndicat/add'}">
+                                <!--i class="fas fa-user-plus ml-2"--> إضافةنقابة</i></a>
+
+
+
+                        </p>
+
+
+
+
+
+
+
+
+
+
+                    </div>
 
 
                 </form>

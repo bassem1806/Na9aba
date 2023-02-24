@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-import java.util.Collections;
-import java.util.List;
-
 @Controller
 @RequestMapping("/widget")
 public class WidgetController {
@@ -22,27 +17,27 @@ public class WidgetController {
 
     private AgentRepository agentRepository;
 
+    private Home1Controller home1Controller;
+
     public WidgetController(AgentRepository agentRepository) {
         this.agentRepository = agentRepository;
     }
 /*
-    @ResponseBody
-    @RequestMapping(value = "loadNbAgent", method = RequestMethod.GET)
-    public List<Object> loadStatesByCountry() throws JsonProcessingException
+    @GetMapping("/nbagent")
 
-    {
+    public String nbagent(Model model) {
 
-        System.out.println("init loadStatesByCountry2");
+   int nbag =agentRepository.nbagent();
+        model.addAttribute("nbagent", nbag);
 
+        System.out.println("nb agent widget -************************************************************ :" +nbag);
 
-        Object nbAgent =agentRepository.nbAgent();
-
-        System.out.println("la taille de la liste est egale =" + agentRepository.nbAgent());
-
-        return nbAgent;
+        return "widget";
 
     }
+
 */
+
     @ResponseBody
     @RequestMapping(value = "loadNbAgent", method = RequestMethod.GET)
     public int  nbagent() throws JsonProcessingException
@@ -54,7 +49,7 @@ public class WidgetController {
 
 
 
-        System.out.println("la taille de la liste est egale =" + agentRepository.nbagent());
+        System.out.println("nb agent model widget  87877878978978978979797979797979879797=" +x);
 
         return x;
 

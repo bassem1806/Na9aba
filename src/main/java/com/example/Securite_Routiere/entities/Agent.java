@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Entity
 public class Agent implements Serializable {
@@ -134,7 +135,7 @@ public class Agent implements Serializable {
         return CNRPS;
     }
 
-    public void setCNRPS(long CNRPS) {
+    public void setCNRPS(long cnrpsR) {
         this.CNRPS = CNRPS;
     }
 
@@ -230,4 +231,36 @@ public class Agent implements Serializable {
 
     public void setDateSaisie(DateTimeFormatter ofLocalizedTime) {
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Agent agent = (Agent) o;
+        return AgentId == agent.AgentId && CIN == agent.CIN && CNRPS == agent.CNRPS && Objects.equals(Nom, agent.Nom) && Objects.equals(Prenom, agent.Prenom) && Objects.equals(Prenom_Pere, agent.Prenom_Pere) && Objects.equals(dateInscription, agent.dateInscription) && Objects.equals(agentSaisie, agent.agentSaisie) && Objects.equals(dateSaisie, agent.dateSaisie) && Objects.equals(delegation, agent.delegation) && Objects.equals(grade, agent.grade) && Objects.equals(sousDirection, agent.sousDirection) && Objects.equals(syndicat, agent.syndicat);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(AgentId, CIN, CNRPS, Nom, Prenom, Prenom_Pere, dateInscription, agentSaisie, dateSaisie, delegation, grade, sousDirection, syndicat);
+    }
+
+    public void setCIN() {
+    }
+
+    public void setCNRPS() {
+
+
+    }
+
+    public void setGrade() {
+    }
+
+    public void setSousDirection(String sousDirectionR) {
+    }
+
+
+
+
 }

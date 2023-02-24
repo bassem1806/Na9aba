@@ -1,6 +1,8 @@
 package com.example.Securite_Routiere.service;
 
 import com.example.Securite_Routiere.entities.Agent;
+import com.example.Securite_Routiere.entities.AgentR;
+import com.example.Securite_Routiere.repositories.AgentRRepository;
 import com.example.Securite_Routiere.repositories.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +17,8 @@ import java.util.List;
 public class AgentService {
     @Autowired
     AgentRepository agentRepository;
+    @Autowired
+    AgentRRepository agentRRepository;
 
 
     public Page<Agent> findPage(int pageNumber) {
@@ -35,7 +39,7 @@ public class AgentService {
     }
 
 
-    public List<Agent> getAllAgent(){
+    public List<Agent> getAllAgent() {
         List<Agent> agents = (List<Agent>) agentRepository.findAll();
         return agents;
     }
@@ -43,10 +47,14 @@ public class AgentService {
     /*
      * TODO: Get Shop By keyword
      */
-    public List<Agent> getByKeyword(String keyword){
+    public List<Agent> getByKeyword(String keyword) {
 
         return agentRepository.findByKeyword(keyword);
     }
 
-}
 
+    public List<AgentR> GetByCNRPSAgentR1(String keywordd) {
+        return  agentRRepository.findbyCNRPSAGRkey(keywordd);
+
+     }
+}

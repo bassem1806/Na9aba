@@ -38,22 +38,24 @@ public class AgentController {
     @Autowired
     private final AgentService agentService;
     private final AgentRepository agentRepository;
+
+    private final AgentRRepository agentRRepository;
     private final GouvernoratRepository gouvernoratRepository;
     private final DelegationRepository delegationRepository;
     private final DirectionGeneralRepository directionGeneralRepository;
     private final DirectionRepository directionRepository;
     private final SousDirectionRepository sousDirectionRepository;
     private final GradeRepository gradeRepository;
-private final UserService userService;
+    private final UserService userService;
     private final SyndicatRepository syndicatRepository;
     private int Transient;
     private RestTemplate restTemplate;
 
 
-
     @Autowired
-    public AgentController(AgentRepository agentRepository,GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository, DirectionGeneralRepository directionGeneralRepository, DirectionRepository directionRepository, SousDirectionRepository sousDirectionRepository, GradeRepository gradeRepository, UserService userService, SyndicatRepository syndicatRepository) {
+    public AgentController(AgentRepository agentRepository, AgentRRepository agentRRepository, GouvernoratRepository gouvernoratRepository, DelegationRepository delegationRepository, DirectionGeneralRepository directionGeneralRepository, DirectionRepository directionRepository, SousDirectionRepository sousDirectionRepository, GradeRepository gradeRepository, UserService userService, SyndicatRepository syndicatRepository) {
         this.agentRepository = agentRepository;
+        this.agentRRepository = agentRRepository;
         this.gouvernoratRepository = gouvernoratRepository;
         this.delegationRepository = delegationRepository;
         this.directionGeneralRepository = directionGeneralRepository;
@@ -84,28 +86,28 @@ private final UserService userService;
 
     }
 */
+
     /******* search *******/
 
     @RequestMapping(path = {"list/{pageNumber}/search"})
-    public String listAgents(Agent agent, Model model, String keyword ) {
+    public String listAgents(Agent agent, Model model, String keyword) {
 
         System.out.println(" methode recherche in");
-        if(keyword != null) {
+        if (keyword != null) {
 
             List<Agent> agents1 = agentService.getByKeyword(keyword);
-            model.addAttribute("agents1", agents1);
-            System.out.println("taille de la liste keyword rempli :" +agents1.size());
-            return "Agent/listAgents1";
-        }
-
-        else {
+            model.addAttribute("agents", agents1);
+            System.out.println("taille de la liste keyword rempli :" + agents1.size());
+            return "Agent/listAgents";
+        } else {
             List<Agent> agents = agentService.getAllAgent();
             model.addAttribute("agents", agents);
-            System.out.println("taille de la liste keyword vide :" +agents.size());
+            System.out.println("taille de la liste keyword vide :" + agents.size());
             return "Agent/listAgents";
         }
 
     }
+
 
     /******* export to csv *******/
     @GetMapping("export")
@@ -118,14 +120,17 @@ private final UserService userService;
         String headerValue = "attachment; filename=Agent" + currentDateTime + ".csv";
         response.setHeader(headerKey, headerValue);
 
-       // List<User> listUsers = service.listAll();
+        // List<User> listUsers = service.listAll();
         List<Agent> agents = (List<Agent>) agentRepository.findAll();
-        System.out.println("taille de la liste keyword :" +agents.size());
+        System.out.println("taille de la liste keyword :" + agents.size());
 
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-        String[] csvHeader = {"nom ", "prenom ","CNRPS",  "date insecription","Grade"};
-        String[] nameMapping = {"Nom", "prenom", "CNRPS",  "dateInscription","grade"};
+        String[] csvHeader = {"nom ", "prenom ", "CNRPS", "date insecription", "Grade"};
+        String[] nameMapping = {"Nom", "prenom", "CNRPS", "dateInscription", "grade"};
+/****/
 
+
+        /******/
         csvWriter.writeHeader(csvHeader);
 
         for (Agent agent : agents) {
@@ -134,28 +139,28 @@ private final UserService userService;
 
         csvWriter.close();
 
+
     }
 
     /******* pagination get the first page *******/
 
     @GetMapping("list/{pageNumber}")
 
-    public String getOnePage(Model model, String DateInscription, String DirectionGeneralId, String DirectionId, String SousDirectionId, String gouvernoratId1,String SyndicatId,String GradeId, @PathVariable("pageNumber") int currentPage) {
-     Page<Agent> page=null;
+    public String getOnePage(Model model, String DateInscription, String DirectionGeneralId, String DirectionId, String SousDirectionId, String gouvernoratId1, String SyndicatId, String GradeId, @PathVariable("pageNumber") int currentPage) {
+        Page<Agent> page = null;
         int totalPages = 0;
         long totalItems = 0;
         List<Agent> agents = null;
 
 
-        page=agentService.findPage(currentPage);
+        page = agentService.findPage(currentPage);
         totalPages = page.getTotalPages();
         totalItems = page.getTotalElements();
-        agents=page.getContent();
+        agents = page.getContent();
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("totalItems", totalItems);
         model.addAttribute("agents", agents);
-
 
 
         return "Agent/listAgents";
@@ -217,10 +222,8 @@ private final UserService userService;
         System.out.println("grade liste :" + gradeRepository.findAll().size());
 
 
-
-
-
         return "Agent/addAgent";
+
 
     }
 
@@ -258,7 +261,7 @@ private final UserService userService;
 
         Syndicat syndicat = syndicatRepository.findById(sy).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid  sundicat Id:" + sy));
-agent.setSyndicat(syndicat);
+        agent.setSyndicat(syndicat);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByLogin(auth.getName());
@@ -267,16 +270,14 @@ agent.setSyndicat(syndicat);
         agent.setDateSaisie(String.valueOf(LocalDateTime.now()));
 
 
-
 //agent= (Agent) agentRepository.save(agent);
 
         if (agentRepository.existsByCNRPS(agent.getCNRPS())) {
 
             return "error/403";
+        } else {
+            agent = (Agent) agentRepository.save(agent);
         }
-      else {
-          agent= (Agent) agentRepository.save(agent);
-      }
         return "redirect:list/1";
 
     }
@@ -286,10 +287,10 @@ agent.setSyndicat(syndicat);
 
     public String deleteDirectionGeneral(@PathVariable("AgentId") long AgentId, Model model) throws Throwable {
 
-Agent agent = (Agent) agentRepository.findById(AgentId)
-        .orElseThrow(() -> new IllegalArgumentException("Invalid agent Id:" + AgentId));
+        Agent agent = (Agent) agentRepository.findById(AgentId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid agent Id:" + AgentId));
         agentRepository.delete(agent);
-       return "redirect:../list/1";
+        return "redirect:../list/1";
 
     }
 
@@ -322,6 +323,7 @@ Agent agent = (Agent) agentRepository.findById(AgentId)
 
 
     }
+
     /************ loadDirectionByDirectionGeneral/{DgId}   ******/
     @ResponseBody
     @RequestMapping(value = "loadDirectionByDirectionGeneral/{DgId}", method = RequestMethod.GET)
@@ -361,7 +363,6 @@ Agent agent = (Agent) agentRepository.findById(AgentId)
         System.out.println("la taille de la liste est egale =" + sousDirectionByD.get(0).getNomSDir());
 
 
-
         //Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().excludeFieldsWithModifiers(Transient).create();
         //Gson gson = new Gson();
 
@@ -371,8 +372,72 @@ Agent agent = (Agent) agentRepository.findById(AgentId)
         return mapper.writeValueAsString(sousDirectionByD);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "loadAgentR", method = RequestMethod.GET)
+    public List<AgentR> loadStatesByCountry() throws JsonProcessingException {
 
-}
+        System.out.println("init loadStatesByCountry");
+
+        List<AgentR> AgentRcnrps = agentRRepository.FindByCNRPSAgentR();
+
+        System.out.println("nbdirection : " + agentRepository.getCountBySDirection());
+
+        return AgentRcnrps;
+
+    }
+
+
+    /******* search cnrps *******/
+
+    @RequestMapping(path = {"add/search"})
+    public String searchAgentR(AgentR agentR, Model model, String keywordd) {
+        System.out.println("taille de la liste total :" + agentRRepository.FindByCNRPSAgentR().size());
+        System.out.println(" methode recherche  cnrps in");
+        System.out.println("cnrps:" + keywordd);
+        List<AgentR> agentfind = agentService.GetByCNRPSAgentR1(keywordd);
+
+        if (keywordd != null && keywordd.length() > 0) {
+            int i = 0;
+            for (AgentR searchAgentR : agentfind) {
+                Agent agentrempl = new Agent();
+
+                agentrempl.setCNRPS(agentfind.get(i).getCnrpsR());
+                agentrempl.setCIN(agentfind.get(i).getCinR());
+                agentrempl.setPrenom(agentfind.get(i).getPrenomR());
+                agentrempl.setNom(agentfind.get(i).getNomR());
+                agentrempl.setPrenom_Pere(agentfind.get(i).getPrenomPereR());
+                agentrempl.setSousDirection(agentfind.get(i).getSousDirectionR());
+                agentrempl.setGrade();
+
+                System.out.println("find agent :" + agentfind);
+                System.out.println("find agent :" + agentfind.size());
+                System.out.println("find agent cnrps :" + agentfind.get(0).getCnrpsR());
+                System.out.println("find agent cin :" + agentfind.get(0).getCinR());
+                System.out.println("find agent :" + agentfind.get(0).getDirectionGeneralR());
+                System.out.println("find agent :" + agentfind.get(0).getDirectionR());
+                System.out.println("find agent :" + agentfind.get(0).getSousDirectionR());
+                System.out.println("find agent :" + agentfind.get(0).getNomR());
+                System.out.println("find agent :" + agentfind.get(0).getPrenomR());
+                System.out.println("find agent :" + agentfind.get(0).getGradeR());
+
+                System.out.println("separation************************************************ :");
+
+                System.out.println("find agentrempli cnrps----------- :" + agentrempl.getCNRPS());
+                System.out.println("find agentrempli CIN --------------:" + agentrempl.getCIN());
+                System.out.println("find agentrempli cnrps----------- :" + agentrempl.getCNRPS());
+                System.out.println("find agentrempli prenom --------------:" + agentrempl.getPrenom());
+                System.out.println("find agentrempli nom --------------:" + agentrempl.getNom());
+                System.out.println("find agentrempli prenom pere --------------:" + agentrempl.getPrenom_Pere());
+                System.out.println("find agentrempli grade --------------:" + agentrempl.getGrade());
+                System.out.println("find agentrempli sous direction --------------:" + agentrempl.getSousDirection());
+            }
+
+
+        }
+        return "Agent/addAgent";
+    }
+    }
+
 
 
 

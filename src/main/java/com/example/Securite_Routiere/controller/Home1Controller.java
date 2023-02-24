@@ -48,13 +48,18 @@ public class Home1Controller {
 
     @GetMapping(value = "/home")
     public ModelAndView home1(Model model) {
+
+
+        int nbag =agentRepository.nbagent();
+      //  System.out.println("----------------------------------------------------------------------------------------------------------------------------------- :" + nbag);
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         String date_time = dtf.format(now);
 
         Map params = new HashMap<String, Object>();
         params.put("date_time", date_time);
-
+       // model.addAttribute("nbrAg",nbag);
+       // System.out.println("nbr agnet model :"  +nbag);
         return new ModelAndView("home1", params);
 
     }
@@ -67,8 +72,8 @@ public class Home1Controller {
 
         List<Object> nbsyndicat=agentRepository.getCountBySyndicat();
 
-                System.out.println("la taille de la liste est egale =" + agentRepository.getCountBySyndicat().size());
-        System.out.println("la taille de la liste est egale =" + agentRepository.getCountBySyndicat().get(0));
+              System.out.println("la taille de la liste est egale =" + agentRepository.getCountBySyndicat().size());
+       System.out.println("la taille de la liste est egale =" + agentRepository.getCountBySyndicat().get(0));
         System.out.println("la taille de la liste est egale =" + agentRepository.getCountBySyndicat().get(0).toString());
 
         return nbsyndicat;
