@@ -17,7 +17,7 @@ public class AgentR {
 
 
     @Column(name = "CNRPS")
-    private long cnrpsR;
+    private String cnrpsR;
 
 
     @Column(name = "NOM")
@@ -64,11 +64,11 @@ public class AgentR {
         this.cinR = cinR;
     }
 
-    public long getCnrpsR() {
+    public String getCnrpsR() {
         return cnrpsR;
     }
 
-    public void setCnrpsR(long cnrpsR) {
+    public void setCnrpsR(String cnrpsR) {
         this.cnrpsR = cnrpsR;
     }
 
@@ -131,7 +131,7 @@ public class AgentR {
     }
 
 
-    public AgentR(long agentRId, long cinR, long cnrpsR, String nomR, String prenomR, String prenomPereR, String gouvernoratR, String deligationR, String directionGeneralR, String directionR, String sousDirectionR, String gradeR) {
+    public AgentR(long agentRId, long cinR, String cnrpsR, String nomR, String prenomR, String prenomPereR, String gouvernoratR, String deligationR, String directionGeneralR, String directionR, String sousDirectionR, String gradeR) {
         this.agentRId = agentRId;
         this.cinR = cinR;
         this.cnrpsR = cnrpsR;

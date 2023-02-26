@@ -20,7 +20,7 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
 
 /***** serch if existe by cnrps
  * @param CNRPS*****/
-    Boolean existsByCNRPS(long CNRPS);
+    Boolean existsByCNRPS(String CNRPS);
 
 /******* nb abbonnée par syndicat *********/
     @Query(value = "SELECT COUNT(s.nom_syndicat) ," +

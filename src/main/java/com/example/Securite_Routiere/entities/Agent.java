@@ -23,7 +23,7 @@ public class Agent implements Serializable {
 
 
     @Column(name = "CNRPS")
-    private long CNRPS;
+    private String CNRPS;
 
 
     @Column(name = "NOM")
@@ -79,7 +79,7 @@ public class Agent implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Syndicat syndicat;
 
-    public Agent(long agentId, long CIN, long CNRPS, String nom, String prenom,String agentSaisie,String dateSaisie ,String prenom_Pere, String dateInscription ,Delegation delegation, Grade grade, SousDirection sousDirection, Syndicat syndicat) {
+    public Agent(long agentId, long CIN, String CNRPS, String nom, String prenom,String agentSaisie,String dateSaisie ,String prenom_Pere, String dateInscription ,Delegation delegation, Grade grade, SousDirection sousDirection, Syndicat syndicat) {
         AgentId = agentId;
         this.CIN = CIN;
         this.CNRPS = CNRPS;
@@ -131,11 +131,12 @@ public class Agent implements Serializable {
         this.CIN = CIN;
     }
 
-    public long getCNRPS() {
+
+    public String getCNRPS() {
         return CNRPS;
     }
 
-    public void setCNRPS(long cnrpsR) {
+    public void setCNRPS(String CNRPS) {
         this.CNRPS = CNRPS;
     }
 

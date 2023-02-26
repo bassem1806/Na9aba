@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org"
+
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<head>
+
+    <meta charset="utf-8"/>
+
+
+
+</head>
+
+<!-- menu a droite  -->
+
+<body>
+
+<!--end  menu a droite  -->
+
+
+
+
+<form th:action="@{/Agent/add/search}" method="get">
+    <input type="text" name="keywordd" th:value="${keywordd}"  placeholder="بحث" size="50" >
+    <!--select class="mySelect2"> zrrzerzerzrzrzrzrzrzrzrzrzrzrzerzr</select-->
+    <button type="submit"   class="btn btn-info" >بحث</button>
+
+
+</form>
+
+
+
+<form  action="#" method="post" th:action="@{/Agent/addSave}" th:object="${agent}" >
+
+
+
+
+
+
+
+</form>
+
+
+</body>
+
+</html>

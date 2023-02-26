@@ -20,50 +20,29 @@
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- CSS Files -->
     <link href="/assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
-    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
-    <script src="/assets/js/select2.min.js"></script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2011"></script>
+    <!--script src="//cdn.jsdelivr.net/npm/sweetalert2011"></script-->
     <script src="/assets/js/jquery-1.7.1.min.js"></script>
 
     <!-- script envoie de donnée gson -->
+    <script src="/assets/js/jquery-3.5.1.js"></script>
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <script src="/assets/js/select2.min.js"></script>
 <script>
-    $("#e6").select2({
-    placeholder: "Search for a repository",
-    minimumInputLength: 1,
-    ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-    url: "/Agent/loadAgentR",
-    dataType: 'json',
-    quietMillis: 250,
-    data: function (term, page) {
-    return {
-    q: term, // search term
-    };
-    },
-    results: function (data, page) { // parse the results into the format expected by Select2.
-    // since we are using custom formatting functions we do not need to alter the remote JSON data
-    return { results: data.items };
-    },
-    cache: true
-    },
-    initSelection: function(element, callback) {
-    // the input tag has a value attribute preloaded that points to a preselected repository's id
-    // this function resolves that id attribute to an object that select2 can render
-    // using its formatResult renderer - that way the repository name is shown preselected
-    var id = $(element).val();
-    if (id !== "") {
-    $.ajax("/Agent/loadAgentR/" + id, {
-    dataType: "json"
-    }).done(function(data) { callback(data); });
+$('#mySelect2').select2({
+  ajax: {
+    url: '/Agent/loadAgentR',
+    processResults: function (data) {
+      // Transforms the top-level key of the response object from 'items' to 'results'
+      return {
+        results: data.items
+      };
     }
-    },
-    formatResult: repoFormatResult, // omitted for brevity, see the source of this page
-    formatSelection: repoFormatSelection,  // omitted for brevity, see the source of this page
-    dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
-    escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
-    });
+  }
+});
 </script>
     <!--script>
 let dropdown = $('#locality-dropdown');
@@ -282,9 +261,9 @@ function myFunction() {
 
                     </div>
 
-                    <form th:action="@{/Agent/add/search}" method="get">
+                    <form th:action="@{/Agent/add/search}" method="post">
+                        <input type="text"  id="keywordd" name="keywordd" th:value="${keywordd}"  placeholder="بحث" size="50" >
 
-                        <select id="e6"> zrrzerzerzrzrzrzrzrzrzrzrzrzrzerzr</select>
                         <button type="submit"   class="btn btn-info" >بحث</button>
 
 
@@ -307,53 +286,48 @@ function myFunction() {
 
                     <form  action="#" method="post" th:action="@{/Agent/addSave}" th:object="${agent}" >
 
-
                         <div class="row">
 
 
 
-                            <!--div-- class="form-group col-md-8">
-                                <label class="col-form-label" for="CIN"> cin </label> <input class="form-control" id="CIN" placeholder=" cin" th:field="*{agentrempl.CIN}"
-                                    type="text"> <span class="text-danger" th:errors="*{CIN}" th:if="${#fields.hasErrors('CIN')}"></span>
-                            </div-->
-
-                            <div class="form-group col-md-3">
-                                <label class="col-form-label" for="CNRPS">المعرف الوحيد </label>
-                                <input class="form-control" id="CNRPS" placeholder="المعرف الوحيد" name="CNRPS"  th:field="*{CNRPS}"
-                                       type="text"/>
 
 
-                                <span class="text-danger" th:errors="*{CNRPS}"
-                                      th:if="${#fields.hasErrors('CNRPS')}"></span>
-                            </div>
 
                             <div class="form-group col-md-3"   >
-                                <label class="col-form-label" for="CIN">رقم بطاقة التعريف الوطنية </label>
-                                <input class="form-control" id="CIN" placeholder="رقم بطاقة التعريف الوطنية " th:field="*{CIN}"
-                                       type="text"/>
-                                <span class="text-danger" th:errors="*{CIN}" th:if="${#fields.hasErrors('CIN')}"></span>
+
+                                <label class="col-form-label" for="$cinTmp">رقم بطاقة التعريف الوطنية </label>
+                                <input class="form-control" id="$cinTmp"  placeholder="رقم بطاقة التعريف الوطنية " th:value="${cinTmp}"   type="text"/>
+
                             </div>
                             <br>
 
-                            <div class="form-group col-md-4" >
-                                <label class="col-form-label" for="Prenom">الإسم </label>
-                                <input class="form-control" id="Prenom" placeholder="الإسم " th:field="*{Prenom}"
-                                       type="text"/>
-                                <span class="text-danger" th:errors="*{Prenom}"
-                                      th:if="${#fields.hasErrors('Prenom')}"></span>
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$cnrpsTmp">المعرف الوحيد</label>
+                                <input class="form-control" id="$cnrpsTmp"  placeholder="المعرف الوحيد " th:value="${cnrpsTmp}"   type="text"/>
+
                             </div>
-                            <div class="form-group col-md-3" >
-                                <label class="col-form-label" for="Nom">اللقب </label>
-                                <input class="form-control" id="Nom" placeholder="اللقب " th:field="*{Nom}"
-                                       type="text"/>
-                                <span class="text-danger" th:errors="*{Nom}" th:if="${#fields.hasErrors('Nom')}"></span>
+                            <br>
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$prenomTmp">الإسم</label>
+                                <input class="form-control" id="$prenomTmp"  placeholder="الإسم " th:value="${prenomTmp}"   type="text"/>
+
                             </div>
-                            <div class="form-group col-md-3" >
-                                <label class="col-form-label" for="Prenom_Pere">إسم الأب </label>
-                                <input class="form-control" id="Prenom_Pere" placeholder="إسم الأب " th:field="*{Prenom_Pere}"
-                                       type="text"/>
-                                <span class="text-danger" th:errors="*{Prenom_Pere}"
-                                      th:if="${#fields.hasErrors('Prenom_Pere')}"></span>
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$nomTmp">اللقب</label>
+                                <input class="form-control" id="$nomTmp"  placeholder="اللقب " th:value="${nomTmp}"   type="text"/>
+
+                            </div>
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$prenompereTmp">إسم الأب</label>
+                                <input class="form-control" id="prenompereTmp"  placeholder="إسم الأب " th:value="${prenompereTmp}"   type="text"/>
+
                             </div>
 
                             <div class="col-sm-3" >
@@ -376,7 +350,6 @@ function myFunction() {
                                 </select>
 
                             </div>
-
 
                             <div class="form-group col-md-4" >
                                 <label class="col-form-label" for="directionGeneral" id="directionGeneral">الإدارة
@@ -406,15 +379,14 @@ function myFunction() {
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-4">
-                                <label class="col-form-label" for="grade" id="grade1">الرتبة </label>
-                                <select class="form-control" id="grade" name="GradeId">
-                                    <option value="">--من فضل إختر الرتبة --</option>
-                                    <option th:each="gr: ${grades}" th:text="${gr.LibelleGrade}" th:value="${gr.GradeId}"/>
-                                </select>
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$gradeTmp">الرتبة</label>
+                                <input class="form-control" id="$gradeTmp"  placeholder="الرتبة " th:value="${gradeTmp}"   type="text"/>
+
                             </div>
 
-                            <div class="form-group col-md-4" >
+                            <div class="form-group col-md-3" >
                                 <label class="col-form-label" for="syndicat" id="syndicat1">النقابة </label>
                                 <select class="form-control" id="syndicat" name="SyndicatId">
                                     <option value="">--من فضل إختر النقابة --</option>
@@ -426,11 +398,9 @@ function myFunction() {
 
                             <div class="form-group col-md-3" >
                                 <label class="col-form-label" for="DateInscription">date</label>
-                                <input class="form-control" id="DateInscription" placeholder="date" th:field="*{DateInscription}"
-                                       type="date"/>
+                                <input class="form-control" id="DateInscription" placeholder="date" th:value="*{DateInscription}" type="date"/>
                                 <span class="text-danger" th:errors="*{DateInscription}" th:if="${#fields.hasErrors('DateInscription')}"></span>
                             </div>
-
 
                             <div class="col-md-6" id="ex1" >
                                 <input class="btn btn-primary" type="submit" value="إضافة موظف ">
@@ -498,7 +468,7 @@ function myFunction() {
 
 
             <!--   Core JS Files   -->
-            <script src="/assets/js/sweetalert2.all.min.js"></script>
+            <!--script src="/assets/js/sweetalert2.all.min.js"></script-->
             <script src="/assets/js/core/popper.min.js"></script>
             <script src="/assets/js/core/bootstrap.min.js"></script>
             <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>

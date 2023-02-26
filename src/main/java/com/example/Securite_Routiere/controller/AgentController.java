@@ -17,9 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.supercsv.io.CsvBeanWriter;
-import org.supercsv.io.ICsvBeanWriter;
-import org.supercsv.prefs.CsvPreference;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -48,8 +45,96 @@ public class AgentController {
     private final GradeRepository gradeRepository;
     private final UserService userService;
     private final SyndicatRepository syndicatRepository;
-    private int Transient;
-    private RestTemplate restTemplate;
+    //private int Transient;
+  //  private RestTemplate restTemplate;
+    private String cinTmp = null;
+    private String cnrpsTmp = null;
+    private String nomTmp = null;
+    private String prenomTmp = null;
+    private String prenompereTmp = null;
+    private String gradeTmp = null;
+    private String directiongeneralTmp = null;
+    private String directionTmp = null;
+    private String sousdirectionTmp = null;
+
+
+
+    public String getCnrpsTmp() {
+        return cnrpsTmp;
+    }
+
+    public void setCnrpsTmp(String cnrpsTmp) {
+        this.cnrpsTmp = cnrpsTmp;
+    }
+
+    public String getCinTmp() {
+        return cinTmp;
+    }
+
+    public void setCinTmp(String cinTmp) {
+        this.cinTmp = cinTmp;
+    }
+
+    public String getNomTmp() {
+        return nomTmp;
+    }
+
+    public void setNomTmp(String nomTmp) {
+        this.nomTmp = nomTmp;
+    }
+
+    public String getPrenomTmp() {
+        return prenomTmp;
+    }
+
+    public void setPrenomTmp(String prenomTmp) {
+        this.prenomTmp = prenomTmp;
+    }
+
+    public String getPrenompereTmp() {
+        return prenompereTmp;
+    }
+
+    public void setPrenompereTmp(String prenompereTmp) {
+        this.prenompereTmp = prenompereTmp;
+    }
+
+    public String getGradeTmp() {
+        return gradeTmp;
+    }
+
+    public void setGradeTmp(String gradeTmp) {
+        this.gradeTmp = gradeTmp;
+    }
+
+    public String getDirectiongeneralTmp() {
+        return directiongeneralTmp;
+    }
+
+    public void setDirectiongeneralTmp(String directiongeneralTmp) {
+        this.directiongeneralTmp = directiongeneralTmp;
+    }
+
+    public String getDirectionTmp() {
+        return directionTmp;
+    }
+
+    public void setDirectionTmp(String directionTmp) {
+        this.directionTmp = directionTmp;
+    }
+
+    public String getSousdirectionTmp() {
+        return sousdirectionTmp;
+    }
+
+    public void setSousdirectionTmp(String sousdirectionTmp) {
+        this.sousdirectionTmp = sousdirectionTmp;
+    }
+
+    public AgentRepository getAgentRepository() {
+        return agentRepository;
+    }
+
 
 
     @Autowired
@@ -110,7 +195,7 @@ public class AgentController {
 
 
     /******* export to csv *******/
-    @GetMapping("export")
+   /* @GetMapping("export")
     public void exportToCSV(HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
@@ -127,10 +212,10 @@ public class AgentController {
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
         String[] csvHeader = {"nom ", "prenom ", "CNRPS", "date insecription", "Grade"};
         String[] nameMapping = {"Nom", "prenom", "CNRPS", "dateInscription", "grade"};
-/****/
 
 
-        /******/
+
+
         csvWriter.writeHeader(csvHeader);
 
         for (Agent agent : agents) {
@@ -141,7 +226,7 @@ public class AgentController {
 
 
     }
-
+*/
     /******* pagination get the first page *******/
 
     @GetMapping("list/{pageNumber}")
@@ -223,6 +308,7 @@ public class AgentController {
 
 
         return "Agent/addAgent";
+       // return "Agent/test";
 
 
     }
@@ -276,6 +362,7 @@ public class AgentController {
 
             return "error/403";
         } else {
+
             agent = (Agent) agentRepository.save(agent);
         }
         return "redirect:list/1";
@@ -390,52 +477,126 @@ public class AgentController {
     /******* search cnrps *******/
 
     @RequestMapping(path = {"add/search"})
-    public String searchAgentR(AgentR agentR, Model model, String keywordd) {
-        System.out.println("taille de la liste total :" + agentRRepository.FindByCNRPSAgentR().size());
-        System.out.println(" methode recherche  cnrps in");
-        System.out.println("cnrps:" + keywordd);
-        List<AgentR> agentfind = agentService.GetByCNRPSAgentR1(keywordd);
+    public String searchAgentR(Model model, String keywordd) {
 
-        if (keywordd != null && keywordd.length() > 0) {
-            int i = 0;
-            for (AgentR searchAgentR : agentfind) {
-                Agent agentrempl = new Agent();
+         System.out.println("cnrps:" + keywordd);
 
-                agentrempl.setCNRPS(agentfind.get(i).getCnrpsR());
-                agentrempl.setCIN(agentfind.get(i).getCinR());
-                agentrempl.setPrenom(agentfind.get(i).getPrenomR());
-                agentrempl.setNom(agentfind.get(i).getNomR());
-                agentrempl.setPrenom_Pere(agentfind.get(i).getPrenomPereR());
-                agentrempl.setSousDirection(agentfind.get(i).getSousDirectionR());
-                agentrempl.setGrade();
+            if (keywordd == null){
+                System.out.println("cnrps2:" + keywordd);
+                this.setCinTmp(null);
+                this.setCnrpsTmp(null);
+                this.setNomTmp(null);
+                this.setPrenomTmp(null);
+                this.setPrenompereTmp(null);
+               // this.setDirectiongeneralTmp(null);
+               // this.setDirectionTmp(null);
+               // this.setSousdirectionTmp(null);
+                this.setGradeTmp(null);
 
-                System.out.println("find agent :" + agentfind);
-                System.out.println("find agent :" + agentfind.size());
-                System.out.println("find agent cnrps :" + agentfind.get(0).getCnrpsR());
-                System.out.println("find agent cin :" + agentfind.get(0).getCinR());
-                System.out.println("find agent :" + agentfind.get(0).getDirectionGeneralR());
-                System.out.println("find agent :" + agentfind.get(0).getDirectionR());
-                System.out.println("find agent :" + agentfind.get(0).getSousDirectionR());
-                System.out.println("find agent :" + agentfind.get(0).getNomR());
-                System.out.println("find agent :" + agentfind.get(0).getPrenomR());
-                System.out.println("find agent :" + agentfind.get(0).getGradeR());
+                model.addAttribute("cinTmp", cinTmp);
+                model.addAttribute("cnrpsTmp", cnrpsTmp);
+                model.addAttribute("nomTmp", nomTmp);
+                model.addAttribute("prenomTmp", prenomTmp);
+               // model.addAttribute("directiongeneralTmp", directiongeneralTmp);
+               // model.addAttribute("directionTmp", directionTmp);
+               // model.addAttribute("sousdirectionTmp", sousdirectionTmp);
+                model.addAttribute("gradeTmp", gradeTmp);
+                model.addAttribute("directions", directionRepository.findAll());
 
-                System.out.println("separation************************************************ :");
-
-                System.out.println("find agentrempli cnrps----------- :" + agentrempl.getCNRPS());
-                System.out.println("find agentrempli CIN --------------:" + agentrempl.getCIN());
-                System.out.println("find agentrempli cnrps----------- :" + agentrempl.getCNRPS());
-                System.out.println("find agentrempli prenom --------------:" + agentrempl.getPrenom());
-                System.out.println("find agentrempli nom --------------:" + agentrempl.getNom());
-                System.out.println("find agentrempli prenom pere --------------:" + agentrempl.getPrenom_Pere());
-                System.out.println("find agentrempli grade --------------:" + agentrempl.getGrade());
-                System.out.println("find agentrempli sous direction --------------:" + agentrempl.getSousDirection());
+                model.addAttribute("sousDirections", sousDirectionRepository.findAll());
+                model.addAttribute("grades", gradeRepository.findAll());
             }
 
 
-        }
-        return "Agent/addAgent";
+            if (keywordd != null) {
+                List<AgentR> agentfind = agentService.GetByCNRPSAgentR1(keywordd);
+
+                System.out.println("cnrps3:" + keywordd);
+                if (keywordd==""){
+                    this.setCinTmp((null));
+                    model.addAttribute("cinTmp", cinTmp);
+                    this.setCnrpsTmp((null));
+                    model.addAttribute("cnrpsTmp", cnrpsTmp);
+
+                    this.setNomTmp((null));
+                    model.addAttribute("nomTmp", nomTmp);
+
+                    this.setPrenomTmp((null));
+                    model.addAttribute("prenomTmp", prenomTmp);
+
+                    this.setPrenomTmp((null));
+                    model.addAttribute("prenompereTmp", prenompereTmp);
+
+                    this.setDirectiongeneralTmp((null));
+                    model.addAttribute("directiongeneralTmp", directiongeneralTmp);
+
+                    this.setDirectionTmp((null));
+                    model.addAttribute("directionTmp", directionTmp);
+
+                    this.setSousdirectionTmp((null));
+                    model.addAttribute("sousdirectionTmp", sousdirectionTmp);
+
+                    this.setGradeTmp((null));
+                    model.addAttribute("gradeTmp", gradeTmp);
+                }else
+                {
+
+
+                for (AgentR searchAgentR : agentfind) {
+
+                    Agent agentrempl = new Agent();
+
+                    agentrempl.setCNRPS(searchAgentR.getCnrpsR());
+
+                    agentrempl.setCIN(searchAgentR.getCinR());
+
+                    this.setCnrpsTmp(String.valueOf(searchAgentR.getCnrpsR()));
+                    model.addAttribute("cnrpsTmp", cnrpsTmp);
+
+
+                    this.setCinTmp(String.valueOf(searchAgentR.getCinR()));
+                    model.addAttribute("cinTmp", cinTmp);
+
+                    this.setNomTmp(String.valueOf(searchAgentR.getNomR()));
+                    model.addAttribute("nomTmp", nomTmp);
+
+                    this.setPrenomTmp(String.valueOf(searchAgentR.getPrenomR()));
+                    model.addAttribute("prenomTmp", prenomTmp);
+
+                    this.setPrenompereTmp(String.valueOf(searchAgentR.getPrenomPereR()));
+                    model.addAttribute("prenompereTmp", prenompereTmp);
+
+                    this.setDirectiongeneralTmp(String.valueOf(searchAgentR.getDirectionGeneralR()));
+                    model.addAttribute("directiongeneralTmp", directiongeneralTmp);
+
+                    this.setDirectionTmp(String.valueOf(searchAgentR.getDirectionR()));
+                    model.addAttribute("directionTmp", directionTmp);
+
+                    this.setSousdirectionTmp(String.valueOf(searchAgentR.getSousDirectionR()));
+                    model.addAttribute("sousdirectionTmp", sousdirectionTmp);
+
+                    this.setGradeTmp(String.valueOf(searchAgentR.getGradeR()));
+                    model.addAttribute("gradeTmp", gradeTmp);
+
+
+                }
+
+                }
+
+            }
+
+          return "Agent/addAgent";
     }
+
+
+
+
+
+
+
+
+
+
     }
 
 

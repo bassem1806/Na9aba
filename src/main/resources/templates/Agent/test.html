@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<script>
+ function controle(){
+var saisie =document.getElementById("keywordd").value;
+alert("Vous avez saisi : "+saisie);
+console.log( "alert:" +saisie);
+};
+</script>
+
+<head>
+
+    <meta charset="utf-8"/>
+
+
+
+</head>
+
+<!-- menu a droite  -->
+
+<body>
+
+<!--end  menu a droite  -->
+
+
+
+
+<form th:action="@{/Agent/add/search}" method="post" >
+    <input type="text" name="keywordd" th:value="${keywordd}"  placeholder="بحث" size="50" >
+    <!--select class="mySelect2"> zrrzerzerzrzrzrzrzrzrzrzrzrzrzerzr</select-->
+    <button  type="submit" onclick="controle()" >بحث</button>
+    <input type="text" th:value="${cinTmp}" />
+
+
+
+</form>
+
+
+
+
+
+
+</body>
+
+</html>

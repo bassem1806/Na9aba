@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+
+
+
+</head>
+
+<!-- menu a droite  -->
+
+<body>
+
+<!--end  menu a droite  -->
+
+
+
+
+<form th:action="@{/Agent/add/search}" method="get">
+    <input type="text" name="keywordd" th:value="${keywordd}"  placeholder="بحث" size="50" >
+    <!--select class="mySelect2"> zrrzerzerzrzrzrzrzrzrzrzrzrzrzerzr</select-->
+    <button type="submit"   class="btn btn-info" >بحث</button>
+
+
+</form>
+
+
+
+<form  action="#" method="post" th:action="@{/Agent/addSave}" th:object="${agent}" >
+    <input type="text" th:field="*{CIN}" />
+
+
+    <label  for="CIN">رقم بطاقة التعريف الوطنية </label>
+    <input  id="CIN" placeholder="رقم بطاقة التعريف الوطنية " th:field="*{CIN}"
+            type="text"/>
+    <span  th:errors="*{CIN}" th:if="${#fields.hasErrors('CIN')}"></span>
+
+
+
+
+</form>
+
+
+</body>
+
+</html>
