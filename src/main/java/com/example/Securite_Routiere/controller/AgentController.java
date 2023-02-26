@@ -486,7 +486,7 @@ public class AgentController {
                 this.setCinTmp(null);
                 this.setCnrpsTmp(null);
                 this.setNomTmp(null);
-                this.setPrenomTmp(null);
+                this.setPrenompereTmp(null);
                 this.setPrenompereTmp(null);
                // this.setDirectiongeneralTmp(null);
                // this.setDirectionTmp(null);
@@ -497,10 +497,11 @@ public class AgentController {
                 model.addAttribute("cnrpsTmp", cnrpsTmp);
                 model.addAttribute("nomTmp", nomTmp);
                 model.addAttribute("prenomTmp", prenomTmp);
+                model.addAttribute("prenompereTmp",prenompereTmp);
                // model.addAttribute("directiongeneralTmp", directiongeneralTmp);
                // model.addAttribute("directionTmp", directionTmp);
                // model.addAttribute("sousdirectionTmp", sousdirectionTmp);
-                model.addAttribute("gradeTmp", gradeTmp);
+                //model.addAttribute("gradeTmp", gradeTmp);
                 model.addAttribute("directions", directionRepository.findAll());
 
                 model.addAttribute("sousDirections", sousDirectionRepository.findAll());
@@ -510,6 +511,9 @@ public class AgentController {
 
             if (keywordd != null) {
                 List<AgentR> agentfind = agentService.GetByCNRPSAgentR1(keywordd);
+
+                System.out.println("agent find :"+agentfind);
+                System.out.println("agent find :"+agentfind.size());
 
                 System.out.println("cnrps3:" + keywordd);
                 if (keywordd==""){
@@ -524,7 +528,7 @@ public class AgentController {
                     this.setPrenomTmp((null));
                     model.addAttribute("prenomTmp", prenomTmp);
 
-                    this.setPrenomTmp((null));
+                    this.setPrenompereTmp((null));
                     model.addAttribute("prenompereTmp", prenompereTmp);
 
                     this.setDirectiongeneralTmp((null));

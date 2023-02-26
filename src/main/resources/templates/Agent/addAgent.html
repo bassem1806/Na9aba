@@ -396,11 +396,11 @@ function myFunction() {
                             </div>
 
 
-                            <div class="form-group col-md-3" >
+                            <!--div class="form-group col-md-3" >
                                 <label class="col-form-label" for="DateInscription">date</label>
-                                <input class="form-control" id="DateInscription" placeholder="date" th:value="*{DateInscription}" type="date"/>
+                                <input class="form-control" id="DateInscription" placeholder="date" th:text="*{DateInscription}" type="date"/>
                                 <span class="text-danger" th:errors="*{DateInscription}" th:if="${#fields.hasErrors('DateInscription')}"></span>
-                            </div>
+                            </div-->
 
                             <div class="col-md-6" id="ex1" >
                                 <input class="btn btn-primary" type="submit" value="إضافة موظف ">
