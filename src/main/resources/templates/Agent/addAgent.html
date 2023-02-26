@@ -28,73 +28,24 @@
     <script src="/assets/js/jquery-1.7.1.min.js"></script>
 
     <!-- script envoie de donnée gson -->
-    <script src="/assets/js/jquery-3.5.1.js"></script>
-    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
-    <script src="/assets/js/select2.min.js"></script>
-<script>
-$('#mySelect2').select2({
-  ajax: {
-    url: '/Agent/loadAgentR',
-    processResults: function (data) {
-      // Transforms the top-level key of the response object from 'items' to 'results'
-      return {
-        results: data.items
-      };
+
+
+
+    <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-  }
-});
+
 </script>
-    <!--script>
-let dropdown = $('#locality-dropdown');
-
-dropdown.empty();
-
-dropdown.append('<option selected="true" disabled>Choose State/Province</option>');
-dropdown.prop('selectedIndex', 0);
-
-const  url = '/Agent/loadAgentR';
-
-// Populate dropdown with list of provinces
-$.getJSON(url, function (data) {
-console.log("size agentR data :" + data)
-  $.each(data, function (key, entry) {
-    dropdown.append($('<option></option>').attr('value', entry.cnrpsR).text(entry.cnrpsR));
-  })
-});
-
-    </script-->
-<!--script>
-
-var xhr = new XMLHttpRequest();
-xhr.open('GET', ' /Agent/loadAgentR');
-xhr.onreadystatechange = function() {
-  if (xhr.readyState === 4) {
-    var reponse = JSON.parse(xhr.responseText);
-
-       console.log("size agentR:" + reponse.length)
-
-  console.log("size agentR:" + reponse[0].cnrpsR)
-
- $("#e10_2").select2({
-            data:{ results: reponse, text: 'CNRPS' },
-            formatSelection: format,
-            formatResult: format
-    });
-
-
-}
-
-};
-
-
-xhr.send();
-
-</script-->
 
     <!-- script control input saisie -->
 <script>
    function controlecnrps(){
-var saisie =document.getElementById("CNRPS").value;
+var saisie =document.getElementById("keywordd").value;
 console.log("entrer fct ---***-----:" + saisie);
 alert("Vous avez saisi : "+ saisie);
 };
@@ -233,6 +184,16 @@ function myFunction() {
 
 </head>
 
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+
+</script>
 <!-- menu a droite  -->
 
 <body class="g-sidenav-show rtl bg-gray-100">
@@ -264,7 +225,7 @@ function myFunction() {
                     <form th:action="@{/Agent/add/search}" method="post">
                         <input type="text"  id="keywordd" name="keywordd" th:value="${keywordd}"  placeholder="بحث" size="50" >
 
-                        <button type="submit"   class="btn btn-info" >بحث</button>
+                        <button type="submit"   onclick="controlecnrps()"  class="btn btn-info" >بحث</button>
 
 
                     </form>
@@ -285,6 +246,9 @@ function myFunction() {
                    <!-- id="myDIV"-->
 
                     <form  action="#" method="post" th:action="@{/Agent/addSave}" th:object="${agent}" >
+
+
+
 
                         <div class="row">
 
@@ -351,7 +315,7 @@ function myFunction() {
 
                             </div>
 
-                            <div class="form-group col-md-4" >
+                            <!--div class="form-group col-md-4" >
                                 <label class="col-form-label" for="directionGeneral" id="directionGeneral">الإدارة
                                     العامة </label>
                                 <select class="form-control" id="listDirectionGeneral" name="DirectionGeneralId">
@@ -377,6 +341,26 @@ function myFunction() {
                                     <option value="">--من فضل إختر الإدارةالفرعية --</option>
                                     <option th:each="sd: ${sousDirection }" th:text="${sd.nomSDir}" th:value="${sd.sdId}"/>
                                 </select>
+                            </div-->
+                           <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$directiongeneralTmp">الإدارة العامة</label>
+                                <input class="form-control" id="$directiongeneralTmp"  placeholder="الإدارة العامة " th:value="${directiongeneralTmp}"   type="text"/>
+
+                            </div>
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$directionTmp">الإدارة </label>
+                                <input class="form-control" id="$directionTmp"  placeholder="الإدارة  " th:value="${directionTmp}"   type="text"/>
+
+                            </div>
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$sousdirectionTmp">الإدارة الفرعية </label>
+                                <input class="form-control" id="$sousdirectionTmp"  placeholder="الإدارة الفرعية  " th:value="${sousdirectionTmp}"   type="text"/>
+
                             </div>
 
                             <div class="form-group col-md-3"   >
@@ -398,7 +382,7 @@ function myFunction() {
 
                             <!--div class="form-group col-md-3" >
                                 <label class="col-form-label" for="DateInscription">date</label>
-                                <input class="form-control" id="DateInscription" placeholder="date" th:text="*{DateInscription}" type="date"/>
+                                <input class="form-control" id="DateInscription" placeholder="date" th:value="*{DateInscription}" type="date"/>
                                 <span class="text-danger" th:errors="*{DateInscription}" th:if="${#fields.hasErrors('DateInscription')}"></span>
                             </div-->
 
@@ -415,6 +399,159 @@ function myFunction() {
                         </div>
                     </form>
 
+                    <form  action="#" method="post" th:action="@{/Agent/addSave}" th:object="${agent}" >
+
+
+
+
+                        <div class="row">
+
+
+
+
+
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$cinTmp">رقم بطاقة التعريف الوطنية </label>
+                                <input class="form-control" id="$cinTmp"  placeholder="رقم بطاقة التعريف الوطنية " th:value="${cinTmp}"   type="text"/>
+
+                            </div>
+                            <br>
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$cnrpsTmp">المعرف الوحيد</label>
+                                <input class="form-control" id="$cnrpsTmp"  placeholder="المعرف الوحيد " th:value="${cnrpsTmp}"   type="text"/>
+
+                            </div>
+                            <br>
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$prenomTmp">الإسم</label>
+                                <input class="form-control" id="$prenomTmp"  placeholder="الإسم " th:value="${prenomTmp}"   type="text"/>
+
+                            </div>
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$nomTmp">اللقب</label>
+                                <input class="form-control" id="$nomTmp"  placeholder="اللقب " th:value="${nomTmp}"   type="text"/>
+
+                            </div>
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$prenompereTmp">إسم الأب</label>
+                                <input class="form-control" id="prenompereTmp"  placeholder="إسم الأب " th:value="${prenompereTmp}"   type="text"/>
+
+                            </div>
+
+                            <div class="col-sm-3" >
+                                <label class="col-form-label" for="gouvernorat">الولاية</label>
+
+                                <select class="form-control" id="gouvernorat" name="gouvernoratId">
+                                    <option value="">--من فضل إختر الولاية--</option>
+                                    <option th:data="${gv.gouvernoratId}" th:each="gv: ${gouvernorat}"
+                                            th:text="${gv.name}" th:value="${gv.gouvernoratId}"/>
+                                </select>
+
+                            </div>
+
+
+                            <div class="col-sm-3" >
+                                <label class="col-form-label" for="gouvernorat1">المعتمدية</label>
+
+                                <select class="form-control" id="gouvernorat1" name="gouvernoratId1">
+                                    <option value="">--من فضل إختر المعتمدية--</option>
+                                </select>
+
+                            </div>
+
+                            <!--div class="form-group col-md-4" >
+                                <label class="col-form-label" for="directionGeneral" id="directionGeneral">الإدارة
+                                    العامة </label>
+                                <select class="form-control" id="listDirectionGeneral" name="DirectionGeneralId">
+                                    <option value="">--من فضل إختر الإدارة العامة--</option>
+                                    <option th:each="dr: ${directionGenerals}" th:text="${dr.NomDirGen}"
+                                            th:value="${dr.DgId}"/>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group col-md-4" >
+                                <label class="col-form-label" for="direction" id="direction">الإدارة </label>
+                                <select class="form-control" id="listDirection" name="DirectionId">
+
+                                    <option value="">--من فضل إختر الإدارة --</option>
+                                    <option th:each="d: ${direction}" th:text="${d.NomDir}" th:value="${d.DId}"/>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4" >
+                                <label class="col-form-label" for="sousDirection" id="sousDirection">الإدارةالفرعية </label>
+                                <select class="form-control" id="listSousDirection"   name="SousDirectionId">
+                                    <option value="">--من فضل إختر الإدارةالفرعية --</option>
+                                    <option th:each="sd: ${sousDirection }" th:text="${sd.nomSDir}" th:value="${sd.sdId}"/>
+                                </select>
+                            </div-->
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$directiongeneralTmp">الإدارة العامة</label>
+                                <input class="form-control" id="$directiongeneralTmp"  placeholder="الإدارة العامة " th:value="${directiongeneralTmp}"   type="text"/>
+
+                            </div>
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$directionTmp">الإدارة </label>
+                                <input class="form-control" id="$directionTmp"  placeholder="الإدارة  " th:value="${directionTmp}"   type="text"/>
+
+                            </div>
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$sousdirectionTmp">الإدارة الفرعية </label>
+                                <input class="form-control" id="$sousdirectionTmp"  placeholder="الإدارة الفرعية  " th:value="${sousdirectionTmp}"   type="text"/>
+
+                            </div>
+
+                            <div class="form-group col-md-3"   >
+
+                                <label class="col-form-label" for="$gradeTmp">الرتبة</label>
+                                <input class="form-control" id="$gradeTmp"  placeholder="الرتبة " th:value="${gradeTmp}"   type="text"/>
+
+                            </div>
+
+                            <div class="form-group col-md-3" >
+                                <label class="col-form-label" for="syndicat" id="syndicat1">النقابة </label>
+                                <select class="form-control" id="syndicat" name="SyndicatId">
+                                    <option value="">--من فضل إختر النقابة --</option>
+                                    <option th:each="sy: ${syndicat}" th:text="${sy.NomSyndicat}"
+                                            th:value="${sy.SynId}"/>
+                                </select>
+                            </div>
+
+
+                            <!--div class="form-group col-md-3" >
+                                <label class="col-form-label" for="DateInscription">date</label>
+                                <input class="form-control" id="DateInscription" placeholder="date" th:value="*{DateInscription}" type="date"/>
+                                <span class="text-danger" th:errors="*{DateInscription}" th:if="${#fields.hasErrors('DateInscription')}"></span>
+                            </div-->
+
+                            <div class="col-md-6" id="ex1" >
+                                <input class="btn btn-primary" type="submit" value="إضافة موظف ">
+                            </div>
+                            <!--/div-->
+
+                            <div class="form-group col-md-8">
+
+                            </div>
+
+
+                        </div>
+                    </form>
 
                 </div>
             </div>
@@ -480,6 +617,7 @@ function myFunction() {
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
             <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+
     </body>
 
 </html>

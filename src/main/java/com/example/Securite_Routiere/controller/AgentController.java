@@ -47,6 +47,7 @@ public class AgentController {
     private final SyndicatRepository syndicatRepository;
     //private int Transient;
   //  private RestTemplate restTemplate;
+    private String dateTmp=null;
     private String cinTmp = null;
     private String cnrpsTmp = null;
     private String nomTmp = null;
@@ -129,6 +130,14 @@ public class AgentController {
 
     public void setSousdirectionTmp(String sousdirectionTmp) {
         this.sousdirectionTmp = sousdirectionTmp;
+    }
+
+    public String getDateTmp() {
+        return dateTmp;
+    }
+
+    public void setDateTmp(String dateTmp) {
+        this.dateTmp = dateTmp;
     }
 
     public AgentRepository getAgentRepository() {
@@ -488,24 +497,22 @@ public class AgentController {
                 this.setNomTmp(null);
                 this.setPrenompereTmp(null);
                 this.setPrenompereTmp(null);
-               // this.setDirectiongeneralTmp(null);
-               // this.setDirectionTmp(null);
-               // this.setSousdirectionTmp(null);
+               this.setDirectiongeneralTmp(null);
+              this.setDirectionTmp(null);
+               this.setSousdirectionTmp(null);
                 this.setGradeTmp(null);
+                this.setDateTmp(null);
 
                 model.addAttribute("cinTmp", cinTmp);
                 model.addAttribute("cnrpsTmp", cnrpsTmp);
                 model.addAttribute("nomTmp", nomTmp);
                 model.addAttribute("prenomTmp", prenomTmp);
                 model.addAttribute("prenompereTmp",prenompereTmp);
-               // model.addAttribute("directiongeneralTmp", directiongeneralTmp);
-               // model.addAttribute("directionTmp", directionTmp);
-               // model.addAttribute("sousdirectionTmp", sousdirectionTmp);
-                //model.addAttribute("gradeTmp", gradeTmp);
-                model.addAttribute("directions", directionRepository.findAll());
-
-                model.addAttribute("sousDirections", sousDirectionRepository.findAll());
-                model.addAttribute("grades", gradeRepository.findAll());
+                model.addAttribute("directiongeneralTmp", directiongeneralTmp);
+                model.addAttribute("directionTmp", directionTmp);
+                model.addAttribute("sousdirectionTmp", sousdirectionTmp);
+               model.addAttribute("gradeTmp", gradeTmp);
+              model.addAttribute("dateTmp", dateTmp);
             }
 
 
@@ -542,6 +549,7 @@ public class AgentController {
 
                     this.setGradeTmp((null));
                     model.addAttribute("gradeTmp", gradeTmp);
+
                 }else
                 {
 
