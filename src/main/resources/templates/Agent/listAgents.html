@@ -16,12 +16,16 @@
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- Font Awesome Icons -->
     <!-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>-->
+    <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
     <script crossorigin="anonymous" src="/assets/js/fontawesome.js"></script>
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <script src="/assets/js/core/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/assets/css/bootstrap3.4.min.css">
     <!--link rel="stylesheet" href="@{/assets/css/bootstrap3.4.min.css}"-->
     <!-- CSS Files -->
     <link href="/assets/css/soft-ui-dashboard.css?v=1.0.3" id="pagestyle" rel="stylesheet"/>
+
+    <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
     <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -91,7 +95,7 @@ console.log("zeaeaeaeae");
     <!--div class="container my-3"-->
     <div class="container my-3" th:switch="${Agents}">
         <p class="my-8">
-            <a class="btn btn-primary" th:href="@{'/Agent/add'}">
+            <a class="btn btn-primary btn-lg" th:href="@{'/Agent/add'}">
                 <i class="fas fa-user-plus ml-2"> إضافة ملف موظف</i></a>
         </p>
         <div>
@@ -260,7 +264,7 @@ console.log("zeaeaeaeae");
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+
 
 
 
