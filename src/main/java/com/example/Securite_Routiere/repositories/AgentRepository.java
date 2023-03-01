@@ -72,9 +72,14 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
     /******* nb abbonnée Total *********/
     @Query(value ="SELECT COUNT(a.cnrps)"+
     "FROM syndicat01.agent a" ,nativeQuery = true)
+    int nbagent();
 
-   int nbagent();
 
+
+    /******* nb syndicat*****/
+    @Query(value ="SELECT COUNT(s.syn_id)"+
+            "FROM syndicat01.syndicat s" ,nativeQuery = true)
+    int nbsyndicat();
     /******* Search Bar *********/
 
     @Query(value =" SELECT * FROM syndicat01.agent a where (a.date_inscription like %:keyword% ) or (a.cnrps like %:keyword%) or (a.nom like %:keyword%)or (a.prenom like %:keyword%)  ;" ,nativeQuery = true)

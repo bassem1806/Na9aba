@@ -1,4 +1,4 @@
-package com.example.Securite_Routiere.controller;
+/*package com.example.Securite_Routiere.controller;
 
 
 import com.example.Securite_Routiere.repositories.AgentRepository;
@@ -9,9 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
-@RequestMapping("/widget")
+@RequestMapping("/widget1")
 public class WidgetController {
 
 
@@ -22,39 +28,25 @@ public class WidgetController {
     public WidgetController(AgentRepository agentRepository) {
         this.agentRepository = agentRepository;
     }
-/*
-    @GetMapping("/nbagent")
-
-    public String nbagent(Model model) {
-
-   int nbag =agentRepository.nbagent();
-        model.addAttribute("nbagent", nbag);
-
-        System.out.println("nb agent widget -************************************************************ :" +nbag);
-
-        return "widget";
-
-    }
-
-*/
-
-    @ResponseBody
-    @RequestMapping(value = "loadNbAgent", method = RequestMethod.GET)
-    public int  nbagent() throws JsonProcessingException
-
-    {
-
-      int x= agentRepository.nbagent();
 
 
 
+    @GetMapping(value = "/widget")
+    public ModelAndView widget (Model model) {
 
-        System.out.println("nb agent model widget  87877878978978978979797979797979879797=" +x);
 
-        return x;
+
+        //  System.out.println("----------------------------------------------------------------------------------------------------------------------------------- :" + nbag);
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        String date_time = dtf.format(now);
+
+        Map params = new HashMap<String, Object>();
+        params.put("date_time", date_time);
+
+        return new ModelAndView("widget1", params);
 
     }
-
-
 
 }
+*/

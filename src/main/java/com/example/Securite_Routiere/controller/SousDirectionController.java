@@ -150,8 +150,7 @@ public class SousDirectionController {
         System.out.println("la taille de la liste est egale =" + directionByDg.size());
 
         Gson gson = new Gson();
-        // GsonBuilder gsonBuilder = new GsonBuilder();
-        // Gson gson = gsonBuilder.registerTypeAdapter(Direction.class, new MessageAdapter()).create();
+
         return gson.toJson(directionRepository.findByDirectionGeneral(directionGeneralRepository.findById(DgId).get()));
 
     }

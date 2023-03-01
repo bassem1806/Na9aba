@@ -4,9 +4,12 @@ import com.example.Securite_Routiere.repositories.AgentRepository;
 import com.example.Securite_Routiere.repositories.DelegationRepository;
 import com.example.Securite_Routiere.repositories.GouvernoratRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.sf.jasperreports.engine.fill.FillDatasetPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +39,9 @@ public class Home1Controller {
 
     @Autowired
     private GouvernoratRepository gouvernoratRepository;
+    private FillDatasetPosition model;
 
-@Autowired
+    @Autowired
     public Home1Controller(AgentRepository agentRepository, DelegationRepository delegationRepository, GouvernoratRepository gouvernoratRepository) {
         this.agentRepository = agentRepository;
        // this.dataSyndicatService = dataSyndicatService;
@@ -50,7 +54,7 @@ public class Home1Controller {
     public ModelAndView home1(Model model) {
 
 
-        int nbag =agentRepository.nbagent();
+
       //  System.out.println("----------------------------------------------------------------------------------------------------------------------------------- :" + nbag);
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -64,17 +68,18 @@ public class Home1Controller {
 
     }
     /*** methode nb abbonne par syndicat**/
+
+
+
     @ResponseBody
     @RequestMapping(value = "loadNbsyndicat", method = RequestMethod.GET)
     public List<Object> loadStatesByCountry2() throws JsonProcessingException {
 
-        System.out.println("init loadStatesByCountry2");
+
 
         List<Object> nbsyndicat=agentRepository.getCountBySyndicat();
 
-              System.out.println("la taille de la liste est egale =" + agentRepository.getCountBySyndicat().size());
-       System.out.println("la taille de la liste est egale =" + agentRepository.getCountBySyndicat().get(0));
-        System.out.println("la taille de la liste est egale =" + agentRepository.getCountBySyndicat().get(0).toString());
+
 
         return nbsyndicat;
 
@@ -85,11 +90,11 @@ public class Home1Controller {
     @RequestMapping(value = "loadNbsdirection", method = RequestMethod.GET)
     public List<Object> loadStatesByCountry() throws JsonProcessingException {
 
-        System.out.println("init loadStatesByCountry");
+
 
         List<Object> nbdirection =agentRepository.getCountBySDirection();
 
-        System.out.println("nbdirection : " +agentRepository.getCountBySDirection());
+
 
         return nbdirection;
 
@@ -100,11 +105,11 @@ public class Home1Controller {
     @RequestMapping(value = "loadNbgrade", method = RequestMethod.GET)
     public List<Object> loadStatesByCountry1() throws JsonProcessingException {
 
-        System.out.println("init loadStatesByCountry1");
+
 
 
         List<Object> nbgrade = agentRepository.getCountByGrade();
-        System.out.println("nbdirection : " + agentRepository.getCountByGrade());
+
 
         return nbgrade;
 
@@ -115,15 +120,60 @@ public class Home1Controller {
     @RequestMapping(value = "loadNbagentperiode", method = RequestMethod.GET)
     public List<Object> loadStatesByCountry3() throws JsonProcessingException {
 
-        System.out.println("init loadStatesByCountry3");
+
 
         List<Object> nbagentperiode = agentRepository.getCountnbagentperiode();
-        System.out.println("nbagent periode : " + agentRepository.getCountnbagentperiode());
+
 
         return nbagentperiode;
 
     }
 
+/*
+    @ResponseBody
+    @RequestMapping(value = "loadNbAgent", method = RequestMethod.GET)
+    public int  nbagent() throws JsonProcessingException
+    {
+
+        System.out.println("nbagent loedede");
+
+        int  nbagentins = agentRepository.nbagent();
+
+        System.out.println("nb agent model widget  87877878978978978979797979797979879797=" +nbagentins);
+
+        return nbagentins;
+    }
+*/
+    @Autowired
+    private ObjectMapper objectMapper;
+
+// ...
+
+    /*****    Widget nb Agent********/
+    @ResponseBody
+    @RequestMapping(value = "loadNbAgent", method = RequestMethod.GET)
+    public String getAgentCount(Model model) throws JsonProcessingException {
+        int nbAgents = agentRepository.nbagent();
+        Map<String, Object> data = new HashMap<>();
+        data.put("nbAgents", nbAgents);
+        String jsonData = objectMapper.writeValueAsString(data);
+        model.addAttribute("jsonData", jsonData);
+        System.out.println("nb agent model widget  87877878978978978979797979797979879797=" +jsonData);
+        return jsonData;
+    }
+
+/*****    Widget nb Syndicat********/
+    @ResponseBody
+    @RequestMapping(value = "loadNbSyndicat", method = RequestMethod.GET)
+    public String getSyndicatCount(Model model) throws JsonProcessingException {
+        int nbSyndicats = agentRepository.nbsyndicat();
+        Map<String, Object> data = new HashMap<>();
+        data.put("nbSyndicats", nbSyndicats);
+        String jsonData = objectMapper.writeValueAsString(data);
+        model.addAttribute("jsonData", jsonData);
+        System.out.println("nb syndicat  model widget  =" +jsonData);
+        return jsonData;
+    }
 }
 
 

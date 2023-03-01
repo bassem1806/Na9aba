@@ -501,7 +501,7 @@ public class AgentController {
               this.setDirectionTmp(null);
                this.setSousdirectionTmp(null);
                 this.setGradeTmp(null);
-                this.setDateTmp(null);
+
 
                 model.addAttribute("cinTmp", cinTmp);
                 model.addAttribute("cnrpsTmp", cnrpsTmp);
@@ -512,7 +512,8 @@ public class AgentController {
                 model.addAttribute("directionTmp", directionTmp);
                 model.addAttribute("sousdirectionTmp", sousdirectionTmp);
                model.addAttribute("gradeTmp", gradeTmp);
-              model.addAttribute("dateTmp", dateTmp);
+
+
             }
 
 
@@ -524,8 +525,10 @@ public class AgentController {
 
                 System.out.println("cnrps3:" + keywordd);
                 if (keywordd==""){
+
                     this.setCinTmp((null));
                     model.addAttribute("cinTmp", cinTmp);
+
                     this.setCnrpsTmp((null));
                     model.addAttribute("cnrpsTmp", cnrpsTmp);
 
@@ -549,6 +552,24 @@ public class AgentController {
 
                     this.setGradeTmp((null));
                     model.addAttribute("gradeTmp", gradeTmp);
+
+                    this.gouvernoratRepository.findAll();
+                    model.addAttribute("gouvernorat", gouvernoratRepository.findAll());
+                    this.delegationRepository.findAll();
+                    model.addAttribute("delegation", delegationRepository.findAll());
+
+                    this.syndicatRepository.findAll();
+                    model.addAttribute("syndicat", syndicatRepository.findAll());
+
+                     this.directionGeneralRepository.findAll();
+                    model.addAttribute("directionGenerals", directionGeneralRepository.findAll());
+
+                    this.directionRepository.findAll();
+                    model.addAttribute("directions", directionRepository.findAll());
+
+                     this.sousDirectionRepository.findAll();
+                    model.addAttribute("sousDirections", sousDirectionRepository.findAll());
+
 
                 }else
                 {
@@ -589,6 +610,23 @@ public class AgentController {
 
                     this.setGradeTmp(String.valueOf(searchAgentR.getGradeR()));
                     model.addAttribute("gradeTmp", gradeTmp);
+
+                    this.gouvernoratRepository.findAll();
+                    model.addAttribute("gouvernorat", gouvernoratRepository.findAll());
+                    this.delegationRepository.findAll();
+                    model.addAttribute("delegation", delegationRepository.findAll());
+
+                    this.syndicatRepository.findAll();
+                    model.addAttribute("syndicat", syndicatRepository.findAll());
+
+                    this.directionGeneralRepository.findAll();
+                    model.addAttribute("directionGenerals", directionGeneralRepository.findAll());
+
+                    this.directionRepository.findAll();
+                    model.addAttribute("directions", directionRepository.findAll());
+
+                    this.sousDirectionRepository.findAll();
+                    model.addAttribute("sousDirections", sousDirectionRepository.findAll());
 
 
                 }

@@ -54,18 +54,13 @@
                         <input th:field="*{DId}" type="hidden"/>
                         <div class="row">
                             <div class="col-sm-7">
-
-
                                 <label class="col-form-label" for="directionGeneral">الإدارة العامة</label>
                                 <select class="form-control" id="directionGeneral" name="DirectionGeneralId">
                                     <option th:each="dr: ${directionGenerals}"
                                             th:selected="(${dr.DgId} == ${idDirectionGeneral})"
                                             th:text="${dr.NomDirGen}"
-                                            th:value="${dr.DgId}"
-
-                                    />
+                                            th:value="${dr.DgId}"/>
                                 </select>
-
                             </div>
 
                             <div class="form-group col-md-8">
