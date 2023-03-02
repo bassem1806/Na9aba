@@ -57,4 +57,12 @@ public class AgentService {
         return  agentRRepository.findbyCNRPSAGRkey(keywordd);
 
      }
+
+     public Agent getByCnrp (String cnrps){
+        String  query = "select a from AgentR  a  where a.cnrpsR='"+cnrps+"' ";
+
+        return null;
+     }
+
+
 }

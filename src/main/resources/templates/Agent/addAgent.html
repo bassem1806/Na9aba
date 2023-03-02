@@ -44,8 +44,6 @@ console.log( "alert:" +saisie);
 </script>
 
 
-</script>
-
     <script type="text/javascript">
 $(document).ready(function(){
 
@@ -179,6 +177,13 @@ function myFunction() {
     }
 
 </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+var listDirectionGeneral = document.getElementById("listDirectionGeneral");
+var selectedOptionValue = parseInt(listDirectionGeneral.value);
+console.log(selectedOptionValue);
+</script>
 <!-- menu a droite  -->
 
 <body class="g-sidenav-show rtl bg-gray-100">
@@ -228,7 +233,7 @@ function myFunction() {
 
                     <!-- id="myDIV"-->
 
-                    <form  name="FormName" action="#" method="post" th:action="@{/Agent/addSave}" th:object="${agent}" >
+                    <form  id="FormName" name="FormName" action="#" method="post" th:action="@{/Agent/addSave}" th:object="${agent}" >
                         <div class="row">
 
                             <div class="form-group col-md-3"   >
@@ -277,21 +282,24 @@ function myFunction() {
 
 
                             <div class="form-group col-md-4" >
-
                                 <label class="col-form-label" for="directionGeneral" id="directionGeneral">الإدارةالعامة</label>
-                                <input class="form-control" id="$directiongeneralTmp"  placeholder="الإدارة العامة " th:value="${directiongeneralTmp}"   type="text"/>
+                                <!--input class="form-control" id="$directiongeneralTmp"  placeholder="الإدارة العامة " th:value="${directiongeneralTmp}"   type="text"/-->
                                 <select class="form-control" id="listDirectionGeneral" name="DirectionGeneralId">
-                                    <option value="">--من فضل إختر الإدارة العامة--</option>
-                                    <option th:each="dr: ${directionGenerals}" th:text="${dr.NomDirGen}" th:value="${dr.DgId}"/>
+                                    <option th:value="${directiongeneralTmp}"        th:text="${directiongeneralTmp}">
+                                    <option value="">--من فضل إخترالإدارة العامة--</option>
+                                    <option th:each="dr: ${directionGenerals}"
+                                    th:text="${dr.NomDirGen}"
+                                    th:value="${dr.DgId}"/>
 
                                 </select>
                             </div>
-
                             <div class="form-group col-md-4" >
 
                                 <label class="col-form-label" for="direction" id="direction">الإدارة </label>
-                                <input class="form-control" id="$directionTmp"  placeholder="الإدارة  " th:value="${directionTmp}"   type="text"/>
+                                <!--input class="form-control" id="$directionTmp"  placeholder="الإدارة  " th:value="${directionTmp}"   type="text"/-->
                                 <select class="form-control" id="listDirection" name="DirectionId">
+
+                                    <option th:value="${$directionTmp}"        th:text="${directionTmp}">
                                     <option value="">--من فضل إختر الإدارة --</option>
                                     <option th:each="d: ${direction}" th:text="${d.NomDir}" th:value="${d.DId}"/>
                                 </select>
@@ -300,8 +308,9 @@ function myFunction() {
                             <div class="form-group col-md-4" >
 
                                 <label class="col-form-label" for="sousDirection" id="sousDirection">الإدارةالفرعية </label>
-                                <input class="form-control" id="$sousdirectionTmp"  placeholder="الإدارة الفرعية  " th:value="${sousdirectionTmp}"   type="text"/>
+                                <!--input class="form-control" id="$sousdirectionTmp"  placeholder="الإدارة الفرعية  " th:value="${sousdirectionTmp}"   type="text"/-->
                                 <select class="form-control" id="listSousDirection"   name="SousDirectionId">
+                                    <option th:value="${sousdirectionTmp}"        th:text="${sousdirectionTmp}">
                                     <option value="">--من فضل إختر الإدارةالفرعية --</option>
                                     <option th:each="sd: ${sousDirection }" th:text="${sd.nomSDir}" th:value="${sd.sdId}"/>
                                 </select>

@@ -522,6 +522,13 @@ public class AgentController {
 
                 System.out.println("agent find :"+agentfind);
                 System.out.println("agent find :"+agentfind.size());
+              //  AgentR agentrTmp = agentService.getByKeyword(keywordd);
+
+
+               // for  (AgentR agentr : agentfind){
+              //    System.out.println("directiin G R := "+agentr.getDirectionGeneralR());
+            //    }
+
 
                 System.out.println("cnrps3:" + keywordd);
                 if (keywordd==""){
@@ -569,6 +576,8 @@ public class AgentController {
 
                      this.sousDirectionRepository.findAll();
                     model.addAttribute("sousDirections", sousDirectionRepository.findAll());
+
+
 
 
                 }else
