@@ -25,7 +25,7 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
 /******* nb abbonnée par syndicat *********/
     @Query(value = "SELECT COUNT(s.nom_syndicat) ," +
             " s.nom_syndicat" +
-            " FROM syndicat01.agent a " +
+            " FROM syndicatv02.agent a " +
             " left join syndicat01.syndicat s" +
             " ON a.syndicat_id = s.syn_id " +
             "GROUP BY s.nom_syndicat ORDER BY  COUNT(s.nom_syndicat) desc ", nativeQuery = true)
@@ -40,7 +40,7 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
    " sd.nomsdir" +
 
   " FROM syndicat01.agent a" +
-   " left join syndicat01.sous_direction sd"+
+   " left join syndicatv02.sous_direction sd"+
    " ON a.sousdirection_id = sd.sd_id" +
 
    " GROUP BY sd.nomsdir ORDER BY  COUNT(a.cnrps) desc ",nativeQuery = true)
@@ -50,7 +50,7 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
     @Query(value = "SELECT COUNT(a.cnrps) ," +
             " g.libelle_grade" +
 
-            " FROM syndicat01.agent a" +
+            " FROM syndicatv02.agent a" +
             " left join syndicat01.grade g" +
             " ON a.grade_id = g.grade_id" +
 
@@ -62,7 +62,7 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
     @Query(value = "SELECT COUNT(a.agent_id)," +
             " YEAR (a.date_inscription) ," +
             " MONTH (a.date_inscription)" +
-            "FROM syndicat01.agent a" +
+            "FROM syndicatv02.agent a" +
 
             "  WHERE( YEAR(a.date_inscription) = YEAR(CURDATE())     or YEAR(a.date_inscription) = YEAR(CURDATE()) - 1)" +
             "GROUP BY YEAR(a.date_inscription), MONTH (a.date_inscription)", nativeQuery = true)
@@ -71,14 +71,14 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
 
     /******* nb abbonnée Total *********/
     @Query(value ="SELECT COUNT(a.cnrps)"+
-    "FROM syndicat01.agent a" ,nativeQuery = true)
+    "FROM syndicatv02.agent a" ,nativeQuery = true)
     int nbagent();
 
 
 
     /******* nb syndicat*****/
     @Query(value ="SELECT COUNT(s.syn_id)"+
-            "FROM syndicat01.syndicat s" ,nativeQuery = true)
+            "FROM syndicatv02.syndicat s" ,nativeQuery = true)
     int nbsyndicat();
     /******* Search Bar *********/
 
