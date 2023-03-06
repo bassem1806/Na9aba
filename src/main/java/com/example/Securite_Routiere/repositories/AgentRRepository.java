@@ -13,7 +13,7 @@ public interface AgentRRepository extends JpaRepository<AgentR, Long> {
 
 
 
-    @Query(value ="SELECT  * FROM syndicat01.agentr  ar    " ,nativeQuery = true)
+    @Query(value ="SELECT  * FROM syndicatv02.agentr  ar    " ,nativeQuery = true)
     List<AgentR>  FindByCNRPSAgentR();
 
 /*
@@ -21,7 +21,7 @@ public interface AgentRRepository extends JpaRepository<AgentR, Long> {
     List<AgentR>  findbyCNRPSAGRkey(@Param("keywordd") String keywordd);
 */
 
-    @Query(value ="SELECT  * FROM syndicat01.agentr  ar where ar.cnrps = :keywordd " ,nativeQuery = true)
+    @Query(value ="SELECT  * FROM syndicatv02.agentr  ar where ar.cnrps = :keywordd " ,nativeQuery = true)
     List<AgentR>  findbyCNRPSAGRkey(@Param("keywordd") String keywordd);
 }
 

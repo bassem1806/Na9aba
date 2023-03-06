@@ -51,7 +51,7 @@ public class Agent implements Serializable {
     private String nomDirectionGenrale;
     private String nomDirection;
     private String nomSousDirection;
-
+    private String nomGrade;
     /**** Many To One delegation ****/
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -249,28 +249,6 @@ public class Agent implements Serializable {
 
     }
 
-    @Override
-    public String toString() {
-        return "Agent{" +
-                "AgentId=" + AgentId +
-                ", CIN=" + CIN +
-                ", CNRPS='" + CNRPS + '\'' +
-                ", Nom='" + Nom + '\'' +
-                ", Prenom='" + Prenom + '\'' +
-                ", Prenom_Pere='" + Prenom_Pere + '\'' +
-                ", dateInscription='" + dateInscription + '\'' +
-                ", agentSaisie='" + agentSaisie + '\'' +
-                ", dateSaisie='" + dateSaisie + '\'' +
-                ", nomDirectionGenrale='" + nomDirectionGenrale + '\'' +
-                ", nomDirection='" + nomDirection + '\'' +
-                ", nomSousDirection='" + nomSousDirection + '\'' +
-                ", delegation=" + delegation +
-                ", grade=" + grade +
-                ", sousDirection=" + sousDirection +
-                ", syndicat=" + syndicat +
-                '}';
-    }
-
     public void setGrade() {
     }
 
@@ -299,5 +277,36 @@ public class Agent implements Serializable {
 
     public void setNomSousDirection(String nomSousDirection) {
         this.nomSousDirection = nomSousDirection;
+    }
+
+    @Override
+    public String toString() {
+        return "Agent{" +
+                "AgentId=" + AgentId +
+                ", CIN=" + CIN +
+                ", CNRPS='" + CNRPS + '\'' +
+                ", Nom='" + Nom + '\'' +
+                ", Prenom='" + Prenom + '\'' +
+                ", Prenom_Pere='" + Prenom_Pere + '\'' +
+                ", dateInscription='" + dateInscription + '\'' +
+                ", agentSaisie='" + agentSaisie + '\'' +
+                ", dateSaisie='" + dateSaisie + '\'' +
+                ", nomDirectionGenrale='" + nomDirectionGenrale + '\'' +
+                ", nomDirection='" + nomDirection + '\'' +
+                ", nomSousDirection='" + nomSousDirection + '\'' +
+                ", nomGrade='" + nomGrade + '\'' +
+                ", delegation=" + delegation +
+                ", grade=" + grade +
+                ", sousDirection=" + sousDirection +
+                ", syndicat=" + syndicat +
+                '}';
+    }
+
+    public String getNomGrade() {
+        return nomGrade;
+    }
+
+    public void setNomGrade(String nomGrade) {
+        this.nomGrade = nomGrade;
     }
 }

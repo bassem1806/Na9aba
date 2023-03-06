@@ -164,17 +164,17 @@
             <div class="col-6" div>
                 <div class="chart">
                     <!--canvas class="chart-canvas" height="300" width="500" id="chart-bars"></canvas-->
+                    <h4 align="center">عدد المنخرطين بحسب  النقابات الأمنية</h4>
                     <canvas class="chart-canvas" height="300"  width="500" id="bar-chart1"></canvas>
+
                 </div>
             </div>
 
             <div class="col-6">
                 <div class="chart">
                     <!--canvas class="chart-canvas" height="300"  width="500" id="chart-bars1"></canvas-->
+                    <h4 align="center">عدد المنخرطين بحسب   الإدارات العامة</h4>
                     <canvas class="chart-canvas" height="300"  width="500" id="bar-chart"></canvas>
-                    bar-chart
-
-
                 </div>
 
             </div>
@@ -182,6 +182,7 @@
 
             <div class="col-6">
                 <div class="chart">
+                    <h4 align="center">عدد المنخرطين بحسب   الإدارات العامة</h4>
                     <canvas id="line-chart" width="500" height="300"></canvas>
 
 
@@ -194,6 +195,7 @@
                     <div class="chart">
                         <!--canvas class="chart-canvas" height="300"  width="500" id="chart-bars2"></canvas-->
                         <!--canvas class="chart-canvas" height="300"  width="500" id="pie-chart"></canvas-->
+                        <h4 align="center">عدد المنخرطين بحسب    الرتب</h4>
                         <canvas id="pie-chart" width="250" height="250"></canvas>
 
 
@@ -520,7 +522,7 @@ new Chart(document.getElementById("bar-chart"), {
       labels: y,
       datasets: [
         {
-          label: "عدد المنخرطين حسب الإدارات الفرعية ",
+          label: "عدد المنخرطين حسب الإدارات العامة ",
           backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
           data: x
         }
@@ -530,7 +532,7 @@ new Chart(document.getElementById("bar-chart"), {
       legend: { display: false },
       title: {
         display: true,
-        text: 'عدد المنخرطين حسب الإدارات الفرعية'
+        text: 'عدد المنخرطين حسب الإدارات العامة'
       }
     }
     });

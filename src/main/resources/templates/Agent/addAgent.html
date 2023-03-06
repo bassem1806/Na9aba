@@ -217,7 +217,8 @@ console.log(selectedOptionValue);
                     <form th:action="@{/Agent/add/search}" method="post">
                         <input type="text"  id="keywordd" name="keywordd" th:value="${keywordd}"  placeholder="بحث" size="50" >
 
-                        <button type="submit"   onclick="controlecnrps()"  class="btn btn-info" >بحث</button>
+                        <button type="submit"   onclick="controlecnrps()"  class="btn btn-outline-info" >بحث</button>
+                        <a class="btn btn-outline-success" th:href="@{/Agent/add}"> إعادة البحث</a>
 
 
                     </form>
@@ -283,7 +284,7 @@ console.log(selectedOptionValue);
 
                             <div  th:switch="${affiche}" class="form-group col-md-4" >
                                 <label class="col-form-label" for="directionGeneral" id="directionGeneral">الإدارةالعامة</label>
-                                <input th:case="true" class="form-control" id="$directiongeneralTmp"  placeholder="الإدارة العامة "
+                                <input th:case="true"  name="nomDirectionGenrale"  class="form-control" id="$directiongeneralTmp"  placeholder="الإدارة العامة "
                                          th:value="${directiongeneralTmp}">
                                 <select th:case="*"   class="form-control" id="listDirectionGeneral" name="DirectionGeneralId">
 
@@ -297,7 +298,7 @@ console.log(selectedOptionValue);
                             <div th:switch="${affiche}" class="form-group col-md-4" >
 
                                 <label class="col-form-label" for="direction" id="direction">الإدارة </label>
-                               <input th:case="true" type="text" class="form-control" id="$directionTmp"  placeholder="الإدارة  " th:value="${directionTmp}" >
+                               <input th:case="true" type="text"    name="nomDirection" class="form-control" id="$directionTmp"  placeholder="الإدارة  " th:value="${directionTmp}" >
                               <select  th:case="*"   class="form-control" id="listDirection" name="DirectionId">
 
                                     <option value="">--من فضل إختر الإدارة --</option>
@@ -308,8 +309,7 @@ console.log(selectedOptionValue);
                             <div  th:switch="${affiche}" class="form-group col-md-4" >
 
                                 <label class="col-form-label" for="sousDirection" id="sousDirection">الإدارةالفرعية </label>
-                                <input th:case="true"     class="form-control" id="$sousdirectionTmp"
-                                        placeholder="الإدارة الفرعية  " th:value="${sousdirectionTmp}"  >
+                                <input th:case="true"       name="nomSousDirection"    class="form-control" id="$sousdirectionTmp" placeholder="الإدارة الفرعية  " th:value="${sousdirectionTmp}"  >
                                 <select  th:case="*"   class="form-control" id="listSousDirection"   name="SousDirectionId">
 
                                     <option value="">--من فضل إختر الإدارةالفرعية --</option>
@@ -320,12 +320,12 @@ console.log(selectedOptionValue);
                             </div>
 
 
-                            <div class="col-sm-3" >
+                            <div  th:switch="${affiche}" class="col-sm-3" >
                                 <label class="col-form-label" for="grade">الرتبة</label>
-                                <select class="form-control" id="grade" name="GradeId">
-                                    <option th:value="${gradeTmp}" th:text="${gradeTmp}"/>
-                                    <option value="">--من فضل إختر الرتبة--</option>
-                                    <option th:each="g: ${grades}" th:text="${g.libelleGrade}" th:value="${g.gradeId}" th:selected="${g.gradeId}==${gradeTmp}"/>
+                                <input th:case="true"     name="nomGrade" class="form-control" id="gradeTmp"  placeholder=" الرتبة  " th:value="${gradeTmp}"   >
+                                <select  th:case="*"  class="form-control" id="grade" name="GradeId">
+                                        <option value="">--من فضل إختر الرتبة--</option>
+                                    <option th:each="g: ${grades}" th:text="${g.libelleGrade}" th:value="${g.gradeId}" />
                                 </select>
                             </div>
 
@@ -347,7 +347,8 @@ console.log(selectedOptionValue);
                             <br/>
 
                             <div class="col-md-6" id="ex1" >
-                                <input class="btn btn-primary" type="submit" value="إضافة موظف ">
+                                <input class="btn btn-outline-primary" type="submit" value="إضافة موظف ">
+                               <a     class="btn btn-outline-secondary" th:href="@{/Agent/list/1}">  قائمة الموظفين</a>
                             </div>
                     </form>
 
@@ -372,6 +373,7 @@ console.log(selectedOptionValue);
 
             <script src="/assets/js/core/popper.min.js"></script>
             <script src="/assets/js/core/bootstrap.min.js"></script>
+
             <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
             <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
             <script src="/assets/js/plugins/choices.min.js"></script>

@@ -25,8 +25,8 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
 /******* nb abbonnée par syndicat *********/
     @Query(value = "SELECT COUNT(s.nom_syndicat) ," +
             " s.nom_syndicat" +
-            " FROM syndicat01.agent a " +
-            " left join syndicat01.syndicat s" +
+            " FROM syndicatv02.agent a " +
+            " left join syndicatv02.syndicat s" +
             " ON a.syndicat_id = s.syn_id " +
             "GROUP BY s.nom_syndicat ORDER BY  COUNT(s.nom_syndicat) desc ", nativeQuery = true)
 
@@ -37,24 +37,20 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
     /******* nb abbonnée par Sous Direction *********/
 
     @Query(value = "SELECT COUNT(a.cnrps) ," +
-   " sd.nomsdir" +
+   "  a.nom_direction_genrale" +
+  " FROM syndicatv02.agent a" +
 
-  " FROM syndicat01.agent a" +
-   " left join syndicat01.sous_direction sd"+
-   " ON a.sousdirection_id = sd.sd_id" +
-
-   " GROUP BY sd.nomsdir ORDER BY  COUNT(a.cnrps) desc ",nativeQuery = true)
+   " GROUP BY  a.nom_direction_genrale ORDER BY  COUNT(a.cnrps) desc ",nativeQuery = true)
     List<Object> getCountBySDirection();
 
     /******* nb abbonnée par Grade *********/
     @Query(value = "SELECT COUNT(a.cnrps) ," +
-            " g.libelle_grade" +
+            " a.nom_grade" +
 
-            " FROM syndicat01.agent a" +
-            " left join syndicat01.grade g" +
-            " ON a.grade_id = g.grade_id" +
+            " FROM syndicatv02.agent a" +
 
-            " GROUP BY g.libelle_grade ORDER BY  COUNT(a.cnrps) desc ", nativeQuery = true)
+
+            " GROUP BY  a.nom_grade ORDER BY  COUNT(a.cnrps) desc ", nativeQuery = true)
     List<Object> getCountByGrade();
 
     /******* nb abbonnée par periode *********/
@@ -62,7 +58,7 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
     @Query(value = "SELECT COUNT(a.agent_id)," +
             " YEAR (a.date_inscription) ," +
             " MONTH (a.date_inscription)" +
-            "FROM syndicat01.agent a" +
+            "FROM syndicatv02.agent a" +
 
             "  WHERE( YEAR(a.date_inscription) = YEAR(CURDATE())     or YEAR(a.date_inscription) = YEAR(CURDATE()) - 1)" +
             "GROUP BY YEAR(a.date_inscription), MONTH (a.date_inscription)", nativeQuery = true)
@@ -71,18 +67,20 @@ public interface AgentRepository<getnbagent> extends PagingAndSortingRepository<
 
     /******* nb abbonnée Total *********/
     @Query(value ="SELECT COUNT(a.cnrps)"+
-    "FROM syndicat01.agent a" ,nativeQuery = true)
+    "FROM syndicatv02.agent a" ,nativeQuery = true)
     int nbagent();
 
 
 
     /******* nb syndicat*****/
     @Query(value ="SELECT COUNT(s.syn_id)"+
-            "FROM syndicat01.syndicat s" ,nativeQuery = true)
+            "FROM syndicatv02.syndicat s" ,nativeQuery = true)
     int nbsyndicat();
+
+
     /******* Search Bar *********/
 
-    @Query(value =" SELECT * FROM syndicat01.agent a where (a.date_inscription like %:keyword% ) or (a.cnrps like %:keyword%) or (a.nom like %:keyword%)or (a.prenom like %:keyword%)  ;" ,nativeQuery = true)
+    @Query(value =" SELECT * FROM syndicatv02.agent a where (a.date_inscription like %:keyword% ) or (a.cnrps like %:keyword%) or (a.nom like %:keyword%)or (a.prenom like %:keyword%)  ;" ,nativeQuery = true)
     List<Agent> findByKeyword(@Param("keyword") String keyword);
 /*
     @Query(value =" SELECT"+

@@ -346,10 +346,10 @@ private String typeT = "hidden";
 
                            @RequestParam(name = "gouvernoratId", required = true) Long k,
                            @RequestParam(name = "gouvernoratId1", required = true) Long b,
-                           @RequestParam(name = "DirectionGeneralId", required = true) Long dg,
-                           @RequestParam(name = "DirectionId", required = true) Long d,
-                           @RequestParam(name = "SousDirectionId", required = true) Long sd,
-                           @RequestParam(name = "GradeId", required = true) Long g,
+                           @RequestParam(name = "DirectionGeneralId", required = false) Long dg,
+                           @RequestParam(name = "DirectionId", required = false) Long d,
+                           @RequestParam(name = "SousDirectionId", required = false) Long sd,
+                           @RequestParam(name = "GradeId", required = false) Long g,
                            @RequestParam(name = "SyndicatId", required = true) Long sy) {
 
         System.out.println("bonjourrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr les amis");
@@ -360,30 +360,83 @@ private String typeT = "hidden";
 
         System.out.println("delegation " + delegationRepository.findById(b));
 
-        SousDirection sousDirection = sousDirectionRepository.findById(sd).orElseThrow(() -> new IllegalArgumentException
+
+        if (sd!=null){
+
+             SousDirection sousDirection = sousDirectionRepository.findById(sd).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid sous direction Id:" + sd));
         agent.setSousDirection(sousDirection);
 
-        System.out.println(sousDirection+"ana sous direction");
+            Grade grade = gradeRepository.findById(g).orElseThrow(() -> new IllegalArgumentException
+                    ("Invalid grade id:" + g));
+            agent.setGrade(grade);
+            System.out.println(grade.getGradeId()+"getGradeId");
+
+
+         System.out.println(sousDirection+"ana sous direction");
+            System.out.println(keywordTmp+"keywordTmp");
+
 
         if (keywordTmp!=null){
-            agent.setNomDirection(agent.getNomDirection());
-            agent.setNomDirectionGenrale(agent.getNomDirectionGenrale());
-            agent.setSousDirection(agent.getNomSousDirection());
-        }else {
+
+            List<AgentR> agentfind = agentService.GetByCNRPSAgentR1(keywordTmp);
+
+        for (AgentR agentFound : agentfind){
+
+
+            agent.setNomDirection(agentFound.getDirectionR());
+            agent.setNomDirectionGenrale(agentFound.getDirectionGeneralR());
+            agent.setSousDirection(agentFound.getSousDirectionR());
+            agent.setNomGrade(agentFound.getGradeR());
+}
+        }else
+
+        if (keywordTmp==null){
+        {
             agent.setNomDirection(sousDirection.getDirection().getNomDir());
             agent.setNomDirectionGenrale(sousDirection.getDirection().getDirectionGeneral().getNomDirGen());
             agent.setNomSousDirection(sousDirection.getNomSDir());
+          agent.setNomGrade(grade.getLibelleGrade());
+        }
+
+        }else
+        if (keywordTmp==""){
+            {
+                agent.setNomDirection(sousDirection.getDirection().getNomDir());
+                agent.setNomDirectionGenrale(sousDirection.getDirection().getDirectionGeneral().getNomDirGen());
+                agent.setNomSousDirection(sousDirection.getNomSDir());
+                agent.setNomGrade(grade.getLibelleGrade());
+            }
+        }
+        System.out.println("Sousdirection " + sousDirectionRepository.findById(sd));
         }
 
 
-        System.out.println("Sousdirection " + sousDirectionRepository.findById(sd));
+        if (sd==null){
 
+            if (keywordTmp==null){
+                {
+                    agent.setNomDirection(this.getDirectionTmp());
+                    agent.setNomDirectionGenrale(this.getDirectiongeneralTmp());
+                    agent.setNomSousDirection(this.getSousdirectionTmp());
+                    agent.setNomGrade(this.getGradeTmp());
+
+                }
+            }
+
+        }
+
+
+     //       System.out.println("Sousdirection " + sousDirectionRepository.findById(sd));
+
+
+
+/*
         Grade grade = gradeRepository.findById(g).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid grade Id:" + g));
         agent.setGrade(grade);
         System.out.println("grade id :" + gradeRepository.findById(g));
-
+*/
         Syndicat syndicat = syndicatRepository.findById(sy).orElseThrow(() -> new IllegalArgumentException
                 ("Invalid  sundicat Id:" + sy));
         agent.setSyndicat(syndicat);
@@ -408,9 +461,8 @@ private String typeT = "hidden";
 
     }
 
-/*
-    @GetMapping("delete/{AgentId}")
 
+    @GetMapping("delete/{AgentId}")
 
     public String deleteDirectionGeneral(@PathVariable("AgentId") long AgentId, Model model) throws Throwable {
 
@@ -419,7 +471,7 @@ private String typeT = "hidden";
         agentRepository.delete(agent);
         return "redirect:../list/1";
 
-    }*/
+    }
 
     @GetMapping("edit/{AgentId}")
     public String showDirectionGeneralFormToUpdate(@PathVariable("AgentId") long AgentId, Model model) throws Throwable {
@@ -490,10 +542,8 @@ private String typeT = "hidden";
         System.out.println("la taille de la liste est egale =" + sousDirectionByD.get(0).getNomSDir());
 
 
-        //Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().excludeFieldsWithModifiers(Transient).create();
-        //Gson gson = new Gson();
 
-        //return gson.toJson(sousDirectionByD);
+      
         ObjectMapper mapper = new ObjectMapper();
 
         return mapper.writeValueAsString(sousDirectionByD);
@@ -533,11 +583,9 @@ private String typeT = "hidden";
                 this.setPrenompereTmp(null);
                 this.setPrenompereTmp(null);
 
-                  this.setDirectiongeneralTmp(null);
-                  this.setDirectionTmp(null);
-                   this.setSousdirectionTmp(null);
-
-
+                 this.setDirectiongeneralTmp(null);
+                this.setDirectionTmp(null);
+                this.setSousdirectionTmp(null);
                 this.setGradeTmp(null);
                  this.setDateTmp(null);
 
@@ -579,8 +627,9 @@ private String typeT = "hidden";
                 if (agentfind.size()==0){
                     this.setAffiche(false);
                     model.addAttribute("affiche", affiche);
-                    model.addAttribute("typeT", typeT);
-                    System.out.println(typeT+"model.addAttribute(\"typeT\", typeT);");
+                //
+                    //    model.addAttribute("typeT", typeT);
+                  //  System.out.println(typeT+"model.addAttribute(\"typeT\", typeT);");
 
                     this.setCinTmp((null));
                     model.addAttribute("cinTmp", cinTmp);
@@ -636,8 +685,8 @@ private String typeT = "hidden";
                 if (keywordd==""){
                     this.setAffiche(false);
                     model.addAttribute("affiche", affiche);
-                    model.addAttribute("typeT", typeT);
-                    System.out.println(typeT+"model.addAttribute(\"typeT\", typeT);");
+                    //model.addAttribute("typeT", typeT);
+                   // System.out.println(typeT+"model.addAttribute(\"typeT\", typeT);");
 
                     this.setCinTmp((null));
                     model.addAttribute("cinTmp", cinTmp);

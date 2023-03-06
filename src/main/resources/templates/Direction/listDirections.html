@@ -14,6 +14,7 @@
     <!-- Nucleo Icons -->
     <link href="/assets/css/nucleo-icons.css" rel="stylesheet"/>
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <script src="/assets/js/core/bootstrap.min.js"></script>
     <!-- Font Awesome Icons -->
     <!-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>-->
     <script crossorigin="anonymous" src="/assets/js/fontawesome.js"></script>
@@ -33,7 +34,7 @@
 </aside>
 <!--end  menu a droite  -->
 
-<main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg overflow-hidden">
+<main class="main-content position-relative max-height-vh-100 h-100 mt-1 ">
 
 
     <!-- Navbar header  -->
@@ -45,10 +46,6 @@
             <div class="card-body">
                 <div class="container my-5" th:switch="${directions}">
 
-                    <!--div class="col-md-10">
-                      <h2 th:case="null">لا يوجد إدارات </h2>
-                      <div th:case="*"-->
-
                     <h2 align="center"> الإدارات </h2>
                     <p align="center" class="my-5">
                         <a class="btn btn-primary" th:href="@{'/Direction/add'}">
@@ -58,7 +55,6 @@
                         <thead>
                         <tr>
                             <th> الإدارةالعامة</th>
-
                             <th> الإدارة</th>
                             <th> رمز الإدارة</th>
                             <th> الوضعية</th>
@@ -75,7 +71,7 @@
                             <td th:text="${direction.CodeDir}"></td>
                             <td th:text="${direction.etatD}"></td>
 
-                            <!--td><a th:href="@{/DirectionGeneral/edit/{DgId}(DgId=${directionGeneral.DgId})}" class="btn btn-warning"><i class="fas fa-user-edit ml-2"></i></a></td-->
+
                             <td><a class="btn btn-warning" th:href="@{/Direction/edit/{id}(id=${direction.DId})}"> تحيين<i
                                     class="fas fa-user-edit ml-2"></i></a></td>
                             <td><a class="btn btn-danger" th:href="@{/Direction/delete/{id}(id=${direction.DId})}">
@@ -85,7 +81,7 @@
                         </tbody>
                     </table>
                     <p align="right" class="my-5">
-                        <a class="btn btn-secondary" th:href="@{'/home1'}">
+                        <a class="btn btn-secondary" th:href="@{'/home1/home'}">
 
                             <i class="fas fa-solid fa-backward"> الصفحة الرئيسية</i></a>
 
