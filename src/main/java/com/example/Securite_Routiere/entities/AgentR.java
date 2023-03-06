@@ -48,6 +48,9 @@ public class AgentR {
     private String gradeR;
 
 
+    @Column(name = "dateInsecription")
+    private String dateR;
+
     public long getAgentRId() {
         return agentRId;
     }
@@ -130,22 +133,34 @@ public class AgentR {
         this.gradeR = gradeR;
     }
 
+    public String getDateR() {
+        return dateR;
+    }
 
-    public AgentR(long agentRId, long cinR, String cnrpsR, String nomR, String prenomR, String prenomPereR, String gouvernoratR, String deligationR, String directionGeneralR, String directionR, String sousDirectionR, String gradeR) {
+    public void setDateR(String dateR) {
+        this.dateR = dateR;
+    }
+
+    public AgentR(long agentRId, long cinR, String cnrpsR, String nomR, String prenomR, String prenomPereR, String directionGeneralR, String directionR, String sousDirectionR, String gradeR, String dateR) {
         this.agentRId = agentRId;
         this.cinR = cinR;
         this.cnrpsR = cnrpsR;
         this.nomR = nomR;
         this.prenomR = prenomR;
         this.prenomPereR = prenomPereR;
-
         this.directionGeneralR = directionGeneralR;
         this.directionR = directionR;
         this.sousDirectionR = sousDirectionR;
         this.gradeR = gradeR;
+        this.dateR = dateR;
     }
 
     public AgentR() {
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override
@@ -153,7 +168,7 @@ public class AgentR {
         return "AgentR{" +
                 "agentRId=" + agentRId +
                 ", cinR=" + cinR +
-                ", cnrpsR=" + cnrpsR +
+                ", cnrpsR='" + cnrpsR + '\'' +
                 ", nomR='" + nomR + '\'' +
                 ", prenomR='" + prenomR + '\'' +
                 ", prenomPereR='" + prenomPereR + '\'' +
@@ -161,9 +176,7 @@ public class AgentR {
                 ", directionR='" + directionR + '\'' +
                 ", sousDirectionR='" + sousDirectionR + '\'' +
                 ", gradeR='" + gradeR + '\'' +
+                ", dateR='" + dateR + '\'' +
                 '}';
     }
-
-
-
 }

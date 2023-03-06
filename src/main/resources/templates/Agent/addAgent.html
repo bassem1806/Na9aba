@@ -35,13 +35,13 @@
 
 
     <!-- script control input saisie -->
-    <script>
+    <!--script>
    function controlecnrps(){
 var saisie =document.getElementById("keywordd").value;
 alert("Vous avez saisi : "+ saisie);
 console.log( "alert:" +saisie);
 };
-</script>
+</script-->
 
 
     <script type="text/javascript">
@@ -238,29 +238,30 @@ console.log(selectedOptionValue);
 
                             <div class="form-group col-md-3"   >
                                 <label class="col-form-label" for="$cinTmp">رقم بطاقة التعريف الوطنية </label>
-                                <input class="form-control" id="$cinTmp"  placeholder="رقم بطاقة التعريف الوطنية " th:value="${cinTmp}"   type="text"/>
+                                <input class="form-control" id="$cinTmp"  name="CIN" placeholder="رقم بطاقة التعريف الوطنية " th:value="${cinTmp}"   type="text"/>
+
                             </div>
 
 
                             <div class="form-group col-md-3"   >
                                 <label class="col-form-label" for="$cnrpsTmp">المعرف الوحيد</label>
-                                <input class="form-control" id="$cnrpsTmp"  placeholder="المعرف الوحيد " th:value="${cnrpsTmp}"    type="text"/>
+                                <input class="form-control" id="$cnrpsTmp"  name="CNRPS" placeholder="المعرف الوحيد " th:value="${cnrpsTmp}"     type="text"/>
                             </div>
                             <br>
 
                             <div class="form-group col-md-3"   >
                                 <label class="col-form-label" for="$prenomTmp">الإسم</label>
-                                <input class="form-control" id="$prenomTmp"  placeholder="الإسم " th:value="${prenomTmp}"   type="text"/>
+                                <input class="form-control" id="$prenomTmp"  name="Prenom" placeholder="الإسم " th:value="${prenomTmp}"   type="text"/>
                             </div>
 
                             <div class="form-group col-md-3"   >
                                 <label class="col-form-label" for="$nomTmp">اللقب</label>
-                                <input class="form-control" id="$nomTmp"  placeholder="اللقب " th:value="${nomTmp}"   type="text"/>
+                                <input class="form-control" id="$nomTmp" name="Nom" placeholder="اللقب " th:value="${nomTmp}"  type="text"/>
                             </div>
 
                             <div class="form-group col-md-3"   >
                                 <label class="col-form-label" for="$prenompereTmp">إسم الأب</label>
-                                <input class="form-control" id="prenompereTmp"  placeholder="إسم الأب " th:value="${prenompereTmp}"   type="text"/>
+                                <input class="form-control" id="prenompereTmp" name="Prenom_Pere" placeholder="إسم الأب " th:value="${prenompereTmp}"     type="text"/>
                             </div>
 
                             <div class="col-sm-3" >
@@ -280,46 +281,52 @@ console.log(selectedOptionValue);
                                 </select>
                             </div>
 
-
-                            <div class="form-group col-md-4" >
+                            <div  th:switch="${affiche}" class="form-group col-md-4" >
                                 <label class="col-form-label" for="directionGeneral" id="directionGeneral">الإدارةالعامة</label>
-                                <!--input class="form-control" id="$directiongeneralTmp"  placeholder="الإدارة العامة " th:value="${directiongeneralTmp}"   type="text"/-->
-                                <select class="form-control" id="listDirectionGeneral" name="DirectionGeneralId">
-                                    <option th:value="${directiongeneralTmp}"        th:text="${directiongeneralTmp}">
+                                <input th:case="true" class="form-control" id="$directiongeneralTmp"  placeholder="الإدارة العامة "
+                                         th:value="${directiongeneralTmp}">
+                                <select th:case="*"   class="form-control" id="listDirectionGeneral" name="DirectionGeneralId">
+
                                     <option value="">--من فضل إخترالإدارة العامة--</option>
-                                    <option th:each="dr: ${directionGenerals}"
-                                    th:text="${dr.NomDirGen}"
-                                    th:value="${dr.DgId}"/>
+                                    <option th:each="dr: ${directionGenerals}" th:text="${dr.NomDirGen}" th:value="${dr.DgId}" th:selected="${dr.DgId}==${directiongeneralTmp}"/>
 
                                 </select>
                             </div>
-                            <div class="form-group col-md-4" >
+
+
+                            <div th:switch="${affiche}" class="form-group col-md-4" >
 
                                 <label class="col-form-label" for="direction" id="direction">الإدارة </label>
-                                <!--input class="form-control" id="$directionTmp"  placeholder="الإدارة  " th:value="${directionTmp}"   type="text"/-->
-                                <select class="form-control" id="listDirection" name="DirectionId">
+                               <input th:case="true" type="text" class="form-control" id="$directionTmp"  placeholder="الإدارة  " th:value="${directionTmp}" >
+                              <select  th:case="*"   class="form-control" id="listDirection" name="DirectionId">
 
-                                    <option th:value="${$directionTmp}"        th:text="${directionTmp}">
                                     <option value="">--من فضل إختر الإدارة --</option>
-                                    <option th:each="d: ${direction}" th:text="${d.NomDir}" th:value="${d.DId}"/>
+                                    <option th:each="d: ${direction}" th:text="${d.NomDir}" th:value="${d.DId}" th:selected="${d.DId}==${directionTmp}"/>
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-4" >
+                            <div  th:switch="${affiche}" class="form-group col-md-4" >
 
                                 <label class="col-form-label" for="sousDirection" id="sousDirection">الإدارةالفرعية </label>
-                                <!--input class="form-control" id="$sousdirectionTmp"  placeholder="الإدارة الفرعية  " th:value="${sousdirectionTmp}"   type="text"/-->
-                                <select class="form-control" id="listSousDirection"   name="SousDirectionId">
-                                    <option th:value="${sousdirectionTmp}"        th:text="${sousdirectionTmp}">
+                                <input th:case="true"     class="form-control" id="$sousdirectionTmp"
+                                        placeholder="الإدارة الفرعية  " th:value="${sousdirectionTmp}"  >
+                                <select  th:case="*"   class="form-control" id="listSousDirection"   name="SousDirectionId">
+
                                     <option value="">--من فضل إختر الإدارةالفرعية --</option>
-                                    <option th:each="sd: ${sousDirection }" th:text="${sd.nomSDir}" th:value="${sd.sdId}"/>
+
+                                    <option th:each="sd: ${sousDirection }" th:text="${sd.nomSDir}" th:value="${sd.sdId}" th:selected="${sd.sdId}==${sousdirectionTmp}"/>
                                 </select>
+
                             </div>
 
 
-                            <div class="form-group col-md-3"   >
-                                <label class="col-form-label" for="$gradeTmp">الرتبة</label>
-                                <input class="form-control" id="$gradeTmp"  placeholder="الرتبة " th:value="${gradeTmp}"   type="text"/>
+                            <div class="col-sm-3" >
+                                <label class="col-form-label" for="grade">الرتبة</label>
+                                <select class="form-control" id="grade" name="GradeId">
+                                    <option th:value="${gradeTmp}" th:text="${gradeTmp}"/>
+                                    <option value="">--من فضل إختر الرتبة--</option>
+                                    <option th:each="g: ${grades}" th:text="${g.libelleGrade}" th:value="${g.gradeId}" th:selected="${g.gradeId}==${gradeTmp}"/>
+                                </select>
                             </div>
 
                             <div class="form-group col-md-3" >

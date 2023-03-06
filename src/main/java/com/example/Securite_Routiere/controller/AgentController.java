@@ -58,7 +58,24 @@ public class AgentController {
     private String directionTmp = null;
     private String sousdirectionTmp = null;
 
+    private Long directiongeneralTmpID;
+    private Long directionTmpID ;
+    private Long sousdirectionTmpID;
 
+private String keywordTmp ;
+private boolean affiche = false;
+
+
+
+private String typeT = "hidden";
+
+    public boolean isAffiche() {
+        return affiche;
+    }
+
+    public void setAffiche(boolean affiche) {
+        this.affiche = affiche;
+    }
 
     public String getCnrpsTmp() {
         return cnrpsTmp;
@@ -347,6 +364,19 @@ public class AgentController {
                 ("Invalid sous direction Id:" + sd));
         agent.setSousDirection(sousDirection);
 
+        System.out.println(sousDirection+"ana sous direction");
+
+        if (keywordTmp!=null){
+            agent.setNomDirection(agent.getNomDirection());
+            agent.setNomDirectionGenrale(agent.getNomDirectionGenrale());
+            agent.setSousDirection(agent.getNomSousDirection());
+        }else {
+            agent.setNomDirection(sousDirection.getDirection().getNomDir());
+            agent.setNomDirectionGenrale(sousDirection.getDirection().getDirectionGeneral().getNomDirGen());
+            agent.setNomSousDirection(sousDirection.getNomSDir());
+        }
+
+
         System.out.println("Sousdirection " + sousDirectionRepository.findById(sd));
 
         Grade grade = gradeRepository.findById(g).orElseThrow(() -> new IllegalArgumentException
@@ -378,6 +408,7 @@ public class AgentController {
 
     }
 
+/*
     @GetMapping("delete/{AgentId}")
 
 
@@ -388,7 +419,7 @@ public class AgentController {
         agentRepository.delete(agent);
         return "redirect:../list/1";
 
-    }
+    }*/
 
     @GetMapping("edit/{AgentId}")
     public String showDirectionGeneralFormToUpdate(@PathVariable("AgentId") long AgentId, Model model) throws Throwable {
@@ -487,21 +518,28 @@ public class AgentController {
 
     @RequestMapping(path = {"add/search"})
     public String searchAgentR(Model model, String keywordd) {
-
+            this.setKeywordTmp(keywordd);
          System.out.println("cnrps:" + keywordd);
 
+
             if (keywordd == null){
+                this.setAffiche(false);
+                model.addAttribute("affiche", affiche);
                 System.out.println("cnrps2:" + keywordd);
+               // this.setTypeT("hidden");
                 this.setCinTmp(null);
                 this.setCnrpsTmp(null);
                 this.setNomTmp(null);
                 this.setPrenompereTmp(null);
                 this.setPrenompereTmp(null);
-               this.setDirectiongeneralTmp(null);
-              this.setDirectionTmp(null);
-               this.setSousdirectionTmp(null);
-                this.setGradeTmp(null);
 
+                  this.setDirectiongeneralTmp(null);
+                  this.setDirectionTmp(null);
+                   this.setSousdirectionTmp(null);
+
+
+                this.setGradeTmp(null);
+                 this.setDateTmp(null);
 
                 model.addAttribute("cinTmp", cinTmp);
                 model.addAttribute("cnrpsTmp", cnrpsTmp);
@@ -512,26 +550,94 @@ public class AgentController {
                 model.addAttribute("directionTmp", directionTmp);
                 model.addAttribute("sousdirectionTmp", sousdirectionTmp);
                model.addAttribute("gradeTmp", gradeTmp);
+                model.addAttribute("dateTmp", dateTmp);
 
-
+               // model.addAttribute("typeT", typeT);
+           // System.out.println(typeT+"model.addAttribute(\"typeT\", typeT);");
             }
 
 
             if (keywordd != null) {
+
+
                 List<AgentR> agentfind = agentService.GetByCNRPSAgentR1(keywordd);
+
 
                 System.out.println("agent find :"+agentfind);
                 System.out.println("agent find :"+agentfind.size());
               //  AgentR agentrTmp = agentService.getByKeyword(keywordd);
 
 
-               // for  (AgentR agentr : agentfind){
-              //    System.out.println("directiin G R := "+agentr.getDirectionGeneralR());
-            //    }
+               for  (AgentR agentr : agentfind){
+                   this.setAffiche(true);
+                   model.addAttribute("affiche", affiche);
+                 System.out.println("directiin G R := "+agentr.getDirectionGeneralR());
+                }
 
 
                 System.out.println("cnrps3:" + keywordd);
+                if (agentfind.size()==0){
+                    this.setAffiche(false);
+                    model.addAttribute("affiche", affiche);
+                    model.addAttribute("typeT", typeT);
+                    System.out.println(typeT+"model.addAttribute(\"typeT\", typeT);");
+
+                    this.setCinTmp((null));
+                    model.addAttribute("cinTmp", cinTmp);
+
+                    this.setCnrpsTmp((null));
+                    model.addAttribute("cnrpsTmp", cnrpsTmp);
+
+                    this.setNomTmp((null));
+                    model.addAttribute("nomTmp", nomTmp);
+
+                    this.setPrenomTmp((null));
+                    model.addAttribute("prenomTmp", prenomTmp);
+
+                    this.setPrenompereTmp((null));
+                    model.addAttribute("prenompereTmp", prenompereTmp);
+
+                    this.setDirectiongeneralTmp((null));
+                    model.addAttribute("directiongeneralTmp", directiongeneralTmp);
+
+                    this.setDirectionTmp((null));
+                    model.addAttribute("directionTmp", directionTmp);
+
+                    this.setSousdirectionTmp((null));
+                    model.addAttribute("sousdirectionTmp", sousdirectionTmp);
+
+
+
+                    this.gouvernoratRepository.findAll();
+                    model.addAttribute("gouvernorat", gouvernoratRepository.findAll());
+                    this.delegationRepository.findAll();
+                    model.addAttribute("delegation", delegationRepository.findAll());
+
+                    this.syndicatRepository.findAll();
+                    model.addAttribute("syndicat", syndicatRepository.findAll());
+
+                    this.directionGeneralRepository.findAll();
+                    model.addAttribute("directionGenerals", directionGeneralRepository.findAll());
+
+                    this.directionRepository.findAll();
+                    model.addAttribute("directions", directionRepository.findAll());
+
+                    this.sousDirectionRepository.findAll();
+                    model.addAttribute("sousDirections", sousDirectionRepository.findAll());
+
+
+                    this.gradeRepository.findAll();
+                    model.addAttribute("grades", gradeRepository.findAll());
+
+                }
+
+
+
                 if (keywordd==""){
+                    this.setAffiche(false);
+                    model.addAttribute("affiche", affiche);
+                    model.addAttribute("typeT", typeT);
+                    System.out.println(typeT+"model.addAttribute(\"typeT\", typeT);");
 
                     this.setCinTmp((null));
                     model.addAttribute("cinTmp", cinTmp);
@@ -559,6 +665,9 @@ public class AgentController {
 
                     this.setGradeTmp((null));
                     model.addAttribute("gradeTmp", gradeTmp);
+
+                    this.setDateTmp((null));
+                    model.addAttribute("dateTmp", dateTmp);
 
                     this.gouvernoratRepository.findAll();
                     model.addAttribute("gouvernorat", gouvernoratRepository.findAll());
@@ -593,6 +702,7 @@ public class AgentController {
                     agentrempl.setCIN(searchAgentR.getCinR());
 
                     this.setCnrpsTmp(String.valueOf(searchAgentR.getCnrpsR()));
+
                     model.addAttribute("cnrpsTmp", cnrpsTmp);
 
 
@@ -619,6 +729,9 @@ public class AgentController {
 
                     this.setGradeTmp(String.valueOf(searchAgentR.getGradeR()));
                     model.addAttribute("gradeTmp", gradeTmp);
+
+                    this.setDateTmp(String.valueOf(searchAgentR.getDateR()));
+                    model.addAttribute("dateTmp", dateTmp);
 
                     this.gouvernoratRepository.findAll();
                     model.addAttribute("gouvernorat", gouvernoratRepository.findAll());
@@ -647,16 +760,46 @@ public class AgentController {
           return "Agent/addAgent";
     }
 
-
-
-
-
-
-
-
-
-
+    public Long getDirectiongeneralTmpID() {
+        return directiongeneralTmpID;
     }
+
+    public void setDirectiongeneralTmpID(Long directiongeneralTmpID) {
+        this.directiongeneralTmpID = directiongeneralTmpID;
+    }
+
+    public Long getDirectionTmpID() {
+        return directionTmpID;
+    }
+
+    public void setDirectionTmpID(Long directionTmpID) {
+        this.directionTmpID = directionTmpID;
+    }
+
+    public Long getSousdirectionTmpID() {
+        return sousdirectionTmpID;
+    }
+
+    public void setSousdirectionTmpID(Long sousdirectionTmpID) {
+        this.sousdirectionTmpID = sousdirectionTmpID;
+    }
+
+    public String getKeywordTmp() {
+        return keywordTmp;
+    }
+
+    public void setKeywordTmp(String keywordTmp) {
+        this.keywordTmp = keywordTmp;
+    }
+/*
+    public String getTypeT() {
+        return typeT;
+    }
+
+    public void setTypeT(String typeT) {
+        this.typeT = typeT;
+    }*/
+}
 
 
 

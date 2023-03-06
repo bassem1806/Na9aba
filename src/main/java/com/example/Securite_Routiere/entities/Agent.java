@@ -48,6 +48,10 @@ public class Agent implements Serializable {
     @Column(name = "date_saisie")
     private String dateSaisie;
 
+    private String nomDirectionGenrale;
+    private String nomDirection;
+    private String nomSousDirection;
+
     /**** Many To One delegation ****/
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -220,16 +224,6 @@ public class Agent implements Serializable {
         this.dateSaisie = dateSaisie;
     }
 
-    @Override
-    public String toString() {
-        return "Agent{" +
-                "delegation=" + delegation +
-                ", grade=" + grade +
-                ", sousDirection=" + sousDirection +
-                ", syndicat=" + syndicat +
-                '}';
-    }
-
     public void setDateSaisie(DateTimeFormatter ofLocalizedTime) {
     }
 
@@ -255,13 +249,55 @@ public class Agent implements Serializable {
 
     }
 
+    @Override
+    public String toString() {
+        return "Agent{" +
+                "AgentId=" + AgentId +
+                ", CIN=" + CIN +
+                ", CNRPS='" + CNRPS + '\'' +
+                ", Nom='" + Nom + '\'' +
+                ", Prenom='" + Prenom + '\'' +
+                ", Prenom_Pere='" + Prenom_Pere + '\'' +
+                ", dateInscription='" + dateInscription + '\'' +
+                ", agentSaisie='" + agentSaisie + '\'' +
+                ", dateSaisie='" + dateSaisie + '\'' +
+                ", nomDirectionGenrale='" + nomDirectionGenrale + '\'' +
+                ", nomDirection='" + nomDirection + '\'' +
+                ", nomSousDirection='" + nomSousDirection + '\'' +
+                ", delegation=" + delegation +
+                ", grade=" + grade +
+                ", sousDirection=" + sousDirection +
+                ", syndicat=" + syndicat +
+                '}';
+    }
+
     public void setGrade() {
     }
 
     public void setSousDirection(String sousDirectionR) {
     }
 
+    public String getNomDirectionGenrale() {
+        return nomDirectionGenrale;
+    }
 
+    public void setNomDirectionGenrale(String nomDirectionGenrale) {
+        this.nomDirectionGenrale = nomDirectionGenrale;
+    }
 
+    public String getNomDirection() {
+        return nomDirection;
+    }
 
+    public void setNomDirection(String nomDirection) {
+        this.nomDirection = nomDirection;
+    }
+
+    public String getNomSousDirection() {
+        return nomSousDirection;
+    }
+
+    public void setNomSousDirection(String nomSousDirection) {
+        this.nomSousDirection = nomSousDirection;
+    }
 }
